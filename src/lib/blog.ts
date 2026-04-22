@@ -38,7 +38,9 @@ export function getAllPosts(): BlogPost[] {
 }
 
 export function getPostBySlug(slug: string): BlogPost | null {
+  if (!/^[a-z0-9-]+$/.test(slug)) return null;
   const fullPath = path.join(postsDirectory, `${slug}.mdx`);
+  if (!fullPath.startsWith(postsDirectory)) return null;
 
   if (!fs.existsSync(fullPath)) return null;
 

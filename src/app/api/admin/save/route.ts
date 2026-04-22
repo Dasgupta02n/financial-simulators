@@ -3,7 +3,16 @@ import { saveFile } from "@/lib/github-api";
 
 const ALLOWED_PREFIXES = ["src/content/calculators/", "src/content/blog/"];
 
+function isAuthenticated(req: NextRequest): boolean {
+  const session = req.cookies.get("admin_session");
+  return session?.value === "1";
+}
+
 export async function POST(req: NextRequest) {
+  if (!isAuthenticated(req)) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
   const token = process.env.GITHUB_TOKEN ?? "";
   if (!token) {
     return NextResponse.json({ error: "GitHub token not configured" }, { status: 500 });

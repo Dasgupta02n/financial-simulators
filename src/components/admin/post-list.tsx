@@ -13,7 +13,7 @@ export function PostList() {
   useEffect(() => {
     async function loadPosts() {
       try {
-        const res = await fetch("/api/blog");
+        const res = await fetch("/api/admin/posts");
         const data = await res.json();
         setPosts(data.posts ?? []);
       } catch {

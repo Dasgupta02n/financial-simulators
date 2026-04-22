@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
 import { getAllPosts } from "@/lib/blog";
+import type { BlogCategory } from "@/lib/blog-categories";
 import { BlogCard } from "@/components/blog/blog-card";
 import { CategoryFilter } from "@/components/blog/category-filter";
 
@@ -16,10 +17,18 @@ export const metadata: Metadata = {
   },
 };
 
-export default function BlogPage() {
+export default async function BlogPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ category?: string }>;
+}) {
+  const { category } = await searchParams;
   const allPosts = getAllPosts();
-  const featured = allPosts.filter((p) => p.featured);
-  const rest = allPosts.filter((p) => !p.featured);
+  const filtered = category && category !== "all"
+    ? allPosts.filter((p) => p.category === (category as BlogCategory))
+    : allPosts;
+  const featured = filtered.filter((p) => p.featured);
+  const rest = filtered.filter((p) => !p.featured);
 
   return (
     <main className="flex-1 w-full max-w-7xl mx-auto px-4 pt-8 pb-12">

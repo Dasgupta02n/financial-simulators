@@ -25,7 +25,7 @@ export function CalculatorConfig() {
   useEffect(() => {
     async function loadConfig() {
       try {
-        const res = await fetch(`/src/content/calculators/${activeCalc}.json`);
+        const res = await fetch(`/api/admin/calculator-config/${activeCalc}`);
         const data = await res.json();
         setConfig(data);
       } catch {

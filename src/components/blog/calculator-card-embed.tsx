@@ -17,8 +17,13 @@ interface CalculatorCardProps {
   id: string;
 }
 
+const SLUG_LOOKUP: Record<string, string> = {};
+Object.entries(CALCULATOR_INFO).forEach(([key, val]) => {
+  SLUG_LOOKUP[val.slug] = key;
+});
+
 export function CalculatorCard({ id }: CalculatorCardProps) {
-  const info = CALCULATOR_INFO[id];
+  const info = CALCULATOR_INFO[id] ?? CALCULATOR_INFO[SLUG_LOOKUP[id]];
 
   if (!info) {
     return null;
