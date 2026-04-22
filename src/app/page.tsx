@@ -1,65 +1,75 @@
-import Image from "next/image";
+"use client";
+
+import { useState } from "react";
+import { twMerge } from "tailwind-merge";
+import { SIPCalculator } from "@/components/sip/sip-calculator";
+import { EMICalculator } from "@/components/emi/emi-calculator";
+import { TaxCalculator } from "@/components/tax/tax-calculator";
+import { AccumCalculator } from "@/components/accum/accum-calculator";
+import { FDCalculator } from "@/components/fd/fd-calculator";
+import { SWPCalculator } from "@/components/swp/swp-calculator";
+import { FIRECalculator } from "@/components/fire/fire-calculator";
+import { CTCCalculator } from "@/components/ctc/ctc-calculator";
+import { NPSCalculator } from "@/components/nps/nps-calculator";
+import { GoalCalculator } from "@/components/goal/goal-calculator";
+
+const CALCULATORS = [
+  { id: "sip", label: "SIP Simulator" },
+  { id: "emi", label: "EMI Analyzer" },
+  { id: "tax", label: "Tax Sandbox" },
+  { id: "accum", label: "Accumulator" },
+  { id: "fd", label: "FD Comparator" },
+  { id: "swp", label: "SWP Stress" },
+  { id: "fire", label: "FIRE Matrix" },
+  { id: "ctc", label: "CTC Optimizer" },
+  { id: "nps", label: "NPS Modeler" },
+  { id: "goal", label: "Goal Planner" },
+] as const;
+
+type CalcId = (typeof CALCULATORS)[number]["id"];
 
 export default function Home() {
+  const [activeCalc, setActiveCalc] = useState<CalcId>("sip");
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+    <main className="flex-1 flex flex-col items-center">
+      <header className="w-full max-w-7xl mx-auto px-4 pt-8 pb-4">
+        <h1 className="text-2xl font-semibold tracking-tight">Financial Simulators</h1>
+        <p className="text-sm text-text-secondary mt-1">
+          Real returns. No marketing. All math runs in your browser.
+        </p>
+        <nav className="flex gap-2 mt-4 flex-wrap">
+          {CALCULATORS.map((calc) => (
+            <button
+              key={calc.id}
+              onClick={() => setActiveCalc(calc.id)}
+              className={twMerge(
+                "px-4 py-2 text-sm rounded-md font-mono transition-colors",
+                activeCalc === calc.id
+                  ? "bg-gain/20 text-gain border border-gain/40"
+                  : "bg-border text-text-secondary border border-border hover:bg-border/80"
+              )}
             >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+              {calc.label}
+            </button>
+          ))}
+        </nav>
+      </header>
+
+      {activeCalc === "sip" && <SIPCalculator />}
+      {activeCalc === "emi" && <EMICalculator />}
+      {activeCalc === "tax" && <TaxCalculator />}
+      {activeCalc === "accum" && <AccumCalculator />}
+      {activeCalc === "fd" && <FDCalculator />}
+      {activeCalc === "swp" && <SWPCalculator />}
+      {activeCalc === "fire" && <FIRECalculator />}
+      {activeCalc === "ctc" && <CTCCalculator />}
+      {activeCalc === "nps" && <NPSCalculator />}
+      {activeCalc === "goal" && <GoalCalculator />}
+
+      <footer className="w-full max-w-7xl mx-auto px-4 py-6 text-xs text-text-secondary border-t border-border mt-auto">
+        Zero PII. Zero tracking. Computed entirely client-side. Macro defaults: NIFTY 12% μ / 18% σ, 6% inflation, LTCG 12.5% above ₹1.25L.
+      </footer>
+    </main>
   );
 }

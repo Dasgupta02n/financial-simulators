@@ -1,0 +1,129 @@
+"use client";
+
+import {
+  Area,
+  AreaChart,
+  ComposedChart,
+  Line,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from "recharts";
+import type { YearlyDataPoint } from "@/lib/calculators/sip/types";
+import { formatINRShort } from "@/lib/format";
+
+interface ProjectionChartProps {
+  data: YearlyDataPoint[];
+  showStress: boolean;
+}
+
+export function ProjectionChart({ data, showStress }: ProjectionChartProps) {
+  return (
+    <div className="w-full h-[400px]">
+      <ResponsiveContainer width="100%" height="100%">
+        <ComposedChart data={data} margin={{ top: 10, right: 30, left: 10, bottom: 0 }}>
+          <defs>
+            <linearGradient id="nominalGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="#6ee7b7" stopOpacity={0.25} />
+              <stop offset="100%" stopColor="#6ee7b7" stopOpacity={0.02} />
+            </linearGradient>
+            <linearGradient id="realGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="#f87171" stopOpacity={0.2} />
+              <stop offset="100%" stopColor="#f87171" stopOpacity={0.02} />
+            </linearGradient>
+            <linearGradient id="coneGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stopColor="#6ee7b7" stopOpacity={0.08} />
+              <stop offset="100%" stopColor="#6ee7b7" stopOpacity={0.02} />
+            </linearGradient>
+          </defs>
+
+          <XAxis
+            dataKey="year"
+            tick={{ fill: "#9ca3af", fontSize: 12, fontFamily: "var(--font-geist-mono)" }}
+            tickFormatter={(v) => `Y${v}`}
+            axisLine={{ stroke: "#1f2937" }}
+            tickLine={false}
+          />
+          <YAxis
+            tick={{ fill: "#9ca3af", fontSize: 12, fontFamily: "var(--font-geist-mono)" }}
+            tickFormatter={formatINRShort}
+            axisLine={{ stroke: "#1f2937" }}
+            tickLine={false}
+            width={70}
+          />
+          <Tooltip
+            contentStyle={{
+              backgroundColor: "#111827",
+              border: "1px solid #1f2937",
+              borderRadius: "8px",
+              fontFamily: "var(--font-geist-mono)",
+              fontSize: "12px",
+            }}
+            labelFormatter={(v) => `Year ${v}`}
+            formatter={(value, name) => [
+              formatINRShort(Number(value)),
+              String(name),
+            ]}
+          />
+
+          {/* Monte Carlo P10/P90 confidence band */}
+          <Area
+            type="monotone"
+            dataKey="p90"
+            stroke="none"
+            fill="url(#coneGrad)"
+            fillOpacity={1}
+            name="P90"
+            isAnimationActive={false}
+          />
+          <Area
+            type="monotone"
+            dataKey="p10"
+            stroke="none"
+            fill="#0a0f1a"
+            fillOpacity={1}
+            name="P10 (mask)"
+            isAnimationActive={false}
+          />
+
+          {/* Nominal corpus area */}
+          <Area
+            type="monotone"
+            dataKey="nominalCorpus"
+            stroke="#6ee7b7"
+            strokeWidth={2}
+            fill="url(#nominalGrad)"
+            name="Nominal"
+            isAnimationActive={false}
+          />
+
+          {/* Real corpus area */}
+          <Area
+            type="monotone"
+            dataKey="realCorpus"
+            stroke="#f87171"
+            strokeWidth={2}
+            fill="url(#realGrad)"
+            name="Real"
+            isAnimationActive={false}
+          />
+
+          {/* Stress test overlay */}
+          {showStress && (
+            <Line
+              type="monotone"
+              dataKey="stressCorpus"
+              stroke="#ef4444"
+              strokeWidth={2}
+              strokeDasharray="6 4"
+              dot={false}
+              name="Stress"
+              isAnimationActive={false}
+            />
+          )}
+        </ComposedChart>
+      </ResponsiveContainer>
+    </div>
+  );
+}
