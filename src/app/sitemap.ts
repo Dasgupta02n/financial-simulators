@@ -9,6 +9,7 @@ import fireConfig from "@/content/calculators/fire.json";
 import ctcConfig from "@/content/calculators/ctc.json";
 import npsConfig from "@/content/calculators/nps.json";
 import goalConfig from "@/content/calculators/goal.json";
+import { getAllPosts } from "@/lib/blog";
 
 const BASE_URL = "https://financialsimulators.in";
 
@@ -35,6 +36,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })
   );
 
+  const blogPages: MetadataRoute.Sitemap = getAllPosts().map((post) => ({
+    url: `${BASE_URL}/blog/${post.slug}`,
+    lastModified: new Date(post.date),
+    changeFrequency: "monthly" as const,
+    priority: 0.7,
+  }));
+
   return [
     {
       url: BASE_URL,
@@ -47,7 +55,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
       url: `${BASE_URL}/blog`,
       lastModified: new Date(),
       changeFrequency: "weekly",
-      priority: 0.7,
+      priority: 0.8,
     },
+    ...blogPages,
   ];
 }

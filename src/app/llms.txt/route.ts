@@ -9,6 +9,7 @@ import fireConfig from "@/content/calculators/fire.json";
 import ctcConfig from "@/content/calculators/ctc.json";
 import npsConfig from "@/content/calculators/nps.json";
 import goalConfig from "@/content/calculators/goal.json";
+import { getAllPosts } from "@/lib/blog";
 
 const calculatorConfigs = [
   sipConfig,
@@ -37,6 +38,7 @@ ${calculatorLines}
 
 ## Blog
 - [Blog Index](/blog): Financial stories for common Indians
+${getAllPosts().map((post) => `- [${post.title}](/blog/${post.slug})`).join("\n")}
 
 ## Use Cases
 - "How much SIP do I need for ₹1 crore?" → /sip-simulator
