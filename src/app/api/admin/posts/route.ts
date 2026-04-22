@@ -11,6 +11,6 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
-  const posts = getAllPosts().map(({ content, ...meta }) => meta);
+  const posts = getAllPosts();
   return NextResponse.json({ posts });
 }

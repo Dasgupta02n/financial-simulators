@@ -1,0 +1,821 @@
+[
+  {
+    "slug": "4-percent-rule-indian-version",
+    "title": "The 4% withdrawal rule is American. Here's the Indian version.",
+    "description": "Why the world's most popular retirement rule fails in India and what replaces it",
+    "date": "2026-04-22",
+    "category": "retirement",
+    "tags": [
+      "withdrawal-rate",
+      "SWP",
+      "inflation",
+      "retirement-planning"
+    ],
+    "calculators": [
+      "swp-stress-test"
+    ],
+    "readTime": 4,
+    "featured": false,
+    "status": "published"
+  },
+  {
+    "slug": "5-crore-not-enough",
+    "title": "₹5 crore retirement corpus sounds enough. It isn't.",
+    "description": "Why India's most popular retirement number is a mathematical delusion",
+    "date": "2026-04-22",
+    "category": "retirement",
+    "tags": [
+      "FIRE",
+      "inflation",
+      "retirement-corpus",
+      "withdrawal"
+    ],
+    "calculators": [
+      "fire-matrix"
+    ],
+    "readTime": 4,
+    "featured": false,
+    "status": "published"
+  },
+  {
+    "slug": "50-30-20-rule-broken-indian",
+    "title": "The 50-30-20 rule is broken for Indian salaries",
+    "description": "The famous budgeting rule assumes a Western cost structure. Indian CTCs, mandatory deductions, and family obligations make it unworkable.",
+    "date": "2026-04-22",
+    "category": "personal-finance",
+    "tags": [
+      "budgeting",
+      "ctc",
+      "salary",
+      "50-30-20-rule"
+    ],
+    "calculators": [
+      "ctc-optimizer"
+    ],
+    "readTime": 3,
+    "featured": false,
+    "status": "published"
+  },
+  {
+    "slug": "dont-borrow-for-wedding",
+    "title": "Why you shouldn't borrow for a wedding (the math is brutal)",
+    "description": "A ₹15 lakh wedding loan at 11% will cost you ₹24 lakh. That one day will take 7 years and your future wealth to repay.",
+    "date": "2026-04-22",
+    "category": "personal-finance",
+    "tags": [
+      "wedding-loan",
+      "emi",
+      "personal-loan",
+      "debt"
+    ],
+    "calculators": [
+      "emi-analyzer"
+    ],
+    "readTime": 3,
+    "featured": false,
+    "status": "published"
+  },
+  {
+    "slug": "emergency-fund-real-math",
+    "title": "Your emergency fund is probably too small (here's the real math)",
+    "description": "The standard 3-6 month rule ignores Indian realities — medical inflation, job market gaps, and the fact that emergencies arrive in clusters.",
+    "date": "2026-04-22",
+    "category": "personal-finance",
+    "tags": [
+      "emergency-fund",
+      "fd",
+      "inflation",
+      "savings"
+    ],
+    "calculators": [
+      "fd-comparator"
+    ],
+    "readTime": 3,
+    "featured": false,
+    "status": "published"
+  },
+  {
+    "slug": "epf-825-not-enough",
+    "title": "Your EPF is earning 8.25%. Here's why that's not enough.",
+    "description": "The comfortable illusion of EPF returns and the retirement gap nobody discusses",
+    "date": "2026-04-22",
+    "category": "retirement",
+    "tags": [
+      "EPF",
+      "inflation",
+      "retirement-corpus",
+      "provident-fund"
+    ],
+    "calculators": [
+      "fire-matrix"
+    ],
+    "readTime": 4,
+    "featured": false,
+    "status": "published"
+  },
+  {
+    "slug": "financial-literacy-starts-inflation",
+    "title": "Why financial literacy in India starts with understanding inflation",
+    "description": "Every financial decision in India — from FDs to SIPs to salary negotiations — is distorted by inflation. Understand it first.",
+    "date": "2026-04-22",
+    "category": "personal-finance",
+    "tags": [
+      "inflation",
+      "financial-literacy",
+      "real-returns",
+      "purchasing-power"
+    ],
+    "calculators": [
+      "sip-simulator"
+    ],
+    "readTime": 4,
+    "featured": false,
+    "status": "published"
+  },
+  {
+    "slug": "fire-india-feasible-dream",
+    "title": "FIRE in India: feasible dream or first-world import?",
+    "description": "Examining whether the FIRE movement makes mathematical sense in the Indian context",
+    "date": "2026-04-22",
+    "category": "retirement",
+    "tags": [
+      "FIRE",
+      "early-retirement",
+      "inflation",
+      "retirement-planning"
+    ],
+    "calculators": [
+      "fire-matrix"
+    ],
+    "readTime": 3,
+    "featured": false,
+    "status": "published"
+  },
+  {
+    "slug": "first-sip-boring-good",
+    "title": "Why your first SIP should be boring (and that's good)",
+    "description": "The best first SIP isn't a sector fund or a mid-cap rocket. It's a plain index fund. Here's why boring wins.",
+    "date": "2026-04-22",
+    "category": "personal-finance",
+    "tags": [
+      "sip",
+      "index-fund",
+      "mutual-funds",
+      "beginner-investing"
+    ],
+    "calculators": [
+      "sip-simulator"
+    ],
+    "readTime": 3,
+    "featured": false,
+    "status": "published"
+  },
+  {
+    "slug": "gold-etf-vs-physical-gold-liquidity",
+    "title": "Gold ETFs vs physical gold: the liquidity you didn't know you needed",
+    "description": "Indians hold more physical gold than any other nation. But when you actually need the money, the gold in your locker is the least liquid asset you own.",
+    "date": "2026-04-22",
+    "category": "markets-policy",
+    "tags": [
+      "gold",
+      "etf",
+      "liquidity",
+      "sovereign-gold-bonds"
+    ],
+    "calculators": [
+      "goal-planner"
+    ],
+    "readTime": 4,
+    "featured": false,
+    "status": "published"
+  },
+  {
+    "slug": "great-indian-small-cap-illusion",
+    "title": "The great Indian small-cap illusion",
+    "description": "Small-cap funds have delivered eye-popping returns. Most of those returns are unreachable for ordinary investors. Here is why.",
+    "date": "2026-04-22",
+    "category": "markets-policy",
+    "tags": [
+      "small-cap",
+      "mutual-funds",
+      "liquidity",
+      "risk"
+    ],
+    "calculators": [
+      "accumulation-calculator"
+    ],
+    "readTime": 3,
+    "featured": false,
+    "status": "published"
+  },
+  {
+    "slug": "hidden-cost-savings-account",
+    "title": "The hidden cost of keeping money in savings accounts",
+    "description": "Your savings account pays 3.5% and inflation takes 5.5%. You are paying the bank to hold your money. Here are the real numbers.",
+    "date": "2026-04-22",
+    "category": "personal-finance",
+    "tags": [
+      "savings-account",
+      "inflation",
+      "fd",
+      "liquid-funds"
+    ],
+    "calculators": [
+      "fd-comparator"
+    ],
+    "readTime": 3,
+    "featured": false,
+    "status": "published"
+  },
+  {
+    "slug": "how-much-spend-on-house",
+    "title": "How much should you actually spend on a house?",
+    "description": "The EMI-to-income ratio that banks approve will make you house-poor. Here's the real math for Indian home buyers.",
+    "date": "2026-04-22",
+    "category": "personal-finance",
+    "tags": [
+      "home-loan",
+      "emi",
+      "real-estate",
+      "housing"
+    ],
+    "calculators": [
+      "emi-analyzer"
+    ],
+    "readTime": 3,
+    "featured": false,
+    "status": "published"
+  },
+  {
+    "slug": "how-much-tax-do-fd-interest-earnings-cost",
+    "title": "How much tax do FD interest earnings actually cost you?",
+    "description": "That 7.1% FD? After tax and inflation, you're earning roughly 1.5%. Here's the real math.",
+    "date": "2026-04-22",
+    "category": "tax-ctc",
+    "tags": [
+      "fixed-deposit",
+      "fd-interest",
+      "tax-on-interest",
+      "inflation"
+    ],
+    "calculators": [
+      "fd-comparator"
+    ],
+    "readTime": 3,
+    "featured": false,
+    "status": "published"
+  },
+  {
+    "slug": "india-inflation-numbers-honest-terrifying",
+    "title": "India's inflation numbers are honest (and still terrifying)",
+    "description": "CPI data is not rigged. But what it measures and what you experience are two different things. Here is the gap.",
+    "date": "2026-04-22",
+    "category": "markets-policy",
+    "tags": [
+      "inflation",
+      "cpi",
+      "purchasing-power",
+      "rbi"
+    ],
+    "calculators": [
+      "fd-comparator"
+    ],
+    "readTime": 3,
+    "featured": false,
+    "status": "published"
+  },
+  {
+    "slug": "lic-vs-mutual-funds-emotional-decision",
+    "title": "LIC vs mutual funds: the emotional decision nobody admits",
+    "description": "The LIC versus mutual fund debate is not about returns. It is about fear, trust, and who your parents listened to. The numbers tell a clear story.",
+    "date": "2026-04-22",
+    "category": "markets-policy",
+    "tags": [
+      "lic",
+      "mutual-funds",
+      "insurance",
+      "returns"
+    ],
+    "calculators": [
+      "sip-simulator"
+    ],
+    "readTime": 4,
+    "featured": false,
+    "status": "published"
+  },
+  {
+    "slug": "ltcg-tax-changed-again-mutual-funds",
+    "title": "LTCG tax changed again — what it means for your mutual funds",
+    "description": "LTCG rates moved from 10% to 12.5% and the exemption limit shifted. Here's what your actual returns look like now.",
+    "date": "2026-04-22",
+    "category": "tax-ctc",
+    "tags": [
+      "ltcg",
+      "mutual-funds",
+      "capital-gains",
+      "tax-on-investments"
+    ],
+    "calculators": [
+      "sip-simulator"
+    ],
+    "readTime": 3,
+    "featured": false,
+    "status": "published"
+  },
+  {
+    "slug": "lump-sum-vs-sip-timing",
+    "title": "Lump sum vs SIP: the answer depends on when you ask",
+    "description": "Lump sum wins statistically, SIP wins behaviorally. The right answer hinges on a question most people never ask.",
+    "date": "2026-04-22",
+    "category": "personal-finance",
+    "tags": [
+      "sip",
+      "lump-sum",
+      "market-timing",
+      "investing-strategy"
+    ],
+    "calculators": [
+      "accumulation-calculator"
+    ],
+    "readTime": 3,
+    "featured": false,
+    "status": "published"
+  },
+  {
+    "slug": "market-crashes-worst-time-stop-sip",
+    "title": "Why market crashes are the worst time to stop your SIP",
+    "description": "Pausing your SIP during a crash feels prudent. The numbers say it is the most expensive mistake you can make.",
+    "date": "2026-04-22",
+    "category": "markets-policy",
+    "tags": [
+      "market-crash",
+      "sip",
+      "rupee-cost-averaging",
+      "behavioral-finance"
+    ],
+    "calculators": [
+      "swp-stress-test"
+    ],
+    "readTime": 3,
+    "featured": false,
+    "status": "published"
+  },
+  {
+    "slug": "most-indians-retire-7-years-savings",
+    "title": "Why most Indians retire with 7 years of savings (and need 20)",
+    "description": "The retirement readiness gap in India and why almost nobody talks about it",
+    "date": "2026-04-22",
+    "category": "retirement",
+    "tags": [
+      "retirement-readiness",
+      "savings-gap",
+      "EPF",
+      "longevity"
+    ],
+    "calculators": [
+      "fire-matrix"
+    ],
+    "readTime": 4,
+    "featured": false,
+    "status": "published"
+  },
+  {
+    "slug": "new-tax-regime-is-honest-why-people-dont-like-it",
+    "title": "The new tax regime is honest (that's why people don't like it)",
+    "description": "Lower rates, no deductions — the new regime removes the illusion of tax planning. Here's why that makes people uncomfortable.",
+    "date": "2026-04-22",
+    "category": "tax-ctc",
+    "tags": [
+      "new-regime",
+      "tax-simplification",
+      "income-tax",
+      "behavioral-economics"
+    ],
+    "calculators": [
+      "tax-sandbox"
+    ],
+    "readTime": 3,
+    "featured": false,
+    "status": "published"
+  },
+  {
+    "slug": "nifty-12-percent-average-hides-more",
+    "title": "Why NIFTY's 12% average hides more than it reveals",
+    "description": "NIFTY 50's headline return is a comforting myth. The reality involves sequence risk, survivorship bias, and years where your money went nowhere.",
+    "date": "2026-04-22",
+    "category": "markets-policy",
+    "tags": [
+      "nifty",
+      "index-returns",
+      "sequence-risk",
+      "survivorship-bias"
+    ],
+    "calculators": [
+      "sip-simulator"
+    ],
+    "readTime": 3,
+    "featured": false,
+    "status": "published"
+  },
+  {
+    "slug": "nps-tax-benefit-50000-deduction-nobody-uses",
+    "title": "NPS tax benefit: the ₹50,000 deduction that nobody uses",
+    "description": "Section 80CCD(1B) gives you ₹50,000 extra deduction on NPS. Most people ignore it. Here's what it's actually worth.",
+    "date": "2026-04-22",
+    "category": "tax-ctc",
+    "tags": [
+      "nps",
+      "section-80ccd",
+      "tax-deduction",
+      "retirement-planning"
+    ],
+    "calculators": [
+      "nps-modeler"
+    ],
+    "readTime": 3,
+    "featured": false,
+    "status": "published"
+  },
+  {
+    "slug": "nps-vs-ppf-showdown",
+    "title": "NPS vs PPF: the retirement showdown nobody explains clearly",
+    "description": "A clear-eyed comparison of India's two most recommended retirement products",
+    "date": "2026-04-22",
+    "category": "retirement",
+    "tags": [
+      "NPS",
+      "PPF",
+      "retirement-planning",
+      "tax-saving"
+    ],
+    "calculators": [
+      "nps-modeler"
+    ],
+    "readTime": 4,
+    "featured": false,
+    "status": "published"
+  },
+  {
+    "slug": "old-vs-new-tax-regime-honest-comparison",
+    "title": "Old vs New tax regime: the honest comparison nobody shows you",
+    "description": "Most comparisons are sales pitches in disguise. Here's what the two regimes actually cost you — with real numbers.",
+    "date": "2026-04-22",
+    "category": "tax-ctc",
+    "tags": [
+      "tax-regime",
+      "old-regime",
+      "new-regime",
+      "income-tax"
+    ],
+    "calculators": [
+      "tax-sandbox"
+    ],
+    "readTime": 3,
+    "featured": false,
+    "status": "published"
+  },
+  {
+    "slug": "parents-fd-losing-money",
+    "title": "Your parents' FD strategy is losing them money (gently explain it)",
+    "description": "Fixed deposits feel safe but are silently eroding your parents' retirement corpus. Here is the math to explain why — without alarming them.",
+    "date": "2026-04-22",
+    "category": "personal-finance",
+    "tags": [
+      "fd",
+      "retirement",
+      "senior-citizens",
+      "inflation",
+      "post-tax-returns"
+    ],
+    "calculators": [
+      "fd-comparator"
+    ],
+    "readTime": 3,
+    "featured": false,
+    "status": "published"
+  },
+  {
+    "slug": "ppf-71-safest-loses-inflation",
+    "title": "PPF at 7.1%: the safest option that still loses to inflation",
+    "description": "Why India's most trusted savings instrument is not the retirement shield you think it is",
+    "date": "2026-04-22",
+    "category": "retirement",
+    "tags": [
+      "PPF",
+      "inflation",
+      "fixed-income",
+      "retirement-planning"
+    ],
+    "calculators": [
+      "fd-comparator"
+    ],
+    "readTime": 4,
+    "featured": false,
+    "status": "published"
+  },
+  {
+    "slug": "rbi-rate-cuts-fd-wealth-transfer",
+    "title": "RBI's rate cuts and your FD: the silent wealth transfer",
+    "description": "Every time RBI cuts the repo rate, your fixed deposit shrinks. Here is how much, and why nobody warns you.",
+    "date": "2026-04-22",
+    "category": "markets-policy",
+    "tags": [
+      "rbi",
+      "repo-rate",
+      "fixed-deposits",
+      "inflation"
+    ],
+    "calculators": [
+      "fd-comparator"
+    ],
+    "readTime": 3,
+    "featured": false,
+    "status": "published"
+  },
+  {
+    "slug": "reach-one-crore-without-posters",
+    "title": "How to actually reach ₹1 crore (without the motivational posters)",
+    "description": "₹1 crore is a round number, not a plan. Here is the actual math — how much to invest monthly, for how long, at what return.",
+    "date": "2026-04-22",
+    "category": "personal-finance",
+    "tags": [
+      "wealth-building",
+      "sip",
+      "goal-planning",
+      "1-crore"
+    ],
+    "calculators": [
+      "goal-planner"
+    ],
+    "readTime": 3,
+    "featured": false,
+    "status": "published"
+  },
+  {
+    "slug": "retirement-planning-25-vs-35",
+    "title": "Retirement planning at 25 vs 35: the 10-year cost of waiting",
+    "description": "The mathematically brutal difference a decade makes in retirement corpus accumulation",
+    "date": "2026-04-22",
+    "category": "retirement",
+    "tags": [
+      "SIP",
+      "compounding",
+      "early-start",
+      "retirement-planning"
+    ],
+    "calculators": [
+      "goal-planner"
+    ],
+    "readTime": 4,
+    "featured": false,
+    "status": "published"
+  },
+  {
+    "slug": "sebi-expense-ratio-caps-savings",
+    "title": "What SEBI's expense ratio caps actually save you",
+    "description": "SEBI's expense ratio framework has saved investors thousands of crores. Here is exactly how much, and why the savings are still invisible to most.",
+    "date": "2026-04-22",
+    "category": "markets-policy",
+    "tags": [
+      "sebi",
+      "expense-ratio",
+      "mutual-funds",
+      "costs"
+    ],
+    "calculators": [
+      "sip-simulator"
+    ],
+    "readTime": 3,
+    "featured": false,
+    "status": "published"
+  },
+  {
+    "slug": "sebi-mutual-fund-reforms-pocket",
+    "title": "SEBI's mutual fund reforms: what actually changed for your pocket",
+    "description": "SEBI has reformed mutual fund rules repeatedly. Here is what each reform actually saved — or did not save — for the average investor.",
+    "date": "2026-04-22",
+    "category": "markets-policy",
+    "tags": [
+      "sebi",
+      "mutual-funds",
+      "expense-ratio",
+      "regulation"
+    ],
+    "calculators": [
+      "sip-simulator"
+    ],
+    "readTime": 3,
+    "featured": false,
+    "status": "published"
+  },
+  {
+    "slug": "section-80c-is-not-a-savings-strategy",
+    "title": "Section 80C is not a savings strategy (it's a tax deadline)",
+    "description": "80C limits you to ₹1.5L and expires every March. Here's why treating it as an investment plan is a mistake.",
+    "date": "2026-04-22",
+    "category": "tax-ctc",
+    "tags": [
+      "section-80c",
+      "tax-deductions",
+      "old-regime",
+      "investment-mistakes"
+    ],
+    "calculators": [
+      "tax-sandbox"
+    ],
+    "readTime": 3,
+    "featured": false,
+    "status": "published"
+  },
+  {
+    "slug": "sensex-80000-richer-or-inflated",
+    "title": "The Sensex at 80,000: are you richer or just holding inflated numbers?",
+    "description": "Sensex crossing 80,000 made headlines. But adjusted for inflation and currency depreciation, the milestone means less than you think.",
+    "date": "2026-04-22",
+    "category": "markets-policy",
+    "tags": [
+      "sensex",
+      "inflation",
+      "real-returns",
+      "currency-depreciation"
+    ],
+    "calculators": [
+      "sip-simulator"
+    ],
+    "readTime": 3,
+    "featured": false,
+    "status": "published"
+  },
+  {
+    "slug": "standard-deduction-doubled-does-it-actually-help",
+    "title": "Standard deduction doubled: does it actually help?",
+    "description": "₹50,000 to ₹75,000 sounds impressive. But the real benefit depends entirely on your tax slab.",
+    "date": "2026-04-22",
+    "category": "tax-ctc",
+    "tags": [
+      "standard-deduction",
+      "budget-2024",
+      "tax-benefit",
+      "new-regime"
+    ],
+    "calculators": [
+      "tax-sandbox"
+    ],
+    "readTime": 3,
+    "featured": false,
+    "status": "published"
+  },
+  {
+    "slug": "swp-2008-crash",
+    "title": "What happens to your SWP in a 2008-style crash",
+    "description": "A simulation of systematic withdrawal plans under the worst market conditions",
+    "date": "2026-04-22",
+    "category": "retirement",
+    "tags": [
+      "SWP",
+      "market-crash",
+      "sequence-risk",
+      "retirement-corpus"
+    ],
+    "calculators": [
+      "swp-stress-test"
+    ],
+    "readTime": 4,
+    "featured": false,
+    "status": "published"
+  },
+  {
+    "slug": "why-hra-claims-are-most-misunderstood",
+    "title": "Why HRA claims are the most misunderstood tax benefit",
+    "description": "HRA exemption depends on your salary, rent, and city — not just the rent receipt your landlord reluctantly gave you.",
+    "date": "2026-04-22",
+    "category": "tax-ctc",
+    "tags": [
+      "hra",
+      "house-rent-allowance",
+      "tax-exemption",
+      "old-regime"
+    ],
+    "calculators": [
+      "ctc-optimizer"
+    ],
+    "readTime": 3,
+    "featured": false,
+    "status": "published"
+  },
+  {
+    "slug": "withdraw-corpus-without-going-broke",
+    "title": "How to withdraw from your corpus without going broke by 75",
+    "description": "A structured withdrawal strategy that accounts for Indian inflation, medical costs, and market reality",
+    "date": "2026-04-22",
+    "category": "retirement",
+    "tags": [
+      "SWP",
+      "withdrawal-strategy",
+      "retirement-corpus",
+      "deaccumulation"
+    ],
+    "calculators": [
+      "swp-stress-test"
+    ],
+    "readTime": 4,
+    "featured": false,
+    "status": "published"
+  },
+  {
+    "slug": "your-ctc-is-a-lie",
+    "title": "Your CTC is a lie (and here's what you actually take home)",
+    "description": "That ₹15 lakh CTC offer? You'll see roughly ₹10.5 lakh. Here's where the rest vanishes.",
+    "date": "2026-04-22",
+    "category": "tax-ctc",
+    "tags": [
+      "ctc",
+      "take-home-pay",
+      "salary-structure",
+      "in-hand-salary"
+    ],
+    "calculators": [
+      "ctc-optimizer"
+    ],
+    "readTime": 2,
+    "featured": false,
+    "status": "published"
+  },
+  {
+    "slug": "your-salary-structure-is-costing-you-lakhs",
+    "title": "Your salary structure is costing you lakhs (and your HR won't tell you)",
+    "description": "Basic salary, HRA, special allowance — the mix determines your tax, PF, and take-home. Here's how to fix it.",
+    "date": "2026-04-22",
+    "category": "tax-ctc",
+    "tags": [
+      "salary-structure",
+      "ctc-optimization",
+      "take-home-pay",
+      "hra-optimization"
+    ],
+    "calculators": [
+      "ctc-optimizer"
+    ],
+    "readTime": 3,
+    "featured": false,
+    "status": "published"
+  },
+  {
+    "slug": "retirement-crash-test",
+    "title": "Will your retirement fund survive a market crash?",
+    "description": "A ₹2 crore corpus can die in 17 years instead of 25 if the market crashes early. Here's how to stress-test your retirement plan.",
+    "date": "2026-04-01",
+    "category": "retirement",
+    "tags": [
+      "retirement",
+      "swp",
+      "sequence-risk",
+      "fire"
+    ],
+    "calculators": [
+      "swp-stress-test",
+      "fire-matrix"
+    ],
+    "readTime": 2,
+    "featured": false,
+    "status": "published"
+  },
+  {
+    "slug": "sip-real-returns",
+    "title": "Your SIP returns are a lie (and here's the real number)",
+    "description": "A ₹1 crore SIP sounds great. After inflation and tax, it's worth less than half. Here are the actual numbers.",
+    "date": "2026-03-22",
+    "category": "personal-finance",
+    "tags": [
+      "sip",
+      "inflation",
+      "real-returns",
+      "ltcg"
+    ],
+    "calculators": [
+      "sip-simulator"
+    ],
+    "readTime": 2,
+    "featured": true,
+    "status": "published"
+  },
+  {
+    "slug": "budget-2026-tax-slabs",
+    "title": "Budget 2026: What the new tax slabs mean for your take-home pay",
+    "description": "The new regime just got more attractive. Here's exactly how much more you'll keep each month.",
+    "date": "2026-03-15",
+    "category": "tax-ctc",
+    "tags": [
+      "budget-2026",
+      "tax-regime",
+      "take-home-pay"
+    ],
+    "calculators": [
+      "tax-sandbox",
+      "ctc-optimizer"
+    ],
+    "readTime": 2,
+    "featured": true,
+    "status": "published"
+  }
+]

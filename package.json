@@ -8,6 +8,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "prebuild": "node scripts/generate-blog-index.mjs",
     "start": "next start",
     "lint": "eslint"
   },

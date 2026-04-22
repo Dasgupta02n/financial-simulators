@@ -1,10 +1,10 @@
 import Link from "next/link";
-import type { BlogPost } from "@/lib/blog";
+import type { BlogPostSummary } from "@/lib/blog";
 import type { BlogCategory } from "@/lib/blog-categories";
 import { BLOG_CATEGORIES } from "@/lib/blog-categories";
 
 interface BlogCardProps {
-  post: BlogPost;
+  post: BlogPostSummary;
 }
 
 function categoryLabel(slug: BlogCategory): string {

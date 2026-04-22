@@ -1,7 +1,10 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  serverExternalPackages: ["gray-matter"],
+  outputFileTracingIncludes: {
+    "/*": ["src/content/blog/**/*.mdx"],
+  },
 };
 
 export default nextConfig;

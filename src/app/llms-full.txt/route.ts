@@ -9,7 +9,7 @@ import fireConfig from "@/content/calculators/fire.json";
 import ctcConfig from "@/content/calculators/ctc.json";
 import npsConfig from "@/content/calculators/nps.json";
 import goalConfig from "@/content/calculators/goal.json";
-import { getAllPosts } from "@/lib/blog";
+import { getAllPosts, getPostBySlug } from "@/lib/blog";
 
 const calculatorConfigs = [
   sipConfig,
@@ -57,7 +57,7 @@ ${calculatorSections}
 - [Blog Index](/blog): Financial stories for common Indians
 - Individual blog posts with full content are available at /blog/[slug]
 
-${getAllPosts().map((post) => `### ${post.title}\n\n${post.description}\n\n${post.content}`).join("\n\n---\n\n")}
+${getAllPosts().map((summary) => { const post = getPostBySlug(summary.slug); return post ? `### ${post.title}\n\n${post.description}\n\n${post.content}` : null; }).filter(Boolean).join("\n\n---\n\n")}
 `;
 
   return new NextResponse(content, {
