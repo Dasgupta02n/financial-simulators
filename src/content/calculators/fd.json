@@ -1,0 +1,24 @@
+{
+  "id": "fd",
+  "slug": "fd-comparator",
+  "name": "FD Comparator",
+  "metaTitle": "FD Comparator — Real Fixed Deposit Returns | Financial Simulators",
+  "metaDescription": "See real FD returns after tax and inflation. Compare banks, tenures, and compounding. Client-side, no PII.",
+  "shortDescription": "Real FD returns after tax and inflation",
+  "faq": [
+    {
+      "question": "How much tax do I pay on FD interest?",
+      "answer": "FD interest is taxed at your income tax slab rate. If you're in the 30% slab, a 7% FD gives only 4.9% post-tax. After 6% inflation, your real return is negative."
+    },
+    {
+      "question": "Is FD better than mutual funds?",
+      "answer": "FDs give guaranteed returns but post-tax and post-inflation returns are often negative. Equity mutual funds have risk but historically deliver 10-12% long-term returns, which are positive even after tax and inflation."
+    }
+  ],
+  "howToSteps": [
+    { "name": "Enter FD amount and rate", "text": "Set your deposit amount and the offered interest rate" },
+    { "name": "Set tenure and tax slab", "text": "Choose the FD duration and your tax bracket" },
+    { "name": "See real returns", "text": "View post-tax and post-inflation returns" },
+    { "name": "Compare options", "text": "Compare different FD rates, tenures, and compounding frequencies" }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "id": "accum",
+  "slug": "accumulation-calculator",
+  "name": "Accumulation Calculator",
+  "metaTitle": "Accumulation Calculator — Lump Sum vs SIP | Financial Simulators",
+  "metaDescription": "Compare lump sum investment vs SIP over time. See which strategy works better for your timeline. Client-side, no PII.",
+  "shortDescription": "Lump sum vs SIP comparison",
+  "faq": [
+    {
+      "question": "Is lump sum better than SIP?",
+      "answer": "Lump sum wins more often in back-tests because money is invested longer. But SIPs are psychologically easier and reduce timing risk. Over 10+ years, the difference narrows. Use this calculator to compare with your actual numbers."
+    },
+    {
+      "question": "What if I invest a windfall as lump sum?",
+      "answer": "A ₹10L lump sum at 12% grows to ₹31L in 10 years. The same ₹10L as SIP over 10 years (₹8,333/month) grows to ₹17.3L. But you'd only invest ₹10L total via SIP vs ₹10L upfront via lump sum."
+    }
+  ],
+  "howToSteps": [
+    { "name": "Set investment amount", "text": "Enter the lump sum or monthly SIP amount" },
+    { "name": "Choose time horizon", "text": "Set the number of years for your investment" },
+    { "name": "Compare results", "text": "See lump sum vs SIP growth side by side" },
+    { "name": "Adjust returns", "text": "Change expected return rate to see different scenarios" }
+  ]
+}

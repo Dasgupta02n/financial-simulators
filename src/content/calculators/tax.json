@@ -1,0 +1,28 @@
+{
+  "id": "tax",
+  "slug": "tax-sandbox",
+  "name": "Tax Sandbox",
+  "metaTitle": "Tax Sandbox — Old vs New Regime Comparison | Financial Simulators",
+  "metaDescription": "Compare old vs new tax regime side by side. Includes HRA, 80C/80D, LTCG/STCG, surcharge and cess. Client-side, no PII.",
+  "shortDescription": "Old vs New regime, side by side",
+  "faq": [
+    {
+      "question": "Which tax regime is better for me?",
+      "answer": "It depends on your income and deductions. The new regime has lower rates but fewer deductions. If you claim more than ₹3.75L in deductions, the old regime is usually better. Use the Tax Sandbox to compare with your actual numbers."
+    },
+    {
+      "question": "What deductions are available under the old regime?",
+      "answer": "Common deductions include 80C (₹1.5L for PPF, ELSS, home loan principal), 80D (health insurance), HRA exemption, home loan interest (₹2L), and NPS contribution (₹50K additional)."
+    },
+    {
+      "question": "How does the new tax regime work in Budget 2026?",
+      "answer": "The new regime raised the basic exemption limit to ₹4L and widened the 5% slab. For most salaried individuals, this means roughly ₹17,000/year in savings compared to the previous new regime."
+    }
+  ],
+  "howToSteps": [
+    { "name": "Enter your income", "text": "Set your gross annual income and salary structure" },
+    { "name": "Add deductions", "text": "Enter HRA, 80C, 80D, home loan interest and other deductions" },
+    { "name": "Compare regimes", "text": "See old vs new regime tax side by side" },
+    { "name": "Optimize", "text": "Adjust deductions to find which regime saves you more" }
+  ]
+}

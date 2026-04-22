@@ -1,0 +1,28 @@
+{
+  "id": "emi",
+  "slug": "emi-analyzer",
+  "name": "EMI Analyzer",
+  "metaTitle": "EMI Analyzer — Real Cost of Your Loan | Financial Simulators",
+  "metaDescription": "Compare loan EMIs across tenures. See total interest, real cost after inflation, and prepayment impact. Client-side, no PII.",
+  "shortDescription": "Compare loan EMIs with real cost",
+  "faq": [
+    {
+      "question": "How much interest do I pay on a home loan?",
+      "answer": "On a ₹50L home loan at 8.5% for 20 years, you pay approximately ₹54.7L in interest — more than the principal. The real cost after inflation is lower, but still significant."
+    },
+    {
+      "question": "Should I choose a shorter or longer loan tenure?",
+      "answer": "Shorter tenures have higher EMIs but much less total interest. A 15-year loan at 8.5% saves roughly ₹20L in interest vs a 25-year loan on the same amount."
+    },
+    {
+      "question": "How does prepayment reduce my loan cost?",
+      "answer": "A single prepayment of ₹5L on a ₹50L loan in year 5 can reduce your total interest by ₹12-15L and shorten the loan by 3-4 years."
+    }
+  ],
+  "howToSteps": [
+    { "name": "Enter loan amount", "text": "Set the principal amount you want to borrow" },
+    { "name": "Set interest rate and tenure", "text": "Adjust the rate and tenure to see different EMI options" },
+    { "name": "Compare total cost", "text": "See total interest paid vs principal across tenures" },
+    { "name": "Add prepayments", "text": "Toggle prepayment to see how it reduces total cost" }
+  ]
+}

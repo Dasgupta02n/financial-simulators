@@ -1,0 +1,24 @@
+{
+  "id": "ctc",
+  "slug": "ctc-optimizer",
+  "name": "CTC Optimizer",
+  "metaTitle": "CTC Optimizer — Maximize Your In-Hand Salary | Financial Simulators",
+  "metaDescription": "See how much of your CTC you actually take home. Optimize salary structure for maximum in-hand pay. Client-side, no PII.",
+  "shortDescription": "Maximize your in-hand salary",
+  "faq": [
+    {
+      "question": "How much of my CTC do I actually get?",
+      "answer": "A ₹15L CTC typically gives ₹9.5-11L in hand depending on your salary structure. EPF, gratuity, and taxes take 27-37% off the top. This calculator shows the exact breakdown."
+    },
+    {
+      "question": "How can I optimize my CTC structure?",
+      "answer": "Restructuring allowances (HRA, transport, food) can increase in-hand pay without changing your CTC. Some companies allow flexible benefit plans that reduce your tax burden."
+    }
+  ],
+  "howToSteps": [
+    { "name": "Enter your CTC", "text": "Set your total cost to company amount" },
+    { "name": "Review salary breakdown", "text": "See how your CTC splits into basic, HRA, allowances, and deductions" },
+    { "name": "Compare structures", "text": "See current vs optimized salary structure" },
+    { "name": "See in-hand difference", "text": "View the monthly take-home difference" }
+  ]
+}

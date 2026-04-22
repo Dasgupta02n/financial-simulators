@@ -1,0 +1,24 @@
+{
+  "id": "swp",
+  "slug": "swp-stress-test",
+  "name": "SWP Stress Test",
+  "metaTitle": "SWP Stress Test — Will Your Corpus Survive? | Financial Simulators",
+  "metaDescription": "Test if your retirement corpus survives market crashes with Systematic Withdrawal Plans. Monte Carlo stress testing. Client-side, no PII.",
+  "shortDescription": "Will your corpus survive a crash?",
+  "faq": [
+    {
+      "question": "How long will my retirement corpus last?",
+      "answer": "A ₹2 crore corpus with ₹1L/month SWP at 8% returns lasts approximately 25 years. But a 30% market crash in year 1 can reduce that to 17 years. This calculator stress-tests your corpus against crashes."
+    },
+    {
+      "question": "What is sequence-of-returns risk?",
+      "answer": "If the market crashes early in your retirement, you're selling more units at lower prices. This can wipe out 40% of your corpus. A 2008-style crash in year 1 of retirement can cut your corpus life in half."
+    }
+  ],
+  "howToSteps": [
+    { "name": "Set your corpus", "text": "Enter your total retirement corpus amount" },
+    { "name": "Set monthly withdrawal", "text": "Enter your monthly SWP amount" },
+    { "name": "Stress test", "text": "See how crashes at different points affect your corpus" },
+    { "name": "Adjust assumptions", "text": "Change return rate, inflation, and crash scenarios" }
+  ]
+}

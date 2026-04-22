@@ -1,0 +1,32 @@
+{
+  "id": "sip",
+  "slug": "sip-simulator",
+  "name": "SIP Simulator",
+  "metaTitle": "SIP Simulator — Real Returns Calculator | Financial Simulators",
+  "metaDescription": "See what your SIP actually earns after inflation and tax. Client-side, no PII, no signup.",
+  "shortDescription": "See actual returns after inflation and tax",
+  "faq": [
+    {
+      "question": "How much will my SIP grow in 20 years?",
+      "answer": "A ₹10,000/month SIP at 12% for 20 years grows to approximately ₹1.02 crore nominally, but after 6% inflation, the real value is about ₹30.5 lakh. After LTCG tax, you keep even less."
+    },
+    {
+      "question": "What is real return vs nominal return?",
+      "answer": "Nominal return is what your investment grows to in absolute numbers. Real return adjusts for inflation — what your money can actually buy in the future. A 12% nominal return with 6% inflation is roughly a 5.7% real return."
+    },
+    {
+      "question": "How does LTCG tax affect SIP returns?",
+      "answer": "Long-Term Capital Gains tax at 12.5% applies to equity mutual fund gains above ₹1.25 lakh per year. This can reduce your effective returns by 0.5-1% annually depending on your holding period and gain size."
+    },
+    {
+      "question": "Should I step up my SIP every year?",
+      "answer": "A 10% annual step-up on a ₹10,000 SIP can increase your final corpus by 40-60% over 20 years. Step-up SIPs work because they match your likely income growth with higher investments."
+    }
+  ],
+  "howToSteps": [
+    { "name": "Enter monthly investment", "text": "Set your monthly SIP amount in the slider" },
+    { "name": "Set expected return rate", "text": "Adjust the expected annual return (default: 12% for NIFTY)" },
+    { "name": "Adjust inflation", "text": "Set the inflation rate to see real vs nominal returns" },
+    { "name": "See real vs nominal returns", "text": "Compare what your SIP grows to vs what it's actually worth after inflation" }
+  ]
+}

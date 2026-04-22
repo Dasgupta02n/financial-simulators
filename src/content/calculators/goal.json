@@ -1,0 +1,24 @@
+{
+  "id": "goal",
+  "slug": "goal-planner",
+  "name": "Goal Planner",
+  "metaTitle": "Goal Planner — SIP Amount Per Financial Goal | Financial Simulators",
+  "metaDescription": "Calculate the monthly SIP needed for each financial goal. Add multiple goals, adjust timelines. Client-side, no PII.",
+  "shortDescription": "Monthly SIP needed per goal",
+  "faq": [
+    {
+      "question": "How much SIP do I need for ₹1 crore?",
+      "answer": "At 12% returns, you need approximately ₹10,000/month for 20 years to reach ₹1 crore. At 10%, you need ₹13,200/month. The Goal Planner lets you set multiple goals with different timelines."
+    },
+    {
+      "question": "How do I plan for multiple goals?",
+      "answer": "Add each goal separately — house down payment, children's education, retirement — with its own target amount and timeline. The planner shows the monthly SIP needed for each goal independently."
+    }
+  ],
+  "howToSteps": [
+    { "name": "Add a goal", "text": "Click '+ Add Goal' and enter target amount and years" },
+    { "name": "Set expected returns", "text": "Adjust the expected return rate for each goal" },
+    { "name": "See monthly SIP needed", "text": "View how much to invest monthly for each goal" },
+    { "name": "Compare scenarios", "text": "Adjust timelines and rates to see different outcomes" }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "id": "fire",
+  "slug": "fire-matrix",
+  "name": "FIRE Matrix",
+  "metaTitle": "FIRE Calculator — When Can You Retire? | Financial Simulators",
+  "metaDescription": "Calculate your FIRE number and retirement timeline. See how savings rate affects retirement age. Client-side, no PII.",
+  "shortDescription": "When can you retire?",
+  "faq": [
+    {
+      "question": "What is the FIRE number?",
+      "answer": "Your FIRE number is 25x your annual expenses. If you spend ₹10L/year, you need ₹2.5 crore invested to be financially independent. This calculator shows how your savings rate affects when you reach that number."
+    },
+    {
+      "question": "How does the 4% rule work in India?",
+      "answer": "The 4% rule says you can withdraw 4% of your corpus in the first year of retirement, adjusted for inflation each year. In India with higher inflation (6%), you may need a 3% withdrawal rate instead, meaning 33x annual expenses."
+    }
+  ],
+  "howToSteps": [
+    { "name": "Enter current savings and income", "text": "Set your monthly savings and current invested corpus" },
+    { "name": "Set monthly expenses", "text": "Enter your expected monthly expenses in retirement" },
+    { "name": "See retirement timeline", "text": "View when you'll hit your FIRE number" },
+    { "name": "Adjust assumptions", "text": "Change return rate and inflation to see different scenarios" }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "id": "nps",
+  "slug": "nps-modeler",
+  "name": "NPS Modeler",
+  "metaTitle": "NPS Modeler — Project Your Pension & Corpus | Financial Simulators",
+  "metaDescription": "Project your NPS corpus at retirement. See pension amount, lump sum, and annuity options. Client-side, no PII.",
+  "shortDescription": "Project your pension and corpus",
+  "faq": [
+    {
+      "question": "How much pension will NPS give me?",
+      "answer": "A ₹10K/month NPS contribution for 30 years at 10% returns builds approximately ₹2.3 crore. At a 6% annuity rate, that's roughly ₹11.5K/month pension. But 40% must be used for annuity, and you can withdraw only 60% as lump sum."
+    },
+    {
+      "question": "Is NPS better than PPF or mutual funds?",
+      "answer": "NPS has the lowest expense ratio (0.01-0.03%) and extra ₹50K deduction under 80CCD(1B). But NPS mandates 40% annuity at retirement. ELSS mutual funds offer more flexibility and similar returns."
+    }
+  ],
+  "howToSteps": [
+    { "name": "Set monthly contribution", "text": "Enter your monthly NPS contribution amount" },
+    { "name": "Choose asset allocation", "text": "Set equity and debt allocation percentages" },
+    { "name": "See projected corpus", "text": "View your total NPS corpus at retirement" },
+    { "name": "Explore pension options", "text": "See monthly pension and lump sum from different annuity rates" }
+  ]
+}
