@@ -1,15 +1,10 @@
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
+import type { BlogCategory } from "./blog-categories";
 
-export const BLOG_CATEGORIES = [
-  { slug: "markets-policy", label: "Markets & Policy" },
-  { slug: "personal-finance", label: "Personal Finance" },
-  { slug: "tax-ctc", label: "Tax & CTC" },
-  { slug: "retirement", label: "Retirement" },
-] as const;
-
-export type BlogCategory = (typeof BLOG_CATEGORIES)[number]["slug"];
+export { BLOG_CATEGORIES } from "./blog-categories";
+export type { BlogCategory } from "./blog-categories";
 
 export interface BlogPost {
   slug: string;

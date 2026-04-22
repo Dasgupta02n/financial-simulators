@@ -1,6 +1,7 @@
 import Link from "next/link";
-import type { BlogPost, BlogCategory } from "@/lib/blog";
-import { BLOG_CATEGORIES } from "@/lib/blog";
+import type { BlogPost } from "@/lib/blog";
+import type { BlogCategory } from "@/lib/blog-categories";
+import { BLOG_CATEGORIES } from "@/lib/blog-categories";
 
 interface BlogCardProps {
   post: BlogPost;
@@ -10,7 +11,7 @@ function categoryLabel(slug: BlogCategory): string {
   return BLOG_CATEGORIES.find((c) => c.slug === slug)?.label ?? slug;
 }
 
-const categoryColors: Record<BlogCategory, string> = {
+const categoryColors: Record<string, string> = {
   "markets-policy": "text-amber-400",
   "personal-finance": "text-red-400",
   "tax-ctc": "text-amber-400",

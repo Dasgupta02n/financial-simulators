@@ -1,8 +1,8 @@
 "use client";
 
 import { useRouter, useSearchParams } from "next/navigation";
-import { BLOG_CATEGORIES } from "@/lib/blog";
-import type { BlogCategory } from "@/lib/blog";
+import { BLOG_CATEGORIES } from "@/lib/blog-categories";
+import type { BlogCategory } from "@/lib/blog-categories";
 
 export function CategoryFilter() {
   const router = useRouter();

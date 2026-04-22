@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
-import { getAllPosts, getPostBySlug, BLOG_CATEGORIES } from "@/lib/blog";
+import { getAllPosts, getPostBySlug } from "@/lib/blog";
+import { BLOG_CATEGORIES } from "@/lib/blog-categories";
 import { CalculatorCard as CalculatorCardEmbed } from "@/components/blog/calculator-card-embed";
 
 interface BlogPostPageProps {

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { getAllPosts } from "@/lib/blog";
 import { BlogCard } from "@/components/blog/blog-card";
 import { CategoryFilter } from "@/components/blog/category-filter";
@@ -30,7 +31,9 @@ export default function BlogPage() {
       </header>
 
       <div className="mb-6">
-        <CategoryFilter />
+        <Suspense fallback={null}>
+          <CategoryFilter />
+        </Suspense>
       </div>
 
       {featured.length > 0 && (
