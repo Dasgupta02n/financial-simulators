@@ -1,74 +1,142 @@
-"use client";
+import Link from "next/link";
+import type { Metadata } from "next";
 
-import { useState } from "react";
-import { twMerge } from "tailwind-merge";
-import { SIPCalculator } from "@/components/sip/sip-calculator";
-import { EMICalculator } from "@/components/emi/emi-calculator";
-import { TaxCalculator } from "@/components/tax/tax-calculator";
-import { AccumCalculator } from "@/components/accum/accum-calculator";
-import { FDCalculator } from "@/components/fd/fd-calculator";
-import { SWPCalculator } from "@/components/swp/swp-calculator";
-import { FIRECalculator } from "@/components/fire/fire-calculator";
-import { CTCCalculator } from "@/components/ctc/ctc-calculator";
-import { NPSCalculator } from "@/components/nps/nps-calculator";
-import { GoalCalculator } from "@/components/goal/goal-calculator";
+const CALCULATORS: readonly {
+  id: string;
+  name: string;
+  slug: string;
+  description: string;
+  tag?: string;
+}[] = [
+  {
+    id: "sip",
+    name: "SIP Simulator",
+    slug: "sip-simulator",
+    description: "See actual returns after inflation and tax",
+    tag: "Popular",
+  },
+  {
+    id: "emi",
+    name: "EMI Analyzer",
+    slug: "emi-analyzer",
+    description: "Compare loan EMIs with real cost",
+  },
+  {
+    id: "tax",
+    name: "Tax Sandbox",
+    slug: "tax-sandbox",
+    description: "Old vs New regime, side by side",
+  },
+  {
+    id: "accum",
+    name: "Accumulator",
+    slug: "accumulation-calculator",
+    description: "Lump sum vs SIP comparison",
+  },
+  {
+    id: "fd",
+    name: "FD Comparator",
+    slug: "fd-comparator",
+    description: "Real FD returns after tax and inflation",
+  },
+  {
+    id: "swp",
+    name: "SWP Stress Test",
+    slug: "swp-stress-test",
+    description: "Will your corpus survive a crash?",
+  },
+  {
+    id: "fire",
+    name: "FIRE Matrix",
+    slug: "fire-matrix",
+    description: "When can you retire?",
+  },
+  {
+    id: "ctc",
+    name: "CTC Optimizer",
+    slug: "ctc-optimizer",
+    description: "Maximize your in-hand salary",
+  },
+  {
+    id: "nps",
+    name: "NPS Modeler",
+    slug: "nps-modeler",
+    description: "Project your pension and corpus",
+  },
+  {
+    id: "goal",
+    name: "Goal Planner",
+    slug: "goal-planner",
+    description: "Monthly SIP needed per goal",
+  },
+];
 
-const CALCULATORS = [
-  { id: "sip", label: "SIP Simulator" },
-  { id: "emi", label: "EMI Analyzer" },
-  { id: "tax", label: "Tax Sandbox" },
-  { id: "accum", label: "Accumulator" },
-  { id: "fd", label: "FD Comparator" },
-  { id: "swp", label: "SWP Stress" },
-  { id: "fire", label: "FIRE Matrix" },
-  { id: "ctc", label: "CTC Optimizer" },
-  { id: "nps", label: "NPS Modeler" },
-  { id: "goal", label: "Goal Planner" },
-] as const;
-
-type CalcId = (typeof CALCULATORS)[number]["id"];
+export const metadata: Metadata = {
+  title: "Financial Simulators — Real Returns, No Marketing",
+  description:
+    "Inflation-adjusted, tax-aware financial calculators for Indian investors. Zero PII, zero tracking, all math runs in your browser.",
+  openGraph: {
+    title: "Financial Simulators — Real Returns, No Marketing",
+    description:
+      "Inflation-adjusted, tax-aware financial calculators for Indian investors. Zero PII, zero tracking, all math runs in your browser.",
+    url: "https://financialsimulators.in",
+    siteName: "Financial Simulators",
+    type: "website",
+  },
+  alternates: {
+    canonical: "/",
+  },
+};
 
 export default function Home() {
-  const [activeCalc, setActiveCalc] = useState<CalcId>("sip");
-
   return (
     <main className="flex-1 flex flex-col items-center">
-      <header className="w-full max-w-7xl mx-auto px-4 pt-8 pb-4">
-        <h1 className="text-2xl font-semibold tracking-tight">Financial Simulators</h1>
-        <p className="text-sm text-text-secondary mt-1">
-          Real returns. No marketing. All math runs in your browser.
+      <header className="w-full max-w-7xl mx-auto px-4 pt-12 pb-8">
+        <h1 className="text-3xl font-semibold tracking-tight">
+          Financial Simulators
+        </h1>
+        <p className="text-lg text-text-secondary mt-2">
+          Real returns. No marketing.
         </p>
-        <nav className="flex gap-2 mt-4 flex-wrap">
-          {CALCULATORS.map((calc) => (
-            <button
-              key={calc.id}
-              onClick={() => setActiveCalc(calc.id)}
-              className={twMerge(
-                "px-4 py-2 text-sm rounded-md font-mono transition-colors",
-                activeCalc === calc.id
-                  ? "bg-gain/20 text-gain border border-gain/40"
-                  : "bg-border text-text-secondary border border-border hover:bg-border/80"
-              )}
-            >
-              {calc.label}
-            </button>
-          ))}
-        </nav>
+        <p className="text-sm text-text-secondary mt-1 max-w-2xl">
+          Inflation-adjusted, tax-aware calculators for Indian investors. No
+          signups, no tracking, no product pushing. All math runs in your
+          browser.
+        </p>
       </header>
 
-      {activeCalc === "sip" && <SIPCalculator />}
-      {activeCalc === "emi" && <EMICalculator />}
-      {activeCalc === "tax" && <TaxCalculator />}
-      {activeCalc === "accum" && <AccumCalculator />}
-      {activeCalc === "fd" && <FDCalculator />}
-      {activeCalc === "swp" && <SWPCalculator />}
-      {activeCalc === "fire" && <FIRECalculator />}
-      {activeCalc === "ctc" && <CTCCalculator />}
-      {activeCalc === "nps" && <NPSCalculator />}
-      {activeCalc === "goal" && <GoalCalculator />}
+      <div className="w-full max-w-7xl mx-auto px-4 pb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {CALCULATORS.map((calc) => (
+            <Link
+              key={calc.id}
+              href={`/${calc.slug}`}
+              className="group flex flex-col gap-2 p-5 bg-surface rounded-lg border border-border hover:border-gain/40 hover:bg-surface/80 transition-colors"
+            >
+              <div className="flex items-center justify-between">
+                <h2 className="text-base font-semibold group-hover:text-gain transition-colors">
+                  {calc.name}
+                </h2>
+                {calc.tag && (
+                  <span className="text-[10px] uppercase tracking-wider bg-gain/20 text-gain px-2 py-0.5 rounded font-mono">
+                    {calc.tag}
+                  </span>
+                )}
+              </div>
+              <p className="text-sm text-text-secondary">
+                {calc.description}
+              </p>
+              <span className="text-xs font-mono text-gain opacity-0 group-hover:opacity-100 transition-opacity">
+                Open →
+              </span>
+            </Link>
+          ))}
+        </div>
+      </div>
 
       <footer className="w-full max-w-7xl mx-auto px-4 py-6 text-xs text-text-secondary border-t border-border mt-auto">
-        Zero PII. Zero tracking. Computed entirely client-side. Macro defaults: NIFTY 12% μ / 18% σ, 6% inflation, LTCG 12.5% above ₹1.25L.
+        Zero PII. Zero tracking. Computed entirely client-side. Macro defaults:
+        NIFTY 12% μ / 18% σ, 6% inflation, LTCG 12.5% above ₹1.25L.
       </footer>
     </main>
   );
