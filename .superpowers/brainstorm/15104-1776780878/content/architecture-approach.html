@@ -1,0 +1,127 @@
+<h2>Architecture Approach</h2>
+<p class="subtitle">Three subsystems, one philosophy: client-first, privacy-first, AI-discoverable</p>
+
+<div class="section">
+  <h3>Recommended: Content Layer + Admin Panel + AI Ingestion</h3>
+  <p>Three layers that build on each other, deployed in order:</p>
+</div>
+
+<div class="split">
+  <div class="mockup">
+    <div class="mockup-header">Layer 1: SEO/AI Foundation</div>
+    <div class="mockup-body" style="font-size: 12px; padding: 12px;">
+      <div class="mock-nav">llms.txt | sitemap.xml | robots.txt | JSON-LD</div>
+      <div style="display: flex; gap: 8px; margin-top: 8px;">
+        <div class="placeholder" style="flex: 1; padding: 8px;">
+          <strong>/llms.txt</strong><br/>
+          AI agent summary<br/>
+          → Calculator descriptions<br/>
+          → Blog post index<br/>
+          → Use-case entry points
+        </div>
+        <div class="placeholder" style="flex: 1; padding: 8px;">
+          <strong>JSON-LD</strong><br/>
+          Per-page structured data<br/>
+          → FAQ schema<br/>
+          → HowTo schema<br/>
+          → FinancialProduct schema
+        </div>
+        <div class="placeholder" style="flex: 1; padding: 8px;">
+          <strong>Meta</strong><br/>
+          Next.js metadata API<br/>
+          → Title, description<br/>
+          → Open Graph<br/>
+          → Canonical URLs
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="mockup">
+    <div class="mockup-header">Layer 2: Blog + Content</div>
+    <div class="mockup-body" style="font-size: 12px; padding: 12px;">
+      <div class="mock-nav">/blog | /blog/[slug]</div>
+      <div style="display: flex; gap: 8px; margin-top: 8px;">
+        <div class="placeholder" style="flex: 1; padding: 8px;">
+          <strong>Blog Post</strong><br/>
+          MDX with frontmatter<br/>
+          → Policy impact stories<br/>
+          → Personal finance guides<br/>
+          → Calculator tie-ins
+        </div>
+        <div class="placeholder" style="flex: 1; padding: 8px;">
+          <strong>Categories</strong><br/>
+          Taxonomy system<br/>
+          → Markets & Policy<br/>
+          → Personal Finance<br/>
+          → Tax & CTC<br/>
+          → Retirement
+        </div>
+        <div class="placeholder" style="flex: 1; padding: 8px;">
+          <strong>Tie-ins</strong><br/>
+          Embedded calculator links<br/>
+          → "Try the SIP Simulator"<br/>
+          → Dynamic embeds<br/>
+          → Context-aware CTAs
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="mockup" style="margin-top: 16px;">
+  <div class="mockup-header">Layer 3: CMS Admin Panel</div>
+  <div class="mockup-body" style="font-size: 12px; padding: 12px;">
+    <div style="display: flex; gap: 8px;">
+      <div class="placeholder" style="flex: 1; padding: 8px;">
+        <strong>Blog Manager</strong><br/>
+        Create/edit/delete posts<br/>
+        Rich text + MDX editor<br/>
+        Draft/Published control<br/>
+        Category & tag management
+      </div>
+      <div class="placeholder" style="flex: 1; padding: 8px;">
+        <strong>Calculator Config</strong><br/>
+        Edit descriptions<br/>
+        Adjust default values<br/>
+        Customize CalcExplainer text<br/>
+        Per-calculator SEO settings
+      </div>
+      <div class="placeholder" style="flex: 1; padding: 8px;">
+        <strong>SEO Toolkit</strong><br/>
+        Meta title/description editor<br/>
+        Open Graph preview<br/>
+        JSON-LD schema editor<br/>
+        Sitemap control
+      </div>
+      <div class="placeholder" style="flex: 1; padding: 8px;">
+        <strong>SEM Dashboard</strong><br/>
+        Keyword tracking<br/>
+        Internal link suggestions<br/>
+        Social share previews<br/>
+        Performance metrics
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section" style="margin-top: 20px;">
+  <h3>Key Design Decisions</h3>
+  <div class="pros-cons">
+    <div class="pros"><h4>Why this works</h4>
+      <ul>
+        <li><strong>No external database</strong> — content lives in MDX files + a lightweight JSON config, committed to the repo</li>
+        <li><strong>Anti-marketing intact</strong> — still zero PII, zero tracking, all math client-side</li>
+        <li><strong>AI-agent discoverable</strong> — llms.txt gives agents a structured map of the entire site</li>
+        <li><strong>Build-time SEO</strong> — all metadata generated at build time, no runtime overhead</li>
+        <li><strong>Incremental build</strong> — each layer can be deployed independently</li>
+      </ul>
+    </div>
+    <div class="cons"><h4>Trade-offs</h4>
+      <ul>
+        <li><strong>Admin requires deploy</strong> — content changes need a git push + rebuild (not instant, but Vercel deploys in ~30s)</li>
+        <li><strong>No user accounts</strong> — admin panel uses a simple password gate (no auth system, stays zero-PII)</li>
+        <li><strong>SEM is read-only dashboard</strong> — we can show metrics and suggestions, but actual ad campaigns need external tools (Google Ads, etc.)</li>
+      </ul>
+    </div>
+  </div>
+</div>

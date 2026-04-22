@@ -7,6 +7,7 @@ import { formatINR, formatINRShort } from "@/lib/format";
 import { MetricCard } from "@/components/sip/metric-card";
 import { Area, ComposedChart, Line, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { CalcExplainer } from "@/components/shared/calc-explainer";
+import { CalcVisualization } from "@/components/shared/calc-visualization";
 
 const DEFAULT_INPUT: NPSInput = {
   currentAge: 30,
@@ -42,6 +43,11 @@ export function NPSCalculator() {
     <K extends keyof NPSInput>(key: K, value: NPSInput[K]) => { setInput((prev) => ({ ...prev, [key]: value })); }, []
   );
   const output = useMemo(() => computeNPS(input), [input]);
+  const vizData = useMemo(() => ({
+    totalCorpus: output.corpusAtRetirement,
+    monthlyPension: output.monthlyPension,
+    lumpsumWithdrawal: output.lumpsumWithdrawal,
+  }), [output.corpusAtRetirement, output.monthlyPension, output.lumpsumWithdrawal]);
 
   return (
     <div className="flex flex-col lg:flex-row gap-6 w-full max-w-7xl mx-auto px-4 py-8">
@@ -86,6 +92,7 @@ export function NPSCalculator() {
               <li><span className="text-text-primary">Real Monthly Pension</span> — what that pension can actually buy in today&apos;s prices. If inflation is 6%, a ₹35,000 pension in 30 years buys what ₹6,000 buys today.</li>
             </ul>
           </CalcExplainer>
+          <CalcVisualization calcId="nps" data={vizData} />
           <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
             <MetricCard label="Corpus at Retirement" value={output.corpusAtRetirement} variant="gain" />
             <MetricCard label="Real Value (Today's ₹)" value={output.realCorpusAtRetirement} variant="neutral" />

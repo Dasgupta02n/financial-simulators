@@ -8,6 +8,7 @@ import { MetricCard } from "@/components/sip/metric-card";
 import { Bar, BarChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { twMerge } from "tailwind-merge";
 import { CalcExplainer } from "@/components/shared/calc-explainer";
+import { CalcVisualization } from "@/components/shared/calc-visualization";
 
 const DEFAULT_GOALS: Goal[] = [
   { id: "1", name: "Emergency Fund", targetAmount: 500000, yearsFromNow: 2, priority: "essential" },
@@ -54,6 +55,11 @@ export function GoalCalculator() {
     <K extends keyof GoalInput>(key: K, value: GoalInput[K]) => { setInput((prev) => ({ ...prev, [key]: value })); }, []
   );
   const output = useMemo(() => computeGoals(input), [input]);
+  const vizData = useMemo(() => ({
+    targetAmount: output.totalInflatedTarget,
+    currentSaved: output.goals.reduce((sum, g) => sum + g.todayValue, 0),
+    monthlySIPNeeded: output.totalMonthlyModerate,
+  }), [output.totalInflatedTarget, output.goals, output.totalMonthlyModerate]);
 
   const chartData = output.goals.map((g) => ({
     name: g.name.length > 12 ? g.name.slice(0, 12) + "…" : g.name,
@@ -146,6 +152,7 @@ export function GoalCalculator() {
             <p className="font-semibold text-text-primary">Priority labels</p>
             <p>Essential = must-have (emergency fund, education). Important = should-have (house). Nice-to-have = can delay (vacation). Use these to decide what to fund first if your total SIP feels too high.</p>
           </CalcExplainer>
+          <CalcVisualization calcId="goal" data={vizData} />
           <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
             <MetricCard label="Total SIP (Conservative)" value={output.totalMonthlyConservative} variant="neutral" />
             <MetricCard label="Total SIP (Moderate)" value={output.totalMonthlyModerate} variant="gain" />

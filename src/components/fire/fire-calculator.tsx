@@ -8,6 +8,7 @@ import { MetricCard } from "@/components/sip/metric-card";
 import { Area, ComposedChart, Line, ReferenceLine, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { twMerge } from "tailwind-merge";
 import { CalcExplainer } from "@/components/shared/calc-explainer";
+import { CalcVisualization } from "@/components/shared/calc-visualization";
 
 const DEFAULT_INPUT: FIREInput = {
   currentAge: 30,
@@ -46,6 +47,10 @@ export function FIRECalculator() {
     <K extends keyof FIREInput>(key: K, value: FIREInput[K]) => { setInput((prev) => ({ ...prev, [key]: value })); }, []
   );
   const output = useMemo(() => computeFIRE(input), [input]);
+  const vizData = useMemo(() => ({
+    fireNumber: output.fireNumber,
+    corpusAtRetirement: output.corpusAtRetirement,
+  }), [output.fireNumber, output.corpusAtRetirement]);
 
   const retirementYear = input.retirementAge - input.currentAge;
 
@@ -100,6 +105,7 @@ export function FIRECalculator() {
               <li>After retirement, watch if the green line starts dropping — that&apos;s your money running out.</li>
             </ul>
           </CalcExplainer>
+          <CalcVisualization calcId="fire" data={vizData} />
           <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
             <MetricCard label="FIRE Number (25x)" value={output.fireNumber} variant="neutral" />
             <MetricCard label="Corpus at Retirement" value={output.corpusAtRetirement} variant={output.corpusAtRetirement >= output.fireNumber ? "gain" : "loss"} />

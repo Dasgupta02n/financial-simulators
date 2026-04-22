@@ -47,6 +47,11 @@ export function EMICalculator() {
     };
   }, [input, rateShift]);
 
+  const vizData = useMemo(() => result ? {
+    principal: input.loanAmount,
+    totalInterest: result.totalInterest,
+  } : { principal: 0, totalInterest: 0 }, [result, input.loanAmount]);
+
   if (!result) return null;
 
   return (
@@ -61,6 +66,7 @@ export function EMICalculator() {
       </div>
       <div className="lg:w-[60%]">
         <ResultsPanel
+          vizData={vizData}
           emi={result.emi}
           totalInterest={result.totalInterest}
           totalPayment={result.totalPayment}

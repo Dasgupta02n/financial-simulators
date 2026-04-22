@@ -1,0 +1,112 @@
+<h2>Layer 1: SEO & AI Ingestion</h2>
+<p class="subtitle">How search engines and AI agents discover and understand your site</p>
+
+<div class="split">
+  <div class="mockup">
+    <div class="mockup-header">llms.txt — AI Agent Entry Point</div>
+    <div class="mockup-body" style="font-size: 12px; padding: 12px; font-family: monospace; line-height: 1.6;">
+      <div style="color: #6ee7b7;"># Financial Simulators</div>
+      <div style="color: #9ca3af;">&gt; Real-return financial calculators for Indian investors. Zero PII, zero tracking, all math runs client-side.</div>
+      <br/>
+      <div style="color: #fbbf24;">## Calculators</div>
+      <div style="color: #9ca3af;">- [SIP Simulator](/sip-simulator): See actual returns after inflation and tax</div>
+      <div style="color: #9ca3af;">- [EMI Analyzer](/emi-analyzer): Compare loan EMIs with real cost</div>
+      <div style="color: #9ca3af;">- [Tax Sandbox](/tax-sandbox): Old vs New regime, side by side</div>
+      <div style="color: #9ca3af;">- [FIRE Matrix](/fire-matrix): When can you retire?</div>
+      <div style="color: #9ca3af;">- [SWP Stress Test](/swp-stress-test): Will your corpus survive a crash?</div>
+      <div style="color: #9ca3af;">- ... (5 more)</div>
+      <br/>
+      <div style="color: #fbbf24;">## Blog</div>
+      <div style="color: #9ca3af;">- [How inflation eats your SIP returns](/blog/inflation-eats-sip-returns)</div>
+      <div style="color: #9ca3af;">- [Budget 2026: What changes for you](/blog/budget-2026-impact)</div>
+      <div style="color: #9ca3af;">- ... (auto-generated from blog posts)</div>
+      <br/>
+      <div style="color: #fbbf24;">## Use Cases</div>
+      <div style="color: #9ca3af;">- "How much SIP do I need for ₹1 crore?" → /sip-simulator</div>
+      <div style="color: #9ca3af;">- "Is old or new tax regime better?" → /tax-sandbox</div>
+      <div style="color: #9ca3af;">- "Will my retirement fund last?" → /swp-stress-test</div>
+    </div>
+  </div>
+  <div class="mockup">
+    <div class="mockup-header">llms-full.txt — Complete Content</div>
+    <div class="mockup-body" style="font-size: 12px; padding: 12px; font-family: monospace; line-height: 1.6;">
+      <div style="color: #6ee7b7;"># Financial Simulators — Full Content</div>
+      <br/>
+      <div style="color: #fbbf24;">## SIP Simulator</div>
+      <div style="color: #9ca3af;">Projects SIP growth with inflation adjustment and LTCG tax. Default: ₹10K/month for 20 years at 12% return with 6% inflation. Shows: nominal corpus, real value, tax impact, effective return rate.</div>
+      <br/>
+      <div style="color: #fbbf24;">## EMI Analyzer</div>
+      <div style="color: #9ca3af;">Compares loan EMIs across tenures. Shows total interest paid vs principal, and the real cost of a loan after inflation. Includes prepayment impact analysis.</div>
+      <br/>
+      <div style="color: #fbbf24;">## Tax Sandbox</div>
+      <div style="color: #9ca3af;">Side-by-side old vs new tax regime comparison. Includes HRA exemption, 80C/80D deductions, LTCG/STCG tax, surcharge and cess. Optimizes for lowest tax automatically.</div>
+      <br/>
+      <div style="color: #9ca3af;">... (full descriptions for all 10 calculators + all blog posts)</div>
+    </div>
+  </div>
+</div>
+
+<div class="section" style="margin-top: 20px;">
+  <h3>JSON-LD Structured Data (per calculator page)</h3>
+  <div class="split">
+    <div class="mockup">
+      <div class="mockup-header">FAQ Schema</div>
+      <div class="mockup-body" style="font-size: 12px; padding: 12px; font-family: monospace; line-height: 1.5;">
+        <div style="color: #9ca3af;">{</div>
+        <div style="color: #9ca3af;">  "@type": "FAQPage",</div>
+        <div style="color: #9ca3af;">  "mainEntity": [{</div>
+        <div style="color: #9ca3af;">    "name": "How much will my SIP grow?",</div>
+        <div style="color: #9ca3af;">    "acceptedAnswer": {</div>
+        <div style="color: #9ca3af;">      "text": "₹10K/month for 20 years at 12%..."</div>
+        <div style="color: #9ca3af;">    }</div>
+        <div style="color: #9ca3af;">  }]</div>
+        <div style="color: #9ca3af;">}</div>
+      </div>
+    </div>
+    <div class="mockup">
+      <div class="mockup-header">HowTo Schema</div>
+      <div class="mockup-body" style="font-size: 12px; padding: 12px; font-family: monospace; line-height: 1.5;">
+        <div style="color: #9ca3af;">{</div>
+        <div style="color: #9ca3af;">  "@type": "HowTo",</div>
+        <div style="color: #9ca3af;">  "name": "Calculate SIP returns",</div>
+        <div style="color: #9ca3af;">  "step": [</div>
+        <div style="color: #9ca3af;">    "Enter monthly investment",</div>
+        <div style="color: #9ca3af;">    "Set expected return rate",</div>
+        <div style="color: #9ca3af;">    "Adjust inflation",</div>
+        <div style="color: #9ca3af;">    "See real vs nominal returns"</div>
+        <div style="color: #9ca3af;">  ]</div>
+        <div style="color: #9ca3af;">}</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section" style="margin-top: 16px;">
+  <h3>Complete SEO Stack</h3>
+  <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+    <div style="padding: 10px 14px; background: #111827; border: 1px solid #1f2937; border-radius: 6px; font-size: 12px; flex: 1; min-width: 140px;">
+      <div style="color: #6ee7b7; font-weight: 600;">llms.txt</div>
+      <div style="color: #9ca3af; margin-top: 4px;">AI agent summary — calculator index, blog index, use-case entry points</div>
+    </div>
+    <div style="padding: 10px 14px; background: #111827; border: 1px solid #1f2937; border-radius: 6px; font-size: 12px; flex: 1; min-width: 140px;">
+      <div style="color: #6ee7b7; font-weight: 600;">llms-full.txt</div>
+      <div style="color: #9ca3af; margin-top: 4px;">Full content export — every calculator description + all blog post text</div>
+    </div>
+    <div style="padding: 10px 14px; background: #111827; border: 1px solid #1f2937; border-radius: 6px; font-size: 12px; flex: 1; min-width: 140px;">
+      <div style="color: #6ee7b7; font-weight: 600;">JSON-LD</div>
+      <div style="color: #9ca3af; margin-top: 4px;">FAQ + HowTo + WebApplication schemas per calculator, Article schema per blog post</div>
+    </div>
+    <div style="padding: 10px 14px; background: #111827; border: 1px solid #1f2937; border-radius: 6px; font-size: 12px; flex: 1; min-width: 140px;">
+      <div style="color: #6ee7b7; font-weight: 600;">Metadata API</div>
+      <div style="color: #9ca3af; margin-top: 4px;">Unique title, description, OG image per page via Next.js generateMetadata</div>
+    </div>
+    <div style="padding: 10px 14px; background: #111827; border: 1px solid #1f2937; border-radius: 6px; font-size: 12px; flex: 1; min-width: 140px;">
+      <div style="color: #6ee7b7; font-weight: 600;">sitemap.xml</div>
+      <div style="color: #9ca3af; margin-top: 4px;">Auto-generated from calculator routes + blog posts, with lastmod dates</div>
+    </div>
+    <div style="padding: 10px 14px; background: #111827; border: 1px solid #1f2937; border-radius: 6px; font-size: 12px; flex: 1; min-width: 140px;">
+      <div style="color: #6ee7b7; font-weight: 600;">robots.txt</div>
+      <div style="color: #9ca3af; margin-top: 4px;">Allow all crawlers, point to sitemap, disallow /admin</div>
+    </div>
+  </div>
+</div>

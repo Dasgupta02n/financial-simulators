@@ -6,6 +6,7 @@ import { CrossoverGauge } from "./crossover-gauge";
 import { RegimeChart } from "./regime-chart";
 import { twMerge } from "tailwind-merge";
 import { CalcExplainer } from "@/components/shared/calc-explainer";
+import { CalcVisualization } from "@/components/shared/calc-visualization";
 
 interface ResultsPanelProps {
   output: TaxOutput;
@@ -83,6 +84,7 @@ export function ResultsPanel({ output }: ResultsPanelProps) {
   const { oldRegime, newRegime, crossover } = output;
   const oldWins = crossover.recommendation === "old";
   const savings = Math.abs(oldRegime.totalTax - newRegime.totalTax);
+  const vizData = { oldRegimeTax: oldRegime.totalTax, newRegimeTax: newRegime.totalTax };
 
   return (
     <div className="flex flex-col gap-6">
@@ -101,6 +103,7 @@ export function ResultsPanel({ output }: ResultsPanelProps) {
           <li><span className="text-text-primary">Crossover Gauge</span> — shows whether your deductions make the Old Regime worthwhile. If the marker is on the left, New Regime wins. If on the right, Old Regime wins.</li>
         </ul>
       </CalcExplainer>
+      <CalcVisualization calcId="tax" data={vizData} />
       <div className="text-xs font-mono text-text-secondary">
         {oldWins
           ? `Old Regime saves ${formatINR(savings)}`

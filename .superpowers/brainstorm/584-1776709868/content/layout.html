@@ -1,0 +1,31 @@
+<h2>Which layout structure for the SIP Simulator?</h2>
+<p class="subtitle">This shapes the entire calculator experience. Pick the one that best serves the "anti-marketing" transparency mission.</p>
+
+<div class="options">
+  <div class="option" data-choice="a" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>Single-Page Vertical Flow</h3>
+      <p>Inputs at top → Results below → Chart at bottom. One continuous scroll. Simple, but the chart lives far from the sliders — you lose the real-time "slide and see" feedback loop.</p>
+    </div>
+  </div>
+  <div class="option" data-choice="b" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>Split Panel — Left Controls, Right Results</h3>
+      <p>Sliders on the left panel. Live results + chart on the right. Every drag instantly updates the chart. Desktop-first, collapses to vertical on mobile. The "real-time feedback" layout.</p>
+    </div>
+  </div>
+  <div class="option" data-choice="c" onclick="toggleSelect(this)">
+    <div class="letter">C</div>
+    <div class="content">
+      <h3>Dashboard Grid — Cards Everywhere</h3>
+      <p>Each metric (Nominal, Real, Post-Tax, Stress) gets its own card with a mini-chart. Comprehensive but risks the "marketing dashboard" feel we're explicitly avoiding. Many small charts instead of one clear one.</p>
+    </div>
+  </div>
+</div>
+
+<div class="section" style="margin-top:2rem">
+  <h3>My Recommendation: B</h3>
+  <p>The split panel gives instant visual feedback when dragging sliders — which is the core interaction pattern for a financial simulator. It makes the Real vs Nominal divergence visceral and immediate. On mobile it stacks naturally.</p>
+</div>

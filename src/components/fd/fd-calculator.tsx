@@ -9,6 +9,7 @@ import { Area, Bar, ComposedChart, Line, ResponsiveContainer, Tooltip, XAxis, YA
 import { MetricCard } from "@/components/sip/metric-card";
 import { twMerge } from "tailwind-merge";
 import { CalcExplainer } from "@/components/shared/calc-explainer";
+import { CalcVisualization } from "@/components/shared/calc-visualization";
 
 const COMPOUND_OPTIONS = [
   { value: 1, label: "Annual" },
@@ -48,6 +49,11 @@ export function FDCalculator() {
   );
   const output = useMemo(() => computeFD(input), [input]);
   const isNegativeReal = output.realYield < 0;
+  const vizData = useMemo(() => ({
+    grossReturn: output.maturityGross,
+    postTaxReturn: output.maturityPostTax,
+    realReturn: output.maturityReal,
+  }), [output.maturityGross, output.maturityPostTax, output.maturityReal]);
 
   return (
     <div className="flex flex-col lg:flex-row gap-6 w-full max-w-7xl mx-auto px-4 py-8">
@@ -97,6 +103,7 @@ export function FDCalculator() {
             <p className="font-semibold text-text-primary">Compounding frequency</p>
             <p>Quarterly compounding (most common in India) pays slightly more than annual. Monthly pays a tiny bit more. The difference is small but adds up over long tenures.</p>
           </CalcExplainer>
+          <CalcVisualization calcId="fd" data={vizData} />
           <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
             <MetricCard label="Maturity (Gross)" value={output.maturityGross} variant="neutral" />
             <MetricCard label="Maturity (Post-Tax)" value={output.maturityPostTax} variant="gain" />

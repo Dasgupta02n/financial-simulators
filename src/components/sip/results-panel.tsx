@@ -4,6 +4,7 @@ import type { YearlyDataPoint } from "@/lib/calculators/sip/types";
 import { MetricCard } from "./metric-card";
 import { ProjectionChart } from "./projection-chart";
 import { CalcExplainer } from "@/components/shared/calc-explainer";
+import { CalcVisualization } from "@/components/shared/calc-visualization";
 
 interface ResultsPanelProps {
   totalInvested: number;
@@ -14,6 +15,7 @@ interface ResultsPanelProps {
   ltcgTax: number;
   yearlyData: YearlyDataPoint[];
   stressEnabled: boolean;
+  vizData: Record<string, number>;
 }
 
 export function ResultsPanel({
@@ -25,6 +27,7 @@ export function ResultsPanel({
   ltcgTax,
   yearlyData,
   stressEnabled,
+  vizData,
 }: ResultsPanelProps) {
   return (
     <div className="flex flex-col gap-6">
@@ -48,6 +51,7 @@ export function ResultsPanel({
         <p className="font-semibold text-text-primary">Step-Up SIP</p>
         <p>Increasing your SIP by a small amount each year (even 10%) dramatically increases your final amount, because more money stays invested for longer.</p>
       </CalcExplainer>
+      <CalcVisualization calcId="sip" data={vizData} />
       <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
         <MetricCard label="Total Invested" value={totalInvested} variant="neutral" />
         <MetricCard label="Nominal Corpus" value={nominalCorpus} variant="gain" />

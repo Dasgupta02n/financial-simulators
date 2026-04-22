@@ -5,13 +5,15 @@ import { formatINR, formatINRShort } from "@/lib/format";
 import { MetricCard } from "@/components/sip/metric-card";
 import { Area, ComposedChart, Line, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { CalcExplainer } from "@/components/shared/calc-explainer";
+import { CalcVisualization } from "@/components/shared/calc-visualization";
 
 interface Props {
   output: SWPOutput;
   crashEnabled: boolean;
+  vizData: Record<string, number>;
 }
 
-export function SWPResultsPanel({ output, crashEnabled }: Props) {
+export function SWPResultsPanel({ output, crashEnabled, vizData }: Props) {
   const isDepleted = output.depleted;
   const isStressWorse = crashEnabled && output.stressDepleted && (output.stressYearsLasted ?? 0) < output.yearsLasted;
 
@@ -30,6 +32,7 @@ export function SWPResultsPanel({ output, crashEnabled }: Props) {
         <p className="font-semibold text-text-primary">The stress test</p>
         <p>Turn it on to simulate a market crash (20% or 30% drop) in your first few years of withdrawals. This is called <em>sequence-of-returns risk</em> — a crash when you&apos;re already withdrawing is far more damaging than one while you&apos;re still investing. This is why the &quot;Bucket Strategy&quot; (keeping 3-5 years of expenses in safe assets) exists.</p>
       </CalcExplainer>
+      <CalcVisualization calcId="swp" data={vizData} />
       <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
         <MetricCard label="Final Corpus" value={output.finalCorpus} variant={isDepleted ? "loss" : "gain"} />
         <MetricCard label="Real Value (Today's ₹)" value={output.finalRealCorpus} variant={isDepleted ? "loss" : "neutral"} />

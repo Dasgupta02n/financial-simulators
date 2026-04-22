@@ -7,6 +7,7 @@ import { formatINR } from "@/lib/format";
 import { MetricCard } from "@/components/sip/metric-card";
 import { Bar, BarChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { CalcExplainer } from "@/components/shared/calc-explainer";
+import { CalcVisualization } from "@/components/shared/calc-visualization";
 
 const DEFAULT_INPUT: CTCInput = {
   grossCTC: 1500000,
@@ -45,6 +46,10 @@ export function CTCCalculator() {
     <K extends keyof CTCInput>(key: K, value: CTCInput[K]) => { setInput((prev) => ({ ...prev, [key]: value })); }, []
   );
   const output = useMemo(() => computeCTC(input), [input]);
+  const vizData = useMemo(() => ({
+    grossCTC: input.grossCTC,
+    inHand: output.inHandAnnual,
+  }), [input.grossCTC, output.inHandAnnual]);
 
   const chartData = [
     { name: "Current", inHand: output.inHandAnnual, tax: output.tax.totalTax },
@@ -92,6 +97,7 @@ export function CTCCalculator() {
             <p className="font-semibold text-text-primary">HRA Exemption — how it works</p>
             <p>Of your HRA, the tax-free part is the smallest of: (a) actual HRA received, (b) rent paid minus 10% of basic, or (c) 50%/40% of basic. The optimizer finds the Basic/HRA split that maximizes this exemption.</p>
           </CalcExplainer>
+          <CalcVisualization calcId="ctc" data={vizData} />
           <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
             <MetricCard label="In-Hand/Year" value={output.inHandAnnual} variant="neutral" />
             <MetricCard label="In-Hand/Month" value={output.inHandMonthly} variant="gain" />

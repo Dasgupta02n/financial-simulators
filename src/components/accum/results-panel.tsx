@@ -5,10 +5,12 @@ import { MetricCard } from "@/components/sip/metric-card";
 import { AccumulationChart } from "./accumulation-chart";
 import { formatINR } from "@/lib/format";
 import { CalcExplainer } from "@/components/shared/calc-explainer";
+import { CalcVisualization } from "@/components/shared/calc-visualization";
 
 interface ResultsPanelProps { output: AccumulatorOutput; }
 
 export function AccumResultsPanel({ output }: ResultsPanelProps) {
+  const vizData = { sipFinal: output.finalSipCorpus, lumpFinal: output.finalLumpsum };
   return (
     <div className="flex flex-col gap-6">
       <CalcExplainer>
@@ -25,6 +27,7 @@ export function AccumResultsPanel({ output }: ResultsPanelProps) {
         <p className="font-semibold text-text-primary">Step-Up SIP</p>
         <p>Choosing &quot;% Annual&quot; increases your SIP by that percentage each year (like a salary hike). Choosing &quot;₹ Fixed&quot; adds a flat amount yearly. Even a 10% step-up can more than double your final corpus over 20 years.</p>
       </CalcExplainer>
+      <CalcVisualization calcId="accum" data={vizData} />
       <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
         <MetricCard label="Total Invested" value={output.totalInvested} variant="neutral" />
         <MetricCard label="Lumpsum Value" value={output.finalLumpsum} variant="gain" />

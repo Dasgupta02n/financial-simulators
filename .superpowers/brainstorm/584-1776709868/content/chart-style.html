@@ -1,0 +1,64 @@
+<h2>Chart Structure: How to Show the Divergence</h2>
+<p class="subtitle">The core visualization must make the gap between Nominal and Real wealth unmistakable. Which chart structure serves the "anti-marketing" truth-telling mission best?</p>
+
+<div class="cards">
+  <div class="card" data-choice="area" onclick="toggleSelect(this)">
+    <div class="card-image" style="background: #0a0f1a; padding: 1.5rem; min-height: 220px; display: flex; align-items: center; justify-content: center;">
+      <svg viewBox="0 0 300 160" style="width:100%;max-width:300px">
+        <!-- Nominal area -->
+        <path d="M 10 140 Q 80 130 150 80 Q 220 30 290 10" fill="none" stroke="#6ee7b7" stroke-width="2.5"/>
+        <path d="M 10 140 Q 80 130 150 80 Q 220 30 290 10 L 290 160 L 10 160 Z" fill="#6ee7b7" opacity="0.15"/>
+        <!-- Real area -->
+        <path d="M 10 140 Q 80 135 150 120 Q 220 100 290 80" fill="none" stroke="#f87171" stroke-width="2.5"/>
+        <path d="M 10 140 Q 80 135 150 120 Q 220 100 290 80 L 290 160 L 10 160 Z" fill="#f87171" opacity="0.12"/>
+        <!-- Gap annotation -->
+        <line x1="240" y1="52" x2="240" y2="108" stroke="#fbbf24" stroke-width="1.5" stroke-dasharray="4 3"/>
+        <text x="250" y="85" fill="#fbbf24" font-size="9" font-family="monospace">GAP</text>
+        <!-- Stress zone -->
+        <rect x="230" y="10" width="60" height="150" fill="#ef4444" opacity="0.08" rx="3"/>
+        <text x="260" y="155" fill="#ef4444" font-size="7" text-anchor="middle" font-family="monospace">STRESS</text>
+        <!-- Labels -->
+        <text x="15" y="155" fill="#6ee7b7" font-size="8" font-family="monospace">Nominal</text>
+        <text x="15" y="148" fill="#f87171" font-size="8" font-family="monospace" dy="12">Real</text>
+      </svg>
+    </div>
+    <div class="card-body">
+      <h3>Stacked Area — The "Gap" Visualizer</h3>
+      <p>Two filled areas with the gap between them highlighted. The divergence zone itself becomes the story. Stress test shown as a red-shaded zone at the end of the timeline. Best for showing how the gap widens over time.</p>
+    </div>
+  </div>
+
+  <div class="card" data-choice="line" onclick="toggleSelect(this)">
+    <div class="card-image" style="background: #0a0f1a; padding: 1.5rem; min-height: 220px; display: flex; align-items: center; justify-content: center;">
+      <svg viewBox="0 0 300 160" style="width:100%;max-width:300px">
+        <!-- Nominal line -->
+        <path d="M 10 140 Q 80 130 150 80 Q 220 30 290 10" fill="none" stroke="#6ee7b7" stroke-width="2.5"/>
+        <!-- Real line -->
+        <path d="M 10 140 Q 80 135 150 120 Q 220 100 290 80" fill="none" stroke="#f87171" stroke-width="2.5"/>
+        <!-- Stress dashed lines -->
+        <path d="M 230 45 Q 260 70 290 95" fill="none" stroke="#ef4444" stroke-width="1.5" stroke-dasharray="4 3"/>
+        <path d="M 230 110 Q 260 118 290 130" fill="none" stroke="#ef4444" stroke-width="1.5" stroke-dasharray="4 3"/>
+        <!-- Year markers -->
+        <line x1="10" y1="145" x2="290" y2="145" stroke="#374151" stroke-width="0.5"/>
+        <text x="10" y="155" fill="#6b7280" font-size="7" font-family="monospace">Y0</text>
+        <text x="150" y="155" fill="#6b7280" font-size="7" font-family="monospace">Y15</text>
+        <text x="280" y="155" fill="#6b7280" font-size="7" font-family="monospace">Y30</text>
+        <!-- Labels -->
+        <circle cx="290" cy="10" r="3" fill="#6ee7b7"/>
+        <text x="270" y="8" fill="#6ee7b7" font-size="8" font-family="monospace" text-anchor="end">Nominal</text>
+        <circle cx="290" cy="80" r="3" fill="#f87171"/>
+        <text x="270" y="84" fill="#f87171" font-size="8" font-family="monospace" text-anchor="end">Real</text>
+        <text x="290" y="100" fill="#ef4444" font-size="7" font-family="monospace" text-anchor="end">Stress</text>
+      </svg>
+    </div>
+    <div class="card-body">
+      <h3>Line Chart — The "Clarity" Approach</h3>
+      <p>Clean lines with stress scenarios as dashed red paths. Year markers on X-axis. More precise, less emotional. Better for comparing exact values. Stress shown as parallel dashed lines branching from the base curves.</p>
+    </div>
+  </div>
+</div>
+
+<div class="section" style="margin-top:2rem">
+  <h3>My Recommendation: Stacked Area ("Gap" Visualizer)</h3>
+  <p>The filled area between Nominal and Real makes the inflation erosion viscerally visible — you literally SEE the wealth disappearing. A line chart shows the same data but the emotional impact is muted. For an anti-marketing tool, the visual shock IS the feature.</p>
+</div>

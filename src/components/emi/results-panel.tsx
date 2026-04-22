@@ -6,6 +6,7 @@ import { AmortizationChart } from "./amortization-chart";
 import { CrossoverChart } from "./crossover-chart";
 import { formatINR } from "@/lib/format";
 import { CalcExplainer } from "@/components/shared/calc-explainer";
+import { CalcVisualization } from "@/components/shared/calc-visualization";
 
 interface ResultsPanelProps {
   emi: number;
@@ -20,6 +21,7 @@ interface ResultsPanelProps {
   amortization: AmortizationRow[];
   extraCash: number;
   interestRate: number;
+  vizData: Record<string, number>;
 }
 
 export function ResultsPanel({
@@ -35,6 +37,7 @@ export function ResultsPanel({
   amortization,
   extraCash,
   interestRate,
+  vizData,
 }: ResultsPanelProps) {
   return (
     <div className="flex flex-col gap-6">
@@ -55,6 +58,7 @@ export function ResultsPanel({
           <li>The <span className="text-warn">crossover chart</span> shows when investing beats prepaying. Before crossover: prepay. After crossover: invest.</li>
         </ul>
       </CalcExplainer>
+      <CalcVisualization calcId="emi" data={vizData} />
       <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
         <MetricCard label="Monthly EMI" value={emi} variant="neutral" />
         <MetricCard label="Total Interest" value={totalInterest} variant="loss" />

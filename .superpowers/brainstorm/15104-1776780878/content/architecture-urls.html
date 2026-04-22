@@ -1,0 +1,100 @@
+<h2>Site Architecture & URLs</h2>
+<p class="subtitle">The URL structure affects SEO, AI discoverability, and how users navigate</p>
+
+<div class="section">
+  <div class="mockup">
+    <div class="mockup-header">Current Structure</div>
+    <div class="mockup-body" style="font-size: 13px; padding: 12px;">
+      <div style="display: flex; gap: 12px;">
+        <div style="flex: 1;">
+          <div class="mock-nav" style="font-size: 11px;">/ (all calculators on one page, tab-switched)</div>
+          <div style="margin-top: 8px; padding: 8px; background: #111827; border-radius: 4px;">
+            <code style="color: #9ca3af;">financialsimulators.in</code><br/>
+            <code style="color: #9ca3af;">financialsimulators.in#sip</code><br/>
+            <code style="color: #9ca3af;">financialsimulators.in#emi</code><br/>
+            <span style="color: #6ee7b7; font-size: 11px;">↑ Not indexable by search engines</span>
+          </div>
+        </div>
+        <div style="flex: 1;">
+          <div class="mock-nav" style="font-size: 11px;">Problems with current structure</div>
+          <div style="margin-top: 8px; padding: 8px; background: #111827; border-radius: 4px;">
+            <div style="color: #f87171; font-size: 12px;">✕ Each calculator has no unique URL</div>
+            <div style="color: #f87171; font-size: 12px;">✕ No dedicated landing pages for SEO</div>
+            <div style="color: #f87171; font-size: 12px;">✕ No blog section exists</div>
+            <div style="color: #f87171; font-size: 12px;">✕ No llms.txt or structured data</div>
+            <div style="color: #f87171; font-size: 12px;">✕ Single title/description for entire site</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mockup" style="margin-top: 16px;">
+    <div class="mockup-header">Proposed Structure</div>
+    <div class="mockup-body" style="font-size: 13px; padding: 12px;">
+      <div style="display: flex; gap: 12px;">
+        <div style="flex: 1;">
+          <div class="mock-nav" style="font-size: 11px;">Every page gets its own URL + metadata</div>
+          <div style="margin-top: 8px; padding: 8px; background: #111827; border-radius: 4px;">
+            <div style="color: #6ee7b7; font-size: 12px;">✓ <code>/</code> — Homepage with calculator overview</div>
+            <div style="color: #6ee7b7; font-size: 12px;">✓ <code>/sip-simulator</code> — Dedicated SIP page</div>
+            <div style="color: #6ee7b7; font-size: 12px;">✓ <code>/emi-analyzer</code> — Dedicated EMI page</div>
+            <div style="color: #6ee7b7; font-size: 12px;">✓ <code>/tax-sandbox</code> — Dedicated Tax page</div>
+            <div style="color: #6ee7b7; font-size: 12px;">✓ ... (8 more calculator routes)</div>
+            <div style="color: #6ee7b7; font-size: 12px;">✓ <code>/blog</code> — Blog index</div>
+            <div style="color: #6ee7b7; font-size: 12px;">✓ <code>/blog/[slug]</code> — Individual posts</div>
+            <div style="color: #6ee7b7; font-size: 12px;">✓ <code>/admin</code> — CMS admin panel</div>
+            <div style="color: #fbbf24; font-size: 12px;">★ <code>/llms.txt</code> — AI agent ingestion</div>
+            <div style="color: #fbbf24; font-size: 12px;">★ <code>/llms-full.txt</code> — Full content export</div>
+            <div style="color: #fbbf24; font-size: 12px;">★ <code>/sitemap.xml</code> — Search engine sitemap</div>
+          </div>
+        </div>
+        <div style="flex: 1;">
+          <div class="mockup-header" style="font-size: 11px; background: #1f2937; color: #9ca3af; padding: 6px 10px; border-radius: 4px 4px 0 0;">SEO per page</div>
+          <div style="padding: 8px; background: #111827; border-radius: 0 0 4px 4px; font-size: 12px;">
+            <div style="margin-bottom: 6px;"><span style="color: #6ee7b7;">Title:</span> "SIP Simulator — Real Returns Calculator | Financial Simulators"</div>
+            <div style="margin-bottom: 6px;"><span style="color: #6ee7b7;">Desc:</span> "See what your SIP actually earns after inflation and tax. Client-side, no PII, no signup."</div>
+            <div style="margin-bottom: 6px;"><span style="color: #6ee7b7;">OG:</span> Custom image + description for social sharing</div>
+            <div><span style="color: #6ee7b7;">JSON-LD:</span> FAQ + HowTo + FinancialProduct schemas</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section" style="margin-top: 20px;">
+  <h3>Calculator Routes</h3>
+  <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+    <div style="padding: 8px 12px; background: #111827; border: 1px solid #1f2937; border-radius: 6px; font-size: 12px;">
+      <span style="color: #6ee7b7;">/sip-simulator</span><br/><span style="color: #9ca3af;">SIP Simulator</span>
+    </div>
+    <div style="padding: 8px 12px; background: #111827; border: 1px solid #1f2937; border-radius: 6px; font-size: 12px;">
+      <span style="color: #6ee7b7;">/emi-analyzer</span><br/><span style="color: #9ca3af;">EMI Analyzer</span>
+    </div>
+    <div style="padding: 8px 12px; background: #111827; border: 1px solid #1f2937; border-radius: 6px; font-size: 12px;">
+      <span style="color: #6ee7b7;">/tax-sandbox</span><br/><span style="color: #9ca3af;">Tax Sandbox</span>
+    </div>
+    <div style="padding: 8px 12px; background: #111827; border: 1px solid #1f2937; border-radius: 6px; font-size: 12px;">
+      <span style="color: #6ee7b7;">/accumulation-calculator</span><br/><span style="color: #9ca3af;">Accumulator</span>
+    </div>
+    <div style="padding: 8px 12px; background: #111827; border: 1px solid #1f2937; border-radius: 6px; font-size: 12px;">
+      <span style="color: #6ee7b7;">/fd-comparator</span><br/><span style="color: #9ca3af;">FD Comparator</span>
+    </div>
+    <div style="padding: 8px 12px; background: #111827; border: 1px solid #1f2937; border-radius: 6px; font-size: 12px;">
+      <span style="color: #6ee7b7;">/swp-stress-test</span><br/><span style="color: #9ca3af;">SWP Stress</span>
+    </div>
+    <div style="padding: 8px 12px; background: #111827; border: 1px solid #1f2937; border-radius: 6px; font-size: 12px;">
+      <span style="color: #6ee7b7;">/fire-matrix</span><br/><span style="color: #9ca3af;">FIRE Matrix</span>
+    </div>
+    <div style="padding: 8px 12px; background: #111827; border: 1px solid #1f2937; border-radius: 6px; font-size: 12px;">
+      <span style="color: #6ee7b7;">/ctc-optimizer</span><br/><span style="color: #9ca3af;">CTC Optimizer</span>
+    </div>
+    <div style="padding: 8px 12px; background: #111827; border: 1px solid #1f2937; border-radius: 6px; font-size: 12px;">
+      <span style="color: #6ee7b7;">/nps-modeler</span><br/><span style="color: #9ca3af;">NPS Modeler</span>
+    </div>
+    <div style="padding: 8px 12px; background: #111827; border: 1px solid #1f2937; border-radius: 6px; font-size: 12px;">
+      <span style="color: #6ee7b7;">/goal-planner</span><br/><span style="color: #9ca3af;">Goal Planner</span>
+    </div>
+  </div>
+</div>
