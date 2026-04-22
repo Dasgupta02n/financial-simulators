@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { generateSiteJsonLd } from "@/lib/seo";
+import { SiteNav } from "@/components/shared/site-nav";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -39,6 +40,7 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-full flex flex-col bg-ink text-text-primary">
+        <SiteNav />
         {children}
       </body>
     </html>

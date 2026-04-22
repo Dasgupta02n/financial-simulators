@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import { getAllPosts } from "@/lib/blog";
 
 const CALCULATORS: readonly {
   id: string;
@@ -89,9 +90,11 @@ export const metadata: Metadata = {
 };
 
 export default function Home() {
+  const posts = getAllPosts().filter((p) => p.featured).slice(0, 3);
+
   return (
     <main className="flex-1 flex flex-col items-center">
-      <header className="w-full max-w-7xl mx-auto px-4 pt-12 pb-8">
+      <header className="w-full max-w-7xl mx-auto px-4 pt-8 pb-6">
         <h1 className="text-3xl font-semibold tracking-tight">
           Financial Simulators
         </h1>
@@ -133,6 +136,39 @@ export default function Home() {
           ))}
         </div>
       </div>
+
+      {posts.length > 0 && (
+        <section className="w-full max-w-7xl mx-auto px-4 pb-12">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-sm font-mono text-gain">From the Blog</h2>
+            <Link
+              href="/blog"
+              className="text-xs font-mono text-text-secondary hover:text-gain transition-colors"
+            >
+              All posts →
+            </Link>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {posts.map((post) => (
+              <Link
+                key={post.slug}
+                href={`/blog/${post.slug}`}
+                className="group block p-4 rounded-lg border border-border bg-surface/50 hover:border-gain/30 transition-colors"
+              >
+                <div className="text-xs uppercase font-mono text-text-secondary mb-1">
+                  {post.category} · {post.readTime} min
+                </div>
+                <h3 className="text-sm font-semibold group-hover:text-gain transition-colors line-clamp-2">
+                  {post.title}
+                </h3>
+                <p className="text-xs text-text-secondary mt-1 line-clamp-2">
+                  {post.description}
+                </p>
+              </Link>
+            ))}
+          </div>
+        </section>
+      )}
 
       <footer className="w-full max-w-7xl mx-auto px-4 py-6 text-xs text-text-secondary border-t border-border mt-auto">
         Zero PII. Zero tracking. Computed entirely client-side. Macro defaults:
