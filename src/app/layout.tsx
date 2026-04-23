@@ -18,6 +18,11 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "SIP Simulator — Real Returns, No Marketing",
   description: "Inflation-adjusted, tax-aware SIP projection tool for Indian investors. Privacy-first, client-side computation.",
+  other: {
+    "geo.region": "IN",
+    "geo.country": "IN",
+    "language": "en-IN",
+  },
 };
 
 export default function RootLayout({
@@ -29,7 +34,7 @@ export default function RootLayout({
 
   return (
     <html
-      lang="en"
+      lang="en-IN"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <head>

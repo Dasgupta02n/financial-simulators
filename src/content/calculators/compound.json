@@ -1,0 +1,32 @@
+{
+  "id": "compound",
+  "slug": "compound-interest-calculator",
+  "name": "Compound Interest Calculator",
+  "metaTitle": "Compound Interest Calculator — Real Returns After Tax & Inflation | Financial Simulators",
+  "metaDescription": "See how compound interest really grows your money after tax and inflation. Works for lump sum, monthly SIP, or both. Client-side, no PII.",
+  "shortDescription": "Real compound growth after tax & inflation",
+  "faq": [
+    {
+      "question": "How does compound interest work?",
+      "answer": "Compound interest means you earn interest on interest. ₹1L at 12% compounded annually becomes ₹3.11L in 10 years — not ₹2.2L (which is simple interest). The difference grows exponentially with time: at 20 years, compound gives ₹9.65L vs ₹3.4L simple."
+    },
+    {
+      "question": "What is the real return on compound interest?",
+      "answer": "A 12% nominal return with 6% inflation and 30% tax on gains gives approximately 5.7% real return. But if you invest via equity mutual funds (LTCG tax at 12.5% above ₹1.25L), your real return is closer to 9.5%."
+    },
+    {
+      "question": "Monthly vs annual compounding — how much difference?",
+      "answer": "On ₹10L at 12% for 10 years: annual compounding gives ₹31.06L, monthly gives ₹33.01L — about ₹2L more. The difference grows with tenure: at 20 years, monthly compounding gives ~₹19L more."
+    },
+    {
+      "question": "Should I include tax in my compound interest calculation?",
+      "answer": "Yes. A 12% return with 30% tax on gains gives only ~9.7% effective return. Over 20 years, this difference means ₹30-40L less on a ₹10L investment. Always calculate post-tax returns."
+    }
+  ],
+  "howToSteps": [
+    { "name": "Set principal and monthly contribution", "text": "Enter your lump sum amount and/or monthly investment" },
+    { "name": "Set interest rate and tenure", "text": "Adjust the expected annual return and investment period" },
+    { "name": "Choose compounding frequency", "text": "Monthly compounding earns slightly more than annual" },
+    { "name": "See real vs nominal growth", "text": "Compare what your money grows to vs what it's actually worth after inflation and tax" }
+  ]
+}

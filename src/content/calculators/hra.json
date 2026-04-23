@@ -1,0 +1,32 @@
+{
+  "id": "hra",
+  "slug": "hra-calculator",
+  "name": "HRA Calculator",
+  "metaTitle": "HRA Calculator — How Much House Rent Allowance Is Tax-Free? | Financial Simulators",
+  "metaDescription": "Calculate your HRA exemption under Section 10(13A). See exactly how much of your HRA is tax-free. Metro/non-metro, rent vs 10% basic. Client-side, no PII.",
+  "shortDescription": "How much HRA is tax-free?",
+  "faq": [
+    {
+      "question": "How is HRA exemption calculated?",
+      "answer": "HRA exemption under Section 10(13A) is the minimum of: (1) Actual HRA received, (2) Rent paid minus 10% of basic salary, (3) 50% of basic salary if in a metro city or 40% if non-metro. Only the lowest of these three is exempt from tax."
+    },
+    {
+      "question": "Can I claim HRA if I don't live in a metro city?",
+      "answer": "Yes, but the limit is 40% of basic salary instead of 50%. Metro cities for HRA purposes are Delhi, Mumbai, Kolkata, and Chennai. All other cities including Bangalore, Hyderabad, and Pune are non-metro."
+    },
+    {
+      "question": "What if my rent is less than 10% of basic salary?",
+      "answer": "If rent paid is less than 10% of your basic salary, you get zero HRA exemption. The formula requires (Rent - 10% of Basic) to be positive. This means if your basic is ₹50,000 and rent is ₹4,000, you get no exemption since ₹4,000 < ₹5,000 (10% of basic)."
+    },
+    {
+      "question": "Can I claim HRA and home loan interest both?",
+      "answer": "Yes, under specific conditions. If you own a house with a home loan and also pay rent (e.g., you work in a different city), you can claim both HRA exemption and home loan interest deduction under Section 24(b)."
+    }
+  ],
+  "howToSteps": [
+    { "name": "Enter your basic salary", "text": "Set your monthly basic salary component" },
+    { "name": "Enter HRA received", "text": "Set the monthly HRA component from your salary slip" },
+    { "name": "Enter monthly rent paid", "text": "Set your actual monthly rent payment" },
+    { "name": "Toggle metro/non-metro", "text": "Choose metro (Delhi/Mumbai/Kolkata/Chennai) or non-metro city" }
+  ]
+}

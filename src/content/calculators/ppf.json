@@ -1,0 +1,32 @@
+{
+  "id": "ppf",
+  "slug": "ppf-calculator",
+  "name": "PPF Calculator",
+  "metaTitle": "PPF Calculator — Real Returns After Inflation | Financial Simulators",
+  "metaDescription": "Calculate PPF maturity with inflation-adjusted returns. See real value after 15 years. EEE tax benefit included. Client-side, no PII.",
+  "shortDescription": "Real PPF returns after inflation",
+  "faq": [
+    {
+      "question": "How much will ₹1.5L/year PPF grow in 15 years?",
+      "answer": "A ₹1.5L/year PPF at 7.1% for 15 years grows to approximately ₹40.7 lakh nominally. But after 6% average inflation, the real value is about ₹16.9 lakh — you more than double your money in real terms thanks to the EEE tax benefit."
+    },
+    {
+      "question": "Is PPF better than FD?",
+      "answer": "PPF beats FD for two reasons: (1) PPF is EEE — no tax on contribution, interest, or maturity. FD interest is taxed at your slab rate, which can reduce a 7% FD to ~5% post-tax. (2) PPF has a 15-year lock-in that forces discipline. But FD offers liquidity — you can break it with a small penalty."
+    },
+    {
+      "question": "Can I extend PPF after 15 years?",
+      "answer": "Yes, you can extend PPF in 5-year blocks indefinitely. During extension, you can continue contributing (and earn interest on the full balance) or stop contributions (and just earn interest on the existing balance)."
+    },
+    {
+      "question": "What is the PPF interest rate for 2026?",
+      "answer": "PPF interest rate is set by the government quarterly and currently stands at 7.1%. It's linked to government bond yields and typically stays between 7-8%. The rate can change every quarter, but for planning purposes, use 7.1%."
+    }
+  ],
+  "howToSteps": [
+    { "name": "Set yearly contribution", "text": "Enter how much you invest in PPF each year (max ₹1.5 lakh)" },
+    { "name": "Adjust interest rate", "text": "Set the PPF interest rate (default: 7.1%)" },
+    { "name": "Set tenure", "text": "Choose 15 years (minimum) or longer with extensions" },
+    { "name": "See real vs nominal maturity", "text": "Compare what your PPF grows to vs what it's actually worth after inflation" }
+  ]
+}

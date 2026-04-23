@@ -9,6 +9,9 @@ import fireConfig from "@/content/calculators/fire.json";
 import ctcConfig from "@/content/calculators/ctc.json";
 import npsConfig from "@/content/calculators/nps.json";
 import goalConfig from "@/content/calculators/goal.json";
+import ppfConfig from "@/content/calculators/ppf.json";
+import compoundConfig from "@/content/calculators/compound.json";
+import hraConfig from "@/content/calculators/hra.json";
 import { getAllPosts } from "@/lib/blog";
 
 const BASE_URL = "https://financialsimulators.in";
@@ -24,6 +27,9 @@ const calculatorConfigs = [
   ctcConfig,
   npsConfig,
   goalConfig,
+  ppfConfig,
+  compoundConfig,
+  hraConfig,
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
