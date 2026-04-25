@@ -5,23 +5,24 @@ import { MetricCard } from "@/components/sip/metric-card";
 import { AccumulationChart } from "./accumulation-chart";
 import { formatINR } from "@/lib/format";
 import { CalcExplainer } from "@/components/shared/calc-explainer";
+import { LieVsTruthPanel } from "@/components/shared/lie-vs-truth-panel";
+import { ConfidenceBadge } from "@/components/shared/confidence-badge";
+import { WhyThisNumber } from "@/components/shared/why-this-number";
+import { ShareButton } from "@/components/shared/share-button";
+import { truthFromAccumulator } from "@/lib/truth/truth-data-adapter";
 
 interface ResultsPanelProps { output: AccumulatorOutput; }
 
 export function AccumResultsPanel({ output }: ResultsPanelProps) {
+  const truth = truthFromAccumulator({ totalInvested: output.totalInvested, finalNominalTotal: output.finalNominalTotal, finalRealTotal: output.finalRealTotal });
+
   return (
     <div className="flex flex-col gap-3 min-h-0">
-      <CalcExplainer>
-        <p className="font-semibold text-text-primary">Accumulation Calculator</p>
-        <p>Combines lumpsum + monthly SIP growth. Step-up increases your SIP yearly, which can double your corpus.</p>
-        <ul className="list-disc pl-5 space-y-0.5">
-          <li><span className="text-text-primary">Total Invested</span> — all money you put in (lumpsum + SIP payments).</li>
-          <li><span className="text-text-primary">Lumpsum Value</span> — one-time investment growth.</li>
-          <li><span className="text-text-primary">SIP Corpus</span> — monthly investments combined growth.</li>
-          <li><span className="text-text-primary">Nominal Total</span> — lumpsum + SIP on paper.</li>
-          <li><span className="text-text-primary">Real Purchasing Power</span> — what total can buy in today&apos;s money.</li>
-        </ul>
-      </CalcExplainer>
+      <div className="flex items-center justify-between shrink-0">
+        <ConfidenceBadge inflationRate={6} />
+        <ShareButton title="Accumulation Calculator — c7xai" />
+      </div>
+      <LieVsTruthPanel truth={truth} />
       <div className="grid grid-cols-2 lg:grid-cols-3 gap-2">
         <MetricCard label="Total Invested" value={output.totalInvested} variant="neutral" />
         <MetricCard label="Lumpsum Value" value={output.finalLumpsum} variant="gain" />
@@ -37,6 +38,15 @@ export function AccumResultsPanel({ output }: ResultsPanelProps) {
           <AccumulationChart data={output.yearlyData} />
         </div>
       </div>
+      <WhyThisNumber assumptions={truth.assumptions} />
+      <CalcExplainer>
+        <p className="font-semibold text-text-primary">The truth about accumulation</p>
+        <ul className="list-disc pl-4 space-y-0.5">
+          <li>Your nominal total looks impressive, but inflation and tax eat a large chunk. The real number is what matters.</li>
+          <li><span className="text-loss">Red number</span> — what your corpus can actually buy in today&apos;s money.</li>
+          <li>Step-up SIP accelerates growth, but returns are assumed constant — actual market returns vary.</li>
+        </ul>
+      </CalcExplainer>
     </div>
   );
 }

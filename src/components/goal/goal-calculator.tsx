@@ -8,6 +8,11 @@ import { MetricCard } from "@/components/sip/metric-card";
 import { Bar, BarChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { twMerge } from "tailwind-merge";
 import { CalcExplainer } from "@/components/shared/calc-explainer";
+import { LieVsTruthPanel } from "@/components/shared/lie-vs-truth-panel";
+import { ConfidenceBadge } from "@/components/shared/confidence-badge";
+import { WhyThisNumber } from "@/components/shared/why-this-number";
+import { ShareButton } from "@/components/shared/share-button";
+import { truthFromGoal } from "@/lib/truth/truth-data-adapter";
 
 const DEFAULT_GOALS: Goal[] = [
   { id: "1", name: "Emergency Fund", targetAmount: 500000, yearsFromNow: 2, priority: "essential" },
@@ -128,15 +133,11 @@ export function GoalCalculator() {
       </div>
       <div className="lg:w-[62%] min-h-0">
         <div className="flex flex-col gap-3 min-h-0">
-          <CalcExplainer>
-            <p className="font-semibold text-text-primary">How to read</p>
-            <ul className="list-disc pl-5 space-y-1">
-              <li>Enter each goal as today&apos;s cost. The calculator inflates that cost to the future year and reverse-calculates the monthly SIP needed.</li>
-              <li><span className="text-text-primary">Conservative (7%)</span> — mostly debt. Higher SIP needed.</li>
-              <li><span className="text-text-primary">Moderate (12%)</span> — balanced equity + debt. NIFTY long-term average.</li>
-              <li><span className="text-text-primary">Aggressive (15%)</span> — mostly equity. Lowest SIP but higher risk.</li>
-            </ul>
-          </CalcExplainer>
+          <div className="flex items-center justify-between shrink-0">
+            <ConfidenceBadge inflationRate={input.inflationRate} />
+            <ShareButton title="Goal Planner — c7xai" />
+          </div>
+          <LieVsTruthPanel truth={truthFromGoal({ totalInflatedTarget: output.totalInflatedTarget ?? 0, totalMonthlyModerate: output.totalMonthlyModerate, goals: output.goals.map(g => ({ name: g.name, inflatedTarget: g.inflatedTarget, todayValue: g.todayValue })) }, input.inflationRate)} />
           <div className="grid grid-cols-2 lg:grid-cols-3 gap-2">
             <MetricCard label="Total SIP (Conservative)" value={output.totalMonthlyConservative} variant="neutral" />
             <MetricCard label="Total SIP (Moderate)" value={output.totalMonthlyModerate} variant="gain" />
@@ -182,6 +183,15 @@ export function GoalCalculator() {
               </ResponsiveContainer>
             </div>
           </div>
+          <WhyThisNumber assumptions={truthFromGoal({ totalInflatedTarget: output.totalInflatedTarget ?? 0, totalMonthlyModerate: output.totalMonthlyModerate, goals: output.goals.map(g => ({ name: g.name, inflatedTarget: g.inflatedTarget, todayValue: g.todayValue })) }, input.inflationRate).assumptions} />
+          <CalcExplainer>
+            <p className="font-semibold text-text-primary">The truth about goal planning</p>
+            <ul className="list-disc pl-4 space-y-0.5">
+              <li>Inflation silently doubles your goal costs. A ₹10L education goal becomes ₹18L+ in 10 years. You&apos;re saving for the inflated number, not today&apos;s.</li>
+              <li>Each goal has a priority: essential goals get funded first, nice-to-haves last.</li>
+              <li><span className="text-text-secondary">Gray bars</span> = conservative, <span className="text-gain">green</span> = moderate, <span className="text-warn">yellow</span> = aggressive SIP estimates.</li>
+            </ul>
+          </CalcExplainer>
         </div>
       </div>
     </div>

@@ -6,6 +6,11 @@ import { computeCompound } from "@/lib/calculators/compound/engine";
 import { formatINR, formatINRShort } from "@/lib/format";
 import { MetricCard } from "@/components/sip/metric-card";
 import { CalcExplainer } from "@/components/shared/calc-explainer";
+import { LieVsTruthPanel } from "@/components/shared/lie-vs-truth-panel";
+import { ConfidenceBadge } from "@/components/shared/confidence-badge";
+import { WhyThisNumber } from "@/components/shared/why-this-number";
+import { ShareButton } from "@/components/shared/share-button";
+import { truthFromCompound } from "@/lib/truth/truth-data-adapter";
 import { Area, Line, ComposedChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { twMerge } from "tailwind-merge";
 
@@ -98,16 +103,11 @@ export function CompoundCalculator() {
       </div>
       <div className="lg:w-[62%] min-h-0">
         <div className="flex flex-col gap-3 min-h-0">
-          <CalcExplainer>
-            <p className="font-semibold text-text-primary">How to read the numbers</p>
-            <ul className="list-disc pl-5 space-y-1">
-              <li><span className="text-text-primary">Maturity (Nominal)</span> — the raw number your investment grows to.</li>
-              <li><span className="text-text-primary">Maturity (Post-Tax)</span> — what you actually receive after paying tax on gains.</li>
-              <li><span className="text-text-primary">Real Value</span> — what your post-tax money can buy in today&apos;s prices.</li>
-              <li><span className="text-text-primary">Nominal Yield</span> — CAGR of nominal value vs total invested.</li>
-              <li><span className="text-text-primary">Real Yield</span> — effective annual return after both tax and inflation.</li>
-            </ul>
-          </CalcExplainer>
+          <div className="flex items-center justify-between shrink-0">
+            <ConfidenceBadge inflationRate={input.inflationRate} />
+            <ShareButton title="Compound Interest Calculator — c7xai" />
+          </div>
+          <LieVsTruthPanel truth={truthFromCompound(output, input.inflationRate)} />
           <div className="grid grid-cols-2 lg:grid-cols-3 gap-2">
             <MetricCard label="Total Invested" value={output.totalInvested} variant="neutral" />
             <MetricCard label="Maturity (Nominal)" value={output.maturityNominal} variant="neutral" />
@@ -147,6 +147,15 @@ export function CompoundCalculator() {
               </ResponsiveContainer>
             </div>
           </div>
+          <WhyThisNumber assumptions={truthFromCompound(output, input.inflationRate).assumptions} />
+          <CalcExplainer>
+            <p className="font-semibold text-text-primary">The truth about compound interest</p>
+            <ul className="list-disc pl-4 space-y-0.5">
+              <li><span className="text-gain">Green area</span> — nominal value grows impressively. But that&apos;s not what you keep.</li>
+              <li><span className="text-loss">Red dashed line</span> — real purchasing power after tax and inflation. The gap is what they don&apos;t show.</li>
+              <li>When real yield is negative, your money loses purchasing power despite appearing to grow.</li>
+            </ul>
+          </CalcExplainer>
         </div>
       </div>
     </div>

@@ -6,6 +6,11 @@ import { computePPF } from "@/lib/calculators/ppf/engine";
 import { formatINR, formatINRShort } from "@/lib/format";
 import { MetricCard } from "@/components/sip/metric-card";
 import { CalcExplainer } from "@/components/shared/calc-explainer";
+import { LieVsTruthPanel } from "@/components/shared/lie-vs-truth-panel";
+import { ConfidenceBadge } from "@/components/shared/confidence-badge";
+import { WhyThisNumber } from "@/components/shared/why-this-number";
+import { ShareButton } from "@/components/shared/share-button";
+import { truthFromPPF } from "@/lib/truth/truth-data-adapter";
 import { Area, Line, ComposedChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 
 const TENURE_OPTIONS = [
@@ -81,17 +86,11 @@ export function PPFViewModel() {
       </div>
       <div className="lg:w-[62%] min-h-0">
         <div className="flex flex-col gap-3 min-h-0">
-          <CalcExplainer>
-            <p className="font-semibold text-text-primary">How to read the numbers</p>
-            <ul className="list-disc pl-5 space-y-1">
-              <li><span className="text-text-primary">Maturity Value</span> — nominal amount you receive at end of tenure.</li>
-              <li><span className="text-text-primary">Real Value</span> — what your maturity can buy in today&apos;s prices. This is the number that matters.</li>
-              <li><span className="text-text-primary">Effective Yield</span> — annualized return vs total invested. Higher than interest rate due to compounding.</li>
-              <li><span className="text-text-primary">Real Yield</span> — effective yield minus inflation. Positive = PPF grows purchasing power.</li>
-            </ul>
-            <p className="font-semibold text-text-primary">Key rules</p>
-            <p>Min 15-yr lock-in. Max ₹1.5L/yr. Rate set quarterly by govt (currently 7.1%). EEE status — no tax on contribution, interest, or maturity.</p>
-          </CalcExplainer>
+          <div className="flex items-center justify-between shrink-0">
+            <ConfidenceBadge inflationRate={input.inflationRate} />
+            <ShareButton title="PPF Calculator — c7xai" />
+          </div>
+          <LieVsTruthPanel truth={truthFromPPF({ totalInvested: output.totalInvested, maturityValue: output.maturityValue, realMaturityValue: output.realMaturityValue }, input.inflationRate)} />
           <div className="grid grid-cols-2 lg:grid-cols-3 gap-2">
             <MetricCard label="Total Invested" value={output.totalInvested} variant="neutral" />
             <MetricCard label="Maturity Value" value={output.maturityValue} variant="gain" />
@@ -134,6 +133,15 @@ export function PPFViewModel() {
               </ResponsiveContainer>
             </div>
           </div>
+          <WhyThisNumber assumptions={truthFromPPF({ totalInvested: output.totalInvested, maturityValue: output.maturityValue, realMaturityValue: output.realMaturityValue }, input.inflationRate).assumptions} />
+          <CalcExplainer>
+            <p className="font-semibold text-text-primary">The truth about PPF</p>
+            <ul className="list-disc pl-4 space-y-0.5">
+              <li>PPF is tax-free (EEE status), but inflation still erodes purchasing power. The real value is what your money can actually buy.</li>
+              <li><span className="text-loss">Red dashed line</span> — real purchasing power of your PPF maturity. The gap from the green area is what inflation steals.</li>
+              <li>When real yield is negative, your PPF loses purchasing power despite tax-free returns.</li>
+            </ul>
+          </CalcExplainer>
         </div>
       </div>
     </div>

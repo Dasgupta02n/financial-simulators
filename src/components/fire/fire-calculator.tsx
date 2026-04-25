@@ -8,6 +8,11 @@ import { MetricCard } from "@/components/sip/metric-card";
 import { Area, ComposedChart, Line, ReferenceLine, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { twMerge } from "tailwind-merge";
 import { CalcExplainer } from "@/components/shared/calc-explainer";
+import { LieVsTruthPanel } from "@/components/shared/lie-vs-truth-panel";
+import { ConfidenceBadge } from "@/components/shared/confidence-badge";
+import { WhyThisNumber } from "@/components/shared/why-this-number";
+import { ShareButton } from "@/components/shared/share-button";
+import { truthFromFIRE } from "@/lib/truth/truth-data-adapter";
 
 const DEFAULT_INPUT: FIREInput = {
   currentAge: 30,
@@ -80,19 +85,11 @@ export function FIRECalculator() {
       </div>
       <div className="lg:w-[62%] min-h-0">
         <div className="flex flex-col gap-3 min-h-0">
-          <CalcExplainer>
-            <p className="font-semibold text-text-primary">How to read</p>
-            <ul className="list-disc pl-5 space-y-1">
-              <li><span className="text-text-primary">FIRE Number</span> — 25x annual expenses at retirement (based on the 4% rule).</li>
-              <li><span className="text-text-primary">Corpus at Retirement</span> — what you&apos;ll actually have saved. Exceeds FIRE number = on track.</li>
-              <li><span className="text-text-primary">Glide Path</span> — equity shifts from {input.equityAllocation}% → {input.equityAllocation - input.glidePathShift}% over retirement.</li>
-            </ul>
-            <p className="font-semibold text-text-primary">Chart</p>
-            <ul className="list-disc pl-5 space-y-1">
-              <li><span className="text-warn">Yellow dashed line</span> = retirement age. <span className="text-gain">Green area</span> = corpus. <span className="text-loss">Red dashed</span> = real purchasing power.</li>
-              <li>After retirement, watch if green line drops — that&apos;s your money running out.</li>
-            </ul>
-          </CalcExplainer>
+          <div className="flex items-center justify-between shrink-0">
+            <ConfidenceBadge inflationRate={input.preRetirementInflation} />
+            <ShareButton title="FIRE Calculator — c7xai" />
+          </div>
+          <LieVsTruthPanel truth={truthFromFIRE({ corpusAtRetirement: output.corpusAtRetirement, realCorpusAtRetirement: output.realCorpusAtRetirement, totalContributed: output.totalContributed }, input.preRetirementInflation)} />
           <div className="grid grid-cols-2 lg:grid-cols-3 gap-2">
             <MetricCard label="FIRE Number (25x)" value={output.fireNumber} variant="neutral" />
             <MetricCard label="Corpus at Retirement" value={output.corpusAtRetirement} variant={output.corpusAtRetirement >= output.fireNumber ? "gain" : "loss"} />
@@ -147,6 +144,15 @@ export function FIRECalculator() {
           <div className="text-xs text-text-secondary font-mono px-1">
             Bifurcated inflation: {input.preRetirementInflation}% pre, {input.postRetirementInflation}% post. Glide: equity {input.equityAllocation}% → {input.equityAllocation - input.glidePathShift}%.
           </div>
+          <WhyThisNumber assumptions={truthFromFIRE({ corpusAtRetirement: output.corpusAtRetirement, realCorpusAtRetirement: output.realCorpusAtRetirement, totalContributed: output.totalContributed }, input.preRetirementInflation).assumptions} />
+          <CalcExplainer>
+            <p className="font-semibold text-text-primary">The truth about FIRE</p>
+            <ul className="list-disc pl-4 space-y-0.5">
+              <li>Your corpus at retirement looks large, but its real purchasing power is far less. Inflation before and after retirement eats both.</li>
+              <li><span className="text-loss">Red dashed line</span> — what your corpus can actually buy. <span className="text-warn">Yellow line</span> — retirement age.</li>
+              <li>After retirement, if the green line drops, your money is running out. The 4% rule is a starting point, not a guarantee.</li>
+            </ul>
+          </CalcExplainer>
         </div>
       </div>
     </div>

@@ -7,6 +7,11 @@ import { formatINR } from "@/lib/format";
 import { MetricCard } from "@/components/sip/metric-card";
 import { Bar, BarChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { CalcExplainer } from "@/components/shared/calc-explainer";
+import { LieVsTruthPanel } from "@/components/shared/lie-vs-truth-panel";
+import { ConfidenceBadge } from "@/components/shared/confidence-badge";
+import { WhyThisNumber } from "@/components/shared/why-this-number";
+import { ShareButton } from "@/components/shared/share-button";
+import { truthFromCTC } from "@/lib/truth/truth-data-adapter";
 
 const DEFAULT_INPUT: CTCInput = {
   grossCTC: 1500000,
@@ -79,17 +84,11 @@ export function CTCCalculator() {
       </div>
       <div className="lg:w-[62%] min-h-0">
         <div className="flex flex-col gap-3 min-h-0">
-          <CalcExplainer>
-            <p className="font-semibold text-text-primary">How to read</p>
-            <ul className="list-disc pl-5 space-y-1">
-              <li><span className="text-text-primary">Basic Salary</span> — core part. HRA, PF calculated as % of this. Higher basic = higher HRA exemption, but higher PF deduction.</li>
-              <li><span className="text-text-primary">HRA</span> — House Rent Allowance. Portion tax-free if you pay rent. Metro: 50% of basic exempt; non-metro: 40%.</li>
-              <li><span className="text-text-primary">LTA</span> — Leave Travel Allowance. Tax-free with actual domestic travel bills.</li>
-              <li><span className="text-text-primary">Special Allowance</span> — leftover after Basic, HRA, LTA, NPS. Fully taxable.</li>
-            </ul>
-            <p className="font-semibold text-text-primary">HRA exemption</p>
-            <p>Tax-free part is smallest of: (a) actual HRA, (b) rent minus 10% of basic, or (c) 50%/40% of basic. Optimizer finds the split that maximizes this.</p>
-          </CalcExplainer>
+          <div className="flex items-center justify-between shrink-0">
+            <ConfidenceBadge inflationRate={6} />
+            <ShareButton title="CTC Optimizer — c7xai" />
+          </div>
+          <LieVsTruthPanel truth={truthFromCTC({ inHandMonthly: output.inHandMonthly, savingsMonthly: output.savingsMonthly })} />
           <div className="grid grid-cols-2 lg:grid-cols-3 gap-2">
             <MetricCard label="In-Hand/Year" value={output.inHandAnnual} variant="neutral" />
             <MetricCard label="In-Hand/Month" value={output.inHandMonthly} variant="gain" />
@@ -133,6 +132,15 @@ export function CTCCalculator() {
           <div className="text-[10px] text-text-secondary font-mono px-1">
             Breakdown: Basic {formatINR(output.breakdown.basic)} | HRA {formatINR(output.breakdown.hra)} | LTA {formatINR(output.breakdown.lta)} | Special {formatINR(output.breakdown.specialAllowance)}
           </div>
+          <WhyThisNumber assumptions={truthFromCTC({ inHandMonthly: output.inHandMonthly, savingsMonthly: output.savingsMonthly }).assumptions} />
+          <CalcExplainer>
+            <p className="font-semibold text-text-primary">The truth about your CTC</p>
+            <ul className="list-disc pl-4 space-y-0.5">
+              <li>CTC is what they offer. In-hand is what you get. The gap is tax + PF + other deductions.</li>
+              <li><span className="text-gain">Green bars</span> — money you actually receive. <span className="text-loss">Red bars</span> — money that goes to tax.</li>
+              <li>HRA exemption can save significant tax if you pay rent — the optimizer finds the best split.</li>
+            </ul>
+          </CalcExplainer>
         </div>
       </div>
     </div>

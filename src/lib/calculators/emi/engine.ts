@@ -66,12 +66,15 @@ export function computeAmortization(
 
     if (outstanding <= 0.01 && prepaidOutstanding <= 0.01) break;
 
+    const inflationFactor = Math.pow(1 + input.inflationRate / 100, month / 12);
+
     rows.push({
       month,
       emi: Math.round(emi),
       principal: Math.round(principalPortion),
       interest: Math.round(interestPortion),
       outstanding: Math.round(outstanding),
+      realOutstanding: Math.round(outstanding / inflationFactor),
       prepaidPrincipal: Math.round(prepaidPrincipal),
       prepaidOutstanding: Math.round(prepaidOutstanding),
       sipInvested: Math.round(input.extraMonthlyCash * month),

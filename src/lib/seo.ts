@@ -82,6 +82,33 @@ export function generateCalculatorJsonLd(config: CalculatorConfig) {
   return [faqSchema, howToSchema, webAppSchema];
 }
 
+export interface PageConfig {
+  slug: string;
+  title: string;
+  description: string;
+}
+
+export function generatePageMetadata(config: PageConfig): Metadata {
+  return {
+    title: config.title,
+    description: config.description,
+    openGraph: {
+      title: config.title,
+      description: config.description,
+      url: `${SITE_URL}/${config.slug}`,
+      siteName: SITE_NAME,
+      type: "website",
+    },
+    alternates: {
+      canonical: `/${config.slug}`,
+    },
+    robots: {
+      index: true,
+      follow: true,
+    },
+  };
+}
+
 export function generateSiteJsonLd() {
   const orgSchema = {
     "@context": "https://schema.org",

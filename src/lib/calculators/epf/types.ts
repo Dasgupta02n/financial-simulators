@@ -7,6 +7,7 @@ export interface EPFInput {
   retirementAge: number;
   annualSalaryIncrease: number; // percentage, e.g. 6
   epfInterestRate: number; // percentage, e.g. 8.25
+  inflationRate: number; // percentage, e.g. 6
 }
 
 export interface EPFYearRow {
@@ -20,6 +21,7 @@ export interface EPFYearRow {
   openingBalance: number;
   interestEarned: number;
   closingBalance: number;
+  realClosingBalance: number;
 }
 
 export interface EPFOutput {
@@ -30,5 +32,6 @@ export interface EPFOutput {
   totalEmployerEpfContribution: number;
   totalInterestEarned: number;
   totalCorpusAtRetirement: number;
+  realCorpusAtRetirement: number;
   yearlyBreakdown: EPFYearRow[];
 }

@@ -5,6 +5,11 @@ import type { HRAInput } from "@/lib/calculators/hra/types";
 import { computeHRA } from "@/lib/calculators/hra/engine";
 import { formatINR } from "@/lib/format";
 import { CalcExplainer } from "@/components/shared/calc-explainer";
+import { LieVsTruthPanel } from "@/components/shared/lie-vs-truth-panel";
+import { ConfidenceBadge } from "@/components/shared/confidence-badge";
+import { WhyThisNumber } from "@/components/shared/why-this-number";
+import { ShareButton } from "@/components/shared/share-button";
+import { truthFromHRA } from "@/lib/truth/truth-data-adapter";
 import { twMerge } from "tailwind-merge";
 
 const DEFAULT_INPUT: HRAInput = {
@@ -99,16 +104,11 @@ export function HRACalculator() {
       </div>
       <div className="lg:w-[62%] min-h-0">
         <div className="flex flex-col gap-3 min-h-0">
-          <CalcExplainer>
-            <p className="font-semibold text-text-primary">How to read</p>
-            <p>Your HRA exemption (Section 10(13A)) is the <strong>minimum</strong> of:</p>
-            <ol className="list-decimal pl-5 space-y-0.5">
-              <li>Actual HRA received from employer</li>
-              <li>Rent paid minus 10% of basic salary</li>
-              <li>50% of basic (metro) or 40% of basic (non-metro)</li>
-            </ol>
-            <p>The lowest of these three is your tax-free HRA. The rest is taxable income.</p>
-          </CalcExplainer>
+          <div className="flex items-center justify-between shrink-0">
+            <ConfidenceBadge inflationRate={6} />
+            <ShareButton title="HRA Calculator — c7xai" />
+          </div>
+          <LieVsTruthPanel truth={truthFromHRA({ hraExemption: result.hraExemption, taxableHRA: result.taxableHRA })} />
 
           <div className="p-4 bg-surface rounded-lg border border-border">
             <h3 className="text-xs font-semibold text-text-primary mb-3">HRA Exemption Breakdown</h3>
@@ -141,6 +141,15 @@ export function HRACalculator() {
               Rent ({formatINR(input.rentPaid)}) is less than 10% of basic ({formatINR(Math.round(0.1 * input.basicSalary))}). Pay rent above this threshold to claim HRA exemption.
             </div>
           )}
+          <WhyThisNumber assumptions={truthFromHRA({ hraExemption: result.hraExemption, taxableHRA: result.taxableHRA }).assumptions} />
+          <CalcExplainer>
+            <p className="font-semibold text-text-primary">The truth about HRA</p>
+            <ul className="list-disc pl-4 space-y-0.5">
+              <li>Your HRA exemption is the <strong>minimum</strong> of: actual HRA, rent minus 10% of basic, or 50%/40% of basic. The lowest wins — that&apos;s the law.</li>
+              <li>The gap between HRA received and HRA exempted is fully taxable. That&apos;s money you lose.</li>
+              <li>HRA exemption only works in the Old Tax Regime. New Regime doesn&apos;t allow HRA claims.</li>
+            </ul>
+          </CalcExplainer>
         </div>
       </div>
     </div>

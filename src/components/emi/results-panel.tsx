@@ -6,6 +6,11 @@ import { AmortizationChart } from "./amortization-chart";
 import { CrossoverChart } from "./crossover-chart";
 import { formatINR } from "@/lib/format";
 import { CalcExplainer } from "@/components/shared/calc-explainer";
+import { LieVsTruthPanel } from "@/components/shared/lie-vs-truth-panel";
+import { ConfidenceBadge } from "@/components/shared/confidence-badge";
+import { WhyThisNumber } from "@/components/shared/why-this-number";
+import { ShareButton } from "@/components/shared/share-button";
+import { truthFromEMI } from "@/lib/truth/truth-data-adapter";
 
 interface ResultsPanelProps {
   emi: number;
@@ -36,19 +41,15 @@ export function ResultsPanel({
   extraCash,
   interestRate,
 }: ResultsPanelProps) {
+  const truth = truthFromEMI({ emi, totalPayment, totalInterest, loanAmount: totalPayment - totalInterest }, 6);
+
   return (
     <div className="flex flex-col gap-3 min-h-0">
-      <CalcExplainer>
-        <p className="font-semibold text-text-primary">EMI Calculator</p>
-        <p>Breaks down your loan into interest vs principal each month, and answers: should you prepay or invest extra cash?</p>
-        <ul className="list-disc pl-5 space-y-0.5">
-          <li><span className="text-text-primary">Monthly EMI</span> — fixed monthly payment.</li>
-          <li><span className="text-text-primary">Total Interest</span> — total bank charges over the full loan.</li>
-          <li><span className="text-text-primary">Interest Saved (Prepay)</span> — interest avoided by prepaying.</li>
-          <li><span className="text-text-primary">Months Saved</span> — months earlier you become debt-free.</li>
-          <li><span className="text-text-primary">SIP Corpus</span> — value of extra cash if invested instead.</li>
-        </ul>
-      </CalcExplainer>
+      <div className="flex items-center justify-between shrink-0">
+        <ConfidenceBadge inflationRate={6} />
+        <ShareButton title="EMI Calculator — c7xai" />
+      </div>
+      <LieVsTruthPanel truth={truth} />
       <div className="grid grid-cols-2 lg:grid-cols-3 gap-2">
         <MetricCard label="Monthly EMI" value={emi} variant="neutral" />
         <MetricCard label="Total Interest" value={totalInterest} variant="loss" />
@@ -102,6 +103,15 @@ export function ResultsPanel({
           </div>
         </div>
       )}
+      <WhyThisNumber assumptions={truth.assumptions} />
+      <CalcExplainer>
+        <p className="font-semibold text-text-primary">The truth about EMI</p>
+        <ul className="list-disc pl-4 space-y-0.5">
+          <li>The bank shows you the EMI — but total interest is what they earn. Your ₹50L loan can cost ₹55L+ in interest alone.</li>
+          <li>Prepaying early saves the most because interest is front-loaded. Even small prepayments compound into large savings.</li>
+          <li>If investing extra cash earns more than the loan interest rate, SIP beats prepayment. The crossover point tells you when.</li>
+        </ul>
+      </CalcExplainer>
     </div>
   );
 }

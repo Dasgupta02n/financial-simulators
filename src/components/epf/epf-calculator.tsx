@@ -5,6 +5,11 @@ import type { EPFInput } from "@/lib/calculators/epf/types";
 import { computeEPF } from "@/lib/calculators/epf/engine";
 import { formatINR } from "@/lib/format";
 import { CalcExplainer } from "@/components/shared/calc-explainer";
+import { LieVsTruthPanel } from "@/components/shared/lie-vs-truth-panel";
+import { ConfidenceBadge } from "@/components/shared/confidence-badge";
+import { WhyThisNumber } from "@/components/shared/why-this-number";
+import { ShareButton } from "@/components/shared/share-button";
+import { truthFromEPF } from "@/lib/truth/truth-data-adapter";
 
 const DEFAULT_INPUT: EPFInput = {
   monthlyBasicSalary: 50000,
@@ -15,6 +20,7 @@ const DEFAULT_INPUT: EPFInput = {
   retirementAge: 58,
   annualSalaryIncrease: 6,
   epfInterestRate: 8.25,
+  inflationRate: 6,
 };
 
 function SliderRow({ label, value, displayValue, min, max, step, onChange }: {
@@ -105,22 +111,21 @@ export function EPFCalculator() {
             displayValue={`${input.epfInterestRate}%`}
             min={5} max={12} step={0.25}
             onChange={(v) => handleInputChange("epfInterestRate", v)} />
+          <SliderRow label="Inflation Rate" value={input.inflationRate}
+            displayValue={`${input.inflationRate}%`}
+            min={0} max={15} step={0.5}
+            onChange={(v) => handleInputChange("inflationRate", v)} />
         </div>
       </div>
 
       {/* Results */}
       <div className="lg:w-[62%] min-h-0">
         <div className="flex flex-col gap-3 min-h-0">
-          <CalcExplainer>
-            <p className="font-semibold text-text-primary">How to read</p>
-            <p>Your EPF corpus grows through three components:</p>
-            <ol className="list-decimal pl-5 space-y-0.5">
-              <li><strong>Employee contribution</strong> — {input.employeeRate}% of basic salary deducted monthly</li>
-              <li><strong>Employer EPF</strong> — {input.employerEpfRate}% of basic goes to your EPF savings</li>
-              <li><strong>Employer EPS</strong> — {input.employerEpsRate}% of basic (capped at ₹15,000) goes to pension, not your corpus</li>
-            </ol>
-            <p>Interest compounds annually on the EPF balance. EPS contributions fund a monthly pension, not included in the lump-sum corpus.</p>
-          </CalcExplainer>
+          <div className="flex items-center justify-between shrink-0">
+            <ConfidenceBadge inflationRate={input.inflationRate} />
+            <ShareButton title="EPF Calculator — c7xai" />
+          </div>
+          <LieVsTruthPanel truth={truthFromEPF({ totalCorpusAtRetirement: result.totalCorpusAtRetirement, totalEmployeeContribution: result.totalEmployeeContribution, totalInterestEarned: result.totalInterestEarned }, input.inflationRate)} />
 
           {/* Monthly contribution summary */}
           <div className="p-4 bg-surface rounded-lg border border-border">
@@ -156,6 +161,15 @@ export function EPFCalculator() {
                 </div>
                 <span className="text-base font-mono font-bold text-gain">{formatINR(result.totalCorpusAtRetirement)}</span>
               </div>
+              <div className="mt-2 pt-2 border-t border-border/50">
+                <div className="flex justify-between items-center py-1">
+                  <div>
+                    <span className="text-xs text-text-secondary">Real Purchasing Power (inflation-adjusted)</span>
+                    <p className="text-[10px] text-text-muted font-mono">At {input.inflationRate}% avg inflation</p>
+                  </div>
+                  <span className="text-sm font-mono font-semibold text-loss">{formatINR(result.realCorpusAtRetirement)}</span>
+                </div>
+              </div>
             </div>
           </div>
 
@@ -189,6 +203,15 @@ export function EPFCalculator() {
               </table>
             </div>
           </div>
+          <WhyThisNumber assumptions={truthFromEPF({ totalCorpusAtRetirement: result.totalCorpusAtRetirement, totalEmployeeContribution: result.totalEmployeeContribution, totalInterestEarned: result.totalInterestEarned }, input.inflationRate).assumptions} />
+          <CalcExplainer>
+            <p className="font-semibold text-text-primary">The truth about EPF</p>
+            <ul className="list-disc pl-4 space-y-0.5">
+              <li>Your EPF corpus at retirement looks large, but its real purchasing power is far less. Inflation silently erodes it every year.</li>
+              <li>EPF is tax-free if withdrawn after 5 years of continuous service — but that tax-free status doesn&apos;t protect against inflation.</li>
+              <li>EPS contributions fund a monthly pension, not your lump-sum corpus. The pension itself is taxable.</li>
+            </ul>
+          </CalcExplainer>
         </div>
       </div>
     </div>

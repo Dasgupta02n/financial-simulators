@@ -6,6 +6,11 @@ import { CrossoverGauge } from "./crossover-gauge";
 import { RegimeChart } from "./regime-chart";
 import { twMerge } from "tailwind-merge";
 import { CalcExplainer } from "@/components/shared/calc-explainer";
+import { LieVsTruthPanel } from "@/components/shared/lie-vs-truth-panel";
+import { ConfidenceBadge } from "@/components/shared/confidence-badge";
+import { WhyThisNumber } from "@/components/shared/why-this-number";
+import { ShareButton } from "@/components/shared/share-button";
+import { truthFromTax } from "@/lib/truth/truth-data-adapter";
 
 interface ResultsPanelProps {
   output: TaxOutput;
@@ -83,19 +88,15 @@ export function ResultsPanel({ output }: ResultsPanelProps) {
   const { oldRegime, newRegime, crossover } = output;
   const oldWins = crossover.recommendation === "old";
   const savings = Math.abs(oldRegime.totalTax - newRegime.totalTax);
+  const truth = truthFromTax({ grossIncome: oldRegime.grossIncome, totalTax: oldWins ? oldRegime.totalTax : newRegime.totalTax, effectiveRate: oldWins ? oldRegime.effectiveRate : newRegime.effectiveRate });
 
   return (
     <div className="flex flex-col gap-3 min-h-0">
-      <CalcExplainer>
-        <p className="font-semibold text-text-primary">Tax Calculator</p>
-        <p>Compares Old vs New tax regimes for your salary — which leaves more money in your pocket?</p>
-        <ul className="list-disc pl-5 space-y-0.5">
-          <li><span className="text-text-primary">Old Regime</span> — claim 80C, 80D, HRA, NPS deductions. Lower taxable income, but needs receipts.</li>
-          <li><span className="text-text-primary">New Regime</span> — wider slabs, lower rates. Only ₹75K standard deduction.</li>
-          <li><span className="text-text-primary">Surcharge</span> — extra tax on high earners (above ₹50L).</li>
-          <li><span className="text-text-primary">Cess (4%)</span> — flat 4% on tax + surcharge.</li>
-        </ul>
-      </CalcExplainer>
+      <div className="flex items-center justify-between shrink-0">
+        <ConfidenceBadge inflationRate={6} />
+        <ShareButton title="Tax Calculator — c7xai" />
+      </div>
+      <LieVsTruthPanel truth={truth} />
       <div className="text-xs font-mono text-text-secondary">
         {oldWins
           ? `Old Regime saves ${formatINR(savings)}`
@@ -115,6 +116,15 @@ export function ResultsPanel({ output }: ResultsPanelProps) {
           <RegimeChart oldRegime={oldRegime} newRegime={newRegime} />
         </div>
       </div>
+      <WhyThisNumber assumptions={truth.assumptions} />
+      <CalcExplainer>
+        <p className="font-semibold text-text-primary">The truth about income tax</p>
+        <ul className="list-disc pl-4 space-y-0.5">
+          <li>Old Regime lets you claim deductions (80C, 80D, HRA) but requires proof. New Regime gives wider slabs with fewer deductions.</li>
+          <li>The gap between gross income and after-tax income is what the government takes. The winning regime minimizes that gap.</li>
+          <li>Surcharge kicks in above ₹50L income. Cess (4%) applies on top of everything — no exemptions.</li>
+        </ul>
+      </CalcExplainer>
     </div>
   );
 }
