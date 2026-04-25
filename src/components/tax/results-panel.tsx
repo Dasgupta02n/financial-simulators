@@ -110,7 +110,7 @@ export function ResultsPanel({ output }: ResultsPanelProps) {
 
       <CrossoverGauge crossover={crossover} />
 
-      <div className="bg-surface rounded-lg border border-border p-3">
+      <div className="bg-white rounded-lg border border-border shadow-sm p-3">
         <h3 className="text-xs font-semibold text-text-secondary mb-2">Regime Comparison</h3>
         <div className="flex-1 min-h-[220px]">
           <RegimeChart oldRegime={oldRegime} newRegime={newRegime} />

@@ -28,20 +28,20 @@ export function AmortizationChart({ data }: AmortizationChartProps) {
             dataKey="month"
             tick={{ fill: "#9ca3af", fontSize: 10, fontFamily: "var(--font-geist-mono)" }}
             tickFormatter={(v) => `M${v}`}
-            axisLine={{ stroke: "#1f2937" }}
+            axisLine={{ stroke: "#e5e7eb" }}
             tickLine={false}
           />
           <YAxis
             tick={{ fill: "#9ca3af", fontSize: 10, fontFamily: "var(--font-geist-mono)" }}
             tickFormatter={formatINRShort}
-            axisLine={{ stroke: "#1f2937" }}
+            axisLine={{ stroke: "#e5e7eb" }}
             tickLine={false}
             width={55}
           />
           <Tooltip
             contentStyle={{
-              backgroundColor: "#111827",
-              border: "1px solid #1f2937",
+              backgroundColor: "#ffffff",
+              border: "1px solid #e5e7eb",
               borderRadius: "8px",
               fontFamily: "var(--font-geist-mono)",
               fontSize: "11px",
@@ -55,7 +55,7 @@ export function AmortizationChart({ data }: AmortizationChartProps) {
             fill="#6ee7b7"
             fillOpacity={0.8}
             name="Principal"
-            isAnimationActive={false}
+            isAnimationActive={true}
           />
           <Bar
             dataKey="interest"
@@ -63,7 +63,7 @@ export function AmortizationChart({ data }: AmortizationChartProps) {
             fill="#f87171"
             fillOpacity={0.8}
             name="Interest"
-            isAnimationActive={false}
+            isAnimationActive={true}
           />
           <Line
             type="monotone"
@@ -72,7 +72,7 @@ export function AmortizationChart({ data }: AmortizationChartProps) {
             strokeWidth={1.5}
             dot={false}
             name="Outstanding"
-            isAnimationActive={false}
+            isAnimationActive={true}
           />
         </ComposedChart>
       </ResponsiveContainer>

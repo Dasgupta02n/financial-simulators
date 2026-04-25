@@ -13,6 +13,7 @@ import { ConfidenceBadge } from "@/components/shared/confidence-badge";
 import { WhyThisNumber } from "@/components/shared/why-this-number";
 import { ShareButton } from "@/components/shared/share-button";
 import { truthFromGoal } from "@/lib/truth/truth-data-adapter";
+import { SliderRow } from "@/components/shared/slider-row";
 
 const DEFAULT_GOALS: Goal[] = [
   { id: "1", name: "Emergency Fund", targetAmount: 500000, yearsFromNow: 2, priority: "essential" },
@@ -36,22 +37,6 @@ const PRIORITY_COLORS: Record<string, string> = {
   important: "text-warn",
   "nice-to-have": "text-text-secondary",
 };
-
-function SliderRow({ label, value, displayValue, min, max, step, onChange }: {
-  label: string; value: number; displayValue: string; min: number; max: number; step: number; onChange: (v: number) => void;
-}) {
-  return (
-    <div className="flex flex-col gap-0.5">
-      <div className="flex justify-between items-baseline">
-        <label className="text-xs text-text-secondary">{label}</label>
-        <span className="text-xs font-mono text-text-primary">{displayValue}</span>
-      </div>
-      <input type="range" min={min} max={max} step={step} value={value}
-        onChange={(e) => onChange(parseFloat(e.target.value))}
-        className="w-full h-1 rounded-full appearance-none cursor-pointer bg-border accent-gain" />
-    </div>
-  );
-}
 
 export function GoalCalculator() {
   const [input, setInput] = useState<GoalInput>(DEFAULT_INPUT);
@@ -89,21 +74,21 @@ export function GoalCalculator() {
   return (
     <div className="flex flex-col lg:flex-row gap-4 w-full h-full">
       <div className="lg:w-[38%] shrink-0">
-        <div className="flex flex-col gap-3 p-4 bg-surface rounded-lg border border-border">
+        <div className="flex flex-col gap-3 p-4 bg-white shadow-sm rounded-lg border border-border">
           <h2 className="text-sm font-semibold tracking-tight">Goal-to-Action</h2>
           <SliderRow label="Inflation Rate" value={input.inflationRate} displayValue={`${input.inflationRate}%`}
-            min={2} max={12} step={0.5} onChange={(v) => handleInputChange("inflationRate", v)} />
+            min={2} max={12} step={0.5} onChange={(v) => handleInputChange("inflationRate", v)} tickUnit="%" />
           <SliderRow label="Conservative Return" value={input.returnRateConservative} displayValue={`${input.returnRateConservative}%`}
-            min={4} max={10} step={0.5} onChange={(v) => handleInputChange("returnRateConservative", v)} />
+            min={4} max={10} step={0.5} onChange={(v) => handleInputChange("returnRateConservative", v)} tickUnit="%" />
           <SliderRow label="Moderate Return" value={input.returnRateModerate} displayValue={`${input.returnRateModerate}%`}
-            min={8} max={14} step={0.5} onChange={(v) => handleInputChange("returnRateModerate", v)} />
+            min={8} max={14} step={0.5} onChange={(v) => handleInputChange("returnRateModerate", v)} tickUnit="%" />
           <SliderRow label="Aggressive Return" value={input.returnRateAggressive} displayValue={`${input.returnRateAggressive}%`}
-            min={10} max={18} step={0.5} onChange={(v) => handleInputChange("returnRateAggressive", v)} />
+            min={10} max={18} step={0.5} onChange={(v) => handleInputChange("returnRateAggressive", v)} tickUnit="%" />
 
           <div className="flex flex-col gap-2">
             <div className="flex justify-between items-baseline">
               <span className="text-xs font-semibold text-text-primary">Goals</span>
-              <button onClick={addGoal} className="px-2 py-0.5 text-[10px] rounded-md font-mono bg-gain/20 text-gain border border-gain/40">+ Add</button>
+              <button onClick={addGoal} className="px-2 py-0.5 text-[10px] rounded-md font-mono bg-sienna/10 text-sienna border border-sienna/30">+ Add</button>
             </div>
             {input.goals.map((goal) => (
               <div key={goal.id} className="flex flex-col gap-1 p-2 bg-border/30 rounded-md border border-border">
@@ -146,7 +131,7 @@ export function GoalCalculator() {
 
           <div className="flex flex-col gap-1">
             {output.goals.map((g) => (
-              <div key={g.id} className="flex items-center gap-2 p-2 bg-surface rounded-lg border border-border">
+              <div key={g.id} className="flex items-center gap-2 p-2 bg-white rounded-lg border border-border shadow-sm">
                 <div className="flex flex-col gap-0 min-w-0 flex-1">
                   <div className="flex items-center gap-1">
                     <span className="text-xs font-mono text-text-primary truncate">{g.name}</span>
@@ -164,7 +149,7 @@ export function GoalCalculator() {
             ))}
           </div>
 
-          <div className="flex-1 min-h-0 bg-surface rounded-lg border border-border p-4">
+          <div className="flex-1 min-h-0 bg-white rounded-lg border border-border shadow-sm p-4">
             <h3 className="text-xs font-semibold text-text-secondary mb-2">Monthly SIP by Risk Profile</h3>
             <div className="w-full flex-1 min-h-[220px]">
               <ResponsiveContainer width="100%" height="100%">

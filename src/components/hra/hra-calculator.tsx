@@ -11,6 +11,7 @@ import { WhyThisNumber } from "@/components/shared/why-this-number";
 import { ShareButton } from "@/components/shared/share-button";
 import { truthFromHRA } from "@/lib/truth/truth-data-adapter";
 import { twMerge } from "tailwind-merge";
+import { SliderRow } from "@/components/shared/slider-row";
 
 const DEFAULT_INPUT: HRAInput = {
   basicSalary: 50000,
@@ -18,22 +19,6 @@ const DEFAULT_INPUT: HRAInput = {
   rentPaid: 15000,
   metroCity: true,
 };
-
-function SliderRow({ label, value, displayValue, min, max, step, onChange }: {
-  label: string; value: number; displayValue: string; min: number; max: number; step: number; onChange: (v: number) => void;
-}) {
-  return (
-    <div className="flex flex-col gap-0.5">
-      <div className="flex justify-between items-baseline">
-        <label className="text-xs text-text-secondary">{label}</label>
-        <span className="text-xs font-mono text-text-primary">{displayValue}</span>
-      </div>
-      <input type="range" min={min} max={max} step={step} value={value}
-        onChange={(e) => onChange(parseFloat(e.target.value))}
-        className="w-full h-1 rounded-full appearance-none cursor-pointer bg-border accent-gain" />
-    </div>
-  );
-}
 
 function ResultRow({ label, value, highlight, subtext }: {
   label: string; value: string; highlight?: boolean; subtext?: string;
@@ -64,7 +49,7 @@ export function HRACalculator() {
   return (
     <div className="flex flex-col lg:flex-row gap-4 w-full h-full">
       <div className="lg:w-[38%] shrink-0">
-        <div className="flex flex-col gap-3 p-4 bg-surface rounded-lg border border-border">
+        <div className="flex flex-col gap-3 p-4 bg-white shadow-sm rounded-lg border border-border">
           <h2 className="text-sm font-semibold tracking-tight">Calculate HRA Exemption</h2>
           <SliderRow label="Basic Salary (Monthly)" value={input.basicSalary}
             displayValue={formatINR(input.basicSalary)}
@@ -84,16 +69,16 @@ export function HRACalculator() {
               <button className={twMerge(
                 "px-4 py-1.5 text-xs rounded-md font-mono transition-colors",
                 input.metroCity
-                  ? "bg-gain/20 text-gain border border-gain/40"
-                  : "bg-border text-text-secondary border border-border"
+                  ? "bg-sienna/10 text-sienna border border-sienna/30"
+                  : "bg-surface-hover text-text-secondary border border-border"
               )} onClick={() => handleInputChange("metroCity", true)}>
                 Metro
               </button>
               <button className={twMerge(
                 "px-4 py-1.5 text-xs rounded-md font-mono transition-colors",
                 !input.metroCity
-                  ? "bg-gain/20 text-gain border border-gain/40"
-                  : "bg-border text-text-secondary border border-border"
+                  ? "bg-sienna/10 text-sienna border border-sienna/30"
+                  : "bg-surface-hover text-text-secondary border border-border"
               )} onClick={() => handleInputChange("metroCity", false)}>
                 Non-Metro
               </button>
@@ -110,7 +95,7 @@ export function HRACalculator() {
           </div>
           <LieVsTruthPanel truth={truthFromHRA({ hraExemption: result.hraExemption, taxableHRA: result.taxableHRA })} />
 
-          <div className="p-4 bg-surface rounded-lg border border-border">
+          <div className="p-4 bg-white rounded-lg border border-border shadow-sm">
             <h3 className="text-xs font-semibold text-text-primary mb-3">HRA Exemption Breakdown</h3>
 
             <ResultRow label="① Actual HRA Received"

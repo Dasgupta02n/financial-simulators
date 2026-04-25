@@ -19,8 +19,8 @@ export function CalcCard({ id, name, slug, description, tag, index }: CalcCardPr
         initial={{ opacity: 0, y: 24 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, delay: index * 0.06 }}
-        className="relative flex flex-col gap-4 p-8 border border-white/10 hover:border-sienna/50
-          transition-all duration-300 group-hover:bg-white/[0.02]"
+        className="relative flex flex-col gap-4 p-8 bg-white border border-border hover:border-sienna/50
+          transition-all duration-300 group-hover:shadow-md"
       >
         {/* Tag only — no numbered index */}
         {tag && (
@@ -30,7 +30,7 @@ export function CalcCard({ id, name, slug, description, tag, index }: CalcCardPr
         )}
 
         {/* Title */}
-        <h3 className="text-lg font-bold text-white group-hover:text-sienna transition-colors duration-200">
+        <h3 className="text-lg font-bold text-text-primary group-hover:text-sienna transition-colors duration-200">
           {name}
         </h3>
 

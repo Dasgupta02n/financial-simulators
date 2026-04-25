@@ -1,49 +1,55 @@
 @import "tailwindcss";
 
 @theme inline {
-  /* Backgrounds — financial gravitas dark, not pure black */
-  --color-ink: #08090C;
-  --color-ink-light: #0d0e12;
+  /* Backgrounds — clean, corporate light (Société Générale inspired) */
+  --color-ink: #ffffff;
+  --color-ink-light: #f8f8fa;
   --color-surface: #ffffff;
-  --color-surface-hover: #f5f5f5;
-  --color-border: #1a1a1a;
-  --color-border-subtle: #111111;
+  --color-surface-hover: #f5f5f7;
+  --color-surface-bright: #fafafa;
+  --color-border: #e0e0e5;
+  --color-border-subtle: #ebebf0;
+
+  /* Dark section overrides (stats bars, hero overlays) */
+  --color-navy: #0a0f1e;
+  --color-navy-light: #141b2d;
+  --color-navy-surface: #1a2238;
 
   /* Truth reveal — warm parchment for insight callouts */
   --color-truth: #E8DCC8;
   --color-truth-dim: rgba(232, 220, 200, 0.10);
 
-  /* Text */
-  --color-text-primary: #ffffff;
-  --color-text-secondary: #999999;
-  --color-text-muted: #666666;
+  /* Text — high contrast on light backgrounds */
+  --color-text-primary: #0a0f1e;
+  --color-text-secondary: #5a5f6e;
+  --color-text-muted: #8e93a0;
 
-  /* Accent — burnt sienna, the brand color */
+  /* Accent — burnt sienna, the brand color (SG uses red, we use sienna) */
   --color-sienna: #D8400E;
-  --color-sienna-dim: rgba(216, 64, 14, 0.12);
+  --color-sienna-dim: rgba(216, 64, 14, 0.08);
 
-  /* Financial accents (kept for calculator pages) */
-  --color-gain: #4ade80;
-  --color-gain-dim: rgba(74, 222, 128, 0.15);
-  --color-loss: #fb7185;
-  --color-loss-dim: rgba(251, 113, 133, 0.15);
-  --color-warn: #fbbf24;
-  --color-warn-dim: rgba(251, 191, 36, 0.15);
-  --color-stress: #ef4444;
+  /* Financial accents */
+  --color-gain: #15803d;
+  --color-gain-dim: rgba(21, 128, 61, 0.10);
+  --color-loss: #dc2626;
+  --color-loss-dim: rgba(220, 38, 38, 0.10);
+  --color-warn: #b45309;
+  --color-warn-dim: rgba(180, 83, 9, 0.10);
+  --color-stress: #dc2626;
   --color-coral: #D8400E;
-  --color-coral-dim: rgba(216, 64, 14, 0.12);
+  --color-coral-dim: rgba(216, 64, 14, 0.08);
 
-  /* Category accents for calculators */
-  --color-cat-sip: #4ade80;
-  --color-cat-emi: #7dd3fc;
-  --color-cat-tax: #fbbf24;
-  --color-cat-accum: #c4b5fd;
-  --color-cat-fd: #fb923c;
-  --color-cat-swp: #f472b6;
-  --color-cat-fire: #2dd4bf;
-  --color-cat-ctc: #a78bfa;
-  --color-cat-nps: #22d3ee;
-  --color-cat-goal: #fb7185;
+  /* Category accents for calculators (muted for light bg) */
+  --color-cat-sip: #15803d;
+  --color-cat-emi: #0369a1;
+  --color-cat-tax: #b45309;
+  --color-cat-accum: #7c3aed;
+  --color-cat-fd: #c2410c;
+  --color-cat-swp: #be185d;
+  --color-cat-fire: #0d9488;
+  --color-cat-ctc: #7c3aed;
+  --color-cat-nps: #0891b2;
+  --color-cat-goal: #e11d48;
 
   /* Fonts */
   --font-sans: var(--font-geist-sans);
@@ -61,22 +67,57 @@ body {
   font-variable-numeric: tabular-nums;
 }
 
-/* Subtle depth pattern for dark sections */
+/* Subtle pattern for dark overlay sections */
 .bg-grid-pattern {
   background-image:
-    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+    linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
   background-size: 40px 40px;
 }
 
-/* Hero gradient */
+/* Hero gradient (dark overlay sections) */
 .gradient-hero {
-  background: linear-gradient(180deg, #08090C 0%, #0d0e12 100%);
+  background: linear-gradient(135deg, #0a0f1e 0%, #141b2d 100%);
 }
 
-/* Serif headlines — FT authority, not startup tech */
+/* Serif headlines — FT authority */
 .font-serif-display {
   font-family: var(--font-playfair), "Playfair Display", Georgia, serif;
+}
+
+/* ── Section alternation ── */
+.section-white {
+  background: #ffffff;
+  color: var(--color-text-primary);
+}
+.section-gray {
+  background: #f5f5f7;
+  color: var(--color-text-primary);
+}
+.section-navy {
+  background: var(--color-navy);
+  color: #ffffff;
+}
+
+/* Cards on light sections */
+.card-white {
+  background: #ffffff;
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  padding: 24px;
+}
+.card-gray {
+  background: #f5f5f7;
+  border: 1px solid var(--color-border-subtle);
+  border-radius: 12px;
+  padding: 24px;
+}
+.card-shadow {
+  background: #ffffff;
+  border: 1px solid var(--color-border-subtle);
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
 }
 
 /* Truth reveal — the signature c7xai interaction */
@@ -110,18 +151,17 @@ body {
   font-family: var(--font-geist-mono), monospace;
 }
 
-/* Glow effects */
-.glow-sienna { box-shadow: 0 0 30px rgba(216, 64, 14, 0.2), 0 0 60px rgba(216, 64, 14, 0.08); }
-.glow-gain { box-shadow: 0 0 24px rgba(74, 222, 128, 0.2); }
-.glow-loss { box-shadow: 0 0 24px rgba(251, 113, 133, 0.2); }
+/* Glow effects (for dark sections only) */
+.glow-sienna { box-shadow: 0 0 30px rgba(216, 64, 14, 0.15), 0 0 60px rgba(216, 64, 14, 0.05); }
+.glow-gain { box-shadow: 0 0 24px rgba(21, 128, 61, 0.15); }
+.glow-loss { box-shadow: 0 0 24px rgba(220, 38, 38, 0.15); }
 
-/* Glass morphism */
-.glass-card {
-  background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+/* Clean card style for calculator pages */
+.calc-card {
+  background: #ffffff;
+  border: 1px solid var(--color-border);
   border-radius: 16px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
 }
 
 /* Marquee animation */
@@ -134,17 +174,113 @@ body {
   animation: marquee 20s linear infinite;
 }
 
-/* Slider thumb hover */
+/* ── Range slider: filled track + visible thumb ── */
+input[type="range"] {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 6px;
+  border-radius: 9999px;
+  background: linear-gradient(
+    to right,
+    var(--color-sienna) 0%,
+    var(--color-sienna) var(--range-fill, 50%),
+    var(--color-border) var(--range-fill, 50%),
+    var(--color-border) 100%
+  );
+  outline: none;
+  cursor: pointer;
+}
+
 input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--color-sienna);
+  border: 3px solid #ffffff;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(216, 64, 14, 0.2);
+  cursor: grab;
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
+
+input[type="range"]::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--color-sienna);
+  border: 3px solid #ffffff;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(216, 64, 14, 0.2);
+  cursor: grab;
+}
+
 input[type="range"]:hover::-webkit-slider-thumb {
-  transform: scale(1.3);
-  box-shadow: 0 0 16px rgba(216, 64, 14, 0.5);
+  transform: scale(1.15);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2), 0 0 0 3px rgba(216, 64, 14, 0.2);
+}
+
+input[type="range"]:hover::-moz-range-thumb {
+  transform: scale(1.15);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2), 0 0 0 3px rgba(216, 64, 14, 0.2);
 }
 
 input[type="range"]:focus-visible::-webkit-slider-thumb {
-  box-shadow: 0 0 0 3px rgba(216, 64, 14, 0.4);
+  box-shadow: 0 0 0 3px rgba(216, 64, 14, 0.3);
+}
+
+input[type="range"]:focus-visible::-moz-range-thumb {
+  box-shadow: 0 0 0 3px rgba(216, 64, 14, 0.3);
+}
+
+/* Range tick marks */
+.range-with-ticks {
+  position: relative;
+}
+
+.range-ticks {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 2px;
+  margin-top: 2px;
+}
+
+.range-ticks span {
+  font-size: 10px;
+  font-family: var(--font-geist-mono), monospace;
+  color: var(--color-text-muted);
+  user-select: none;
+}
+
+/* ── Value bubble above slider ── */
+.slider-value-bubble {
+  position: absolute;
+  top: -30px;
+  left: var(--range-fill, 50%);
+  transform: translateX(-50%);
+  background: var(--color-sienna);
+  color: #fff;
+  font-size: 12px;
+  font-family: var(--font-geist-mono), monospace;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 6px;
+  white-space: nowrap;
+  pointer-events: none;
+  box-shadow: 0 2px 6px rgba(216, 64, 14, 0.3);
+}
+
+.slider-value-bubble::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-top: 5px solid var(--color-sienna);
 }
 
 /* Floating animation */
@@ -180,17 +316,38 @@ svg line {
 .metric-card:hover,
 [class*="metric-card"]:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
 }
 
 /* Selection color */
 ::selection {
-  background: rgba(216, 64, 14, 0.3);
+  background: rgba(216, 64, 14, 0.15);
   color: var(--color-text-primary);
 }
 
-/* Scrollbar */
+/* Scrollbar (light theme) */
 ::-webkit-scrollbar { width: 6px; }
-::-webkit-scrollbar-track { background: #08090C; }
-::-webkit-scrollbar-thumb { background: #1a1a1a; border-radius: 3px; }
-::-webkit-scrollbar-thumb:hover { background: #333; }
+::-webkit-scrollbar-track { background: #f5f5f7; }
+::-webkit-scrollbar-thumb { background: #c0c0c8; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #a0a0a8; }
+
+/* ── Dark section overrides (navy backgrounds) ── */
+.section-navy h2,
+.section-navy h3 {
+  color: #ffffff;
+}
+.section-navy p {
+  color: rgba(255, 255, 255, 0.7);
+}
+.section-navy .card-navy {
+  background: var(--color-navy-surface);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  padding: 24px;
+}
+.section-navy .card-navy h3 {
+  color: #ffffff;
+}
+.section-navy .card-navy p {
+  color: rgba(255, 255, 255, 0.65);
+}

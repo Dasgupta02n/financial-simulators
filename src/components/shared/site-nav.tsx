@@ -11,10 +11,10 @@ const NAV_LINKS = [
 export function SiteNav() {
   return (
     <header className="w-full sticky top-0 z-50">
-      <nav className="w-full bg-ink/90 backdrop-blur-md border-b border-white/5">
+      <nav className="w-full bg-white/95 backdrop-blur-md border-b border-border shadow-sm">
         <div className="max-w-7xl mx-auto px-6 h-14 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
-            <span className="text-xl font-bold tracking-tight text-white font-serif-display">
+            <span className="text-xl font-bold tracking-tight text-text-primary font-serif-display">
               c7<span className="text-sienna">xai</span>
             </span>
           </Link>

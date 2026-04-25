@@ -6,6 +6,7 @@ import { computeTermInsurance } from "@/lib/calculators/term-insurance/engine";
 import { formatINR } from "@/lib/format";
 import { CalcExplainer } from "@/components/shared/calc-explainer";
 import { twMerge } from "tailwind-merge";
+import { SliderRow } from "@/components/shared/slider-row";
 
 const DEFAULT_INPUT: TermInsuranceInput = {
   annualIncome: 1200000,
@@ -17,22 +18,6 @@ const DEFAULT_INPUT: TermInsuranceInput = {
   existingInsuranceCover: 0,
   savingsInvestments: 500000,
 };
-
-function SliderRow({ label, value, displayValue, min, max, step, onChange }: {
-  label: string; value: number; displayValue: string; min: number; max: number; step: number; onChange: (v: number) => void;
-}) {
-  return (
-    <div className="flex flex-col gap-0.5">
-      <div className="flex justify-between items-baseline">
-        <label className="text-xs text-text-secondary">{label}</label>
-        <span className="text-xs font-mono text-text-primary">{displayValue}</span>
-      </div>
-      <input type="range" min={min} max={max} step={step} value={value}
-        onChange={(e) => onChange(parseFloat(e.target.value))}
-        className="w-full h-1 rounded-full appearance-none cursor-pointer bg-border accent-gain" />
-    </div>
-  );
-}
 
 function ResultRow({ label, value, highlight, subtext }: {
   label: string; value: string; highlight?: boolean; subtext?: string;
@@ -68,7 +53,7 @@ export function TermInsuranceCalculator() {
   return (
     <div className="flex flex-col lg:flex-row gap-4 w-full h-full">
       <div className="lg:w-[38%] shrink-0">
-        <div className="flex flex-col gap-3 p-4 bg-surface rounded-lg border border-border">
+        <div className="flex flex-col gap-3 p-4 bg-white rounded-lg border border-border shadow-sm">
           <h2 className="text-sm font-semibold tracking-tight">Calculate Term Cover Needed</h2>
           <SliderRow label="Annual Income" value={input.annualIncome}
             displayValue={formatINR(input.annualIncome)}
@@ -89,11 +74,11 @@ export function TermInsuranceCalculator() {
           <SliderRow label="Years of Coverage" value={input.yearsOfCoverage}
             displayValue={`${input.yearsOfCoverage} yrs`}
             min={5} max={40} step={1}
-            onChange={(v) => handleInputChange("yearsOfCoverage", v)} />
+            onChange={(v) => handleInputChange("yearsOfCoverage", v)} tickUnit=" yr" />
           <SliderRow label="Inflation Rate (% p.a.)" value={input.inflationRate}
             displayValue={`${input.inflationRate}%`}
             min={2} max={15} step={0.5}
-            onChange={(v) => handleInputChange("inflationRate", v)} />
+            onChange={(v) => handleInputChange("inflationRate", v)} tickUnit="%" />
           <SliderRow label="Existing Life Insurance" value={input.existingInsuranceCover}
             displayValue={formatINR(input.existingInsuranceCover)}
             min={0} max={50000000} step={100000}
@@ -119,7 +104,7 @@ export function TermInsuranceCalculator() {
             <p>The result is the additional term cover you should buy.</p>
           </CalcExplainer>
 
-          <div className="p-4 bg-surface rounded-lg border border-border">
+          <div className="p-4 bg-white rounded-lg border border-border shadow-sm">
             <h3 className="text-xs font-semibold text-text-primary mb-3">Cover Breakdown</h3>
 
             <ResultRow label="① Future Expenses (Inflated)"
@@ -151,7 +136,7 @@ export function TermInsuranceCalculator() {
           </div>
 
           {/* Visual bar: existing cover vs needed */}
-          <div className="p-4 bg-surface rounded-lg border border-border">
+          <div className="p-4 bg-white rounded-lg border border-border shadow-sm">
             <h3 className="text-xs font-semibold text-text-primary mb-2">Cover Adequacy</h3>
             <div className="w-full h-6 rounded-full overflow-hidden bg-border flex">
               {input.existingInsuranceCover > 0 && (
@@ -207,7 +192,7 @@ export function TermInsuranceCalculator() {
           </div>
 
           {/* Premium estimate */}
-          <div className="p-4 bg-surface rounded-lg border border-border">
+          <div className="p-4 bg-white rounded-lg border border-border shadow-sm">
             <h3 className="text-xs font-semibold text-text-primary mb-2">Estimated Monthly Premium</h3>
             <div className="flex justify-between items-baseline py-1">
               <span className="text-xs text-text-secondary">Range (30-yr non-smoker)</span>

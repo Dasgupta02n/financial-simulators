@@ -13,19 +13,19 @@ export function LieVsTruthPanel({ truth, className = "" }: Props) {
   const gapPct = truth.grossValue > 0 ? ((gap / truth.grossValue) * 100).toFixed(1) : "0";
 
   return (
-    <div className={`bg-surface rounded-lg border border-border p-4 ${className}`}>
+    <div className={`bg-white rounded-lg border border-border shadow-sm p-4 ${className}`}>
       <h3 className="text-xs font-semibold uppercase tracking-wider text-text-secondary mb-3">
         The Lie vs The Truth
       </h3>
 
       <div className="grid grid-cols-2 gap-4 mb-4">
-        <div className="text-center">
+        <div className="text-center bg-ink-light rounded-lg p-3">
           <p className="text-[10px] text-text-muted uppercase tracking-wider mb-1">{truth.grossLabel}</p>
           <p className="text-lg font-mono font-bold text-text-secondary line-through opacity-60">
             {formatINR(truth.grossValue)}
           </p>
         </div>
-        <div className="text-center">
+        <div className="text-center bg-sienna/5 rounded-lg border border-sienna/10 p-3">
           <p className="text-[10px] text-sienna uppercase tracking-wider mb-1">{truth.realLabel}</p>
           <p className="text-lg font-serif-display font-bold text-sienna">
             {formatINR(truth.realValue)}

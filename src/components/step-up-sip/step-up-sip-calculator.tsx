@@ -63,7 +63,7 @@ export function StepUpSIPCalculator() {
   return (
     <div className="flex flex-col lg:flex-row gap-4 w-full h-full">
       <div className="lg:w-[38%] shrink-0">
-        <div className="flex flex-col gap-3 p-4 bg-surface rounded-lg border border-border">
+        <div className="flex flex-col gap-3 p-4 bg-white rounded-lg border border-border shadow-sm">
           <h2 className="text-sm font-semibold tracking-tight">Step-Up SIP Projection</h2>
           <SliderRow label="Monthly SIP (Start)" value={input.monthlySIP}
             displayValue={formatINR(input.monthlySIP)}
@@ -98,29 +98,29 @@ export function StepUpSIPCalculator() {
           </CalcExplainer>
 
           <div className="grid grid-cols-2 gap-2">
-            <div className="p-3 bg-surface rounded-lg border border-border">
+            <div className="p-3 bg-white rounded-lg border border-border shadow-sm">
               <div className="text-[10px] text-text-muted font-mono">STEP-UP CORPUS</div>
               <div className="text-lg font-mono font-bold text-gain">{formatINR(result.nominalCorpus)}</div>
               <div className="text-[10px] text-text-muted font-mono">After LTCG: {formatINR(result.afterLTCG)}</div>
             </div>
-            <div className="p-3 bg-surface rounded-lg border border-border">
+            <div className="p-3 bg-white rounded-lg border border-border shadow-sm">
               <div className="text-[10px] text-text-muted font-mono">REGULAR SIP CORPUS</div>
               <div className="text-lg font-mono font-bold text-text-primary">{formatINR(result.regularCorpus)}</div>
               <div className="text-[10px] text-gain font-mono">Step-Up is {stepUpPercentVsRegular}% more</div>
             </div>
-            <div className="p-3 bg-surface rounded-lg border border-border">
+            <div className="p-3 bg-white rounded-lg border border-border shadow-sm">
               <div className="text-[10px] text-text-muted font-mono">REAL VALUE (INFLATION-ADJ)</div>
               <div className="text-lg font-mono font-bold text-text-primary">{formatINR(result.realCorpus)}</div>
               <div className="text-[10px] text-text-muted font-mono">What your money actually buys</div>
             </div>
-            <div className="p-3 bg-surface rounded-lg border border-border">
+            <div className="p-3 bg-white rounded-lg border border-border shadow-sm">
               <div className="text-[10px] text-text-muted font-mono">TOTAL INVESTED</div>
               <div className="text-lg font-mono font-bold text-text-primary">{formatINR(result.totalInvested)}</div>
               <div className="text-[10px] text-text-muted font-mono">vs Regular: {formatINR(result.regularInvested)}</div>
             </div>
           </div>
 
-          <div className="p-3 bg-surface rounded-lg border border-border">
+          <div className="p-3 bg-white rounded-lg border border-border shadow-sm">
             <h3 className="text-xs font-semibold text-text-primary mb-2">Corpus Growth Over Time</h3>
             <ResponsiveContainer width="100%" height={220}>
               <ComposedChart data={chartData} margin={{ top: 5, right: 10, left: 0, bottom: 5 }}>

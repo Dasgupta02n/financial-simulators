@@ -33,7 +33,7 @@ export function AccumResultsPanel({ output }: ResultsPanelProps) {
       <div className="text-xs text-text-secondary font-mono px-1">
         SIP invested: {formatINR(output.finalSipInvested)} → Corpus: {formatINR(output.finalSipCorpus)}
       </div>
-      <div className="bg-surface rounded-lg border border-border p-3">
+      <div className="bg-white rounded-lg border border-border shadow-sm p-3">
         <div className="flex-1 min-h-[220px]">
           <AccumulationChart data={output.yearlyData} />
         </div>

@@ -86,7 +86,7 @@ export function ResultsPanel({
         </div>
       )}
 
-      <div className="bg-surface rounded-lg border border-border p-3">
+      <div className="bg-white rounded-lg border border-border shadow-sm p-3">
         <h3 className="text-xs font-semibold text-text-secondary mb-2">Amortization Schedule</h3>
         <div className="flex-1 min-h-[220px]">
           <AmortizationChart data={amortization} />
@@ -94,7 +94,7 @@ export function ResultsPanel({
       </div>
 
       {extraCash > 0 && (
-        <div className="bg-surface rounded-lg border border-border p-3">
+        <div className="bg-white rounded-lg border border-border shadow-sm p-3">
           <h3 className="text-xs font-semibold text-text-secondary mb-2">
             SIP vs Prepayment Crossover
           </h3>

@@ -13,6 +13,7 @@ import { ConfidenceBadge } from "@/components/shared/confidence-badge";
 import { WhyThisNumber } from "@/components/shared/why-this-number";
 import { ShareButton } from "@/components/shared/share-button";
 import { truthFromFIRE } from "@/lib/truth/truth-data-adapter";
+import { SliderRow } from "@/components/shared/slider-row";
 
 const DEFAULT_INPUT: FIREInput = {
   currentAge: 30,
@@ -29,22 +30,6 @@ const DEFAULT_INPUT: FIREInput = {
   glidePathShift: 55,
 };
 
-function SliderRow({ label, value, displayValue, min, max, step, onChange }: {
-  label: string; value: number; displayValue: string; min: number; max: number; step: number; onChange: (v: number) => void;
-}) {
-  return (
-    <div className="flex flex-col gap-0.5">
-      <div className="flex justify-between items-baseline">
-        <label className="text-xs text-text-secondary">{label}</label>
-        <span className="text-xs font-mono text-text-primary">{displayValue}</span>
-      </div>
-      <input type="range" min={min} max={max} step={step} value={value}
-        onChange={(e) => onChange(parseFloat(e.target.value))}
-        className="w-full h-1 rounded-full appearance-none cursor-pointer bg-border accent-gain" />
-    </div>
-  );
-}
-
 export function FIRECalculator() {
   const [input, setInput] = useState<FIREInput>(DEFAULT_INPUT);
   const handleInputChange = useCallback(
@@ -55,14 +40,14 @@ export function FIRECalculator() {
   return (
     <div className="flex flex-col lg:flex-row gap-4 w-full h-full">
       <div className="lg:w-[38%] shrink-0">
-        <div className="flex flex-col gap-3 p-4 bg-surface rounded-lg border border-border">
+        <div className="flex flex-col gap-3 p-4 bg-white shadow-sm rounded-lg border border-border">
           <h2 className="text-sm font-semibold tracking-tight">FIRE Matrix</h2>
           <SliderRow label="Current Age" value={input.currentAge} displayValue={`${input.currentAge}`}
-            min={20} max={60} step={1} onChange={(v) => handleInputChange("currentAge", v)} />
+            min={20} max={60} step={1} onChange={(v) => handleInputChange("currentAge", v)} tickUnit=" yr" />
           <SliderRow label="Retirement Age" value={input.retirementAge} displayValue={`${input.retirementAge}`}
-            min={35} max={65} step={1} onChange={(v) => handleInputChange("retirementAge", v)} />
+            min={35} max={65} step={1} onChange={(v) => handleInputChange("retirementAge", v)} tickUnit=" yr" />
           <SliderRow label="Life Expectancy" value={input.lifeExpectancy} displayValue={`${input.lifeExpectancy}`}
-            min={70} max={100} step={1} onChange={(v) => handleInputChange("lifeExpectancy", v)} />
+            min={70} max={100} step={1} onChange={(v) => handleInputChange("lifeExpectancy", v)} tickUnit=" yr" />
           <SliderRow label="Monthly Expenses" value={input.monthlyExpenses} displayValue={`₹${(input.monthlyExpenses / 1000).toFixed(0)}K`}
             min={10000} max={500000} step={5000} onChange={(v) => handleInputChange("monthlyExpenses", v)} />
           <SliderRow label="Current Corpus" value={input.currentCorpus} displayValue={formatINR(input.currentCorpus)}
@@ -70,17 +55,17 @@ export function FIRECalculator() {
           <SliderRow label="Monthly SIP" value={input.monthlySIP} displayValue={`₹${(input.monthlySIP / 1000).toFixed(0)}K`}
             min={5000} max={500000} step={1000} onChange={(v) => handleInputChange("monthlySIP", v)} />
           <SliderRow label="Pre-Retirement Return" value={input.preRetirementReturn} displayValue={`${input.preRetirementReturn}%`}
-            min={4} max={18} step={0.5} onChange={(v) => handleInputChange("preRetirementReturn", v)} />
+            min={4} max={18} step={0.5} onChange={(v) => handleInputChange("preRetirementReturn", v)} tickUnit="%" />
           <SliderRow label="Post-Retirement Return" value={input.postRetirementReturn} displayValue={`${input.postRetirementReturn}%`}
-            min={3} max={12} step={0.5} onChange={(v) => handleInputChange("postRetirementReturn", v)} />
+            min={3} max={12} step={0.5} onChange={(v) => handleInputChange("postRetirementReturn", v)} tickUnit="%" />
           <SliderRow label="Pre-Retirement Inflation" value={input.preRetirementInflation} displayValue={`${input.preRetirementInflation}%`}
-            min={2} max={12} step={0.5} onChange={(v) => handleInputChange("preRetirementInflation", v)} />
+            min={2} max={12} step={0.5} onChange={(v) => handleInputChange("preRetirementInflation", v)} tickUnit="%" />
           <SliderRow label="Post-Retirement Inflation" value={input.postRetirementInflation} displayValue={`${input.postRetirementInflation}%`}
-            min={2} max={10} step={0.5} onChange={(v) => handleInputChange("postRetirementInflation", v)} />
+            min={2} max={10} step={0.5} onChange={(v) => handleInputChange("postRetirementInflation", v)} tickUnit="%" />
           <SliderRow label="Equity Allocation" value={input.equityAllocation} displayValue={`${input.equityAllocation}%`}
-            min={10} max={100} step={5} onChange={(v) => handleInputChange("equityAllocation", v)} />
+            min={10} max={100} step={5} onChange={(v) => handleInputChange("equityAllocation", v)} tickUnit="%" />
           <SliderRow label="Glide Path Shift" value={input.glidePathShift} displayValue={`-${input.glidePathShift}%`}
-            min={0} max={80} step={5} onChange={(v) => handleInputChange("glidePathShift", v)} />
+            min={0} max={80} step={5} onChange={(v) => handleInputChange("glidePathShift", v)} tickUnit="%" />
         </div>
       </div>
       <div className="lg:w-[62%] min-h-0">
@@ -111,7 +96,7 @@ export function FIRECalculator() {
             </div>
           )}
 
-          <div className="flex-1 min-h-0 bg-surface rounded-lg border border-border p-4">
+          <div className="flex-1 min-h-0 bg-white rounded-lg border border-border shadow-sm p-4">
             <h3 className="text-xs font-semibold text-text-secondary mb-2">Corpus Trajectory</h3>
             <div className="w-full flex-1 min-h-[220px]">
               <ResponsiveContainer width="100%" height="100%">
@@ -132,9 +117,9 @@ export function FIRECalculator() {
                     formatter={(value, name) => [formatINRShort(Number(value)), String(name)]} />
                   <ReferenceLine x={input.retirementAge} stroke="#fbbf24" strokeDasharray="4 4" label={{ value: "RETIRE", fill: "#fbbf24", fontSize: 10, fontFamily: "var(--font-geist-mono)" }} />
                   <Area type="monotone" dataKey="corpusEnd" stroke="#6ee7b7" strokeWidth={2}
-                    fill="url(#fireGrad)" name="Corpus" isAnimationActive={false} />
+                    fill="url(#fireGrad)" name="Corpus" isAnimationActive={true} />
                   <Line type="monotone" dataKey="realCorpusEnd" stroke="#f87171" strokeWidth={2}
-                    strokeDasharray="6 4" dot={false} name="Real Value" isAnimationActive={false} />
+                    strokeDasharray="6 4" dot={false} name="Real Value" isAnimationActive={true} />
                   <ReferenceLine y={output.fireNumber} stroke="#fbbf24" strokeDasharray="2 4" />
                 </ComposedChart>
               </ResponsiveContainer>

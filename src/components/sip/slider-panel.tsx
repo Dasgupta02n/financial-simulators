@@ -1,6 +1,7 @@
 "use client";
 
 import type { SIPInput, StressTestConfig } from "@/lib/calculators/sip/types";
+import { SliderRow } from "@/components/shared/slider-row";
 import { twMerge } from "tailwind-merge";
 
 interface SliderPanelProps {
@@ -10,42 +11,6 @@ interface SliderPanelProps {
   onStressChange: <K extends keyof StressTestConfig>(key: K, value: StressTestConfig[K]) => void;
 }
 
-function SliderRow({
-  label,
-  value,
-  displayValue,
-  min,
-  max,
-  step,
-  onChange,
-}: {
-  label: string;
-  value: number;
-  displayValue: string;
-  min: number;
-  max: number;
-  step: number;
-  onChange: (v: number) => void;
-}) {
-  return (
-    <div className="flex flex-col gap-0.5">
-      <div className="flex justify-between items-baseline">
-        <label className="text-xs text-text-secondary">{label}</label>
-        <span className="text-xs font-mono text-text-primary">{displayValue}</span>
-      </div>
-      <input
-        type="range"
-        min={min}
-        max={max}
-        step={step}
-        value={value}
-        onChange={(e) => onChange(parseFloat(e.target.value))}
-        className="w-full h-1 rounded-full appearance-none cursor-pointer bg-border accent-gain"
-      />
-    </div>
-  );
-}
-
 export function SliderPanel({
   input,
   stressConfig,
@@ -53,8 +18,8 @@ export function SliderPanel({
   onStressChange,
 }: SliderPanelProps) {
   return (
-    <div className="flex flex-col gap-3 p-4 bg-surface rounded-lg border border-border h-full overflow-y-auto">
-      <h2 className="text-sm font-semibold tracking-tight">Configure Your SIP</h2>
+    <div className="flex flex-col gap-3 p-4 bg-white rounded-lg border border-border h-full overflow-y-auto shadow-sm">
+      <h2 className="text-sm font-semibold tracking-tight text-text-primary">Configure Your SIP</h2>
 
       <SliderRow
         label="Monthly SIP"
@@ -83,6 +48,7 @@ export function SliderPanel({
         min={4}
         max={18}
         step={0.5}
+        tickUnit="%"
         onChange={(v) => onInputChange("returnRate", v)}
       />
 
@@ -93,6 +59,7 @@ export function SliderPanel({
         min={1}
         max={40}
         step={1}
+        tickUnit=" yr"
         onChange={(v) => onInputChange("tenure", v)}
       />
 
@@ -103,6 +70,7 @@ export function SliderPanel({
         min={2}
         max={12}
         step={0.5}
+        tickUnit="%"
         onChange={(v) => onInputChange("inflationRate", v)}
       />
 
@@ -113,8 +81,8 @@ export function SliderPanel({
             className={twMerge(
               "px-3 py-1 text-xs rounded-md font-mono transition-colors",
               input.stepUpMode === "percentage"
-                ? "bg-gain/20 text-gain border border-gain/40"
-                : "bg-border text-text-secondary border border-border"
+                ? "bg-sienna/10 text-sienna border border-sienna/30"
+                : "bg-surface-hover text-text-secondary border border-border"
             )}
             onClick={() => onInputChange("stepUpMode", "percentage")}
           >
@@ -124,8 +92,8 @@ export function SliderPanel({
             className={twMerge(
               "px-3 py-1 text-xs rounded-md font-mono transition-colors",
               input.stepUpMode === "fixed"
-                ? "bg-gain/20 text-gain border border-gain/40"
-                : "bg-border text-text-secondary border border-border"
+                ? "bg-sienna/10 text-sienna border border-sienna/30"
+                : "bg-surface-hover text-text-secondary border border-border"
             )}
             onClick={() => onInputChange("stepUpMode", "fixed")}
           >
@@ -140,8 +108,7 @@ export function SliderPanel({
         displayValue={
           input.stepUpMode === "percentage"
             ? `${input.stepUpValue}%`
-            : `₹${input.stepUpValue.toLocaleString("en-IN")}`
-        }
+            : `₹${input.stepUpValue.toLocaleString("en-IN")}`}
         min={input.stepUpMode === "percentage" ? 1 : 500}
         max={input.stepUpMode === "percentage" ? 50 : 50000}
         step={input.stepUpMode === "percentage" ? 1 : 500}
@@ -164,7 +131,7 @@ export function SliderPanel({
           >
             <span
               className={twMerge(
-                "absolute top-0.5 w-3 h-3 rounded-full bg-text-primary transition-transform",
+                "absolute top-0.5 w-3 h-3 rounded-full bg-white transition-transform shadow-sm",
                 stressConfig.enabled ? "translate-x-4" : "translate-x-0.5"
               )}
             />
@@ -178,8 +145,8 @@ export function SliderPanel({
                 className={twMerge(
                   "px-2 py-0.5 text-xs rounded-md font-mono",
                   stressConfig.severity === 0.2
-                    ? "bg-stress/20 text-stress border border-stress/40"
-                    : "bg-border text-text-secondary border border-border"
+                    ? "bg-loss/10 text-loss border border-loss/30"
+                    : "bg-surface-hover text-text-secondary border border-border"
                 )}
                 onClick={() => onStressChange("severity", 0.2)}
               >
@@ -189,8 +156,8 @@ export function SliderPanel({
                 className={twMerge(
                   "px-2 py-0.5 text-xs rounded-md font-mono",
                   stressConfig.severity === 0.3
-                    ? "bg-stress/20 text-stress border border-stress/40"
-                    : "bg-border text-text-secondary border border-border"
+                    ? "bg-loss/10 text-loss border border-loss/30"
+                    : "bg-surface-hover text-text-secondary border border-border"
                 )}
                 onClick={() => onStressChange("severity", 0.3)}
               >
@@ -204,6 +171,7 @@ export function SliderPanel({
               min={1}
               max={5}
               step={1}
+              ticks={false}
               onChange={(v) => onStressChange("crashYears", v)}
             />
           </div>

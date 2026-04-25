@@ -12,6 +12,7 @@ import { ConfidenceBadge } from "@/components/shared/confidence-badge";
 import { WhyThisNumber } from "@/components/shared/why-this-number";
 import { ShareButton } from "@/components/shared/share-button";
 import { truthFromCTC } from "@/lib/truth/truth-data-adapter";
+import { SliderRow } from "@/components/shared/slider-row";
 
 const DEFAULT_INPUT: CTCInput = {
   grossCTC: 1500000,
@@ -28,22 +29,6 @@ const DEFAULT_INPUT: CTCInput = {
   regime: "new",
 };
 
-function SliderRow({ label, value, displayValue, min, max, step, onChange }: {
-  label: string; value: number; displayValue: string; min: number; max: number; step: number; onChange: (v: number) => void;
-}) {
-  return (
-    <div className="flex flex-col gap-0.5">
-      <div className="flex justify-between items-baseline">
-        <label className="text-xs text-text-secondary">{label}</label>
-        <span className="text-xs font-mono text-text-primary">{displayValue}</span>
-      </div>
-      <input type="range" min={min} max={max} step={step} value={value}
-        onChange={(e) => onChange(parseFloat(e.target.value))}
-        className="w-full h-1 rounded-full appearance-none cursor-pointer bg-border accent-gain" />
-    </div>
-  );
-}
-
 export function CTCCalculator() {
   const [input, setInput] = useState<CTCInput>(DEFAULT_INPUT);
   const handleInputChange = useCallback(
@@ -59,23 +44,23 @@ export function CTCCalculator() {
   return (
     <div className="flex flex-col lg:flex-row gap-4 w-full h-full">
       <div className="lg:w-[38%] shrink-0">
-        <div className="flex flex-col gap-3 p-4 bg-surface rounded-lg border border-border">
+        <div className="flex flex-col gap-3 p-4 bg-white shadow-sm rounded-lg border border-border">
           <h2 className="text-sm font-semibold tracking-tight">CTC Optimizer</h2>
           <SliderRow label="Gross CTC" value={input.grossCTC} displayValue={formatINR(input.grossCTC)}
             min={300000} max={10000000} step={50000} onChange={(v) => handleInputChange("grossCTC", v)} />
           <SliderRow label="Basic %" value={input.basicPct} displayValue={`${input.basicPct}%`}
-            min={20} max={50} step={2} onChange={(v) => handleInputChange("basicPct", v)} />
+            min={20} max={50} step={2} onChange={(v) => handleInputChange("basicPct", v)} tickUnit="%" />
           <SliderRow label="HRA (% of Basic)" value={input.hraPct} displayValue={`${input.hraPct}%`}
-            min={10} max={50} step={5} onChange={(v) => handleInputChange("hraPct", v)} />
+            min={10} max={50} step={5} onChange={(v) => handleInputChange("hraPct", v)} tickUnit="%" />
           <SliderRow label="LTA (% of CTC)" value={input.ltaPct} displayValue={`${input.ltaPct}%`}
-            min={0} max={15} step={1} onChange={(v) => handleInputChange("ltaPct", v)} />
+            min={0} max={15} step={1} onChange={(v) => handleInputChange("ltaPct", v)} tickUnit="%" />
           <SliderRow label="NPS Employer %" value={input.npsEmployerPct} displayValue={`${input.npsEmployerPct}%`}
-            min={0} max={10} step={1} onChange={(v) => handleInputChange("npsEmployerPct", v)} />
+            min={0} max={10} step={1} onChange={(v) => handleInputChange("npsEmployerPct", v)} tickUnit="%" />
           <SliderRow label="Actual Rent/Month" value={input.actualRentMonthly} displayValue={`₹${(input.actualRentMonthly / 1000).toFixed(0)}K`}
             min={0} max={200000} step={1000} onChange={(v) => handleInputChange("actualRentMonthly", v)} />
           <div className="flex justify-between items-baseline">
             <label className="text-xs text-text-secondary">Metro City</label>
-            <button className={`px-2 py-1 text-xs rounded-md font-mono transition-colors ${input.metroCity ? "bg-gain/20 text-gain border border-gain/40" : "bg-border text-text-secondary border border-border"}`}
+            <button className={`px-2 py-1 text-xs rounded-md font-mono transition-colors ${input.metroCity ? "bg-sienna/10 text-sienna border border-sienna/30" : "bg-surface-hover text-text-secondary border border-border"}`}
               onClick={() => handleInputChange("metroCity", !input.metroCity)}>
               {input.metroCity ? "YES" : "NO"}
             </button>
@@ -110,7 +95,7 @@ export function CTCCalculator() {
             </>
           )}
 
-          <div className="flex-1 min-h-0 bg-surface rounded-lg border border-border p-4">
+          <div className="flex-1 min-h-0 bg-white rounded-lg border border-border shadow-sm p-4">
             <h3 className="text-xs font-semibold text-text-secondary mb-2">Current vs Optimized</h3>
             <div className="w-full flex-1 min-h-[220px]">
               <ResponsiveContainer width="100%" height="100%">

@@ -10,6 +10,7 @@ import { ConfidenceBadge } from "@/components/shared/confidence-badge";
 import { WhyThisNumber } from "@/components/shared/why-this-number";
 import { ShareButton } from "@/components/shared/share-button";
 import { truthFromEPF } from "@/lib/truth/truth-data-adapter";
+import { SliderRow } from "@/components/shared/slider-row";
 
 const DEFAULT_INPUT: EPFInput = {
   monthlyBasicSalary: 50000,
@@ -22,22 +23,6 @@ const DEFAULT_INPUT: EPFInput = {
   epfInterestRate: 8.25,
   inflationRate: 6,
 };
-
-function SliderRow({ label, value, displayValue, min, max, step, onChange }: {
-  label: string; value: number; displayValue: string; min: number; max: number; step: number; onChange: (v: number) => void;
-}) {
-  return (
-    <div className="flex flex-col gap-0.5">
-      <div className="flex justify-between items-baseline">
-        <label className="text-xs text-text-secondary">{label}</label>
-        <span className="text-xs font-mono text-text-primary">{displayValue}</span>
-      </div>
-      <input type="range" min={min} max={max} step={step} value={value}
-        onChange={(e) => onChange(parseFloat(e.target.value))}
-        className="w-full h-1 rounded-full appearance-none cursor-pointer bg-border accent-gain" />
-    </div>
-  );
-}
 
 function ResultRow({ label, value, highlight, subtext }: {
   label: string; value: string; highlight?: boolean; subtext?: string;
@@ -77,7 +62,7 @@ export function EPFCalculator() {
     <div className="flex flex-col lg:flex-row gap-4 w-full h-full">
       {/* Sliders */}
       <div className="lg:w-[38%] shrink-0">
-        <div className="flex flex-col gap-3 p-4 bg-surface rounded-lg border border-border">
+        <div className="flex flex-col gap-3 p-4 bg-white shadow-sm rounded-lg border border-border">
           <h2 className="text-sm font-semibold tracking-tight">Calculate EPF Corpus</h2>
           <SliderRow label="Monthly Basic Salary" value={input.monthlyBasicSalary}
             displayValue={formatINR(input.monthlyBasicSalary)}
@@ -86,35 +71,35 @@ export function EPFCalculator() {
           <SliderRow label="Employee PF Rate" value={input.employeeRate}
             displayValue={`${input.employeeRate}%`}
             min={1} max={20} step={0.5}
-            onChange={(v) => handleInputChange("employeeRate", v)} />
+            onChange={(v) => handleInputChange("employeeRate", v)} tickUnit="%" />
           <SliderRow label="Employer EPF Rate" value={input.employerEpfRate}
             displayValue={`${input.employerEpfRate}%`}
             min={1} max={15} step={0.01}
-            onChange={(v) => handleInputChange("employerEpfRate", v)} />
+            onChange={(v) => handleInputChange("employerEpfRate", v)} tickUnit="%" />
           <SliderRow label="Employer EPS Rate" value={input.employerEpsRate}
             displayValue={`${input.employerEpsRate}%`}
             min={1} max={15} step={0.01}
-            onChange={(v) => handleInputChange("employerEpsRate", v)} />
+            onChange={(v) => handleInputChange("employerEpsRate", v)} tickUnit="%" />
           <SliderRow label="Age of Entry" value={input.ageOfEntry}
             displayValue={`${input.ageOfEntry} yrs`}
             min={18} max={55} step={1}
-            onChange={(v) => handleInputChange("ageOfEntry", v)} />
+            onChange={(v) => handleInputChange("ageOfEntry", v)} tickUnit=" yr" />
           <SliderRow label="Retirement Age" value={input.retirementAge}
             displayValue={`${input.retirementAge} yrs`}
             min={40} max={65} step={1}
-            onChange={(v) => handleInputChange("retirementAge", v)} />
+            onChange={(v) => handleInputChange("retirementAge", v)} tickUnit=" yr" />
           <SliderRow label="Annual Salary Increase" value={input.annualSalaryIncrease}
             displayValue={`${input.annualSalaryIncrease}%`}
             min={0} max={20} step={0.5}
-            onChange={(v) => handleInputChange("annualSalaryIncrease", v)} />
+            onChange={(v) => handleInputChange("annualSalaryIncrease", v)} tickUnit="%" />
           <SliderRow label="EPF Interest Rate" value={input.epfInterestRate}
             displayValue={`${input.epfInterestRate}%`}
             min={5} max={12} step={0.25}
-            onChange={(v) => handleInputChange("epfInterestRate", v)} />
+            onChange={(v) => handleInputChange("epfInterestRate", v)} tickUnit="%" />
           <SliderRow label="Inflation Rate" value={input.inflationRate}
             displayValue={`${input.inflationRate}%`}
             min={0} max={15} step={0.5}
-            onChange={(v) => handleInputChange("inflationRate", v)} />
+            onChange={(v) => handleInputChange("inflationRate", v)} tickUnit="%" />
         </div>
       </div>
 
@@ -128,7 +113,7 @@ export function EPFCalculator() {
           <LieVsTruthPanel truth={truthFromEPF({ totalCorpusAtRetirement: result.totalCorpusAtRetirement, totalEmployeeContribution: result.totalEmployeeContribution, totalInterestEarned: result.totalInterestEarned }, input.inflationRate)} />
 
           {/* Monthly contribution summary */}
-          <div className="p-4 bg-surface rounded-lg border border-border">
+          <div className="p-4 bg-white rounded-lg border border-border shadow-sm">
             <h3 className="text-xs font-semibold text-text-primary mb-3">Monthly Contributions</h3>
             <ResultRow label="Employee Contribution"
               value={formatINR(result.monthlyEmployeeContribution)} />
@@ -141,7 +126,7 @@ export function EPFCalculator() {
           </div>
 
           {/* Corpus breakdown */}
-          <div className="p-4 bg-surface rounded-lg border border-border">
+          <div className="p-4 bg-white rounded-lg border border-border shadow-sm">
             <h3 className="text-xs font-semibold text-text-primary mb-3">Corpus at Retirement ({years} years)</h3>
             <ResultRow label="Total Employee Contribution"
               value={formatINR(result.totalEmployeeContribution)}
@@ -174,7 +159,7 @@ export function EPFCalculator() {
           </div>
 
           {/* Year-by-year growth chart */}
-          <div className="p-4 bg-surface rounded-lg border border-border">
+          <div className="p-4 bg-white rounded-lg border border-border shadow-sm">
             <h3 className="text-xs font-semibold text-text-primary mb-3">Year-by-Year Growth</h3>
             <div className="overflow-x-auto">
               <table className="w-full text-[10px] font-mono">
