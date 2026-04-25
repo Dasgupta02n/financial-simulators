@@ -18,7 +18,7 @@ export async function generateMetadata({
   if (!post) return { title: "Post Not Found" };
 
   return {
-    title: `${post.title} | Financial Simulators`,
+    title: `${post.title} | c7xai`,
     description: post.description,
     openGraph: {
       title: post.title,
@@ -53,11 +53,11 @@ function ArticleJsonLd({ post }: { post: NonNullable<ReturnType<typeof getPostBy
     datePublished: post.date,
     author: {
       "@type": "Organization",
-      name: "Financial Simulators",
+      name: "c7xai",
     },
     publisher: {
       "@type": "Organization",
-      name: "Financial Simulators",
+      name: "c7xai",
     },
     keywords: post.tags.join(", "),
   };

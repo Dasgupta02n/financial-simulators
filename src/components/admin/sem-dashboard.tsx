@@ -74,8 +74,8 @@ export function SemDashboard() {
           <div className="rounded-md overflow-hidden border border-border">
             <div className="h-10 bg-gain/20" />
             <div className="p-3 bg-surface">
-              <div className="text-sm font-medium text-text-primary">Financial Simulators</div>
-              <div className="text-xs text-text-secondary">financialsimulators.in</div>
+              <div className="text-sm font-medium text-text-primary">c7xai</div>
+              <div className="text-xs text-text-secondary">c7xai.in</div>
             </div>
           </div>
           <p className="text-xs text-text-secondary mt-2">

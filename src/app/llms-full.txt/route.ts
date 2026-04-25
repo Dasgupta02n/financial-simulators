@@ -45,9 +45,9 @@ ${formatCalculatorFaqs(c)}`
     )
     .join("\n\n---\n\n");
 
-  const content = `# Financial Simulators — Full Content
+  const content = `# c7xai — Full Content
 
-> Real-return financial calculators for Indian investors. Zero PII, zero tracking, all math runs client-side.
+> The truth about your money. Financial clarity for India — inflation-adjusted, tax-aware, zero PII.
 
 ${calculatorSections}
 

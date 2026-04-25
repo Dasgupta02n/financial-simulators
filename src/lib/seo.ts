@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 const SITE_URL = "https://c7xai.in";
-const SITE_NAME = "Financial Simulators";
+const SITE_NAME = "c7xai";
 
 export interface CalculatorConfig {
   id: string;
@@ -90,11 +90,11 @@ export function generateSiteJsonLd() {
     url: SITE_URL,
     logo: `${SITE_URL}/logo.png`,
     description:
-      "Real-return financial calculators for Indian investors. Zero PII, zero tracking, all math runs client-side.",
+      "The truth about your money. Financial clarity for India — inflation-adjusted, tax-aware, zero PII.",
     sameAs: [],
     contactPoint: {
       "@type": "ContactPoint",
-      email: "hello@financialsimulators.in",
+      email: "hello@c7xai.in",
       contactType: "customer support",
       availableLanguage: "English",
     },
@@ -105,7 +105,7 @@ export function generateSiteJsonLd() {
     "@type": "WebApplication",
     name: SITE_NAME,
     description:
-      "Real-return financial calculators for Indian investors. Zero PII, zero tracking, all math runs client-side.",
+      "The truth about your money. Financial clarity for India — inflation-adjusted, tax-aware, zero PII.",
     url: SITE_URL,
     applicationCategory: "FinanceApplication",
     operatingSystem: "Any",

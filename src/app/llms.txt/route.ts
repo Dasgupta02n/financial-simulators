@@ -29,9 +29,9 @@ export async function GET() {
     .map((c) => `- [${c.name}](/${c.slug}): ${c.shortDescription}`)
     .join("\n");
 
-  const content = `# Financial Simulators
+  const content = `# c7xai
 
-> Real-return financial calculators for Indian investors. Zero PII, zero tracking, all math runs client-side.
+> The truth about your money. Financial clarity for India — inflation-adjusted, tax-aware, zero PII.
 
 ## Calculators
 ${calculatorLines}

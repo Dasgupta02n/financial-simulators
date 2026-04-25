@@ -2,7 +2,7 @@ import Link from "next/link";
 import type { CalculatorConfig } from "@/lib/seo";
 import { generateCalculatorJsonLd } from "@/lib/seo";
 
-const SITE_URL = "https://financialsimulators.in";
+const SITE_URL = "https://c7xai.in";
 
 interface Props {
   config: CalculatorConfig;

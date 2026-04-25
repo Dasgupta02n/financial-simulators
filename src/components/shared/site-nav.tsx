@@ -13,7 +13,7 @@ export function SiteNav() {
         <div className="animate-marquee whitespace-nowrap py-1.5">
           {Array.from({ length: 8 }).map((_, i) => (
             <span key={i} className="text-[11px] font-mono font-semibold tracking-widest text-white mx-8">
-              REAL RETURNS &bull; NO MARKETING &bull; INFLATION-ADJUSTED &bull; TAX-AWARE &bull; CLIENT-SIDE MATH
+              THE TRUTH ABOUT YOUR MONEY &bull; INFLATION-ADJUSTED &bull; TAX-AWARE &bull; CLIENT-SIDE MATH
             </span>
           ))}
         </div>
@@ -24,7 +24,7 @@ export function SiteNav() {
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
             <span className="text-xl font-bold tracking-tight text-white">
-              Fin<span className="text-sienna">Sim</span>
+              c7<span className="text-sienna">xai</span>
             </span>
           </Link>
           <div className="flex items-center gap-8">

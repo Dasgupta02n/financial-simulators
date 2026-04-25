@@ -32,13 +32,13 @@ const CALCULATORS: readonly {
 ];
 
 export const metadata: Metadata = {
-  title: "Financial Simulators — Real Returns, No Marketing",
-  description: "Inflation-adjusted, tax-aware financial calculators for Indian investors. Zero PII, zero tracking, all math runs in your browser.",
+  title: "c7xai — The Truth About Your Money",
+  description: "Old rules of money are broken. Here are the real ones. Inflation-adjusted, tax-aware financial clarity for India.",
   openGraph: {
-    title: "Financial Simulators — Real Returns, No Marketing",
-    description: "Inflation-adjusted, tax-aware financial calculators for Indian investors. Zero PII, zero tracking, all math runs in your browser.",
-    url: "https://financialsimulators.in",
-    siteName: "Financial Simulators",
+    title: "c7xai — The Truth About Your Money",
+    description: "Old rules of money are broken. Here are the real ones. Inflation-adjusted, tax-aware financial clarity for India.",
+    url: "https://c7xai.in",
+    siteName: "c7xai",
     type: "website",
   },
   alternates: { canonical: "/" },
@@ -53,12 +53,12 @@ export default function Home() {
       <section className="w-full bg-ink bg-grid-pattern relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-6 pt-28 pb-24">
           <h1 className="text-5xl md:text-7xl font-bold tracking-tight leading-[1.1] max-w-4xl">
-            Innovative Financial Simulators for{" "}
-            <span className="text-sienna">Indian Investors</span>
+            The Truth About{" "}
+            <span className="text-sienna">Your Money</span>
           </h1>
           <p className="text-lg md:text-xl text-text-secondary mt-6 max-w-2xl leading-relaxed">
-            Inflation-adjusted, tax-aware calculators that show real returns.
-            No signups, no tracking, no product pushing. All math runs in your browser.
+            Old rules of money are broken. Here are the real ones.
+            Inflation-adjusted, tax-aware clarity — no signups, no tracking, no product pushing.
           </p>
           <div className="mt-8 flex items-center gap-4">
             <Link
@@ -95,13 +95,13 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-6 py-20 md:py-28 grid md:grid-cols-2 gap-12 items-center">
           <div>
             <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-ink">
-              A Closer Look at FinSim
+              A Closer Look at c7xai
             </h2>
             <p className="text-base text-[#444] mt-6 leading-relaxed max-w-lg">
               Every calculator on this site uses NIFTY historical data (12% mean, 18% standard deviation),
               6% inflation, and current Indian tax laws including LTCG at 12.5% above ₹1.25L.
               The math is transparent, the assumptions are stated, and every computation runs in your browser.
-              Zero PII collected. Zero tracking. Zero product pushing.
+              No PII collected. No tracking. No product pushing. Just the truth about your money.
             </p>
             <Link
               href="/blog"
@@ -164,14 +164,14 @@ export default function Home() {
       <section className="w-full bg-surface">
         <div className="max-w-7xl mx-auto px-6 py-20 md:py-28">
           <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-ink mb-16">
-            Why Choose FinSim
+            Why Choose c7xai
           </h2>
           <div className="grid md:grid-cols-2 gap-16">
             {[
               {
                 num: "01",
                 title: "CUTTING-EDGE ACCURACY",
-                desc: "Every simulator uses NIFTY historical data with real standard deviation — not cherry-picked averages that make returns look better than they are."
+                desc: "Every calculator uses NIFTY historical data with real standard deviation — not cherry-picked averages that make returns look better than they are."
               },
               {
                 num: "02",
@@ -181,7 +181,7 @@ export default function Home() {
               {
                 num: "03",
                 title: "24/7 PRIVATE COMPUTATION",
-                desc: "All math runs in your browser. No data leaves your device. No accounts, no tracking, no PII collected. Your finances stay yours."
+                desc: "All math runs in your browser. No data leaves your device. No accounts, no tracking, no PII collected. Your finances stay yours. The truth has no hidden agenda."
               }
             ].map((item) => (
               <div key={item.num} className="flex flex-col gap-3">
@@ -268,9 +268,9 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-4 gap-10">
           {/* Brand */}
           <div>
-            <span className="text-xl font-bold text-white">Fin<span className="text-sienna">Sim</span></span>
+            <span className="text-xl font-bold text-white">c7<span className="text-sienna">xai</span></span>
             <p className="text-xs text-text-muted mt-3 leading-relaxed">
-              Real returns. No marketing. Inflation-adjusted, tax-aware financial calculators for Indian investors.
+              The truth about your money. Inflation-adjusted, tax-aware financial clarity for India.
             </p>
           </div>
           {/* Menu */}
@@ -296,7 +296,7 @@ export default function Home() {
           <div>
             <h4 className="text-xs uppercase font-mono tracking-[0.15em] text-text-muted mb-4">Contact</h4>
             <div className="flex flex-col gap-2 text-sm text-text-secondary">
-              <span>hello@financialsimulators.in</span>
+              <span>hello@c7xai.in</span>
               <span>All math runs client-side</span>
               <span>Zero PII. Zero tracking.</span>
             </div>
@@ -306,10 +306,10 @@ export default function Home() {
         <div className="border-t border-white/5">
           <div className="max-w-7xl mx-auto px-6 py-6 flex items-center justify-between">
             <span className="text-xs text-text-muted">
-              © {new Date().getFullYear()} by FinSim. Computed entirely client-side.
+              © {new Date().getFullYear()} by c7xai. Computed entirely client-side.
             </span>
             <span className="text-xs text-text-muted">
-              NIFTY 12% μ / 18% σ · 6% inflation · LTCG 12.5% above ₹1.25L
+              NIFTY 12% μ / 18% σ · 6% inflation · LTCG 12.5% above ₹1.25L · The truth about your money
             </span>
           </div>
         </div>

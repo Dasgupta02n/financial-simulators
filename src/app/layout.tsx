@@ -16,8 +16,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "SIP Simulator — Real Returns, No Marketing",
-  description: "Inflation-adjusted, tax-aware SIP projection tool for Indian investors. Privacy-first, client-side computation.",
+  title: "c7xai — The Truth About Your Money",
+  description: "Old rules of money are broken. Here are the real ones. Inflation-adjusted, tax-aware financial clarity for India.",
   other: {
     "geo.region": "IN",
     "geo.country": "IN",

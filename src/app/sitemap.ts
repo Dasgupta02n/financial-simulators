@@ -14,7 +14,7 @@ import compoundConfig from "@/content/calculators/compound.json";
 import hraConfig from "@/content/calculators/hra.json";
 import { getAllPosts } from "@/lib/blog";
 
-const BASE_URL = "https://financialsimulators.in";
+const BASE_URL = "https://c7xai.in";
 
 const calculatorConfigs = [
   sipConfig,

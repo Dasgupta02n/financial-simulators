@@ -2,7 +2,7 @@
   "id": "gst",
   "slug": "gst-calculator",
   "name": "GST Calculator",
-  "metaTitle": "GST Calculator — Calculate CGST, SGST & IGST Instantly | Financial Simulators",
+  "metaTitle": "GST Calculator — Calculate CGST, SGST & IGST Instantly | c7xai",
   "metaDescription": "Calculate GST amount, pre-tax price, and post-tax total for any GST slab (5%, 12%, 18%, 28%). Toggle inclusive/exclusive tax, intra-state (CGST+SGST) or inter-state (IGST). Client-side, no PII.",
   "shortDescription": "Instant GST, CGST, SGST & IGST breakdown",
   "faq": [

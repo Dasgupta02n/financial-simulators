@@ -6,7 +6,7 @@ import { BlogCard } from "@/components/blog/blog-card";
 import { CategoryFilter } from "@/components/blog/category-filter";
 
 export const metadata: Metadata = {
-  title: "Blog — Financial Stories for Common Indians | Financial Simulators",
+  title: "Blog — Financial Stories for Common Indians | c7xai",
   description:
     "Plain-language financial stories for Indian investors. No jargon, no product pitches — just real numbers you can verify with our calculators.",
   openGraph: {
