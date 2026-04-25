@@ -52,20 +52,20 @@ export function RegimeChart({ oldRegime, newRegime }: RegimeChartProps) {
           <XAxis
             dataKey="name"
             tick={{ fill: "#9ca3af", fontSize: 10, fontFamily: "var(--font-geist-mono)" }}
-            axisLine={{ stroke: "#1f2937" }}
+            axisLine={{ stroke: "#e5e7eb" }}
             tickLine={false}
           />
           <YAxis
             tick={{ fill: "#9ca3af", fontSize: 10, fontFamily: "var(--font-geist-mono)" }}
             tickFormatter={formatINRShort}
-            axisLine={{ stroke: "#1f2937" }}
+            axisLine={{ stroke: "#e5e7eb" }}
             tickLine={false}
             width={55}
           />
           <Tooltip
             contentStyle={{
-              backgroundColor: "#111827",
-              border: "1px solid #1f2937",
+              backgroundColor: "#ffffff",
+              border: "1px solid #e5e7eb",
               borderRadius: "8px",
               fontFamily: "var(--font-geist-mono)",
               fontSize: "11px",
@@ -77,14 +77,14 @@ export function RegimeChart({ oldRegime, newRegime }: RegimeChartProps) {
             fill="#f87171"
             fillOpacity={0.8}
             name="Old Regime"
-            isAnimationActive={false}
+            isAnimationActive={true}
           />
           <Bar
             dataKey="new"
             fill="#6ee7b7"
             fillOpacity={0.8}
             name="New Regime"
-            isAnimationActive={false}
+            isAnimationActive={true}
           />
         </BarChart>
       </ResponsiveContainer>

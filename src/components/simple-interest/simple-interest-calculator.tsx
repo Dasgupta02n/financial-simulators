@@ -20,6 +20,7 @@ import {
 } from "recharts";
 import { formatINRShort } from "@/lib/format";
 import { twMerge } from "tailwind-merge";
+import { SliderRow } from "@/components/shared/slider-row";
 
 const COMPOUNDING_OPTIONS = [
   { label: "Annually", value: 1 },
@@ -34,22 +35,6 @@ const DEFAULT_INPUT: SimpleInterestInput = {
   years: 5,
   compoundingFrequency: 1,
 };
-
-function SliderRow({ label, value, displayValue, min, max, step, onChange }: {
-  label: string; value: number; displayValue: string; min: number; max: number; step: number; onChange: (v: number) => void;
-}) {
-  return (
-    <div className="flex flex-col gap-0.5">
-      <div className="flex justify-between items-baseline">
-        <label className="text-xs text-text-secondary">{label}</label>
-        <span className="text-xs font-mono text-text-primary">{displayValue}</span>
-      </div>
-      <input type="range" min={min} max={max} step={step} value={value}
-        onChange={(e) => onChange(parseFloat(e.target.value))}
-        className="w-full h-1 rounded-full appearance-none cursor-pointer bg-border accent-gain" />
-    </div>
-  );
-}
 
 function ResultRow({ label, value, highlight, subtext }: {
   label: string; value: string; highlight?: boolean; subtext?: string;
@@ -78,7 +63,7 @@ export function SimpleInterestCalculator() {
   return (
     <div className="flex flex-col lg:flex-row gap-4 w-full h-full">
       <div className="lg:w-[38%] shrink-0">
-        <div className="flex flex-col gap-3 p-4 bg-surface rounded-lg border border-border">
+        <div className="flex flex-col gap-3 p-4 bg-white rounded-lg border border-border shadow-sm">
           <h2 className="text-sm font-semibold tracking-tight">Calculate Simple Interest</h2>
           <SliderRow label="Principal Amount" value={input.principal}
             displayValue={formatINR(input.principal)}
@@ -87,11 +72,11 @@ export function SimpleInterestCalculator() {
           <SliderRow label="Annual Interest Rate (%)" value={input.rate}
             displayValue={`${input.rate}%`}
             min={1} max={30} step={0.5}
-            onChange={(v) => handleInputChange("rate", v)} />
+            onChange={(v) => handleInputChange("rate", v)} tickUnit="%" />
           <SliderRow label="Time Period (Years)" value={input.years}
             displayValue={`${input.years} yr${input.years > 1 ? "s" : ""}`}
             min={1} max={30} step={1}
-            onChange={(v) => handleInputChange("years", v)} />
+            onChange={(v) => handleInputChange("years", v)} tickUnit=" yr" />
           <div className="flex flex-col gap-1">
             <span className="text-xs text-text-secondary">Compounding Frequency</span>
             <div className="flex gap-2">
@@ -101,8 +86,8 @@ export function SimpleInterestCalculator() {
                   className={twMerge(
                     "px-3 py-1.5 text-xs rounded-md font-mono transition-colors",
                     input.compoundingFrequency === opt.value
-                      ? "bg-gain/20 text-gain border border-gain/40"
-                      : "bg-border text-text-secondary border border-border"
+                      ? "bg-sienna/10 text-sienna border border-sienna/30"
+                      : "bg-surface-hover text-text-secondary border border-border"
                   )}
                   onClick={() => handleInputChange("compoundingFrequency", opt.value)}
                 >
@@ -123,7 +108,7 @@ export function SimpleInterestCalculator() {
           </div>
           <LieVsTruthPanel truth={truthFromSimpleInterest({ simpleInterest: result.simpleInterest, compoundInterest: result.compoundInterest, totalAmount: result.totalAmount, principal: input.principal }, 6)} />
 
-          <div className="p-4 bg-surface rounded-lg border border-border">
+          <div className="p-4 bg-white rounded-lg border border-border shadow-sm">
             <h3 className="text-xs font-semibold text-text-primary mb-3">Interest Breakdown</h3>
 
             <ResultRow label="Simple Interest Earned" value={formatINR(result.simpleInterest)} />
@@ -149,7 +134,7 @@ export function SimpleInterestCalculator() {
             </div>
           </div>
 
-          <div className="p-4 bg-surface rounded-lg border border-border flex-1 min-h-0 flex flex-col">
+          <div className="p-4 bg-white rounded-lg border border-border shadow-sm flex-1 min-h-0 flex flex-col">
             <h3 className="text-xs font-semibold text-text-primary mb-2">Year-by-Year Comparison</h3>
             <div className="flex-1 min-h-[220px]">
               <ResponsiveContainer width="100%" height="100%">
@@ -184,14 +169,14 @@ export function SimpleInterestCalculator() {
                     fill="#6ee7b7"
                     fillOpacity={0.8}
                     name="Simple Interest"
-                    isAnimationActive={false}
+                    isAnimationActive={true}
                   />
                   <Bar
                     dataKey="compoundInterest"
                     fill="#60a5fa"
                     fillOpacity={0.8}
                     name="Compound Interest"
-                    isAnimationActive={false}
+                    isAnimationActive={true}
                   />
                 </ComposedChart>
               </ResponsiveContainer>

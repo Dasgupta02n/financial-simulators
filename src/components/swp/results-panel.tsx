@@ -65,7 +65,7 @@ export function SWPResultsPanel({ output, crashEnabled, inflationRate = 6 }: Pro
         </ul>
       </CalcExplainer>
 
-      <div className="bg-surface rounded-lg border border-border p-3">
+      <div className="bg-white rounded-lg border border-border shadow-sm p-3">
         <h3 className="text-xs font-semibold text-text-secondary mb-2">Corpus Over Time</h3>
         <div className="w-full flex-1 min-h-[220px]">
           <ResponsiveContainer width="100%" height="100%">
@@ -85,11 +85,11 @@ export function SWPResultsPanel({ output, crashEnabled, inflationRate = 6 }: Pro
                 labelFormatter={(v) => `Year ${v}`}
                 formatter={(value, name) => [formatINRShort(Number(value)), String(name)]} />
               <Area type="monotone" dataKey="corpusEnd" stroke="#6ee7b7" strokeWidth={2}
-                fill="url(#corpusGrad)" name="Nominal" isAnimationActive={false} />
+                fill="url(#corpusGrad)" name="Nominal" isAnimationActive={true} />
               <Line type="monotone" dataKey="realCorpusEnd" stroke="#f87171" strokeWidth={2}
-                strokeDasharray="6 4" dot={false} name="Real Value" isAnimationActive={false} />
+                strokeDasharray="6 4" dot={false} name="Real Value" isAnimationActive={true} />
               {crashEnabled && <Line type="monotone" dataKey="stressCorpusEnd" stroke="#ef4444" strokeWidth={2}
-                dot={false} name="Stress" isAnimationActive={false} />}
+                dot={false} name="Stress" isAnimationActive={true} />}
             </ComposedChart>
           </ResponsiveContainer>
         </div>

@@ -6,6 +6,7 @@ import { computeSalary } from "@/lib/calculators/salary/engine";
 import { formatINR } from "@/lib/format";
 import { CalcExplainer } from "@/components/shared/calc-explainer";
 import { twMerge } from "tailwind-merge";
+import { SliderRow } from "@/components/shared/slider-row";
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from "recharts";
 
 const COLORS = ["#6ee7b7", "#38bdf8", "#f59e0b", "#a78bfa", "#f87171"];
@@ -17,22 +18,6 @@ const DEFAULT_INPUT: SalaryInput = {
   metroCity: true,
   regime: "new",
 };
-
-function SliderRow({ label, value, displayValue, min, max, step, onChange }: {
-  label: string; value: number; displayValue: string; min: number; max: number; step: number; onChange: (v: number) => void;
-}) {
-  return (
-    <div className="flex flex-col gap-0.5">
-      <div className="flex justify-between items-baseline">
-        <label className="text-xs text-text-secondary">{label}</label>
-        <span className="text-xs font-mono text-text-primary">{displayValue}</span>
-      </div>
-      <input type="range" min={min} max={max} step={step} value={value}
-        onChange={(e) => onChange(parseFloat(e.target.value))}
-        className="w-full h-1 rounded-full appearance-none cursor-pointer bg-border accent-gain" />
-    </div>
-  );
-}
 
 function ResultRow({ label, value, highlight, subtext }: {
   label: string; value: string; highlight?: boolean; subtext?: string;
@@ -76,7 +61,7 @@ export function SalaryCalculator() {
   return (
     <div className="flex flex-col lg:flex-row gap-4 w-full h-full">
       <div className="lg:w-[38%] shrink-0">
-        <div className="flex flex-col gap-3 p-4 bg-surface rounded-lg border border-border">
+        <div className="flex flex-col gap-3 p-4 bg-white rounded-lg border border-border shadow-sm">
           <h2 className="text-sm font-semibold tracking-tight">Calculate In-Hand Salary</h2>
           <SliderRow label="Annual CTC" value={input.ctc}
             displayValue={formatINR(input.ctc)}
@@ -157,18 +142,18 @@ export function SalaryCalculator() {
 
           {/* Key metrics */}
           <div className="grid grid-cols-2 gap-2">
-            <div className="flex flex-col gap-0.5 p-3 bg-surface rounded-lg border border-border">
+            <div className="flex flex-col gap-0.5 p-3 bg-white rounded-lg border border-border shadow-sm">
               <span className="text-[10px] uppercase tracking-wider text-text-secondary font-mono">Monthly In-Hand</span>
               <span className="text-xl font-mono font-semibold text-gain">{formatINR(result.monthlyInHand)}</span>
             </div>
-            <div className="flex flex-col gap-0.5 p-3 bg-surface rounded-lg border border-border">
+            <div className="flex flex-col gap-0.5 p-3 bg-white rounded-lg border border-border shadow-sm">
               <span className="text-[10px] uppercase tracking-wider text-text-secondary font-mono">Annual In-Hand</span>
               <span className="text-xl font-mono font-semibold text-gain">{formatINR(result.annualInHand)}</span>
             </div>
           </div>
 
           {/* CTC Breakdown Pie */}
-          <div className="p-4 bg-surface rounded-lg border border-border">
+          <div className="p-4 bg-white rounded-lg border border-border shadow-sm">
             <h3 className="text-xs font-semibold text-text-primary mb-2">CTC Breakdown</h3>
             <div className="flex items-center gap-4">
               <div className="w-1/2 h-[180px]">
@@ -208,7 +193,7 @@ export function SalaryCalculator() {
           </div>
 
           {/* Salary Components */}
-          <div className="p-4 bg-surface rounded-lg border border-border">
+          <div className="p-4 bg-white rounded-lg border border-border shadow-sm">
             <h3 className="text-xs font-semibold text-text-primary mb-3">Salary Components (Annual)</h3>
             <ResultRow label="Basic Salary" value={formatINR(result.breakdown.basic)}
               subtext={`${input.basicPct}% of CTC`} />
@@ -226,7 +211,7 @@ export function SalaryCalculator() {
           </div>
 
           {/* Deductions */}
-          <div className="p-4 bg-surface rounded-lg border border-border">
+          <div className="p-4 bg-white rounded-lg border border-border shadow-sm">
             <h3 className="text-xs font-semibold text-text-primary mb-3">Deductions (Annual)</h3>
             <ResultRow label="Employee PF" value={formatINR(result.deductions.employeePF)}
               subtext="12% of Basic" />
@@ -242,7 +227,7 @@ export function SalaryCalculator() {
 
           {/* Tax Slab Breakdown */}
           {result.tax.slabEntries.length > 0 && (
-            <div className="p-4 bg-surface rounded-lg border border-border">
+            <div className="p-4 bg-white rounded-lg border border-border shadow-sm">
               <h3 className="text-xs font-semibold text-text-primary mb-2">
                 Tax Slab Breakdown ({input.regime === "new" ? "New" : "Old"} Regime)
               </h3>

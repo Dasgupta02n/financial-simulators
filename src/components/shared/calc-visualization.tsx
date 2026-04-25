@@ -34,9 +34,9 @@ export function CalcVisualization({ calcId, data }: CalcVisualizationProps) {
       initial={{ opacity: 0, scale: 0.95 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.5, delay: 0.2 }}
-      className="relative rounded-lg border border-border bg-surface overflow-hidden"
+      className="relative rounded-lg border border-border bg-white overflow-hidden shadow-sm"
     >
-      <div className="px-3 py-1 border-b border-border bg-surface-hover">
+      <div className="px-3 py-1 border-b border-border bg-ink-light">
         <span className="text-[10px] font-mono text-text-muted uppercase tracking-wider">
           Live Visualization
         </span>

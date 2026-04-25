@@ -42,20 +42,20 @@ export function CrossoverChart({ data, crossoverMonth, interestRate }: Crossover
             dataKey="month"
             tick={{ fill: "#9ca3af", fontSize: 10, fontFamily: "var(--font-geist-mono)" }}
             tickFormatter={(v) => `M${v}`}
-            axisLine={{ stroke: "#1f2937" }}
+            axisLine={{ stroke: "#e5e7eb" }}
             tickLine={false}
           />
           <YAxis
             tick={{ fill: "#9ca3af", fontSize: 10, fontFamily: "var(--font-geist-mono)" }}
             tickFormatter={formatINRShort}
-            axisLine={{ stroke: "#1f2937" }}
+            axisLine={{ stroke: "#e5e7eb" }}
             tickLine={false}
             width={55}
           />
           <Tooltip
             contentStyle={{
-              backgroundColor: "#111827",
-              border: "1px solid #1f2937",
+              backgroundColor: "#ffffff",
+              border: "1px solid #e5e7eb",
               borderRadius: "8px",
               fontFamily: "var(--font-geist-mono)",
               fontSize: "11px",
@@ -71,7 +71,7 @@ export function CrossoverChart({ data, crossoverMonth, interestRate }: Crossover
             fill="#6ee7b7"
             fillOpacity={0.08}
             name="SIP Corpus"
-            isAnimationActive={false}
+            isAnimationActive={true}
           />
           <Line
             type="monotone"
@@ -80,7 +80,7 @@ export function CrossoverChart({ data, crossoverMonth, interestRate }: Crossover
             strokeWidth={2}
             dot={false}
             name="Interest Saved"
-            isAnimationActive={false}
+            isAnimationActive={true}
           />
           {crossoverMonth && (
             <ReferenceLine

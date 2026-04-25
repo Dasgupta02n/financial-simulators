@@ -42,20 +42,20 @@ export function ProjectionChart({ data, showStress }: ProjectionChartProps) {
             dataKey="year"
             tick={{ fill: "#9ca3af", fontSize: 10, fontFamily: "var(--font-geist-mono)" }}
             tickFormatter={(v) => `Y${v}`}
-            axisLine={{ stroke: "#1f2937" }}
+            axisLine={{ stroke: "#e5e7eb" }}
             tickLine={false}
           />
           <YAxis
             tick={{ fill: "#9ca3af", fontSize: 10, fontFamily: "var(--font-geist-mono)" }}
             tickFormatter={formatINRShort}
-            axisLine={{ stroke: "#1f2937" }}
+            axisLine={{ stroke: "#e5e7eb" }}
             tickLine={false}
             width={55}
           />
           <Tooltip
             contentStyle={{
-              backgroundColor: "#111827",
-              border: "1px solid #1f2937",
+              backgroundColor: "#ffffff",
+              border: "1px solid #e5e7eb",
               borderRadius: "8px",
               fontFamily: "var(--font-geist-mono)",
               fontSize: "11px",
@@ -75,16 +75,14 @@ export function ProjectionChart({ data, showStress }: ProjectionChartProps) {
             fill="url(#coneGrad)"
             fillOpacity={1}
             name="P90"
-            isAnimationActive={false}
           />
           <Area
             type="monotone"
             dataKey="p10"
             stroke="none"
-            fill="#0a0f1a"
+            fill="#ffffff"
             fillOpacity={1}
             name="P10 (mask)"
-            isAnimationActive={false}
           />
 
           {/* Nominal corpus area */}
@@ -95,7 +93,6 @@ export function ProjectionChart({ data, showStress }: ProjectionChartProps) {
             strokeWidth={2}
             fill="url(#nominalGrad)"
             name="Nominal"
-            isAnimationActive={false}
           />
 
           {/* Real corpus area */}
@@ -106,7 +103,6 @@ export function ProjectionChart({ data, showStress }: ProjectionChartProps) {
             strokeWidth={2}
             fill="url(#realGrad)"
             name="Real"
-            isAnimationActive={false}
           />
 
           {/* Stress test overlay */}
@@ -119,7 +115,6 @@ export function ProjectionChart({ data, showStress }: ProjectionChartProps) {
               strokeDasharray="6 4"
               dot={false}
               name="Stress"
-              isAnimationActive={false}
             />
           )}
         </ComposedChart>

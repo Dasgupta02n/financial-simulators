@@ -3,57 +3,17 @@
 import type { TaxInput } from "@/lib/calculators/tax/types";
 import { MAX_80C, MAX_80D, MAX_NPS } from "@/lib/calculators/tax/types";
 import { formatINR } from "@/lib/format";
+import { SliderRow } from "@/components/shared/slider-row";
 
 interface SliderPanelProps {
   input: TaxInput;
   onInputChange: <K extends keyof TaxInput>(key: K, value: TaxInput[K]) => void;
 }
 
-function SliderRow({
-  label,
-  value,
-  displayValue,
-  min,
-  max,
-  step,
-  onChange,
-  hint,
-}: {
-  label: string;
-  value: number;
-  displayValue: string;
-  min: number;
-  max: number;
-  step: number;
-  onChange: (v: number) => void;
-  hint?: string;
-}) {
-  return (
-    <div className="flex flex-col gap-0.5">
-      <div className="flex justify-between items-baseline">
-        <label className="text-xs text-text-secondary">
-          {label}
-          {hint && <span className="text-xs text-text-secondary/60 ml-1">({hint})</span>}
-        </label>
-        <span className="text-xs font-mono text-text-primary">{displayValue}</span>
-      </div>
-      <input
-        type="range"
-        min={min}
-        max={max}
-        step={step}
-        value={value}
-        onChange={(e) => onChange(parseFloat(e.target.value))}
-        className="w-full h-1 rounded-full appearance-none cursor-pointer bg-border accent-gain"
-      />
-    </div>
-  );
-}
-
 export function SliderPanel({ input, onInputChange }: SliderPanelProps) {
   return (
-    <div className="flex flex-col gap-3 p-4 bg-surface rounded-lg border border-border h-full overflow-y-auto">
-      <h2 className="text-sm font-semibold tracking-tight">Configure Your Income</h2>
+    <div className="flex flex-col gap-3 p-4 bg-white rounded-lg border border-border h-full overflow-y-auto shadow-sm">
+      <h2 className="text-sm font-semibold tracking-tight text-text-primary">Configure Your Income</h2>
 
       <SliderRow
         label="Gross Annual Salary"
@@ -130,7 +90,7 @@ export function SliderPanel({ input, onInputChange }: SliderPanelProps) {
         </div>
       </div>
 
-      <div className="text-xs text-text-secondary font-mono border-t border-border pt-4">
+      <div className="text-xs text-text-muted font-mono border-t border-border pt-4">
         New Regime: ₹75K standard deduction, no other deductions allowed.
       </div>
     </div>

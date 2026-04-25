@@ -76,32 +76,32 @@ export default function Home() {
 
   return (
     <main className="flex-1 flex flex-col">
-      {/* ── 1. TRUTH BOMB HERO ── Animated counter showing 12% → 3.8% */}
-      <section className="w-full bg-ink relative overflow-hidden">
+      {/* ── 1. TRUTH BOMB HERO ── Dark navy hero with SG-style corporate authority */}
+      <section className="w-full gradient-hero relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-6 pt-28 pb-24">
           <p className="text-sm font-mono uppercase tracking-[0.25em] text-sienna mb-6">
             c7xai
           </p>
-          <h1 className="text-5xl md:text-7xl font-bold tracking-tight leading-[1.1] max-w-4xl font-serif-display">
+          <h1 className="text-5xl md:text-7xl font-bold tracking-tight leading-[1.1] max-w-4xl font-serif-display text-white">
             Your 12% SIP returns become{" "}
             <span className="text-sienna">3.8%</span>.
           </h1>
-          <p className="text-xl md:text-2xl text-truth/80 font-serif-display mt-6 max-w-2xl">
+          <p className="text-xl md:text-2xl text-white/70 font-serif-display mt-6 max-w-2xl">
             Here&apos;s why.
           </p>
-          <p className="text-base text-text-secondary mt-4 max-w-xl leading-relaxed">
+          <p className="text-base text-white/50 mt-4 max-w-xl leading-relaxed">
             Mutual funds show you 12%. After inflation (6%) and LTCG tax (12.5% above ₹1.25L), you keep 3.8%. Every calculator here shows the real number.
           </p>
           <div className="mt-8 flex items-center gap-4">
             <Link
               href="/sip-simulator"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-sienna text-white text-sm font-semibold hover:bg-sienna/90 transition-colors"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-sienna text-white text-sm font-semibold hover:bg-sienna/90 transition-colors rounded"
             >
               Try SIP Truth &rarr;
             </Link>
             <Link
               href="#calculators"
-              className="inline-flex items-center gap-2 px-6 py-3 border border-white/20 text-white text-sm font-medium hover:border-sienna/50 hover:text-sienna transition-colors"
+              className="inline-flex items-center gap-2 px-6 py-3 border border-white/20 text-white text-sm font-medium hover:border-sienna/50 hover:text-sienna transition-colors rounded"
             >
               All Calculators
             </Link>
@@ -109,31 +109,31 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── 2. THE REVEAL ── Interactive widget */}
-      <section className="w-full bg-ink-light border-t border-white/5">
+      {/* ── 2. THE REVEAL ── Stats bar (SG-style dark stats section) */}
+      <section className="w-full section-navy">
         <div className="max-w-7xl mx-auto px-6 py-12 grid md:grid-cols-3 gap-8">
-          <div className="truth-reveal">
-            <div className="text-3xl font-bold font-serif-display text-sienna">3.8%</div>
-            <div className="text-sm text-text-muted font-mono mt-1">Real SIP return</div>
-            <div className="text-xs text-text-muted/60 font-mono line-through">12% advertised</div>
+          <div className="truth-reveal text-center">
+            <div className="text-4xl font-bold font-serif-display text-sienna">3.8%</div>
+            <div className="text-sm text-white/50 font-mono mt-1">Real SIP return</div>
+            <div className="text-xs text-white/30 font-mono line-through">12% advertised</div>
           </div>
-          <div className="truth-reveal">
-            <div className="text-3xl font-bold font-serif-display text-sienna">5.6%</div>
-            <div className="text-sm text-text-muted font-mono mt-1">Post-tax FD yield</div>
-            <div className="text-xs text-text-muted/60 font-mono line-through">7% advertised</div>
+          <div className="truth-reveal text-center">
+            <div className="text-4xl font-bold font-serif-display text-sienna">5.6%</div>
+            <div className="text-sm text-white/50 font-mono mt-1">Post-tax FD yield</div>
+            <div className="text-xs text-white/30 font-mono line-through">7% advertised</div>
           </div>
-          <div className="truth-reveal">
-            <div className="text-3xl font-bold font-serif-display text-sienna">0%</div>
-            <div className="text-sm text-text-muted font-mono mt-1">Data collected about you</div>
-            <div className="text-xs text-text-muted/60 font-mono">No signups. No tracking. No PII.</div>
+          <div className="truth-reveal text-center">
+            <div className="text-4xl font-bold font-serif-display text-sienna">0%</div>
+            <div className="text-sm text-white/50 font-mono mt-1">Data collected about you</div>
+            <div className="text-xs text-white/30 font-mono">No signups. No tracking. No PII.</div>
           </div>
         </div>
       </section>
 
-      {/* ── 3. CALCULATOR GRID ── Recategorized by question */}
-      <section id="calculators" className="w-full bg-ink">
+      {/* ── 3. CALCULATOR GRID ── Light background with clean cards */}
+      <section id="calculators" className="w-full section-gray">
         <div className="max-w-7xl mx-auto px-6 py-20 md:py-28">
-          <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white mb-4 font-serif-display">
+          <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-text-primary mb-4 font-serif-display">
             What do you want to know?
           </h2>
           <p className="text-sm text-text-secondary mb-12 max-w-lg">
@@ -142,10 +142,10 @@ export default function Home() {
           <div className="space-y-16">
             {CALCULATOR_QUESTIONS.map((group) => (
               <div key={group.question}>
-                <h3 className="text-lg font-semibold text-truth/90 font-serif-display mb-6">
+                <h3 className="text-lg font-semibold text-sienna font-serif-display mb-6">
                   {group.question}
                 </h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-white/10">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-border">
                   {group.calculators.map((calc, i) => (
                     <CalcCard key={calc.id} {...calc} index={i} />
                   ))}
@@ -156,31 +156,31 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── 4. THE METHOD ── 3 pillars */}
-      <section className="w-full bg-surface">
+      {/* ── 4. THE METHOD ── White background with card shadows */}
+      <section className="w-full section-white">
         <div className="max-w-7xl mx-auto px-6 py-20 md:py-28">
-          <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-ink font-serif-display">
+          <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-text-primary font-serif-display">
             The Method
           </h2>
-          <p className="text-sm text-[#666] mt-2 mb-12 max-w-lg">
+          <p className="text-sm text-text-secondary mt-2 mb-12 max-w-lg">
             Why our numbers are different — and more honest.
           </p>
           <div className="grid md:grid-cols-3 gap-8">
-            <div className="p-6 border border-[#ddd] rounded-lg">
+            <div className="card-shadow">
               <div className="text-2xl font-bold font-serif-display text-sienna mb-3">Real Inflation Data</div>
-              <p className="text-sm text-[#444] leading-relaxed">
+              <p className="text-sm text-text-secondary leading-relaxed">
                 We use RBI&apos;s 10-year average inflation (6%), not the feel-good 4% headline number. Your money buys less every year — we account for that.
               </p>
             </div>
-            <div className="p-6 border border-[#ddd] rounded-lg">
+            <div className="card-shadow">
               <div className="text-2xl font-bold font-serif-display text-sienna mb-3">Current Tax Laws</div>
-              <p className="text-sm text-[#444] leading-relaxed">
+              <p className="text-sm text-text-secondary leading-relaxed">
                 LTCG at 12.5% above ₹1.25L. New vs Old regime. Section 80C limits. Every deduction that applies to you — we apply it.
               </p>
             </div>
-            <div className="p-6 border border-[#ddd] rounded-lg">
+            <div className="card-shadow">
               <div className="text-2xl font-bold font-serif-display text-sienna mb-3">No Product to Sell</div>
-              <p className="text-sm text-[#444] leading-relaxed">
+              <p className="text-sm text-text-secondary leading-relaxed">
                 We don&apos;t sell mutual funds, insurance, or FDs. No affiliate links. No commissions. The math just is what it is.
               </p>
             </div>
@@ -188,12 +188,12 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── 5. TRUTH LIBRARY ── Blog posts as truth reports */}
+      {/* ── 5. TRUTH LIBRARY ── Light gray background */}
       {posts.length > 0 && (
-        <section className="w-full bg-ink">
+        <section className="w-full section-gray">
           <div className="max-w-7xl mx-auto px-6 py-20 md:py-28">
             <div className="flex items-center justify-between mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white font-serif-display">
+              <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-text-primary font-serif-display">
                 Truth Reports
               </h2>
               <Link
@@ -210,15 +210,15 @@ export default function Home() {
                   href={`/blog/${post.slug}`}
                   className="group block"
                 >
-                  <div className="aspect-[4/3] bg-ink-light border border-white/10 mb-4 overflow-hidden group-hover:border-sienna/30 transition-colors flex items-center justify-center">
+                  <div className="aspect-[4/3] bg-ink-light border border-border mb-4 overflow-hidden group-hover:border-sienna/30 transition-colors flex items-center justify-center rounded-lg">
                     <span className="text-sm font-mono text-text-muted/40 group-hover:text-sienna/60 transition-colors">
                       {post.category}
                     </span>
                   </div>
-                  <div className="text-xs uppercase font-mono text-[#666] mb-2">
+                  <div className="text-xs uppercase font-mono text-text-muted mb-2">
                     {post.category} &middot; {post.readTime} min read
                   </div>
-                  <h3 className="text-lg font-bold text-white group-hover:text-sienna transition-colors">
+                  <h3 className="text-lg font-bold text-text-primary group-hover:text-sienna transition-colors">
                     {post.title}
                   </h3>
                   <p className="text-sm text-text-secondary mt-2 line-clamp-2">
@@ -231,70 +231,70 @@ export default function Home() {
         </section>
       )}
 
-      {/* ── 6. OPEN SOURCE TRUST ── */}
-      <section className="w-full bg-surface border-t border-[#ddd]">
+      {/* ── 6. OPEN SOURCE TRUST ── White background */}
+      <section className="w-full section-white border-t border-border">
         <div className="max-w-7xl mx-auto px-6 py-20 md:py-28 text-center">
-          <div className="text-4xl font-bold font-serif-display text-ink mb-6">
+          <div className="text-4xl font-bold font-serif-display text-text-primary mb-6">
             All our math runs in your browser.
           </div>
-          <p className="text-lg text-[#444] max-w-xl mx-auto leading-relaxed">
+          <p className="text-lg text-text-secondary max-w-xl mx-auto leading-relaxed">
             Zero data sent anywhere. No server. No database. No tracking.
             Every computation happens client-side — you can verify it yourself.
           </p>
-          <div className="mt-8 flex items-center justify-center gap-6 text-sm font-mono text-[#666]">
+          <div className="mt-8 flex items-center justify-center gap-6 text-sm font-mono text-text-muted">
             <span>No signups</span>
-            <span className="text-[#ddd]">&middot;</span>
+            <span className="text-border">&middot;</span>
             <span>No PII</span>
-            <span className="text-[#ddd]">&middot;</span>
+            <span className="text-border">&middot;</span>
             <span>No cookies</span>
-            <span className="text-[#ddd]">&middot;</span>
+            <span className="text-border">&middot;</span>
             <span>No server</span>
           </div>
         </div>
       </section>
 
-      {/* ── FOOTER ── */}
-      <footer className="w-full bg-ink border-t border-white/5">
+      {/* ── FOOTER ── Dark navy */}
+      <footer className="w-full section-navy">
         <div className="max-w-7xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-4 gap-10">
           <div>
             <span className="text-xl font-bold text-white">c7<span className="text-sienna">xai</span></span>
-            <p className="text-xs text-text-muted mt-3 leading-relaxed">
+            <p className="text-xs text-white/40 mt-3 leading-relaxed">
               The truth about your money. Inflation-adjusted, tax-aware financial clarity for India.
             </p>
           </div>
           <div>
-            <h4 className="text-xs uppercase font-mono tracking-[0.15em] text-text-muted mb-4">Calculators</h4>
+            <h4 className="text-xs uppercase font-mono tracking-[0.15em] text-white/40 mb-4">Calculators</h4>
             <div className="flex flex-col gap-2">
-              <Link href="/sip-simulator" className="text-sm text-text-secondary hover:text-sienna transition-colors">SIP Simulator</Link>
-              <Link href="/emi-analyzer" className="text-sm text-text-secondary hover:text-sienna transition-colors">EMI Analyzer</Link>
-              <Link href="/tax-sandbox" className="text-sm text-text-secondary hover:text-sienna transition-colors">Tax Sandbox</Link>
-              <Link href="/fire-matrix" className="text-sm text-text-secondary hover:text-sienna transition-colors">FIRE Matrix</Link>
+              <Link href="/sip-simulator" className="text-sm text-white/60 hover:text-sienna transition-colors">SIP Simulator</Link>
+              <Link href="/emi-analyzer" className="text-sm text-white/60 hover:text-sienna transition-colors">EMI Analyzer</Link>
+              <Link href="/tax-sandbox" className="text-sm text-white/60 hover:text-sienna transition-colors">Tax Sandbox</Link>
+              <Link href="/fire-matrix" className="text-sm text-white/60 hover:text-sienna transition-colors">FIRE Matrix</Link>
             </div>
           </div>
           <div>
-            <h4 className="text-xs uppercase font-mono tracking-[0.15em] text-text-muted mb-4">More</h4>
+            <h4 className="text-xs uppercase font-mono tracking-[0.15em] text-white/40 mb-4">More</h4>
             <div className="flex flex-col gap-2">
-              <Link href="/methodology" className="text-sm text-text-secondary hover:text-sienna transition-colors">Methodology</Link>
-              <Link href="/truth-index" className="text-sm text-text-secondary hover:text-sienna transition-colors">Truth Index</Link>
-              <Link href="/compare" className="text-sm text-text-secondary hover:text-sienna transition-colors">Compare</Link>
-              <Link href="/blog" className="text-sm text-text-secondary hover:text-sienna transition-colors">Blog</Link>
+              <Link href="/methodology" className="text-sm text-white/60 hover:text-sienna transition-colors">Methodology</Link>
+              <Link href="/truth-index" className="text-sm text-white/60 hover:text-sienna transition-colors">Truth Index</Link>
+              <Link href="/compare" className="text-sm text-white/60 hover:text-sienna transition-colors">Compare</Link>
+              <Link href="/blog" className="text-sm text-white/60 hover:text-sienna transition-colors">Blog</Link>
             </div>
           </div>
           <div>
-            <h4 className="text-xs uppercase font-mono tracking-[0.15em] text-text-muted mb-4">Legal</h4>
+            <h4 className="text-xs uppercase font-mono tracking-[0.15em] text-white/40 mb-4">Legal</h4>
             <div className="flex flex-col gap-2">
-              <Link href="/privacy" className="text-sm text-text-secondary hover:text-sienna transition-colors">Privacy Policy</Link>
-              <Link href="/terms" className="text-sm text-text-secondary hover:text-sienna transition-colors">Terms & Conditions</Link>
-              <Link href="/refund" className="text-sm text-text-secondary hover:text-sienna transition-colors">Refund Policy</Link>
+              <Link href="/privacy" className="text-sm text-white/60 hover:text-sienna transition-colors">Privacy Policy</Link>
+              <Link href="/terms" className="text-sm text-white/60 hover:text-sienna transition-colors">Terms & Conditions</Link>
+              <Link href="/refund" className="text-sm text-white/60 hover:text-sienna transition-colors">Refund Policy</Link>
             </div>
           </div>
         </div>
-        <div className="border-t border-white/5">
+        <div className="border-t border-white/10">
           <div className="max-w-7xl mx-auto px-6 py-6 flex items-center justify-between">
-            <span className="text-xs text-text-muted">
+            <span className="text-xs text-white/30">
               &copy; {new Date().getFullYear()} by c7xai. Computed entirely client-side.
             </span>
-            <span className="text-xs text-text-muted">
+            <span className="text-xs text-white/30">
               NIFTY 12% &mu; / 18% &sigma; &middot; 6% inflation &middot; LTCG 12.5% above &rsquo;1.25L
             </span>
           </div>

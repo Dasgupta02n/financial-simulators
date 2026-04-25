@@ -6,6 +6,7 @@ import { computeGST } from "@/lib/calculators/gst/engine";
 import { formatINR } from "@/lib/format";
 import { CalcExplainer } from "@/components/shared/calc-explainer";
 import { twMerge } from "tailwind-merge";
+import { SliderRow } from "@/components/shared/slider-row";
 
 const GST_SLABS = [5, 12, 18, 28] as const;
 
@@ -15,22 +16,6 @@ const DEFAULT_INPUT: GSTInput = {
   inclusive: false,
   intraState: true,
 };
-
-function SliderRow({ label, value, displayValue, min, max, step, onChange }: {
-  label: string; value: number; displayValue: string; min: number; max: number; step: number; onChange: (v: number) => void;
-}) {
-  return (
-    <div className="flex flex-col gap-0.5">
-      <div className="flex justify-between items-baseline">
-        <label className="text-xs text-text-secondary">{label}</label>
-        <span className="text-xs font-mono text-text-primary">{displayValue}</span>
-      </div>
-      <input type="range" min={min} max={max} step={step} value={value}
-        onChange={(e) => onChange(parseFloat(e.target.value))}
-        className="w-full h-1 rounded-full appearance-none cursor-pointer bg-border accent-gain" />
-    </div>
-  );
-}
 
 function ResultRow({ label, value, highlight, subtext }: {
   label: string; value: string; highlight?: boolean; subtext?: string;
@@ -64,8 +49,8 @@ export function GSTCalculator() {
           <button key={rate} className={twMerge(
             "px-3 py-1.5 text-xs rounded-md font-mono transition-colors",
             !customRate && input.gstRate === rate
-              ? "bg-gain/20 text-gain border border-gain/40"
-              : "bg-border text-text-secondary border border-border"
+              ? "bg-sienna/10 text-sienna border border-sienna/30"
+              : "bg-surface-hover text-text-secondary border border-border"
           )} onClick={() => { setCustomRate(false); handleInputChange("gstRate", rate); }}>
             {rate}%
           </button>
@@ -73,8 +58,8 @@ export function GSTCalculator() {
         <button className={twMerge(
           "px-3 py-1.5 text-xs rounded-md font-mono transition-colors",
           customRate
-            ? "bg-gain/20 text-gain border border-gain/40"
-            : "bg-border text-text-secondary border border-border"
+            ? "bg-sienna/10 text-sienna border border-sienna/30"
+            : "bg-surface-hover text-text-secondary border border-border"
         )} onClick={() => setCustomRate(true)}>
           Custom
         </button>
@@ -99,16 +84,16 @@ export function GSTCalculator() {
           <button className={twMerge(
             "px-4 py-1.5 text-xs rounded-md font-mono transition-colors",
             !input.inclusive
-              ? "bg-gain/20 text-gain border border-gain/40"
-              : "bg-border text-text-secondary border border-border"
+              ? "bg-sienna/10 text-sienna border border-sienna/30"
+              : "bg-surface-hover text-text-secondary border border-border"
           )} onClick={() => handleInputChange("inclusive", false)}>
             Exclusive
           </button>
           <button className={twMerge(
             "px-4 py-1.5 text-xs rounded-md font-mono transition-colors",
             input.inclusive
-              ? "bg-gain/20 text-gain border border-gain/40"
-              : "bg-border text-text-secondary border border-border"
+              ? "bg-sienna/10 text-sienna border border-sienna/30"
+              : "bg-surface-hover text-text-secondary border border-border"
           )} onClick={() => handleInputChange("inclusive", true)}>
             Inclusive
           </button>
@@ -126,16 +111,16 @@ export function GSTCalculator() {
           <button className={twMerge(
             "px-4 py-1.5 text-xs rounded-md font-mono transition-colors",
             input.intraState
-              ? "bg-gain/20 text-gain border border-gain/40"
-              : "bg-border text-text-secondary border border-border"
+              ? "bg-sienna/10 text-sienna border border-sienna/30"
+              : "bg-surface-hover text-text-secondary border border-border"
           )} onClick={() => handleInputChange("intraState", true)}>
             Intra-State
           </button>
           <button className={twMerge(
             "px-4 py-1.5 text-xs rounded-md font-mono transition-colors",
             !input.intraState
-              ? "bg-gain/20 text-gain border border-gain/40"
-              : "bg-border text-text-secondary border border-border"
+              ? "bg-sienna/10 text-sienna border border-sienna/30"
+              : "bg-surface-hover text-text-secondary border border-border"
           )} onClick={() => handleInputChange("intraState", false)}>
             Inter-State
           </button>
@@ -152,7 +137,7 @@ export function GSTCalculator() {
   return (
     <div className="flex flex-col lg:flex-row gap-4 w-full h-full">
       <div className="lg:w-[38%] shrink-0">
-        <div className="flex flex-col gap-3 p-4 bg-surface rounded-lg border border-border">
+        <div className="flex flex-col gap-3 p-4 bg-white rounded-lg border border-border shadow-sm">
           <h2 className="text-sm font-semibold tracking-tight">Calculate GST Breakdown</h2>
           <SliderRow label={input.inclusive ? "Total Amount (incl. GST)" : "Base Amount (excl. GST)"}
             value={input.amount}
@@ -180,7 +165,7 @@ export function GSTCalculator() {
             )}
           </CalcExplainer>
 
-          <div className="p-4 bg-surface rounded-lg border border-border">
+          <div className="p-4 bg-white rounded-lg border border-border shadow-sm">
             <h3 className="text-xs font-semibold text-text-primary mb-3">GST Breakdown</h3>
 
             {input.inclusive ? (
@@ -241,7 +226,7 @@ export function GSTCalculator() {
             </div>
           </div>
 
-          <div className="p-4 bg-surface rounded-lg border border-border">
+          <div className="p-4 bg-white rounded-lg border border-border shadow-sm">
             <h3 className="text-xs font-semibold text-text-primary mb-2">Detailed Breakdown Table</h3>
             <div className="overflow-x-auto">
               <table className="w-full text-xs font-mono">

@@ -18,7 +18,7 @@ export function CrossoverGauge({ crossover }: CrossoverGaugeProps) {
   const isOldBetter = recommendation === "old";
 
   return (
-    <div className="flex flex-col gap-3 p-4 bg-surface rounded-lg border border-border">
+    <div className="flex flex-col gap-3 p-4 bg-white rounded-lg border border-border shadow-sm">
       <div className="flex items-center justify-between">
         <h3 className="text-sm font-semibold text-text-secondary">Regime Crossover Gauge</h3>
         <span

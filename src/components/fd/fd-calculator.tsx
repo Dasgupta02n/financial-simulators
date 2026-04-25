@@ -14,6 +14,7 @@ import { ConfidenceBadge } from "@/components/shared/confidence-badge";
 import { WhyThisNumber } from "@/components/shared/why-this-number";
 import { ShareButton } from "@/components/shared/share-button";
 import { truthFromFD } from "@/lib/truth/truth-data-adapter";
+import { SliderRow } from "@/components/shared/slider-row";
 
 const COMPOUND_OPTIONS = [
   { value: 1, label: "Annual" },
@@ -30,22 +31,6 @@ const DEFAULT_INPUT: FDInput = {
   inflationRate: 6,
 };
 
-function SliderRow({ label, value, displayValue, min, max, step, onChange }: {
-  label: string; value: number; displayValue: string; min: number; max: number; step: number; onChange: (v: number) => void;
-}) {
-  return (
-    <div className="flex flex-col gap-0.5">
-      <div className="flex justify-between items-baseline">
-        <label className="text-xs text-text-secondary">{label}</label>
-        <span className="text-xs font-mono text-text-primary">{displayValue}</span>
-      </div>
-      <input type="range" min={min} max={max} step={step} value={value}
-        onChange={(e) => onChange(parseFloat(e.target.value))}
-        className="w-full h-1 rounded-full appearance-none cursor-pointer bg-border accent-gain" />
-    </div>
-  );
-}
-
 export function FDCalculator() {
   const [input, setInput] = useState<FDInput>(DEFAULT_INPUT);
   const handleInputChange = useCallback(
@@ -57,14 +42,14 @@ export function FDCalculator() {
   return (
     <div className="flex flex-col lg:flex-row gap-4 w-full h-full">
       <div className="lg:w-[38%] shrink-0">
-        <div className="flex flex-col gap-3 p-4 bg-surface rounded-lg border border-border">
+        <div className="flex flex-col gap-3 p-4 bg-white shadow-sm rounded-lg border border-border">
           <h2 className="text-sm font-semibold tracking-tight">Configure FD</h2>
           <SliderRow label="Principal" value={input.principal} displayValue={formatINR(input.principal)}
             min={10000} max={50000000} step={10000} onChange={(v) => handleInputChange("principal", v)} />
           <SliderRow label="Interest Rate" value={input.interestRate} displayValue={`${input.interestRate}%`}
-            min={2} max={12} step={0.25} onChange={(v) => handleInputChange("interestRate", v)} />
+            min={2} max={12} step={0.25} onChange={(v) => handleInputChange("interestRate", v)} tickUnit="%" />
           <SliderRow label="Tenure" value={input.tenure} displayValue={`${input.tenure} yrs`}
-            min={1} max={20} step={1} onChange={(v) => handleInputChange("tenure", v)} />
+            min={1} max={20} step={1} onChange={(v) => handleInputChange("tenure", v)} tickUnit=" yr" />
           <div className="flex flex-col gap-1">
             <span className="text-xs text-text-secondary">Compounding</span>
             <div className="flex gap-2">
@@ -72,8 +57,8 @@ export function FDCalculator() {
                 <button key={opt.value} className={twMerge(
                   "px-3 py-1.5 text-xs rounded-md font-mono transition-colors",
                   input.compoundingFreq === opt.value
-                    ? "bg-gain/20 text-gain border border-gain/40"
-                    : "bg-border text-text-secondary border border-border"
+                    ? "bg-sienna/10 text-sienna border border-sienna/30"
+                    : "bg-surface-hover text-text-secondary border border-border"
                 )} onClick={() => handleInputChange("compoundingFreq", opt.value)}>
                   {opt.label}
                 </button>
@@ -81,9 +66,9 @@ export function FDCalculator() {
             </div>
           </div>
           <SliderRow label="Tax Slab" value={input.taxSlab} displayValue={`${input.taxSlab}%`}
-            min={0} max={30} step={5} onChange={(v) => handleInputChange("taxSlab", v)} />
+            min={0} max={30} step={5} onChange={(v) => handleInputChange("taxSlab", v)} tickUnit="%" />
           <SliderRow label="Inflation Rate" value={input.inflationRate} displayValue={`${input.inflationRate}%`}
-            min={2} max={12} step={0.5} onChange={(v) => handleInputChange("inflationRate", v)} />
+            min={2} max={12} step={0.5} onChange={(v) => handleInputChange("inflationRate", v)} tickUnit="%" />
         </div>
       </div>
       <div className="lg:w-[62%] min-h-0">
@@ -108,7 +93,7 @@ export function FDCalculator() {
           <div className="text-xs text-text-secondary font-mono px-1">
             Gross interest: {formatINR(output.totalInterestGross)} → Post-tax: {formatINR(output.totalInterestPostTax)} (Tax: {formatINR(output.totalInterestGross - output.totalInterestPostTax)})
           </div>
-          <div className="flex-1 min-h-0 bg-surface rounded-lg border border-border p-4">
+          <div className="flex-1 min-h-0 bg-white rounded-lg border border-border shadow-sm p-4">
             <h3 className="text-xs font-semibold text-text-secondary mb-2">Growth vs Inflation</h3>
             <div className="w-full flex-1 min-h-[220px]">
               <ResponsiveContainer width="100%" height="100%">
@@ -128,11 +113,11 @@ export function FDCalculator() {
                     labelFormatter={(v) => `Year ${v}`}
                     formatter={(value, name) => [formatINRShort(Number(value)), String(name)]} />
                   <Area type="monotone" dataKey="grossValue" stroke="#9ca3af" strokeWidth={1}
-                    fill="url(#grossGrad)" name="Gross" isAnimationActive={false} />
+                    fill="url(#grossGrad)" name="Gross" isAnimationActive={true} />
                   <Line type="monotone" dataKey="postTaxValue" stroke="#6ee7b7" strokeWidth={2}
-                    dot={false} name="Post-Tax" isAnimationActive={false} />
+                    dot={false} name="Post-Tax" isAnimationActive={true} />
                   <Line type="monotone" dataKey="realValue" stroke="#f87171" strokeWidth={2}
-                    strokeDasharray="6 4" dot={false} name="Real Value" isAnimationActive={false} />
+                    strokeDasharray="6 4" dot={false} name="Real Value" isAnimationActive={true} />
                 </ComposedChart>
               </ResponsiveContainer>
             </div>

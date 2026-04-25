@@ -12,6 +12,7 @@ import { WhyThisNumber } from "@/components/shared/why-this-number";
 import { ShareButton } from "@/components/shared/share-button";
 import { truthFromPPF } from "@/lib/truth/truth-data-adapter";
 import { Area, Line, ComposedChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+import { SliderRow } from "@/components/shared/slider-row";
 
 const TENURE_OPTIONS = [
   { value: 15, label: "15 yrs" },
@@ -26,22 +27,6 @@ const DEFAULT_INPUT: PPFInput = {
   inflationRate: 6,
 };
 
-function SliderRow({ label, value, displayValue, min, max, step, onChange }: {
-  label: string; value: number; displayValue: string; min: number; max: number; step: number; onChange: (v: number) => void;
-}) {
-  return (
-    <div className="flex flex-col gap-0.5">
-      <div className="flex justify-between items-baseline">
-        <label className="text-xs text-text-secondary">{label}</label>
-        <span className="text-xs font-mono text-text-primary">{displayValue}</span>
-      </div>
-      <input type="range" min={min} max={max} step={step} value={value}
-        onChange={(e) => onChange(parseFloat(e.target.value))}
-        className="w-full h-1 rounded-full appearance-none cursor-pointer bg-border accent-gain" />
-    </div>
-  );
-}
-
 export function PPFViewModel() {
   const [input, setInput] = useState<PPFInput>(DEFAULT_INPUT);
   const handleInputChange = useCallback(
@@ -54,7 +39,7 @@ export function PPFViewModel() {
   return (
     <div className="flex flex-col lg:flex-row gap-4 w-full h-full">
       <div className="lg:w-[38%] shrink-0">
-        <div className="flex flex-col gap-3 p-4 bg-surface rounded-lg border border-border">
+        <div className="flex flex-col gap-3 p-4 bg-white shadow-sm rounded-lg border border-border">
           <h2 className="text-sm font-semibold tracking-tight">Configure PPF</h2>
           <SliderRow label="Yearly Contribution" value={input.yearlyContribution}
             displayValue={formatINR(input.yearlyContribution)}
@@ -63,15 +48,15 @@ export function PPFViewModel() {
           <SliderRow label="Interest Rate" value={input.interestRate}
             displayValue={`${input.interestRate}%`}
             min={5} max={9} step={0.1}
-            onChange={(v) => handleInputChange("interestRate", v)} />
+            onChange={(v) => handleInputChange("interestRate", v)} tickUnit="%" />
           <div className="flex flex-col gap-1">
             <span className="text-xs text-text-secondary">Tenure</span>
             <div className="flex gap-2">
               {TENURE_OPTIONS.map((opt) => (
                 <button key={opt.value} className={`px-3 py-1.5 text-xs rounded-md font-mono transition-colors ${
                   input.tenure === opt.value
-                    ? "bg-gain/20 text-gain border border-gain/40"
-                    : "bg-border text-text-secondary border border-border"
+                    ? "bg-sienna/10 text-sienna border border-sienna/30"
+                    : "bg-surface-hover text-text-secondary border border-border"
                 }`} onClick={() => handleInputChange("tenure", opt.value)}>
                   {opt.label}
                 </button>
@@ -81,7 +66,7 @@ export function PPFViewModel() {
           <SliderRow label="Inflation Rate" value={input.inflationRate}
             displayValue={`${input.inflationRate}%`}
             min={2} max={12} step={0.5}
-            onChange={(v) => handleInputChange("inflationRate", v)} />
+            onChange={(v) => handleInputChange("inflationRate", v)} tickUnit="%" />
         </div>
       </div>
       <div className="lg:w-[62%] min-h-0">
@@ -104,7 +89,7 @@ export function PPFViewModel() {
               Real yield is negative — inflation erodes purchasing power faster than PPF grows it.
             </div>
           )}
-          <div className="flex-1 min-h-0 bg-surface rounded-lg border border-border p-4">
+          <div className="flex-1 min-h-0 bg-white rounded-lg border border-border shadow-sm p-4">
             <h3 className="text-xs font-semibold text-text-secondary mb-2">PPF Growth vs Inflation</h3>
             <div className="w-full flex-1 min-h-[220px]">
               <ResponsiveContainer width="100%" height="100%">
@@ -124,11 +109,11 @@ export function PPFViewModel() {
                     labelFormatter={(v) => `Year ${v}`}
                     formatter={(value, name) => [formatINRShort(Number(value)), String(name)]} />
                   <Area type="monotone" dataKey="nominalValue" stroke="#6ee7b7" strokeWidth={2}
-                    fill="url(#ppfGrad)" name="Nominal" isAnimationActive={false} />
+                    fill="url(#ppfGrad)" name="Nominal" isAnimationActive={true} />
                   <Line type="monotone" dataKey="realValue" stroke="#f87171" strokeWidth={2}
-                    strokeDasharray="6 4" dot={false} name="Real Value" isAnimationActive={false} />
+                    strokeDasharray="6 4" dot={false} name="Real Value" isAnimationActive={true} />
                   <Line type="monotone" dataKey="invested" stroke="#9ca3af" strokeWidth={1}
-                    strokeDasharray="3 3" dot={false} name="Invested" isAnimationActive={false} />
+                    strokeDasharray="3 3" dot={false} name="Invested" isAnimationActive={true} />
                 </ComposedChart>
               </ResponsiveContainer>
             </div>

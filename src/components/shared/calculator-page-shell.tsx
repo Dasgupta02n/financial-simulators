@@ -50,7 +50,7 @@ export function CalculatorPageShell({ config, children }: Props) {
       <main className="flex-1 flex flex-col h-[calc(100vh-3.5rem)] overflow-hidden">
         <div className="w-full max-w-7xl mx-auto px-4 pt-1 shrink-0">
           <nav className="flex items-center gap-2 text-xs text-text-secondary font-mono mb-1">
-            <Link href="/" className="hover:text-gain transition-colors">
+            <Link href="/" className="hover:text-sienna transition-colors">
               Home
             </Link>
             <span>/</span>

@@ -22,19 +22,19 @@ export function AccumulationChart({ data }: AccumulationChartProps) {
             </linearGradient>
           </defs>
           <XAxis dataKey="year" tick={{ fill: "#9ca3af", fontSize: 10, fontFamily: "var(--font-geist-mono)" }}
-            tickFormatter={(v) => `Y${v}`} axisLine={{ stroke: "#1f2937" }} tickLine={false} />
+            tickFormatter={(v) => `Y${v}`} axisLine={{ stroke: "#e5e7eb" }} tickLine={false} />
           <YAxis tick={{ fill: "#9ca3af", fontSize: 10, fontFamily: "var(--font-geist-mono)" }}
-            tickFormatter={formatINRShort} axisLine={{ stroke: "#1f2937" }} tickLine={false} width={55} />
-          <Tooltip contentStyle={{ backgroundColor: "#111827", border: "1px solid #1f2937", borderRadius: "8px",
+            tickFormatter={formatINRShort} axisLine={{ stroke: "#e5e7eb" }} tickLine={false} width={55} />
+          <Tooltip contentStyle={{ backgroundColor: "#ffffff", border: "1px solid #e5e7eb", borderRadius: "8px",
             fontFamily: "var(--font-geist-mono)", fontSize: "11px" }}
             labelFormatter={(v) => `Year ${v}`}
             formatter={(value, name) => [formatINRShort(Number(value)), String(name)]} />
           <Area type="monotone" dataKey="lumpsumValue" stroke="#6ee7b7" strokeWidth={2}
-            fill="url(#lumpGrad)" name="Lumpsum Base" isAnimationActive={false} />
+            fill="url(#lumpGrad)" name="Lumpsum Base" isAnimationActive={true} />
           <Area type="monotone" dataKey="sipCorpus" stroke="#60a5fa" strokeWidth={2}
-            fill="url(#sipGrad)" name="SIP Corpus" isAnimationActive={false} />
+            fill="url(#sipGrad)" name="SIP Corpus" isAnimationActive={true} />
           <Line type="monotone" dataKey="realTotal" stroke="#f87171" strokeWidth={1.5}
-            strokeDasharray="6 4" dot={false} name="Real Total" isAnimationActive={false} />
+            strokeDasharray="6 4" dot={false} name="Real Total" isAnimationActive={true} />
         </ComposedChart>
       </ResponsiveContainer>
     </div>
