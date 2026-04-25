@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Playfair_Display } from "next/font/google";
+import { NextIntlClientProvider } from "next-intl";
+import { getLocale, getMessages } from "next-intl/server";
 import { generateSiteJsonLd } from "@/lib/seo";
 import { SiteNav } from "@/components/shared/site-nav";
 import { PageTransition } from "@/components/shared/page-transition";
+import { AuthProvider } from "@/components/shared/auth-provider";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -34,20 +37,29 @@ export const metadata: Metadata = {
     canonical: "/",
     languages: {
       "en-IN": "/",
+      "hi": "/hi/",
+      "mr": "/mr/",
+      "ta": "/ta/",
+      "te": "/te/",
+      "pa": "/pa/",
+      "gu": "/gu/",
+      "bn": "/bn/",
     },
   },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const locale = await getLocale();
+  const messages = await getMessages();
   const siteSchemas = generateSiteJsonLd();
 
   return (
     <html
-      lang="en-IN"
+      lang={locale}
       className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} h-full antialiased`}
     >
       <head>
@@ -55,15 +67,17 @@ export default function RootLayout({
           <script
             key={i}
             type="application/ld+json"
-            // Content is server-generated from our own static config — never user input.
-            // This is the standard Next.js pattern for injecting structured data.
             dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
           />
         ))}
       </head>
       <body className="min-h-full flex flex-col bg-ink text-text-primary">
-        <SiteNav />
-        <PageTransition>{children}</PageTransition>
+        <AuthProvider>
+          <NextIntlClientProvider messages={messages}>
+            <SiteNav />
+            <PageTransition>{children}</PageTransition>
+          </NextIntlClientProvider>
+        </AuthProvider>
       </body>
     </html>
   );
