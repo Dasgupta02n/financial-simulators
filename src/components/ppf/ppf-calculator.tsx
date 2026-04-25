@@ -9,7 +9,7 @@ import { CalcExplainer } from "@/components/shared/calc-explainer";
 import { LieVsTruthPanel } from "@/components/shared/lie-vs-truth-panel";
 import { ConfidenceBadge } from "@/components/shared/confidence-badge";
 import { WhyThisNumber } from "@/components/shared/why-this-number";
-import { ShareButton } from "@/components/shared/share-button";
+import { ShareBar } from "@/components/shared/share-bar";
 import { truthFromPPF } from "@/lib/truth/truth-data-adapter";
 import { Area, Line, ComposedChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { SliderRow } from "@/components/shared/slider-row";
@@ -73,7 +73,7 @@ export function PPFViewModel() {
         <div className="flex flex-col gap-3 min-h-0">
           <div className="flex items-center justify-between shrink-0">
             <ConfidenceBadge inflationRate={input.inflationRate} />
-            <ShareButton title="PPF Calculator — c7xai" />
+            <ShareBar title="PPF Calculator — c7xai" />
           </div>
           <LieVsTruthPanel truth={truthFromPPF({ totalInvested: output.totalInvested, maturityValue: output.maturityValue, realMaturityValue: output.realMaturityValue }, input.inflationRate)} />
           <div className="grid grid-cols-2 lg:grid-cols-3 gap-2">

@@ -9,7 +9,7 @@ import { CalcExplainer } from "@/components/shared/calc-explainer";
 import { LieVsTruthPanel } from "@/components/shared/lie-vs-truth-panel";
 import { ConfidenceBadge } from "@/components/shared/confidence-badge";
 import { WhyThisNumber } from "@/components/shared/why-this-number";
-import { ShareButton } from "@/components/shared/share-button";
+import { ShareBar } from "@/components/shared/share-bar";
 import { truthFromCompound } from "@/lib/truth/truth-data-adapter";
 import { SliderRow } from "@/components/shared/slider-row";
 import { Area, Line, ComposedChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
@@ -90,7 +90,7 @@ export function CompoundCalculator() {
         <div className="flex flex-col gap-3 min-h-0">
           <div className="flex items-center justify-between shrink-0">
             <ConfidenceBadge inflationRate={input.inflationRate} />
-            <ShareButton title="Compound Interest Calculator — c7xai" />
+            <ShareBar title="Compound Interest Calculator — c7xai" />
           </div>
           <LieVsTruthPanel truth={truthFromCompound(output, input.inflationRate)} />
           <div className="grid grid-cols-2 lg:grid-cols-3 gap-2">

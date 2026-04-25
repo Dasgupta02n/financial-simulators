@@ -1,0 +1,28 @@
+{
+  "id": "real-estate",
+  "slug": "real-estate-calculator",
+  "name": "Real Estate Truth Calculator",
+  "metaTitle": "Real Estate Truth Calculator — Real Returns After Tax, Stamp Duty & Inflation | c7xai",
+  "metaDescription": "See the real return on property investment after stamp duty, registration, maintenance, capital gains tax, and inflation. Indian tax laws applied.",
+  "shortDescription": "Real property returns after all hidden costs",
+  "faq": [
+    {
+      "question": "Is real estate really a good investment in India?",
+      "answer": "After stamp duty (5-7%), registration (1%), maintenance, property tax, and capital gains tax, real returns are often 3-5% per year — lower than most people expect."
+    },
+    {
+      "question": "What is stamp duty and who pays it?",
+      "answer": "Stamp duty is a state government tax on property transactions, typically 5-7% of property value. It's paid by the buyer at the time of registration."
+    },
+    {
+      "question": "How does leasehold vs freehold affect returns?",
+      "answer": "Leasehold properties typically appreciate 1-1.5% less per year because the underlying land ownership remains with the lessor. Freehold properties have full ownership rights."
+    }
+  ],
+  "howToSteps": [
+    { "name": "Enter property value", "text": "Set the purchase price and select property type" },
+    { "name": "Choose state & ownership", "text": "Select your state for stamp duty and freehold/leasehold" },
+    { "name": "Set appreciation & rental", "text": "Enter expected appreciation rate and rental yield" },
+    { "name": "See real returns", "text": "View total cost of ownership and real return after all deductions" }
+  ]
+}

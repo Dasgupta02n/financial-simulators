@@ -47,6 +47,8 @@ const CALCULATOR_QUESTIONS: readonly {
     calculators: [
       { id: "emi", name: "EMI Analyzer", slug: "emi-analyzer", description: "Compare loan EMIs with the real total cost over the full tenure." },
       { id: "gst", name: "GST Calculator", slug: "gst-calculator", description: "Compute GST on any amount. CGST/SGST split for intra-state.", tag: "New" },
+      { id: "real-estate", name: "Real Estate", slug: "real-estate-calculator", description: "Stamp duty, capital gains, rental yield — the true cost of property.", tag: "New" },
+      { id: "depreciation", name: "Car & Depreciation", slug: "depreciation-calculator", description: "Total cost of owning a vehicle — fuel, insurance, loan interest, resale.", tag: "New" },
     ],
   },
   {
@@ -54,6 +56,8 @@ const CALCULATOR_QUESTIONS: readonly {
     calculators: [
       { id: "goal", name: "Goal Planner", slug: "goal-planner", description: "Monthly SIP needed per goal. Know exactly what to invest and when." },
       { id: "accum", name: "Accumulator", slug: "accumulation-calculator", description: "Lump sum vs SIP — see which strategy wins after costs." },
+      { id: "crypto", name: "Crypto Tax", slug: "crypto-calculator", description: "30% flat tax + 1% TDS + inflation. Your real crypto return.", tag: "New" },
+      { id: "forex", name: "Forex & LRS", slug: "forex-calculator", description: "TCS, capital gains, and LRS limits — the real cost of investing abroad.", tag: "New" },
     ],
   },
 ];
@@ -269,6 +273,8 @@ export default function Home() {
               <Link href="/emi-analyzer" className="text-sm text-white/60 hover:text-sienna transition-colors">EMI Analyzer</Link>
               <Link href="/tax-sandbox" className="text-sm text-white/60 hover:text-sienna transition-colors">Tax Sandbox</Link>
               <Link href="/fire-matrix" className="text-sm text-white/60 hover:text-sienna transition-colors">FIRE Matrix</Link>
+              <Link href="/real-estate-calculator" className="text-sm text-white/60 hover:text-sienna transition-colors">Real Estate</Link>
+              <Link href="/crypto-calculator" className="text-sm text-white/60 hover:text-sienna transition-colors">Crypto Tax</Link>
             </div>
           </div>
           <div>
@@ -277,6 +283,8 @@ export default function Home() {
               <Link href="/methodology" className="text-sm text-white/60 hover:text-sienna transition-colors">Methodology</Link>
               <Link href="/truth-index" className="text-sm text-white/60 hover:text-sienna transition-colors">Truth Index</Link>
               <Link href="/compare" className="text-sm text-white/60 hover:text-sienna transition-colors">Compare</Link>
+              <Link href="/forex-calculator" className="text-sm text-white/60 hover:text-sienna transition-colors">Forex & LRS</Link>
+              <Link href="/depreciation-calculator" className="text-sm text-white/60 hover:text-sienna transition-colors">Car & Depreciation</Link>
               <Link href="/blog" className="text-sm text-white/60 hover:text-sienna transition-colors">Blog</Link>
             </div>
           </div>
@@ -285,6 +293,7 @@ export default function Home() {
             <div className="flex flex-col gap-2">
               <Link href="/privacy" className="text-sm text-white/60 hover:text-sienna transition-colors">Privacy Policy</Link>
               <Link href="/terms" className="text-sm text-white/60 hover:text-sienna transition-colors">Terms & Conditions</Link>
+              <Link href="/eula" className="text-sm text-white/60 hover:text-sienna transition-colors">EULA</Link>
               <Link href="/refund" className="text-sm text-white/60 hover:text-sienna transition-colors">Refund Policy</Link>
             </div>
           </div>

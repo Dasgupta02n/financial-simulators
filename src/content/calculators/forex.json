@@ -1,0 +1,28 @@
+{
+  "id": "forex",
+  "slug": "forex-calculator",
+  "name": "Forex Investment Calculator",
+  "metaTitle": "Forex Investment Calculator — TCS, LRS Limits, Real Returns | c7xai",
+  "metaDescription": "Calculate real returns on foreign currency investments after TCS (20% above ₹7L), capital gains tax, bank spreads, and RBI's LRS limits.",
+  "shortDescription": "Real forex returns after TCS, tax, and bank spreads",
+  "faq": [
+    {
+      "question": "What is TCS on foreign remittances?",
+      "answer": "Under LRS (Liberalised Remittance Scheme), TCS of 20% applies on remittances above ₹7L per year (Section 206C(1G)). Below ₹7L, TCS is 0.5%. This is collected by your bank at the time of transfer."
+    },
+    {
+      "question": "What is the RBI LRS limit?",
+      "answer": "RBI allows Indian residents to remit up to $250,000 per financial year under the Liberalised Remittance Scheme for any permissible current or capital account transaction."
+    },
+    {
+      "question": "How are foreign capital gains taxed in India?",
+      "answer": "Short-term gains (< 3 years) are taxed at your slab rate. Long-term gains (> 3 years) are taxed at 20% with indexation benefit under the Income Tax Act."
+    }
+  ],
+  "howToSteps": [
+    { "name": "Enter INR amount", "text": "Set the amount you want to invest in foreign currency" },
+    { "name": "Select target currency", "text": "Choose the currency and exchange rate" },
+    { "name": "Set appreciation rate", "text": "Enter expected foreign asset appreciation" },
+    { "name": "See real returns", "text": "View returns after TCS, capital gains tax, and inflation" }
+  ]
+}

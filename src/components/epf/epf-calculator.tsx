@@ -8,7 +8,7 @@ import { CalcExplainer } from "@/components/shared/calc-explainer";
 import { LieVsTruthPanel } from "@/components/shared/lie-vs-truth-panel";
 import { ConfidenceBadge } from "@/components/shared/confidence-badge";
 import { WhyThisNumber } from "@/components/shared/why-this-number";
-import { ShareButton } from "@/components/shared/share-button";
+import { ShareBar } from "@/components/shared/share-bar";
 import { truthFromEPF } from "@/lib/truth/truth-data-adapter";
 import { SliderRow } from "@/components/shared/slider-row";
 
@@ -108,7 +108,7 @@ export function EPFCalculator() {
         <div className="flex flex-col gap-3 min-h-0">
           <div className="flex items-center justify-between shrink-0">
             <ConfidenceBadge inflationRate={input.inflationRate} />
-            <ShareButton title="EPF Calculator — c7xai" />
+            <ShareBar title="EPF Calculator — c7xai" />
           </div>
           <LieVsTruthPanel truth={truthFromEPF({ totalCorpusAtRetirement: result.totalCorpusAtRetirement, totalEmployeeContribution: result.totalEmployeeContribution, totalInterestEarned: result.totalInterestEarned }, input.inflationRate)} />
 

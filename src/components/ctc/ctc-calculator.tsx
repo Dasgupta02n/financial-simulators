@@ -10,7 +10,7 @@ import { CalcExplainer } from "@/components/shared/calc-explainer";
 import { LieVsTruthPanel } from "@/components/shared/lie-vs-truth-panel";
 import { ConfidenceBadge } from "@/components/shared/confidence-badge";
 import { WhyThisNumber } from "@/components/shared/why-this-number";
-import { ShareButton } from "@/components/shared/share-button";
+import { ShareBar } from "@/components/shared/share-bar";
 import { truthFromCTC } from "@/lib/truth/truth-data-adapter";
 import { SliderRow } from "@/components/shared/slider-row";
 
@@ -71,7 +71,7 @@ export function CTCCalculator() {
         <div className="flex flex-col gap-3 min-h-0">
           <div className="flex items-center justify-between shrink-0">
             <ConfidenceBadge inflationRate={6} />
-            <ShareButton title="CTC Optimizer — c7xai" />
+            <ShareBar title="CTC Optimizer — c7xai" />
           </div>
           <LieVsTruthPanel truth={truthFromCTC({ inHandMonthly: output.inHandMonthly, savingsMonthly: output.savingsMonthly })} />
           <div className="grid grid-cols-2 lg:grid-cols-3 gap-2">

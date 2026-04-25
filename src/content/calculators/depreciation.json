@@ -1,0 +1,28 @@
+{
+  "id": "depreciation",
+  "slug": "depreciation-calculator",
+  "name": "Depreciation & TCO Calculator",
+  "metaTitle": "Car & Vehicle Depreciation Calculator — Real TCO, 80EEB, WDV | c7xai",
+  "metaDescription": "See the true cost of owning a car, bike, or commercial vehicle after depreciation (15% WDV), fuel inflation, insurance, maintenance, and Section 80EEB EV deduction.",
+  "shortDescription": "Real cost of vehicle ownership after all hidden costs",
+  "faq": [
+    {
+      "question": "What is WDV depreciation for vehicles?",
+      "answer": "Under the Income Tax Act, vehicles are depreciated at 15% per year on the Written Down Value (WDV) basis. This means each year you deduct 15% from the remaining book value."
+    },
+    {
+      "question": "What is Section 80EEB for EVs?",
+      "answer": "Section 80EEB provides a deduction of up to ₹1.5L per year on interest paid on EV loans, if your annual income is ₹50L or less. This can save up to ₹45,000 in tax per year."
+    },
+    {
+      "question": "What is the true cost of owning a car?",
+      "answer": "A ₹10L car typically costs ₹18-22L over 8 years when you add fuel (with 8% annual inflation), insurance, maintenance, registration, and loan interest. The resale value is often only 20-25% of the purchase price."
+    }
+  ],
+  "howToSteps": [
+    { "name": "Enter vehicle details", "text": "Set purchase price, vehicle type (car/bike/commercial)" },
+    { "name": "Add running costs", "text": "Enter fuel, insurance, and maintenance costs" },
+    { "name": "Set loan details", "text": "Enter loan amount, rate, and tenure if applicable" },
+    { "name": "See real TCO", "text": "View total cost of ownership after all hidden costs and depreciation" }
+  ]
+}

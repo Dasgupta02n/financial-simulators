@@ -1,0 +1,30 @@
+{
+  "id": "planner",
+  "slug": "planner",
+  "name": "Financial Planner",
+  "metaTitle": "Financial Planner Wizard — c7xai",
+  "metaDescription": "6-step financial planning wizard. Profile, income, goals, insurance, gap analysis, and action plan. No PII collected.",
+  "shortDescription": "Your personalized financial roadmap",
+  "faq": [
+    {
+      "question": "How does the financial planner work?",
+      "answer": "It follows the CFP Board's 6-step process: gather your profile, analyze income/expenses, set goals, review insurance, identify gaps, and create an action plan. No personal data is collected — only ranges and brackets."
+    },
+    {
+      "question": "Is my data safe?",
+      "answer": "All computations run in your browser. Nothing is sent to any server. We use income brackets, not exact amounts. No PII is collected."
+    },
+    {
+      "question": "What goals can I plan for?",
+      "answer": "Emergency fund, home purchase, education, marriage, retirement, car, travel, and health fund. Each goal has a target amount, timeline, and priority level."
+    }
+  ],
+  "howToSteps": [
+    { "name": "Set your profile", "text": "Choose life stage and dependents — no exact ages needed" },
+    { "name": "Enter income bracket", "text": "Select income range and savings rate" },
+    { "name": "Add financial goals", "text": "Set target amounts, timelines, and priorities for each goal" },
+    { "name": "Review insurance", "text": "Check existing insurance coverage" },
+    { "name": "See gap analysis", "text": "Find where your savings fall short" },
+    { "name": "Get action plan", "text": "Priority-ranked recommendations with linked calculators" }
+  ]
+}
