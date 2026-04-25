@@ -7,7 +7,7 @@ import { CalcExplainer } from "@/components/shared/calc-explainer";
 import { LieVsTruthPanel } from "@/components/shared/lie-vs-truth-panel";
 import { ConfidenceBadge } from "@/components/shared/confidence-badge";
 import { WhyThisNumber } from "@/components/shared/why-this-number";
-import { ShareButton } from "@/components/shared/share-button";
+import { ShareBar } from "@/components/shared/share-bar";
 import { truthFromSIP } from "@/lib/truth/truth-data-adapter";
 
 interface ResultsPanelProps {
@@ -44,7 +44,7 @@ export function ResultsPanel({
     <div className="flex flex-col gap-3 h-full">
       <div className="flex items-center justify-between shrink-0">
         <ConfidenceBadge inflationRate={inflationRate} />
-        <ShareButton title="SIP Simulator — c7xai" />
+        <ShareBar title="SIP Simulator — c7xai" />
       </div>
 
       <LieVsTruthPanel truth={truth} />

@@ -1,0 +1,28 @@
+{
+  "id": "crypto",
+  "slug": "crypto-calculator",
+  "name": "Crypto Tax Calculator",
+  "metaTitle": "Crypto Tax Calculator — 30% Flat Tax, 1% TDS, Real Returns | c7xai",
+  "metaDescription": "Calculate real crypto returns after India's 30% flat tax, 1% TDS, and inflation. Includes staking income tax and wash sale rules.",
+  "shortDescription": "Real crypto returns after India's harsh tax regime",
+  "faq": [
+    {
+      "question": "How is crypto taxed in India?",
+      "answer": "India taxes crypto gains at a flat 30% rate under Section 115BBE — no slab benefit, no loss set-off against other income. Plus 1% TDS on transfers above ₹10L under Section 194S."
+    },
+    {
+      "question": "Can I offset crypto losses against other income?",
+      "answer": "No. India's wash sale rule for crypto means losses cannot be offset against gains from any other asset class. You can only carry forward crypto losses to offset future crypto gains."
+    },
+    {
+      "question": "How is staking income taxed?",
+      "answer": "Staking rewards are taxed as 'income from other sources' at your slab rate, not at the 30% crypto rate."
+    }
+  ],
+  "howToSteps": [
+    { "name": "Enter purchase details", "text": "Set purchase price, quantity, and current price" },
+    { "name": "Add staking income", "text": "Enter annual staking rewards if applicable" },
+    { "name": "See tax breakdown", "text": "View 30% tax, 1% TDS, and staking tax" },
+    { "name": "Real returns", "text": "See what you actually keep after tax and inflation" }
+  ]
+}

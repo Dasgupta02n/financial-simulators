@@ -11,7 +11,7 @@ import { CalcExplainer } from "@/components/shared/calc-explainer";
 import { LieVsTruthPanel } from "@/components/shared/lie-vs-truth-panel";
 import { ConfidenceBadge } from "@/components/shared/confidence-badge";
 import { WhyThisNumber } from "@/components/shared/why-this-number";
-import { ShareButton } from "@/components/shared/share-button";
+import { ShareBar } from "@/components/shared/share-bar";
 import { truthFromFIRE } from "@/lib/truth/truth-data-adapter";
 import { SliderRow } from "@/components/shared/slider-row";
 
@@ -72,7 +72,7 @@ export function FIRECalculator() {
         <div className="flex flex-col gap-3 min-h-0">
           <div className="flex items-center justify-between shrink-0">
             <ConfidenceBadge inflationRate={input.preRetirementInflation} />
-            <ShareButton title="FIRE Calculator — c7xai" />
+            <ShareBar title="FIRE Calculator — c7xai" />
           </div>
           <LieVsTruthPanel truth={truthFromFIRE({ corpusAtRetirement: output.corpusAtRetirement, realCorpusAtRetirement: output.realCorpusAtRetirement, totalContributed: output.totalContributed }, input.preRetirementInflation)} />
           <div className="grid grid-cols-2 lg:grid-cols-3 gap-2">

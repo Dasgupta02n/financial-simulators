@@ -5,6 +5,7 @@ import {
   LAST_UPDATED,
   computeLTCG,
 } from "./assumptions";
+import { STAMP_DUTY } from "@/lib/calculators/real-estate/types";
 
 /* ── SIP ─────────────────────────────────────── */
 
@@ -472,6 +473,167 @@ export function truthFromSimpleInterest(r: SIPartial, inflationRate = INFLATION_
     ],
     taxRegime: `FY ${FY_YEAR}`,
     inflationRate,
+    lastUpdated: LAST_UPDATED,
+  };
+}
+
+/* ── Real Estate ─────────────────────────────── */
+
+interface RealEstatePartial {
+  finalPropertyValue: number;
+  totalCostOfOwnership: number;
+  stampDuty: number;
+  registrationCost: number;
+  capitalGainsTax: number;
+  realValueAfterInflation: number;
+}
+
+export function truthFromRealEstate(
+  r: RealEstatePartial,
+  state: string,
+  ownershipType: string,
+  inflationRate = INFLATION_RATE
+): TruthResult {
+  const stampDutyPct = (STAMP_DUTY as Record<string, number>)[state] ?? 6;
+  return {
+    grossLabel: "Projected property value",
+    grossValue: r.finalPropertyValue,
+    realLabel: "Real purchasing power",
+    realValue: r.realValueAfterInflation,
+    deductions: [
+      { label: "Stamp duty & registration", amount: r.stampDuty + r.registrationCost },
+      { label: "Capital gains tax", amount: r.capitalGainsTax },
+      { label: `Inflation erosion (${inflationRate}%)`, amount: r.finalPropertyValue - r.realValueAfterInflation },
+    ],
+    assumptions: [
+      `Stamp duty: ${stampDutyPct}% (${state})`,
+      `Inflation: ${inflationRate}% (RBI 10-yr avg)`,
+      ownershipType === "leasehold" ? "Leasehold reduces appreciation by ~1.5%" : "Freehold property",
+    ],
+    taxRegime: `FY ${FY_YEAR}`,
+    inflationRate,
+    lastUpdated: LAST_UPDATED,
+  };
+}
+
+/* ── Crypto ───────────────────────────────────── */
+
+interface CryptoPartial {
+  totalGains: number;
+  taxOnGains: number;
+  tdsAmount: number;
+  stakingTax: number;
+  netAfterTax: number;
+  realValueAfterInflation: number;
+  effectiveTaxRate: number;
+}
+
+export function truthFromCrypto(r: CryptoPartial, inflationRate = INFLATION_RATE): TruthResult {
+  return {
+    grossLabel: "Crypto portfolio value",
+    grossValue: r.netAfterTax + r.taxOnGains + r.tdsAmount + r.stakingTax,
+    realLabel: "What you actually keep",
+    realValue: r.realValueAfterInflation,
+    deductions: [
+      { label: "30% flat tax (Section 115BBE)", amount: r.taxOnGains },
+      { label: "1% TDS (Section 194S)", amount: r.tdsAmount },
+      { label: "Staking income tax", amount: r.stakingTax },
+      { label: `Inflation erosion (${inflationRate}%)`, amount: r.netAfterTax - r.realValueAfterInflation },
+    ],
+    assumptions: [
+      "Crypto gains taxed at flat 30% — no slab benefit",
+      "1% TDS on transfers above ₹10L (Section 194S)",
+      "Crypto losses cannot offset gains from other assets",
+      `Inflation: ${inflationRate}% (RBI 10-yr avg)`,
+    ],
+    taxRegime: `FY ${FY_YEAR}`,
+    inflationRate,
+    lastUpdated: LAST_UPDATED,
+  };
+}
+
+/* ── Forex ───────────────────────────────────── */
+
+interface ForexPartial {
+  finalINRValue: number;
+  capitalGainsTax: number;
+  tcsAmount: number;
+  bankSpread: number;
+  totalDeductions: number;
+  netProceeds: number;
+  realValue: number;
+  effectiveRate: number;
+  holdingYears: number;
+}
+
+export function truthFromForex(r: ForexPartial, input: { holdingYears: number; inflationRate: number }): TruthResult {
+  return {
+    grossLabel: "Foreign investment value (INR)",
+    grossValue: r.finalINRValue,
+    realLabel: "Real purchasing power",
+    realValue: r.realValue,
+    deductions: [
+      { label: "Capital gains tax", amount: r.capitalGainsTax },
+      { label: "TCS on remittance", amount: r.tcsAmount },
+      { label: "Bank spread (~1%)", amount: r.bankSpread },
+      { label: `Inflation erosion (${input.inflationRate}%)`, amount: r.netProceeds - r.realValue },
+    ],
+    assumptions: [
+      input.holdingYears > 3 ? "LTCG at 20% with indexation" : "STCG at slab rate",
+      "TCS: 20% above ₹7L under LRS",
+      "RBI LRS limit: $250,000/year",
+      `Inflation: ${input.inflationRate}% (RBI 10-yr avg)`,
+    ],
+    taxRegime: `FY ${FY_YEAR}`,
+    inflationRate: input.inflationRate,
+    lastUpdated: LAST_UPDATED,
+  };
+}
+
+/* ── Depreciation / Car ────────────────────────── */
+
+interface DepreciationPartial {
+  purchasePrice: number;
+  totalCostOfOwnership: number;
+  estimatedResaleValue: number;
+  totalFuelCost: number;
+  totalInsuranceCost: number;
+  totalMaintenanceCost: number;
+  totalLoanInterest: number;
+  registrationCost: number;
+  section80EEBDeduction: number;
+  netCostAfterTax: number;
+}
+
+export function truthFromDepreciation(
+  r: DepreciationPartial,
+  input: { isEV: boolean; incomeAnnual: number; inflationRate: number }
+): TruthResult {
+  const evDeduction = input.isEV && input.incomeAnnual <= 50_00_000
+    ? Math.min(r.totalLoanInterest, 150000) * 0.3
+    : 0;
+  return {
+    grossLabel: "Purchase price",
+    grossValue: r.purchasePrice,
+    realLabel: "Total cost of ownership",
+    realValue: r.netCostAfterTax,
+    deductions: [
+      { label: "Fuel costs (inflated)", amount: r.totalFuelCost },
+      { label: "Insurance (inflated)", amount: r.totalInsuranceCost },
+      { label: "Maintenance (inflated)", amount: r.totalMaintenanceCost },
+      { label: "Loan interest", amount: r.totalLoanInterest },
+      { label: "Registration", amount: r.registrationCost },
+      { label: "Less: Resale value", amount: -r.estimatedResaleValue },
+      ...(evDeduction > 0 ? [{ label: "Section 80EEB saved", amount: -evDeduction }] : []),
+    ],
+    assumptions: [
+      "15% WDV depreciation per year (Income Tax Act)",
+      "Fuel inflation: 8%/year",
+      input.isEV ? "Section 80EEB: ₹1.5L EV loan interest deduction" : "No EV deduction",
+      `Inflation: ${input.inflationRate}% (RBI 10-yr avg)`,
+    ],
+    taxRegime: `FY ${FY_YEAR}`,
+    inflationRate: input.inflationRate,
     lastUpdated: LAST_UPDATED,
   };
 }

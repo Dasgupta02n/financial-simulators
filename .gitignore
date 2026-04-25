@@ -52,3 +52,27 @@ next-env.d.ts
 
 # OS
 Thumbs.db
+
+# ── Security-sensitive files ──
+# Secrets, keys, and credentials
+*.key
+*.p12
+*.pfx
+*.jks
+*.keystore
+credentials.json
+service-account*.json
+secrets.json
+
+# Lead data / PII
+src/data/leads*.csv
+src/data/leads*.json
+
+# Admin auth
+.admin-session
+
+# Backup files that may contain secrets
+*.bak
+*.orig
+*.swp
+*.swo

@@ -8,7 +8,7 @@ import { CalcExplainer } from "@/components/shared/calc-explainer";
 import { LieVsTruthPanel } from "@/components/shared/lie-vs-truth-panel";
 import { ConfidenceBadge } from "@/components/shared/confidence-badge";
 import { WhyThisNumber } from "@/components/shared/why-this-number";
-import { ShareButton } from "@/components/shared/share-button";
+import { ShareBar } from "@/components/shared/share-bar";
 import { truthFromSimpleInterest } from "@/lib/truth/truth-data-adapter";
 import {
   Bar,
@@ -104,7 +104,7 @@ export function SimpleInterestCalculator() {
         <div className="flex flex-col gap-3 min-h-0">
           <div className="flex items-center justify-between shrink-0">
             <ConfidenceBadge inflationRate={6} />
-            <ShareButton title="Simple Interest Calculator — c7xai" />
+            <ShareBar title="Simple Interest Calculator — c7xai" />
           </div>
           <LieVsTruthPanel truth={truthFromSimpleInterest({ simpleInterest: result.simpleInterest, compoundInterest: result.compoundInterest, totalAmount: result.totalAmount, principal: input.principal }, 6)} />
 
