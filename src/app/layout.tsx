@@ -23,6 +23,12 @@ export const metadata: Metadata = {
     "geo.country": "IN",
     "language": "en-IN",
   },
+  alternates: {
+    canonical: "/",
+    languages: {
+      "en-IN": "/",
+    },
+  },
 };
 
 export default function RootLayout({
@@ -30,7 +36,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const siteSchema = generateSiteJsonLd();
+  const siteSchemas = generateSiteJsonLd();
 
   return (
     <html
@@ -38,12 +44,15 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <head>
-        <script
-          type="application/ld+json"
-          // Content is server-generated from our own config — not user input.
-          // Standard Next.js pattern for structured data injection.
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(siteSchema) }}
-        />
+        {siteSchemas.map((schema, i) => (
+          <script
+            key={i}
+            type="application/ld+json"
+            // Content is server-generated from our own static config — never user input.
+            // This is the standard Next.js pattern for injecting structured data.
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+          />
+        ))}
       </head>
       <body className="min-h-full flex flex-col bg-ink text-text-primary">
         <SiteNav />

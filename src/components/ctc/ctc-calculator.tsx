@@ -7,7 +7,6 @@ import { formatINR } from "@/lib/format";
 import { MetricCard } from "@/components/sip/metric-card";
 import { Bar, BarChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { CalcExplainer } from "@/components/shared/calc-explainer";
-import { CalcVisualization } from "@/components/shared/calc-visualization";
 
 const DEFAULT_INPUT: CTCInput = {
   grossCTC: 1500000,
@@ -28,14 +27,14 @@ function SliderRow({ label, value, displayValue, min, max, step, onChange }: {
   label: string; value: number; displayValue: string; min: number; max: number; step: number; onChange: (v: number) => void;
 }) {
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-0.5">
       <div className="flex justify-between items-baseline">
-        <label className="text-sm text-text-secondary">{label}</label>
-        <span className="text-sm font-mono text-text-primary">{displayValue}</span>
+        <label className="text-xs text-text-secondary">{label}</label>
+        <span className="text-xs font-mono text-text-primary">{displayValue}</span>
       </div>
       <input type="range" min={min} max={max} step={step} value={value}
         onChange={(e) => onChange(parseFloat(e.target.value))}
-        className="w-full h-1.5 rounded-full appearance-none cursor-pointer bg-border accent-gain" />
+        className="w-full h-1 rounded-full appearance-none cursor-pointer bg-border accent-gain" />
     </div>
   );
 }
@@ -46,10 +45,6 @@ export function CTCCalculator() {
     <K extends keyof CTCInput>(key: K, value: CTCInput[K]) => { setInput((prev) => ({ ...prev, [key]: value })); }, []
   );
   const output = useMemo(() => computeCTC(input), [input]);
-  const vizData = useMemo(() => ({
-    grossCTC: input.grossCTC,
-    inHand: output.inHandAnnual,
-  }), [input.grossCTC, output.inHandAnnual]);
 
   const chartData = [
     { name: "Current", inHand: output.inHandAnnual, tax: output.tax.totalTax },
@@ -57,10 +52,10 @@ export function CTCCalculator() {
   ];
 
   return (
-    <div className="flex flex-col lg:flex-row gap-6 w-full max-w-7xl mx-auto px-4 py-8">
-      <div className="lg:w-[40%]">
-        <div className="flex flex-col gap-6 p-6 bg-surface rounded-lg border border-border">
-          <h2 className="text-lg font-semibold tracking-tight">CTC Optimizer</h2>
+    <div className="flex flex-col lg:flex-row gap-4 w-full h-full">
+      <div className="lg:w-[38%] shrink-0">
+        <div className="flex flex-col gap-3 p-4 bg-surface rounded-lg border border-border">
+          <h2 className="text-sm font-semibold tracking-tight">CTC Optimizer</h2>
           <SliderRow label="Gross CTC" value={input.grossCTC} displayValue={formatINR(input.grossCTC)}
             min={300000} max={10000000} step={50000} onChange={(v) => handleInputChange("grossCTC", v)} />
           <SliderRow label="Basic %" value={input.basicPct} displayValue={`${input.basicPct}%`}
@@ -74,31 +69,28 @@ export function CTCCalculator() {
           <SliderRow label="Actual Rent/Month" value={input.actualRentMonthly} displayValue={`₹${(input.actualRentMonthly / 1000).toFixed(0)}K`}
             min={0} max={200000} step={1000} onChange={(v) => handleInputChange("actualRentMonthly", v)} />
           <div className="flex justify-between items-baseline">
-            <label className="text-sm text-text-secondary">Metro City</label>
-            <button className={`px-3 py-1 text-sm rounded-md font-mono transition-colors ${input.metroCity ? "bg-gain/20 text-gain border border-gain/40" : "bg-border text-text-secondary border border-border"}`}
+            <label className="text-xs text-text-secondary">Metro City</label>
+            <button className={`px-2 py-1 text-xs rounded-md font-mono transition-colors ${input.metroCity ? "bg-gain/20 text-gain border border-gain/40" : "bg-border text-text-secondary border border-border"}`}
               onClick={() => handleInputChange("metroCity", !input.metroCity)}>
               {input.metroCity ? "YES" : "NO"}
             </button>
           </div>
         </div>
       </div>
-      <div className="lg:w-[60%]">
-        <div className="flex flex-col gap-6">
+      <div className="lg:w-[62%] min-h-0">
+        <div className="flex flex-col gap-3 min-h-0">
           <CalcExplainer>
-            <p className="font-semibold text-text-primary">What this calculator does</p>
-            <p>Your CTC (Cost to Company) is not what you take home. This tool breaks down how your salary is structured and finds the combination of Basic, HRA, LTA, and allowances that puts the most money in your bank account — legally.</p>
-            <p className="font-semibold text-text-primary">Salary structure explained</p>
+            <p className="font-semibold text-text-primary">How to read</p>
             <ul className="list-disc pl-5 space-y-1">
-              <li><span className="text-text-primary">Basic Salary</span> — the core part. HRA, PF, and many benefits are calculated as a percentage of this. Higher basic = higher HRA exemption, but also higher PF deduction.</li>
-              <li><span className="text-text-primary">HRA</span> — House Rent Allowance. If you pay rent and live in a rented house, a portion of HRA is tax-free. In metro cities, you can exempt up to 50% of basic; in non-metro, 40%.</li>
-              <li><span className="text-text-primary">LTA</span> — Leave Travel Allowance. Tax-free if used for domestic travel, but you need actual bills.</li>
-              <li><span className="text-text-primary">Special Allowance</span> — the leftover after Basic, HRA, LTA, NPS. Fully taxable, no exemptions.</li>
+              <li><span className="text-text-primary">Basic Salary</span> — core part. HRA, PF calculated as % of this. Higher basic = higher HRA exemption, but higher PF deduction.</li>
+              <li><span className="text-text-primary">HRA</span> — House Rent Allowance. Portion tax-free if you pay rent. Metro: 50% of basic exempt; non-metro: 40%.</li>
+              <li><span className="text-text-primary">LTA</span> — Leave Travel Allowance. Tax-free with actual domestic travel bills.</li>
+              <li><span className="text-text-primary">Special Allowance</span> — leftover after Basic, HRA, LTA, NPS. Fully taxable.</li>
             </ul>
-            <p className="font-semibold text-text-primary">HRA Exemption — how it works</p>
-            <p>Of your HRA, the tax-free part is the smallest of: (a) actual HRA received, (b) rent paid minus 10% of basic, or (c) 50%/40% of basic. The optimizer finds the Basic/HRA split that maximizes this exemption.</p>
+            <p className="font-semibold text-text-primary">HRA exemption</p>
+            <p>Tax-free part is smallest of: (a) actual HRA, (b) rent minus 10% of basic, or (c) 50%/40% of basic. Optimizer finds the split that maximizes this.</p>
           </CalcExplainer>
-          <CalcVisualization calcId="ctc" data={vizData} />
-          <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-2 lg:grid-cols-3 gap-2">
             <MetricCard label="In-Hand/Year" value={output.inHandAnnual} variant="neutral" />
             <MetricCard label="In-Hand/Month" value={output.inHandMonthly} variant="gain" />
             <MetricCard label="Tax (Current)" value={output.tax.totalTax} variant="loss" />
@@ -107,11 +99,11 @@ export function CTCCalculator() {
 
           {output.savingsAnnual > 0 && (
             <>
-              <div className="p-3 bg-gain/10 border border-gain/30 rounded-lg text-sm font-mono text-gain">
-                Optimized structure saves ₹{formatINR(output.savingsAnnual)}/year (₹{formatINR(output.savingsMonthly)}/month) — Basic {output.optimizedBreakdown.basicPct ?? "?"}%, HRA {output.optimizedBreakdown.hraPct ?? "?"}%
+              <div className="p-2 bg-gain/10 border border-gain/30 rounded-lg text-xs font-mono text-gain">
+                Optimized saves ₹{formatINR(output.savingsAnnual)}/yr (₹{formatINR(output.savingsMonthly)}/mo) — Basic {output.optimizedBreakdown.basicPct ?? "?"}%, HRA {output.optimizedBreakdown.hraPct ?? "?"}%
               </div>
 
-              <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
+              <div className="grid grid-cols-2 lg:grid-cols-3 gap-2">
                 <MetricCard label="Optimized In-Hand/Yr" value={output.optimizedInHandAnnual} variant="gain" />
                 <MetricCard label="Optimized In-Hand/Mo" value={output.optimizedInHandMonthly} variant="gain" />
                 <MetricCard label="Optimized Tax" value={output.optimizedTax.totalTax} variant="neutral" />
@@ -119,15 +111,15 @@ export function CTCCalculator() {
             </>
           )}
 
-          <div className="bg-surface rounded-lg border border-border p-4">
-            <h3 className="text-sm font-semibold text-text-secondary mb-3">Current vs Optimized</h3>
-            <div className="w-full h-[300px]">
+          <div className="flex-1 min-h-0 bg-surface rounded-lg border border-border p-4">
+            <h3 className="text-xs font-semibold text-text-secondary mb-2">Current vs Optimized</h3>
+            <div className="w-full flex-1 min-h-[220px]">
               <ResponsiveContainer width="100%" height="100%">
-                <BarChart data={chartData} margin={{ top: 10, right: 30, left: 10, bottom: 0 }}>
-                  <XAxis dataKey="name" tick={{ fill: "#9ca3af", fontSize: 11, fontFamily: "var(--font-geist-mono)" }}
+                <BarChart data={chartData} margin={{ top: 5, right: 20, left: 5, bottom: 0 }}>
+                  <XAxis dataKey="name" tick={{ fill: "#9ca3af", fontSize: 10, fontFamily: "var(--font-geist-mono)" }}
                     axisLine={{ stroke: "#1f2937" }} tickLine={false} />
-                  <YAxis tick={{ fill: "#9ca3af", fontSize: 11, fontFamily: "var(--font-geist-mono)" }}
-                    tickFormatter={(v: number) => `₹${(v / 100000).toFixed(1)}L`} axisLine={{ stroke: "#1f2937" }} tickLine={false} width={60} />
+                  <YAxis tick={{ fill: "#9ca3af", fontSize: 10, fontFamily: "var(--font-geist-mono)" }}
+                    tickFormatter={(v: number) => `₹${(v / 100000).toFixed(1)}L`} axisLine={{ stroke: "#1f2937" }} tickLine={false} width={55} />
                   <Tooltip contentStyle={{ backgroundColor: "#111827", border: "1px solid #1f2937", borderRadius: "8px",
                     fontFamily: "var(--font-geist-mono)", fontSize: "11px" }}
                     formatter={(value, name) => [`₹${(Number(value) / 100000).toFixed(1)}L`, String(name)]} />
@@ -138,7 +130,7 @@ export function CTCCalculator() {
             </div>
           </div>
 
-          <div className="text-xs text-text-secondary font-mono px-1">
+          <div className="text-[10px] text-text-secondary font-mono px-1">
             Breakdown: Basic {formatINR(output.breakdown.basic)} | HRA {formatINR(output.breakdown.hra)} | LTA {formatINR(output.breakdown.lta)} | Special {formatINR(output.breakdown.specialAllowance)}
           </div>
         </div>

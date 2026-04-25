@@ -7,7 +7,6 @@ import { formatINR, formatINRShort } from "@/lib/format";
 import { MetricCard } from "@/components/sip/metric-card";
 import { Area, ComposedChart, Line, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { CalcExplainer } from "@/components/shared/calc-explainer";
-import { CalcVisualization } from "@/components/shared/calc-visualization";
 
 const DEFAULT_INPUT: NPSInput = {
   currentAge: 30,
@@ -25,14 +24,14 @@ function SliderRow({ label, value, displayValue, min, max, step, onChange }: {
   label: string; value: number; displayValue: string; min: number; max: number; step: number; onChange: (v: number) => void;
 }) {
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-0.5">
       <div className="flex justify-between items-baseline">
-        <label className="text-sm text-text-secondary">{label}</label>
-        <span className="text-sm font-mono text-text-primary">{displayValue}</span>
+        <label className="text-xs text-text-secondary">{label}</label>
+        <span className="text-xs font-mono text-text-primary">{displayValue}</span>
       </div>
       <input type="range" min={min} max={max} step={step} value={value}
         onChange={(e) => onChange(parseFloat(e.target.value))}
-        className="w-full h-1.5 rounded-full appearance-none cursor-pointer bg-border accent-gain" />
+        className="w-full h-1 rounded-full appearance-none cursor-pointer bg-border accent-gain" />
     </div>
   );
 }
@@ -43,17 +42,12 @@ export function NPSCalculator() {
     <K extends keyof NPSInput>(key: K, value: NPSInput[K]) => { setInput((prev) => ({ ...prev, [key]: value })); }, []
   );
   const output = useMemo(() => computeNPS(input), [input]);
-  const vizData = useMemo(() => ({
-    totalCorpus: output.corpusAtRetirement,
-    monthlyPension: output.monthlyPension,
-    lumpsumWithdrawal: output.lumpsumWithdrawal,
-  }), [output.corpusAtRetirement, output.monthlyPension, output.lumpsumWithdrawal]);
 
   return (
-    <div className="flex flex-col lg:flex-row gap-6 w-full max-w-7xl mx-auto px-4 py-8">
-      <div className="lg:w-[40%]">
-        <div className="flex flex-col gap-6 p-6 bg-surface rounded-lg border border-border">
-          <h2 className="text-lg font-semibold tracking-tight">NPS Pension Modeler</h2>
+    <div className="flex flex-col lg:flex-row gap-4 w-full h-full">
+      <div className="lg:w-[38%] shrink-0">
+        <div className="flex flex-col gap-3 p-4 bg-surface rounded-lg border border-border">
+          <h2 className="text-sm font-semibold tracking-tight">NPS Pension Modeler</h2>
           <SliderRow label="Current Age" value={input.currentAge} displayValue={`${input.currentAge}`}
             min={20} max={55} step={1} onChange={(v) => handleInputChange("currentAge", v)} />
           <SliderRow label="Retirement Age" value={input.retirementAge} displayValue={`${input.retirementAge}`}
@@ -74,26 +68,23 @@ export function NPSCalculator() {
             min={2} max={12} step={0.5} onChange={(v) => handleInputChange("inflationRate", v)} />
         </div>
       </div>
-      <div className="lg:w-[60%]">
-        <div className="flex flex-col gap-6">
+      <div className="lg:w-[62%] min-h-0">
+        <div className="flex flex-col gap-3 min-h-0">
           <CalcExplainer>
-            <p className="font-semibold text-text-primary">What this calculator does</p>
-            <p>It projects your National Pension System corpus growth and tells you what monthly pension to expect — in both nominal and real (inflation-adjusted) terms.</p>
-            <p className="font-semibold text-text-primary">How NPS works at withdrawal</p>
+            <p className="font-semibold text-text-primary">How NPS withdrawal works</p>
             <ul className="list-disc pl-5 space-y-1">
-              <li><span className="text-text-primary">60% Lumpsum</span> — withdrawn tax-free at retirement. You get this as a one-time payment.</li>
-              <li><span className="text-text-primary">40% Annuity</span> — must be used to buy an annuity (pension plan) from an insurance company. This gives you a monthly pension, but the pension amount is fully taxable as &quot;Income from Other Sources.&quot;</li>
+              <li><span className="text-text-primary">60% Lumpsum</span> — withdrawn tax-free at retirement.</li>
+              <li><span className="text-text-primary">40% Annuity</span> — must buy an annuity (pension plan). Monthly pension is fully taxable as &quot;Income from Other Sources.&quot;</li>
             </ul>
-            <p className="font-semibold text-text-primary">Auto Choice lifecycle</p>
-            <p>The <span className="text-warn">yellow line</span> in the chart shows your equity allocation automatically shifting down as you age: 75% equity until age 35, gradually reducing to 25% by age 55+. This protects older savers from market crashes near retirement.</p>
-            <p className="font-semibold text-text-primary">What each number means</p>
+            <p className="font-semibold text-text-primary">How to read the chart</p>
             <ul className="list-disc pl-5 space-y-1">
+              <li><span className="text-warn">Yellow line</span> = equity allocation (Auto Choice lifecycle: 75% → 25% with age).</li>
+              <li><span className="text-gain">Green area</span> = corpus. <span className="text-loss">Red dashed</span> = real purchasing power.</li>
               <li><span className="text-text-primary">Monthly Pension</span> — what you receive each month from the annuity.</li>
-              <li><span className="text-text-primary">Real Monthly Pension</span> — what that pension can actually buy in today&apos;s prices. If inflation is 6%, a ₹35,000 pension in 30 years buys what ₹6,000 buys today.</li>
+              <li><span className="text-text-primary">Real Monthly Pension</span> — what that pension can buy in today&apos;s prices.</li>
             </ul>
           </CalcExplainer>
-          <CalcVisualization calcId="nps" data={vizData} />
-          <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-2 lg:grid-cols-3 gap-2">
             <MetricCard label="Corpus at Retirement" value={output.corpusAtRetirement} variant="gain" />
             <MetricCard label="Real Value (Today's ₹)" value={output.realCorpusAtRetirement} variant="neutral" />
             <MetricCard label="Lumpsum (Tax-Free)" value={output.lumpsumWithdrawal} variant="gain" />
@@ -102,13 +93,13 @@ export function NPSCalculator() {
             <MetricCard label="Real Monthly Pension" value={output.realMonthlyPension} variant="neutral" />
           </div>
 
-          <div className="p-3 bg-warn/10 border border-warn/30 rounded-lg text-sm font-mono text-warn">
-            NPS Tax: 60% lumpsum withdrawal is tax-free. Annuity income ({formatINR(output.annuityTaxable)}/yr) is fully taxable as &quot;Income from Other Sources.&quot;
+          <div className="p-2 bg-warn/10 border border-warn/30 rounded-lg text-xs font-mono text-warn">
+            NPS Tax: 60% lumpsum is tax-free. Annuity income ({formatINR(output.annuityTaxable)}/yr) is fully taxable.
           </div>
 
-          <div className="bg-surface rounded-lg border border-border p-4">
-            <h3 className="text-sm font-semibold text-text-secondary mb-3">Corpus Growth (Auto Choice Lifecycle)</h3>
-            <div className="w-full h-[350px]">
+          <div className="flex-1 min-h-0 bg-surface rounded-lg border border-border p-4">
+            <h3 className="text-xs font-semibold text-text-secondary mb-2">Corpus Growth (Auto Choice Lifecycle)</h3>
+            <div className="w-full flex-1 min-h-[220px]">
               <ResponsiveContainer width="100%" height="100%">
                 <ComposedChart data={output.yearlyData} margin={{ top: 10, right: 30, left: 10, bottom: 0 }}>
                   <defs>
@@ -139,7 +130,7 @@ export function NPSCalculator() {
           </div>
 
           <div className="text-xs text-text-secondary font-mono px-1">
-            Auto Choice lifecycle: Equity shifts from 75% → 25% with age. 60% lumpsum is tax-free; 40% annuity is fully taxable.
+            Auto Choice lifecycle: Equity 75% → 25% with age. 60% lumpsum tax-free; 40% annuity fully taxable.
           </div>
         </div>
       </div>

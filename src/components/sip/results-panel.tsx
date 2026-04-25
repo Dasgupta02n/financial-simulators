@@ -4,7 +4,6 @@ import type { YearlyDataPoint } from "@/lib/calculators/sip/types";
 import { MetricCard } from "./metric-card";
 import { ProjectionChart } from "./projection-chart";
 import { CalcExplainer } from "@/components/shared/calc-explainer";
-import { CalcVisualization } from "@/components/shared/calc-visualization";
 
 interface ResultsPanelProps {
   totalInvested: number;
@@ -30,29 +29,8 @@ export function ResultsPanel({
   vizData,
 }: ResultsPanelProps) {
   return (
-    <div className="flex flex-col gap-6">
-      <CalcExplainer>
-        <p className="font-semibold text-text-primary">What this calculator does</p>
-        <p>It shows how your monthly investment grows over time, after considering the real-world effects of inflation, taxes, and market crashes.</p>
-        <p className="font-semibold text-text-primary">What each number means</p>
-        <ul className="list-disc pl-5 space-y-1">
-          <li><span className="text-text-primary">Total Invested</span> — the actual money you put in from your pocket over the years.</li>
-          <li><span className="text-text-primary">Nominal Corpus</span> — what your investment grows to on paper, before tax.</li>
-          <li><span className="text-text-primary">Post-Tax Corpus</span> — what you actually get after paying long-term capital gains tax (12.5% on profits above ₹1.25 lakh).</li>
-          <li><span className="text-text-primary">Real Purchasing Power</span> — the most important number. This is what your post-tax money can actually buy in today&apos;s prices, after inflation eats away at its value.</li>
-        </ul>
-        <p className="font-semibold text-text-primary">How to read the chart</p>
-        <ul className="list-disc pl-5 space-y-1">
-          <li><span className="text-gain">Green area</span> — your post-tax corpus growing over the years.</li>
-          <li><span className="text-loss">Red dashed line</span> — the real purchasing power of that money (this is what matters for your life goals).</li>
-          <li>The gap between green and red is what inflation silently steals from you.</li>
-          <li>When stress test is on, a <span className="text-stress">red line</span> shows how a market crash would affect your savings.</li>
-        </ul>
-        <p className="font-semibold text-text-primary">Step-Up SIP</p>
-        <p>Increasing your SIP by a small amount each year (even 10%) dramatically increases your final amount, because more money stays invested for longer.</p>
-      </CalcExplainer>
-      <CalcVisualization calcId="sip" data={vizData} />
-      <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
+    <div className="flex flex-col gap-3 h-full">
+      <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 shrink-0">
         <MetricCard label="Total Invested" value={totalInvested} variant="neutral" />
         <MetricCard label="Nominal Corpus" value={nominalCorpus} variant="gain" />
         <MetricCard label="Post-Tax Corpus" value={postTaxCorpus} variant="gain" className="opacity-70" />
@@ -63,14 +41,24 @@ export function ResultsPanel({
       </div>
 
       {ltcgTax > 0 && (
-        <div className="text-xs text-text-secondary font-mono px-1">
+        <div className="text-xs text-text-secondary font-mono px-1 shrink-0">
           LTCG Tax: ₹{ltcgTax.toLocaleString("en-IN", { maximumFractionDigits: 0 })} (12.5% on gains above ₹1.25L exemption)
         </div>
       )}
 
-      <div className="bg-surface rounded-lg border border-border p-4">
+      <div className="bg-surface rounded-lg border border-border p-3 flex-1 min-h-0 flex flex-col">
         <ProjectionChart data={yearlyData} showStress={stressEnabled} />
       </div>
+
+      <CalcExplainer>
+        <p className="font-semibold text-text-primary">How to read this</p>
+        <ul className="list-disc pl-4 space-y-0.5">
+          <li><span className="text-gain">Green area</span> — post-tax corpus growing over the years.</li>
+          <li><span className="text-loss">Red dashed line</span> — real purchasing power (what matters for life goals).</li>
+          <li>The gap between green and red is what inflation silently steals.</li>
+          {stressEnabled && <li><span className="text-stress">Red line</span> — how a market crash would affect savings.</li>}
+        </ul>
+      </CalcExplainer>
     </div>
   );
 }

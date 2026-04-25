@@ -25,9 +25,9 @@ export function AccumCalculator() {
   );
   const output = useMemo(() => computeAccumulation(input), [input]);
   return (
-    <div className="flex flex-col lg:flex-row gap-6 w-full max-w-7xl mx-auto px-4 py-8">
-      <div className="lg:w-[40%]"><AccumSliderPanel input={input} onInputChange={handleInputChange} /></div>
-      <div className="lg:w-[60%]"><AccumResultsPanel output={output} /></div>
+    <div className="flex flex-col lg:flex-row gap-4 w-full h-full">
+      <div className="lg:w-[38%] shrink-0"><AccumSliderPanel input={input} onInputChange={handleInputChange} /></div>
+      <div className="lg:w-[62%] min-h-0"><AccumResultsPanel output={output} /></div>
     </div>
   );
 }

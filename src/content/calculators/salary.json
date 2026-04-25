@@ -1,0 +1,32 @@
+{
+  "id": "salary",
+  "slug": "salary-calculator",
+  "name": "Salary Calculator",
+  "metaTitle": "Salary Calculator — In-Hand Salary from CTC | Financial Simulators",
+  "metaDescription": "Calculate your monthly and annual in-hand salary from CTC. See full salary breakup — basic, HRA, PF, tax — for both old and new tax regimes. Client-side, zero PII.",
+  "shortDescription": "What's your real in-hand salary?",
+  "faq": [
+    {
+      "question": "How is in-hand salary calculated from CTC?",
+      "answer": "CTC (Cost to Company) includes your gross salary plus employer contributions like EPF. In-hand salary = Gross Salary - Employee PF - Professional Tax - Income Tax. Gross Salary = CTC - Employer PF. Your monthly in-hand is what actually lands in your bank account."
+    },
+    {
+      "question": "What is the difference between CTC and in-hand salary?",
+      "answer": "CTC is the total cost a company bears for you, including employer PF contributions and variable pay. In-hand salary is your take-home pay after all deductions — employee PF (12% of basic), professional tax (₹200/month), and income tax. Typically, in-hand salary is 70-80% of CTC."
+    },
+    {
+      "question": "Should I choose the old or new tax regime?",
+      "answer": "The new regime (FY 2025-26) offers lower slab rates but fewer deductions — only standard deduction of ₹75,000 and employer NPS under 80CCD(2). The old regime allows 80C (₹1.5L), 80D, HRA exemption, and more. If your total deductions exceed ~₹4.25L, the old regime usually saves more tax."
+    },
+    {
+      "question": "How much PF is deducted from my salary?",
+      "answer": "Employee PF contribution is 12% of basic salary (same as employer contribution). For example, if your basic is ₹50,000/month, your PF deduction is ₹6,000/month. EPF wage ceiling is ₹15,000/month basic for mandatory coverage, but most IT companies calculate on actual basic."
+    }
+  ],
+  "howToSteps": [
+    { "name": "Enter your CTC", "text": "Set your annual Cost to Company (CTC)" },
+    { "name": "Adjust basic salary %", "text": "Most companies set basic at 40-50% of CTC" },
+    { "name": "Set expected bonus", "text": "Enter variable pay as a percentage of CTC" },
+    { "name": "Choose tax regime", "text": "Select old or new regime to see tax impact" }
+  ]
+}

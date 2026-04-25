@@ -46,7 +46,7 @@ export function RegimeChart({ oldRegime, newRegime }: RegimeChartProps) {
   ];
 
   return (
-    <div className="w-full h-[280px]">
+    <div className="w-full flex-1 min-h-[220px]">
       <ResponsiveContainer width="100%" height="100%">
         <BarChart data={data} margin={{ top: 10, right: 30, left: 10, bottom: 0 }}>
           <XAxis

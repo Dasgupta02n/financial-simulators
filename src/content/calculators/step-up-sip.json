@@ -1,0 +1,32 @@
+{
+  "id": "step-up-sip",
+  "slug": "step-up-sip-calculator",
+  "name": "Step-Up SIP Calculator",
+  "metaTitle": "Step-Up SIP Calculator — See Real Returns with Annual SIP Increase | Financial Simulators",
+  "metaDescription": "Project your Step-Up SIP returns after inflation and tax. See how a yearly SIP increase boosts your corpus. Client-side, no PII.",
+  "shortDescription": "Step-up SIP: more invests, bigger corpus",
+  "faq": [
+    {
+      "question": "What is a Step-Up SIP?",
+      "answer": "A Step-Up SIP automatically increases your monthly investment by a fixed percentage each year, typically matching your salary increment. For example, starting at ₹10,000/month with a 10% annual step-up means you invest ₹11,000/month in year 2, ₹12,100/month in year 3, and so on."
+    },
+    {
+      "question": "How much does a Step-Up SIP increase returns?",
+      "answer": "A 10% annual step-up on a ₹10,000 SIP over 20 years at 12% returns can increase your final corpus by 40-60% compared to a regular SIP. This happens because you invest significantly more capital over time as your income grows."
+    },
+    {
+      "question": "What step-up percentage should I choose?",
+      "answer": "Most investors choose 5-10% annual step-up, aligned with their expected salary increment. A 10% step-up is popular as it matches typical Indian salary growth of 8-12% per year."
+    },
+    {
+      "question": "Is Step-Up SIP better than regular SIP?",
+      "answer": "Step-Up SIP generates a larger corpus because you invest more each year. However, it requires higher annual outflows. If your income grows steadily, Step-Up SIP is superior as it matches your increasing investment capacity with higher contributions."
+    }
+  ],
+  "howToSteps": [
+    { "name": "Set monthly SIP amount", "text": "Enter your starting monthly investment" },
+    { "name": "Set step-up percentage", "text": "Choose how much to increase your SIP each year (default: 10%)" },
+    { "name": "Set expected return rate", "text": "Adjust the expected annual return (default: 12% for NIFTY)" },
+    { "name": "Compare with regular SIP", "text": "See how much more you accumulate with Step-Up vs regular SIP" }
+  ]
+}

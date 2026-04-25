@@ -22,13 +22,13 @@ export function MetricCard({
   className,
 }: MetricCardProps) {
   return (
-    <div className={twMerge("flex flex-col gap-1", className)}>
-      <span className="text-xs uppercase tracking-wider text-text-secondary font-mono">
+    <div className={twMerge("flex flex-col gap-0.5", className)}>
+      <span className="text-[10px] uppercase tracking-wider text-text-secondary font-mono">
         {label}
       </span>
       <span
         className={twMerge(
-          "text-2xl font-mono font-semibold",
+          "text-xl font-mono font-semibold",
           variantStyles[variant]
         )}
       >

@@ -8,7 +8,7 @@ interface AccumulationChartProps { data: YearlyAccumulationPoint[]; }
 
 export function AccumulationChart({ data }: AccumulationChartProps) {
   return (
-    <div className="w-full h-[400px]">
+    <div className="w-full flex-1 min-h-[220px]">
       <ResponsiveContainer width="100%" height="100%">
         <ComposedChart data={data} margin={{ top: 10, right: 30, left: 10, bottom: 0 }}>
           <defs>
@@ -21,12 +21,12 @@ export function AccumulationChart({ data }: AccumulationChartProps) {
               <stop offset="100%" stopColor="#60a5fa" stopOpacity={0.02} />
             </linearGradient>
           </defs>
-          <XAxis dataKey="year" tick={{ fill: "#9ca3af", fontSize: 12, fontFamily: "var(--font-geist-mono)" }}
+          <XAxis dataKey="year" tick={{ fill: "#9ca3af", fontSize: 10, fontFamily: "var(--font-geist-mono)" }}
             tickFormatter={(v) => `Y${v}`} axisLine={{ stroke: "#1f2937" }} tickLine={false} />
-          <YAxis tick={{ fill: "#9ca3af", fontSize: 12, fontFamily: "var(--font-geist-mono)" }}
-            tickFormatter={formatINRShort} axisLine={{ stroke: "#1f2937" }} tickLine={false} width={70} />
+          <YAxis tick={{ fill: "#9ca3af", fontSize: 10, fontFamily: "var(--font-geist-mono)" }}
+            tickFormatter={formatINRShort} axisLine={{ stroke: "#1f2937" }} tickLine={false} width={55} />
           <Tooltip contentStyle={{ backgroundColor: "#111827", border: "1px solid #1f2937", borderRadius: "8px",
-            fontFamily: "var(--font-geist-mono)", fontSize: "12px" }}
+            fontFamily: "var(--font-geist-mono)", fontSize: "11px" }}
             labelFormatter={(v) => `Year ${v}`}
             formatter={(value, name) => [formatINRShort(Number(value)), String(name)]} />
           <Area type="monotone" dataKey="lumpsumValue" stroke="#6ee7b7" strokeWidth={2}

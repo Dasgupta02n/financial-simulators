@@ -30,10 +30,10 @@ function SliderRow({
   onChange: (v: number) => void;
 }) {
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-0.5">
       <div className="flex justify-between items-baseline">
-        <label className="text-sm text-text-secondary">{label}</label>
-        <span className="text-sm font-mono text-text-primary">{displayValue}</span>
+        <label className="text-xs text-text-secondary">{label}</label>
+        <span className="text-xs font-mono text-text-primary">{displayValue}</span>
       </div>
       <input
         type="range"
@@ -42,7 +42,7 @@ function SliderRow({
         step={step}
         value={value}
         onChange={(e) => onChange(parseFloat(e.target.value))}
-        className="w-full h-1.5 rounded-full appearance-none cursor-pointer bg-border accent-gain"
+        className="w-full h-1 rounded-full appearance-none cursor-pointer bg-border accent-gain"
       />
     </div>
   );
@@ -55,8 +55,8 @@ export function SliderPanel({
   onRateShiftChange,
 }: SliderPanelProps) {
   return (
-    <div className="flex flex-col gap-6 p-6 bg-surface rounded-lg border border-border">
-      <h2 className="text-lg font-semibold tracking-tight">Configure Your Loan</h2>
+    <div className="flex flex-col gap-3 p-4 bg-surface rounded-lg border border-border h-full overflow-y-auto">
+      <h2 className="text-sm font-semibold tracking-tight">Configure Your Loan</h2>
 
       <SliderRow
         label="Loan Amount"

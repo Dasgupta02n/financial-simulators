@@ -1,0 +1,32 @@
+{
+  "id": "gst",
+  "slug": "gst-calculator",
+  "name": "GST Calculator",
+  "metaTitle": "GST Calculator — Calculate CGST, SGST & IGST Instantly | Financial Simulators",
+  "metaDescription": "Calculate GST amount, pre-tax price, and post-tax total for any GST slab (5%, 12%, 18%, 28%). Toggle inclusive/exclusive tax, intra-state (CGST+SGST) or inter-state (IGST). Client-side, no PII.",
+  "shortDescription": "Instant GST, CGST, SGST & IGST breakdown",
+  "faq": [
+    {
+      "question": "What is GST and how is it calculated?",
+      "answer": "GST (Goods and Services Tax) is a comprehensive indirect tax levied on the supply of goods and services in India. For exclusive pricing: GST Amount = Base Price x GST Rate / 100, Total = Base Price + GST Amount. For inclusive pricing (when GST is already in the price): Base Price = Total x 100 / (100 + GST Rate), GST Amount = Total - Base Price."
+    },
+    {
+      "question": "What is the difference between CGST, SGST and IGST?",
+      "answer": "For intra-state supplies (within the same state), GST is split equally into CGST (Central GST) and SGST (State GST), each being half the total GST rate. For inter-state supplies (between different states), the full GST is collected as IGST (Integrated GST). For example, at 18% GST on an intra-state supply, you pay 9% CGST + 9% SGST; for inter-state, you pay 18% IGST."
+    },
+    {
+      "question": "What are the GST slab rates in India?",
+      "answer": "India has four main GST slabs: 5% (essential items like food, medicines), 12% (processed food, garments), 18% (most goods and services including smartphones, restaurants), and 28% (luxury items, automobiles, tobacco). A 0.25% rate applies to rough precious stones and 3% to gold jewellery."
+    },
+    {
+      "question": "What is the difference between GST inclusive and exclusive pricing?",
+      "answer": "GST Exclusive means the stated price does not include GST — you add GST on top. GST Inclusive means the stated price already includes GST — you extract the base price and GST component from the total. Most B2B invoices show exclusive prices, while retail prices shown to consumers are typically inclusive of GST."
+    }
+  ],
+  "howToSteps": [
+    { "name": "Enter amount", "text": "Set the base price (exclusive) or total price (inclusive)" },
+    { "name": "Select GST rate", "text": "Choose 5%, 12%, 18%, 28% or enter a custom rate" },
+    { "name": "Toggle inclusive/exclusive", "text": "Choose whether the entered amount includes GST or not" },
+    { "name": "Toggle supply type", "text": "Select intra-state (CGST+SGST) or inter-state (IGST)" }
+  ]
+}

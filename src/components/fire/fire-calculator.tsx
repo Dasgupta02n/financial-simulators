@@ -8,7 +8,6 @@ import { MetricCard } from "@/components/sip/metric-card";
 import { Area, ComposedChart, Line, ReferenceLine, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { twMerge } from "tailwind-merge";
 import { CalcExplainer } from "@/components/shared/calc-explainer";
-import { CalcVisualization } from "@/components/shared/calc-visualization";
 
 const DEFAULT_INPUT: FIREInput = {
   currentAge: 30,
@@ -29,14 +28,14 @@ function SliderRow({ label, value, displayValue, min, max, step, onChange }: {
   label: string; value: number; displayValue: string; min: number; max: number; step: number; onChange: (v: number) => void;
 }) {
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-0.5">
       <div className="flex justify-between items-baseline">
-        <label className="text-sm text-text-secondary">{label}</label>
-        <span className="text-sm font-mono text-text-primary">{displayValue}</span>
+        <label className="text-xs text-text-secondary">{label}</label>
+        <span className="text-xs font-mono text-text-primary">{displayValue}</span>
       </div>
       <input type="range" min={min} max={max} step={step} value={value}
         onChange={(e) => onChange(parseFloat(e.target.value))}
-        className="w-full h-1.5 rounded-full appearance-none cursor-pointer bg-border accent-gain" />
+        className="w-full h-1 rounded-full appearance-none cursor-pointer bg-border accent-gain" />
     </div>
   );
 }
@@ -47,18 +46,12 @@ export function FIRECalculator() {
     <K extends keyof FIREInput>(key: K, value: FIREInput[K]) => { setInput((prev) => ({ ...prev, [key]: value })); }, []
   );
   const output = useMemo(() => computeFIRE(input), [input]);
-  const vizData = useMemo(() => ({
-    fireNumber: output.fireNumber,
-    corpusAtRetirement: output.corpusAtRetirement,
-  }), [output.fireNumber, output.corpusAtRetirement]);
-
-  const retirementYear = input.retirementAge - input.currentAge;
 
   return (
-    <div className="flex flex-col lg:flex-row gap-6 w-full max-w-7xl mx-auto px-4 py-8">
-      <div className="lg:w-[40%]">
-        <div className="flex flex-col gap-6 p-6 bg-surface rounded-lg border border-border">
-          <h2 className="text-lg font-semibold tracking-tight">FIRE Matrix</h2>
+    <div className="flex flex-col lg:flex-row gap-4 w-full h-full">
+      <div className="lg:w-[38%] shrink-0">
+        <div className="flex flex-col gap-3 p-4 bg-surface rounded-lg border border-border">
+          <h2 className="text-sm font-semibold tracking-tight">FIRE Matrix</h2>
           <SliderRow label="Current Age" value={input.currentAge} displayValue={`${input.currentAge}`}
             min={20} max={60} step={1} onChange={(v) => handleInputChange("currentAge", v)} />
           <SliderRow label="Retirement Age" value={input.retirementAge} displayValue={`${input.retirementAge}`}
@@ -85,28 +78,22 @@ export function FIRECalculator() {
             min={0} max={80} step={5} onChange={(v) => handleInputChange("glidePathShift", v)} />
         </div>
       </div>
-      <div className="lg:w-[60%]">
-        <div className="flex flex-col gap-6">
+      <div className="lg:w-[62%] min-h-0">
+        <div className="flex flex-col gap-3 min-h-0">
           <CalcExplainer>
-            <p className="font-semibold text-text-primary">What this calculator does</p>
-            <p>It projects your complete financial journey — from today to retirement, and then through retirement until your expected age. It shows whether your current savings rate is enough to fund the retirement life you want.</p>
-            <p className="font-semibold text-text-primary">Key concepts</p>
+            <p className="font-semibold text-text-primary">How to read</p>
             <ul className="list-disc pl-5 space-y-1">
-              <li><span className="text-text-primary">FIRE Number</span> — 25 times your annual expenses at retirement. This is based on the &quot;4% rule&quot;: if you withdraw 4% per year, your money should last 30 years.</li>
-              <li><span className="text-text-primary">Corpus at Retirement</span> — what you&apos;ll actually have saved. If this exceeds the FIRE number, you&apos;re on track.</li>
-              <li><span className="text-text-primary">Glide Path</span> — gradually shifting from equity (higher growth, higher risk) to debt (lower growth, safer) as you age. This protects your retirement fund from a market crash when you can&apos;t wait for recovery.</li>
+              <li><span className="text-text-primary">FIRE Number</span> — 25x annual expenses at retirement (based on the 4% rule).</li>
+              <li><span className="text-text-primary">Corpus at Retirement</span> — what you&apos;ll actually have saved. Exceeds FIRE number = on track.</li>
+              <li><span className="text-text-primary">Glide Path</span> — equity shifts from {input.equityAllocation}% → {input.equityAllocation - input.glidePathShift}% over retirement.</li>
             </ul>
-            <p className="font-semibold text-text-primary">Bifurcated inflation</p>
-            <p>Inflation before retirement (your earning years) may differ from after retirement. The calculator uses separate rates for each phase, giving you a more realistic picture.</p>
-            <p className="font-semibold text-text-primary">How to read the chart</p>
+            <p className="font-semibold text-text-primary">Chart</p>
             <ul className="list-disc pl-5 space-y-1">
-              <li>The <span className="text-warn">yellow dashed line</span> marks your retirement age — the switch from saving to spending.</li>
-              <li><span className="text-gain">Green area</span> = corpus, <span className="text-loss">red dashed line</span> = real purchasing power.</li>
-              <li>After retirement, watch if the green line starts dropping — that&apos;s your money running out.</li>
+              <li><span className="text-warn">Yellow dashed line</span> = retirement age. <span className="text-gain">Green area</span> = corpus. <span className="text-loss">Red dashed</span> = real purchasing power.</li>
+              <li>After retirement, watch if green line drops — that&apos;s your money running out.</li>
             </ul>
           </CalcExplainer>
-          <CalcVisualization calcId="fire" data={vizData} />
-          <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-2 lg:grid-cols-3 gap-2">
             <MetricCard label="FIRE Number (25x)" value={output.fireNumber} variant="neutral" />
             <MetricCard label="Corpus at Retirement" value={output.corpusAtRetirement} variant={output.corpusAtRetirement >= output.fireNumber ? "gain" : "loss"} />
             <MetricCard label="Real Corpus at Ret." value={output.realCorpusAtRetirement} variant="neutral" />
@@ -116,20 +103,20 @@ export function FIRECalculator() {
           </div>
 
           {output.depleted && output.depletionAge && (
-            <div className="p-3 bg-loss/10 border border-loss/30 rounded-lg text-sm font-mono text-loss">
-              Corpus depletes at age {output.depletionAge}. FIRE target not met — increase SIP, reduce expenses, or delay retirement.
+            <div className="p-2 bg-loss/10 border border-loss/30 rounded-lg text-xs font-mono text-loss">
+              Corpus depletes at age {output.depletionAge}. Increase SIP, reduce expenses, or delay retirement.
             </div>
           )}
 
           {output.corpusAtRetirement >= output.fireNumber && !output.depleted && (
-            <div className="p-3 bg-gain/10 border border-gain/30 rounded-lg text-sm font-mono text-gain">
-              Corpus exceeds FIRE number at retirement. Glide path shifts equity from {input.equityAllocation}% → {input.equityAllocation - input.glidePathShift}% over retirement.
+            <div className="p-2 bg-gain/10 border border-gain/30 rounded-lg text-xs font-mono text-gain">
+              Corpus exceeds FIRE number. Glide path: equity {input.equityAllocation}% → {input.equityAllocation - input.glidePathShift}%.
             </div>
           )}
 
-          <div className="bg-surface rounded-lg border border-border p-4">
-            <h3 className="text-sm font-semibold text-text-secondary mb-3">Corpus Trajectory</h3>
-            <div className="w-full h-[350px]">
+          <div className="flex-1 min-h-0 bg-surface rounded-lg border border-border p-4">
+            <h3 className="text-xs font-semibold text-text-secondary mb-2">Corpus Trajectory</h3>
+            <div className="w-full flex-1 min-h-[220px]">
               <ResponsiveContainer width="100%" height="100%">
                 <ComposedChart data={output.yearlyData} margin={{ top: 10, right: 30, left: 10, bottom: 0 }}>
                   <defs>
@@ -158,7 +145,7 @@ export function FIRECalculator() {
           </div>
 
           <div className="text-xs text-text-secondary font-mono px-1">
-            Bifurcated inflation: {input.preRetirementInflation}% pre-retirement, {input.postRetirementInflation}% post-retirement. Glide path shifts equity from {input.equityAllocation}% to {input.equityAllocation - input.glidePathShift}%.
+            Bifurcated inflation: {input.preRetirementInflation}% pre, {input.postRetirementInflation}% post. Glide: equity {input.equityAllocation}% → {input.equityAllocation - input.glidePathShift}%.
           </div>
         </div>
       </div>

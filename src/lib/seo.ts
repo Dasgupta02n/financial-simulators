@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-const SITE_URL = "https://financialsimulators.in";
+const SITE_URL = "https://c7xai.in";
 const SITE_NAME = "Financial Simulators";
 
 export interface CalculatorConfig {
@@ -27,6 +27,9 @@ export function generateCalculatorMetadata(config: CalculatorConfig): Metadata {
     },
     alternates: {
       canonical: `/${config.slug}`,
+      languages: {
+        "en-IN": `/${config.slug}`,
+      },
     },
     robots: {
       index: true,
@@ -80,7 +83,24 @@ export function generateCalculatorJsonLd(config: CalculatorConfig) {
 }
 
 export function generateSiteJsonLd() {
-  return {
+  const orgSchema = {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: SITE_NAME,
+    url: SITE_URL,
+    logo: `${SITE_URL}/logo.png`,
+    description:
+      "Real-return financial calculators for Indian investors. Zero PII, zero tracking, all math runs client-side.",
+    sameAs: [],
+    contactPoint: {
+      "@type": "ContactPoint",
+      email: "hello@financialsimulators.in",
+      contactType: "customer support",
+      availableLanguage: "English",
+    },
+  };
+
+  const webAppSchema = {
     "@context": "https://schema.org",
     "@type": "WebApplication",
     name: SITE_NAME,
@@ -95,4 +115,6 @@ export function generateSiteJsonLd() {
       priceCurrency: "INR",
     },
   };
+
+  return [orgSchema, webAppSchema];
 }

@@ -29,13 +29,13 @@ function SliderRow({
   hint?: string;
 }) {
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-0.5">
       <div className="flex justify-between items-baseline">
-        <label className="text-sm text-text-secondary">
+        <label className="text-xs text-text-secondary">
           {label}
           {hint && <span className="text-xs text-text-secondary/60 ml-1">({hint})</span>}
         </label>
-        <span className="text-sm font-mono text-text-primary">{displayValue}</span>
+        <span className="text-xs font-mono text-text-primary">{displayValue}</span>
       </div>
       <input
         type="range"
@@ -44,7 +44,7 @@ function SliderRow({
         step={step}
         value={value}
         onChange={(e) => onChange(parseFloat(e.target.value))}
-        className="w-full h-1.5 rounded-full appearance-none cursor-pointer bg-border accent-gain"
+        className="w-full h-1 rounded-full appearance-none cursor-pointer bg-border accent-gain"
       />
     </div>
   );
@@ -52,8 +52,8 @@ function SliderRow({
 
 export function SliderPanel({ input, onInputChange }: SliderPanelProps) {
   return (
-    <div className="flex flex-col gap-6 p-6 bg-surface rounded-lg border border-border">
-      <h2 className="text-lg font-semibold tracking-tight">Configure Your Income</h2>
+    <div className="flex flex-col gap-3 p-4 bg-surface rounded-lg border border-border h-full overflow-y-auto">
+      <h2 className="text-sm font-semibold tracking-tight">Configure Your Income</h2>
 
       <SliderRow
         label="Gross Annual Salary"

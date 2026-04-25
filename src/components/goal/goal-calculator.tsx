@@ -8,7 +8,6 @@ import { MetricCard } from "@/components/sip/metric-card";
 import { Bar, BarChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { twMerge } from "tailwind-merge";
 import { CalcExplainer } from "@/components/shared/calc-explainer";
-import { CalcVisualization } from "@/components/shared/calc-visualization";
 
 const DEFAULT_GOALS: Goal[] = [
   { id: "1", name: "Emergency Fund", targetAmount: 500000, yearsFromNow: 2, priority: "essential" },
@@ -37,14 +36,14 @@ function SliderRow({ label, value, displayValue, min, max, step, onChange }: {
   label: string; value: number; displayValue: string; min: number; max: number; step: number; onChange: (v: number) => void;
 }) {
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-0.5">
       <div className="flex justify-between items-baseline">
-        <label className="text-sm text-text-secondary">{label}</label>
-        <span className="text-sm font-mono text-text-primary">{displayValue}</span>
+        <label className="text-xs text-text-secondary">{label}</label>
+        <span className="text-xs font-mono text-text-primary">{displayValue}</span>
       </div>
       <input type="range" min={min} max={max} step={step} value={value}
         onChange={(e) => onChange(parseFloat(e.target.value))}
-        className="w-full h-1.5 rounded-full appearance-none cursor-pointer bg-border accent-gain" />
+        className="w-full h-1 rounded-full appearance-none cursor-pointer bg-border accent-gain" />
     </div>
   );
 }
@@ -55,11 +54,6 @@ export function GoalCalculator() {
     <K extends keyof GoalInput>(key: K, value: GoalInput[K]) => { setInput((prev) => ({ ...prev, [key]: value })); }, []
   );
   const output = useMemo(() => computeGoals(input), [input]);
-  const vizData = useMemo(() => ({
-    targetAmount: output.totalInflatedTarget,
-    currentSaved: output.goals.reduce((sum, g) => sum + g.todayValue, 0),
-    monthlySIPNeeded: output.totalMonthlyModerate,
-  }), [output.totalInflatedTarget, output.goals, output.totalMonthlyModerate]);
 
   const chartData = output.goals.map((g) => ({
     name: g.name.length > 12 ? g.name.slice(0, 12) + "…" : g.name,
@@ -88,10 +82,10 @@ export function GoalCalculator() {
   }
 
   return (
-    <div className="flex flex-col lg:flex-row gap-6 w-full max-w-7xl mx-auto px-4 py-8">
-      <div className="lg:w-[40%]">
-        <div className="flex flex-col gap-6 p-6 bg-surface rounded-lg border border-border">
-          <h2 className="text-lg font-semibold tracking-tight">Goal-to-Action</h2>
+    <div className="flex flex-col lg:flex-row gap-4 w-full h-full">
+      <div className="lg:w-[38%] shrink-0">
+        <div className="flex flex-col gap-3 p-4 bg-surface rounded-lg border border-border">
+          <h2 className="text-sm font-semibold tracking-tight">Goal-to-Action</h2>
           <SliderRow label="Inflation Rate" value={input.inflationRate} displayValue={`${input.inflationRate}%`}
             min={2} max={12} step={0.5} onChange={(v) => handleInputChange("inflationRate", v)} />
           <SliderRow label="Conservative Return" value={input.returnRateConservative} displayValue={`${input.returnRateConservative}%`}
@@ -101,27 +95,27 @@ export function GoalCalculator() {
           <SliderRow label="Aggressive Return" value={input.returnRateAggressive} displayValue={`${input.returnRateAggressive}%`}
             min={10} max={18} step={0.5} onChange={(v) => handleInputChange("returnRateAggressive", v)} />
 
-          <div className="flex flex-col gap-3">
+          <div className="flex flex-col gap-2">
             <div className="flex justify-between items-baseline">
-              <span className="text-sm font-semibold text-text-primary">Goals</span>
-              <button onClick={addGoal} className="px-3 py-1 text-xs rounded-md font-mono bg-gain/20 text-gain border border-gain/40">+ Add</button>
+              <span className="text-xs font-semibold text-text-primary">Goals</span>
+              <button onClick={addGoal} className="px-2 py-0.5 text-[10px] rounded-md font-mono bg-gain/20 text-gain border border-gain/40">+ Add</button>
             </div>
             {input.goals.map((goal) => (
-              <div key={goal.id} className="flex flex-col gap-2 p-3 bg-border/30 rounded-md border border-border">
+              <div key={goal.id} className="flex flex-col gap-1 p-2 bg-border/30 rounded-md border border-border">
                 <div className="flex justify-between items-center">
                   <input type="text" value={goal.name} onChange={(e) => updateGoal(goal.id, "name", e.target.value)}
-                    className="text-sm font-mono bg-transparent border-none outline-none text-text-primary w-32" />
-                  <button onClick={() => removeGoal(goal.id)} className="text-xs text-loss hover:text-loss/80">✕</button>
+                    className="text-xs font-mono bg-transparent border-none outline-none text-text-primary w-28" />
+                  <button onClick={() => removeGoal(goal.id)} className="text-[10px] text-loss hover:text-loss/80">✕</button>
                 </div>
-                <div className="flex gap-3 items-center">
+                <div className="flex gap-2 items-center">
                   <input type="number" value={goal.targetAmount} onChange={(e) => updateGoal(goal.id, "targetAmount", parseInt(e.target.value) || 0)}
-                    className="w-24 text-xs font-mono bg-transparent border border-border rounded px-2 py-1 text-text-primary" />
+                    className="w-20 text-[10px] font-mono bg-transparent border border-border rounded px-1 py-0.5 text-text-primary" />
                   <select value={goal.yearsFromNow} onChange={(e) => updateGoal(goal.id, "yearsFromNow", parseInt(e.target.value))}
-                    className="text-xs font-mono bg-transparent border border-border rounded px-2 py-1 text-text-primary">
+                    className="text-[10px] font-mono bg-transparent border border-border rounded px-1 py-0.5 text-text-primary">
                     {[1,2,3,5,8,10,15,20,25].map((y) => <option key={y} value={y}>{y}yr</option>)}
                   </select>
                   <select value={goal.priority} onChange={(e) => updateGoal(goal.id, "priority", e.target.value as Goal["priority"])}
-                    className="text-xs font-mono bg-transparent border border-border rounded px-2 py-1 text-text-primary">
+                    className="text-[10px] font-mono bg-transparent border border-border rounded px-1 py-0.5 text-text-primary">
                     <option value="essential">Essential</option>
                     <option value="important">Important</option>
                     <option value="nice-to-have">Nice-to-have</option>
@@ -132,56 +126,46 @@ export function GoalCalculator() {
           </div>
         </div>
       </div>
-      <div className="lg:w-[60%]">
-        <div className="flex flex-col gap-6">
+      <div className="lg:w-[62%] min-h-0">
+        <div className="flex flex-col gap-3 min-h-0">
           <CalcExplainer>
-            <p className="font-semibold text-text-primary">What this calculator does</p>
-            <p>Instead of starting with &quot;how much should I invest?&quot;, it starts with &quot;what do I want to achieve?&quot; and works backwards to tell you exactly how much to invest monthly for each goal — at three different risk levels.</p>
-            <p className="font-semibold text-text-primary">How it works</p>
+            <p className="font-semibold text-text-primary">How to read</p>
             <ul className="list-disc pl-5 space-y-1">
-              <li>Enter each goal as today&apos;s cost (e.g., &quot;child education costs ₹20L today&quot;).</li>
-              <li>The calculator inflates that cost to the future year (₹20L today = ₹48L in 15 years at 6% inflation).</li>
-              <li>It reverse-calculates the monthly SIP needed to reach that inflated target.</li>
+              <li>Enter each goal as today&apos;s cost. The calculator inflates that cost to the future year and reverse-calculates the monthly SIP needed.</li>
+              <li><span className="text-text-primary">Conservative (7%)</span> — mostly debt. Higher SIP needed.</li>
+              <li><span className="text-text-primary">Moderate (12%)</span> — balanced equity + debt. NIFTY long-term average.</li>
+              <li><span className="text-text-primary">Aggressive (15%)</span> — mostly equity. Lowest SIP but higher risk.</li>
             </ul>
-            <p className="font-semibold text-text-primary">Three risk profiles</p>
-            <ul className="list-disc pl-5 space-y-1">
-              <li><span className="text-text-primary">Conservative (7%)</span> — mostly debt/fixed income. Reliable but slow growth. Higher SIP needed.</li>
-              <li><span className="text-text-primary">Moderate (12%)</span> — balanced equity + debt. The NIFTY long-term average. Moderate SIP.</li>
-              <li><span className="text-text-primary">Aggressive (15%)</span> — mostly equity. Higher risk, but historically higher growth. Lowest SIP needed — but markets can dip in the short run.</li>
-            </ul>
-            <p className="font-semibold text-text-primary">Priority labels</p>
-            <p>Essential = must-have (emergency fund, education). Important = should-have (house). Nice-to-have = can delay (vacation). Use these to decide what to fund first if your total SIP feels too high.</p>
           </CalcExplainer>
-          <CalcVisualization calcId="goal" data={vizData} />
-          <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-2 lg:grid-cols-3 gap-2">
             <MetricCard label="Total SIP (Conservative)" value={output.totalMonthlyConservative} variant="neutral" />
             <MetricCard label="Total SIP (Moderate)" value={output.totalMonthlyModerate} variant="gain" />
             <MetricCard label="Total SIP (Aggressive)" value={output.totalMonthlyAggressive} variant="gain" />
           </div>
 
-          <div className="flex flex-col gap-2">
+          <div className="flex flex-col gap-1">
             {output.goals.map((g) => (
-              <div key={g.id} className="flex items-center gap-4 p-3 bg-surface rounded-lg border border-border">
-                <div className="flex flex-col gap-0.5 min-w-0 flex-1">
-                  <div className="flex items-center gap-2">
-                    <span className="text-sm font-mono text-text-primary truncate">{g.name}</span>
-                    <span className={`text-xs font-mono ${PRIORITY_COLORS[g.priority]}`}>{g.priority}</span>
+              <div key={g.id} className="flex items-center gap-2 p-2 bg-surface rounded-lg border border-border">
+                <div className="flex flex-col gap-0 min-w-0 flex-1">
+                  <div className="flex items-center gap-1">
+                    <span className="text-xs font-mono text-text-primary truncate">{g.name}</span>
+                    <span className={`text-[10px] font-mono ${PRIORITY_COLORS[g.priority]}`}>{g.priority}</span>
                   </div>
-                  <div className="text-xs text-text-secondary font-mono">
+                  <div className="text-[10px] text-text-secondary font-mono">
                     {formatINR(g.todayValue)} today → {formatINR(g.inflatedTarget)} in {g.yearsFromNow}yr
                   </div>
                 </div>
-                <div className="text-right flex flex-col gap-0.5">
-                  <span className="text-sm font-mono text-gain">₹{g.monthlySIPModerate.toLocaleString("en-IN")}/mo</span>
-                  <span className="text-xs font-mono text-text-secondary">moderate</span>
+                <div className="text-right flex flex-col gap-0">
+                  <span className="text-xs font-mono text-gain">₹{g.monthlySIPModerate.toLocaleString("en-IN")}/mo</span>
+                  <span className="text-[10px] font-mono text-text-secondary">moderate</span>
                 </div>
               </div>
             ))}
           </div>
 
-          <div className="bg-surface rounded-lg border border-border p-4">
-            <h3 className="text-sm font-semibold text-text-secondary mb-3">Monthly SIP by Risk Profile</h3>
-            <div className="w-full h-[300px]">
+          <div className="flex-1 min-h-0 bg-surface rounded-lg border border-border p-4">
+            <h3 className="text-xs font-semibold text-text-secondary mb-2">Monthly SIP by Risk Profile</h3>
+            <div className="w-full flex-1 min-h-[220px]">
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={chartData} margin={{ top: 10, right: 30, left: 10, bottom: 0 }}>
                   <XAxis dataKey="name" tick={{ fill: "#9ca3af", fontSize: 10, fontFamily: "var(--font-geist-mono)" }}

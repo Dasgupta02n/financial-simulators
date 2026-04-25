@@ -23,6 +23,12 @@ const CALCULATORS: readonly {
   { id: "ctc", name: "CTC Optimizer", slug: "ctc-optimizer", description: "Maximize your in-hand salary. See where every rupee of your CTC goes." },
   { id: "nps", name: "NPS Modeler", slug: "nps-modeler", description: "Project your pension and corpus. See what 80C savings really build." },
   { id: "goal", name: "Goal Planner", slug: "goal-planner", description: "Monthly SIP needed per goal. Know exactly what to invest and when." },
+  { id: "step-up-sip", name: "Step-Up SIP", slug: "step-up-sip-calculator", description: "See how an annual SIP increase boosts your corpus. Step-Up vs Regular compared.", tag: "New" },
+  { id: "gst", name: "GST Calculator", slug: "gst-calculator", description: "Compute GST on any amount. CGST/SGST split for intra-state, IGST for inter-state.", tag: "New" },
+  { id: "simple-interest", name: "Simple Interest", slug: "simple-interest-calculator", description: "Simple vs Compound interest side by side. See what compounding really costs you.", tag: "New" },
+  { id: "epf", name: "EPF Calculator", slug: "epf-calculator", description: "Project your EPF corpus with employer split and annual interest compounding.", tag: "New" },
+  { id: "term-insurance", name: "Term Insurance", slug: "term-insurance-calculator", description: "How much life cover do you actually need? HLV method with inflation and loans.", tag: "New" },
+  { id: "salary", name: "Salary Calculator", slug: "salary-calculator", description: "CTC to in-hand salary. Full breakup — basic, HRA, PF, tax — old vs new regime." },
 ];
 
 export const metadata: Metadata = {

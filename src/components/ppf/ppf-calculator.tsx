@@ -25,14 +25,14 @@ function SliderRow({ label, value, displayValue, min, max, step, onChange }: {
   label: string; value: number; displayValue: string; min: number; max: number; step: number; onChange: (v: number) => void;
 }) {
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-0.5">
       <div className="flex justify-between items-baseline">
-        <label className="text-sm text-text-secondary">{label}</label>
-        <span className="text-sm font-mono text-text-primary">{displayValue}</span>
+        <label className="text-xs text-text-secondary">{label}</label>
+        <span className="text-xs font-mono text-text-primary">{displayValue}</span>
       </div>
       <input type="range" min={min} max={max} step={step} value={value}
         onChange={(e) => onChange(parseFloat(e.target.value))}
-        className="w-full h-1.5 rounded-full appearance-none cursor-pointer bg-border accent-gain" />
+        className="w-full h-1 rounded-full appearance-none cursor-pointer bg-border accent-gain" />
     </div>
   );
 }
@@ -47,10 +47,10 @@ export function PPFViewModel() {
   const isNegativeReal = output.realYield < 0;
 
   return (
-    <div className="flex flex-col lg:flex-row gap-6 w-full max-w-7xl mx-auto px-4 py-8">
-      <div className="lg:w-[40%]">
-        <div className="flex flex-col gap-6 p-6 bg-surface rounded-lg border border-border">
-          <h2 className="text-lg font-semibold tracking-tight">Configure PPF</h2>
+    <div className="flex flex-col lg:flex-row gap-4 w-full h-full">
+      <div className="lg:w-[38%] shrink-0">
+        <div className="flex flex-col gap-3 p-4 bg-surface rounded-lg border border-border">
+          <h2 className="text-sm font-semibold tracking-tight">Configure PPF</h2>
           <SliderRow label="Yearly Contribution" value={input.yearlyContribution}
             displayValue={formatINR(input.yearlyContribution)}
             min={500} max={150000} step={500}
@@ -59,11 +59,11 @@ export function PPFViewModel() {
             displayValue={`${input.interestRate}%`}
             min={5} max={9} step={0.1}
             onChange={(v) => handleInputChange("interestRate", v)} />
-          <div className="flex flex-col gap-2">
-            <span className="text-sm text-text-secondary">Tenure</span>
+          <div className="flex flex-col gap-1">
+            <span className="text-xs text-text-secondary">Tenure</span>
             <div className="flex gap-2">
               {TENURE_OPTIONS.map((opt) => (
-                <button key={opt.value} className={`px-3 py-1.5 text-sm rounded-md font-mono transition-colors ${
+                <button key={opt.value} className={`px-3 py-1.5 text-xs rounded-md font-mono transition-colors ${
                   input.tenure === opt.value
                     ? "bg-gain/20 text-gain border border-gain/40"
                     : "bg-border text-text-secondary border border-border"
@@ -79,22 +79,20 @@ export function PPFViewModel() {
             onChange={(v) => handleInputChange("inflationRate", v)} />
         </div>
       </div>
-      <div className="lg:w-[60%]">
-        <div className="flex flex-col gap-6">
+      <div className="lg:w-[62%] min-h-0">
+        <div className="flex flex-col gap-3 min-h-0">
           <CalcExplainer>
-            <p className="font-semibold text-text-primary">What this calculator does</p>
-            <p>It shows the real value of your PPF maturity after accounting for inflation. PPF has EEE (Exempt-Exempt-Exempt) tax status — no tax on contribution, interest, or maturity — making it one of the few debt instruments that actually grows wealth.</p>
-            <p className="font-semibold text-text-primary">What each number means</p>
+            <p className="font-semibold text-text-primary">How to read the numbers</p>
             <ul className="list-disc pl-5 space-y-1">
-              <li><span className="text-text-primary">Maturity Value</span> — the nominal amount you receive at the end of the PPF tenure.</li>
-              <li><span className="text-text-primary">Real Value</span> — what your maturity money can buy in today&apos;s prices. This is the number that matters.</li>
-              <li><span className="text-text-primary">Effective Yield</span> — your annualized return based on total invested vs maturity. With regular contributions, this is higher than the interest rate due to compounding.</li>
-              <li><span className="text-text-primary">Real Yield</span> — effective yield minus inflation. If positive, PPF grows your purchasing power.</li>
+              <li><span className="text-text-primary">Maturity Value</span> — nominal amount you receive at end of tenure.</li>
+              <li><span className="text-text-primary">Real Value</span> — what your maturity can buy in today&apos;s prices. This is the number that matters.</li>
+              <li><span className="text-text-primary">Effective Yield</span> — annualized return vs total invested. Higher than interest rate due to compounding.</li>
+              <li><span className="text-text-primary">Real Yield</span> — effective yield minus inflation. Positive = PPF grows purchasing power.</li>
             </ul>
-            <p className="font-semibold text-text-primary">Key PPF rules</p>
-            <p>Minimum 15-year lock-in. Max ₹1.5L/year contribution. Interest rate set quarterly by government (currently 7.1%). No tax on maturity (EEE status).</p>
+            <p className="font-semibold text-text-primary">Key rules</p>
+            <p>Min 15-yr lock-in. Max ₹1.5L/yr. Rate set quarterly by govt (currently 7.1%). EEE status — no tax on contribution, interest, or maturity.</p>
           </CalcExplainer>
-          <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-2 lg:grid-cols-3 gap-2">
             <MetricCard label="Total Invested" value={output.totalInvested} variant="neutral" />
             <MetricCard label="Maturity Value" value={output.maturityValue} variant="gain" />
             <MetricCard label="Real Value (Today's ₹)" value={output.realMaturityValue} variant={isNegativeReal ? "loss" : "gain"} />
@@ -103,13 +101,13 @@ export function PPFViewModel() {
             <MetricCard label="Real Yield" value={output.realYield} variant={isNegativeReal ? "loss" : "gain"} />
           </div>
           {isNegativeReal && (
-            <div className="p-3 bg-loss/10 border border-loss/30 rounded-lg text-sm font-mono text-loss">
-              Your real yield is negative — inflation erodes your purchasing power faster than PPF grows it.
+            <div className="p-2 bg-loss/10 border border-loss/30 rounded-lg text-xs font-mono text-loss">
+              Real yield is negative — inflation erodes purchasing power faster than PPF grows it.
             </div>
           )}
-          <div className="bg-surface rounded-lg border border-border p-4">
-            <h3 className="text-sm font-semibold text-text-secondary mb-3">PPF Growth vs Inflation</h3>
-            <div className="w-full h-[350px]">
+          <div className="flex-1 min-h-0 bg-surface rounded-lg border border-border p-4">
+            <h3 className="text-xs font-semibold text-text-secondary mb-2">PPF Growth vs Inflation</h3>
+            <div className="w-full flex-1 min-h-[220px]">
               <ResponsiveContainer width="100%" height="100%">
                 <ComposedChart data={output.yearlyData} margin={{ top: 10, right: 30, left: 10, bottom: 0 }}>
                   <defs>

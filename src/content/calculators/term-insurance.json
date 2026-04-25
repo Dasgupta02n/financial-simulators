@@ -1,0 +1,37 @@
+{
+  "id": "term-insurance",
+  "slug": "term-insurance-calculator",
+  "name": "Term Insurance Calculator",
+  "metaTitle": "Term Insurance Calculator — How Much Life Cover Do You Need? | Financial Simulators",
+  "metaDescription": "Calculate your ideal term insurance cover using the Human Life Value method. Factors in inflation, loans, dependants, savings and existing cover. Client-side, no PII.",
+  "shortDescription": "How much term cover do you need?",
+  "faq": [
+    {
+      "question": "How much term insurance cover do I need?",
+      "answer": "A common rule is 10-15 times your annual income, but the Human Life Value method gives a more precise figure. It accounts for your monthly expenses, outstanding loans, number of dependants, years of coverage needed, inflation, existing savings, and any life insurance you already have."
+    },
+    {
+      "question": "What is the Human Life Value (HLV) method?",
+      "answer": "HLV estimates the financial loss your family would incur if you were no longer around. It calculates the future value of your family's expenses over the coverage period (adjusted for inflation), adds outstanding loans and an emergency fund, then subtracts your existing savings and insurance cover. The result is the additional cover you need."
+    },
+    {
+      "question": "Should I include my outstanding loans in the cover amount?",
+      "answer": "Yes. Outstanding loans (home loan, car loan, personal loan, etc.) are liabilities that your family would still need to service. Adding them to the cover ensures your family can clear all debts if something happens to you."
+    },
+    {
+      "question": "Why does inflation matter in term insurance planning?",
+      "answer": "A cover that seems adequate today will buy less in the future. If inflation is 6%, expenses double in roughly 12 years. The HLV method inflates your monthly expenses over the coverage period so the cover remains sufficient throughout."
+    },
+    {
+      "question": "How much does term insurance cost per month?",
+      "answer": "For a 30-year-old non-smoker, term insurance typically costs ₹800-1200 per ₹1 Crore of cover per year. Monthly premiums are roughly ₹70-100 per ₹1 Crore. Premiums increase with age, smoking status, and policy tenure. Always get actual quotes from insurers."
+    }
+  ],
+  "howToSteps": [
+    { "name": "Enter annual income", "text": "Set your gross annual income" },
+    { "name": "Enter monthly expenses", "text": "Set your family's monthly living expenses" },
+    { "name": "Enter outstanding loans", "text": "Set total outstanding loan amounts (home, car, personal)" },
+    { "name": "Set dependants & coverage years", "text": "Number of dependants and years of coverage needed" },
+    { "name": "Add existing cover & savings", "text": "Enter existing life insurance and savings/investments" }
+  ]
+}

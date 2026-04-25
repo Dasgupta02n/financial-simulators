@@ -112,8 +112,8 @@ export function SIPCalculator() {
   if (!result) return null;
 
   return (
-    <div className="flex flex-col lg:flex-row gap-6 w-full max-w-7xl mx-auto px-4 py-8">
-      <div className="lg:w-[40%]">
+    <div className="flex flex-col lg:flex-row gap-4 w-full h-full">
+      <div className="lg:w-[38%] shrink-0">
         <SliderPanel
           input={input}
           stressConfig={stressConfig}
@@ -121,7 +121,7 @@ export function SIPCalculator() {
           onStressChange={handleStressChange}
         />
       </div>
-      <div className="lg:w-[60%]">
+      <div className="lg:w-[62%] min-h-0">
         <ResultsPanel
           vizData={vizData}
           totalInvested={result.totalInvested}

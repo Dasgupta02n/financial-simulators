@@ -6,7 +6,6 @@ import { CrossoverGauge } from "./crossover-gauge";
 import { RegimeChart } from "./regime-chart";
 import { twMerge } from "tailwind-merge";
 import { CalcExplainer } from "@/components/shared/calc-explainer";
-import { CalcVisualization } from "@/components/shared/calc-visualization";
 
 interface ResultsPanelProps {
   output: TaxOutput;
@@ -84,42 +83,37 @@ export function ResultsPanel({ output }: ResultsPanelProps) {
   const { oldRegime, newRegime, crossover } = output;
   const oldWins = crossover.recommendation === "old";
   const savings = Math.abs(oldRegime.totalTax - newRegime.totalTax);
-  const vizData = { oldRegimeTax: oldRegime.totalTax, newRegimeTax: newRegime.totalTax };
 
   return (
-    <div className="flex flex-col gap-6">
+    <div className="flex flex-col gap-3 min-h-0">
       <CalcExplainer>
-        <p className="font-semibold text-text-primary">What this calculator does</p>
-        <p>It compares the Old and New tax regimes side by side for your salary, so you can see exactly which one leaves more money in your pocket — and by how much.</p>
-        <p className="font-semibold text-text-primary">Old vs New regime in plain terms</p>
-        <ul className="list-disc pl-5 space-y-1">
-          <li><span className="text-text-primary">Old Regime</span> — you can claim deductions like 80C (PPF, ELSS), 80D (health insurance), HRA, NPS, etc. Lower salary shown on paper, but you need the receipts.</li>
-          <li><span className="text-text-primary">New Regime</span> — almost no deductions allowed, but the tax slabs are wider and rates are lower. Only a ₹75,000 standard deduction.</li>
-        </ul>
-        <p className="font-semibold text-text-primary">Key terms explained</p>
-        <ul className="list-disc pl-5 space-y-1">
-          <li><span className="text-text-primary">Surcharge</span> — an extra tax on high earners (income above ₹50L). The calculator applies it automatically with marginal relief so you don&apos;t pay more than you earn above the threshold.</li>
-          <li><span className="text-text-primary">Cess (4%)</span> — a flat 4% added on top of your tax + surcharge. Everyone pays this.</li>
-          <li><span className="text-text-primary">Crossover Gauge</span> — shows whether your deductions make the Old Regime worthwhile. If the marker is on the left, New Regime wins. If on the right, Old Regime wins.</li>
+        <p className="font-semibold text-text-primary">Tax Calculator</p>
+        <p>Compares Old vs New tax regimes for your salary — which leaves more money in your pocket?</p>
+        <ul className="list-disc pl-5 space-y-0.5">
+          <li><span className="text-text-primary">Old Regime</span> — claim 80C, 80D, HRA, NPS deductions. Lower taxable income, but needs receipts.</li>
+          <li><span className="text-text-primary">New Regime</span> — wider slabs, lower rates. Only ₹75K standard deduction.</li>
+          <li><span className="text-text-primary">Surcharge</span> — extra tax on high earners (above ₹50L).</li>
+          <li><span className="text-text-primary">Cess (4%)</span> — flat 4% on tax + surcharge.</li>
         </ul>
       </CalcExplainer>
-      <CalcVisualization calcId="tax" data={vizData} />
       <div className="text-xs font-mono text-text-secondary">
         {oldWins
           ? `Old Regime saves ${formatINR(savings)}`
           : `New Regime saves ${formatINR(savings)}`}
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-2">
         <RegimeCard result={oldRegime} isWinner={oldWins} />
         <RegimeCard result={newRegime} isWinner={!oldWins} />
       </div>
 
       <CrossoverGauge crossover={crossover} />
 
-      <div className="bg-surface rounded-lg border border-border p-4">
-        <h3 className="text-sm font-semibold text-text-secondary mb-3">Regime Comparison</h3>
-        <RegimeChart oldRegime={oldRegime} newRegime={newRegime} />
+      <div className="bg-surface rounded-lg border border-border p-3">
+        <h3 className="text-xs font-semibold text-text-secondary mb-2">Regime Comparison</h3>
+        <div className="flex-1 min-h-[220px]">
+          <RegimeChart oldRegime={oldRegime} newRegime={newRegime} />
+        </div>
       </div>
     </div>
   );

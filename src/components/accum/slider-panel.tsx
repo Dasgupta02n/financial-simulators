@@ -13,22 +13,22 @@ function SliderRow({ label, value, displayValue, min, max, step, onChange }: {
   label: string; value: number; displayValue: string; min: number; max: number; step: number; onChange: (v: number) => void;
 }) {
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-0.5">
       <div className="flex justify-between items-baseline">
-        <label className="text-sm text-text-secondary">{label}</label>
-        <span className="text-sm font-mono text-text-primary">{displayValue}</span>
+        <label className="text-xs text-text-secondary">{label}</label>
+        <span className="text-xs font-mono text-text-primary">{displayValue}</span>
       </div>
       <input type="range" min={min} max={max} step={step} value={value}
         onChange={(e) => onChange(parseFloat(e.target.value))}
-        className="w-full h-1.5 rounded-full appearance-none cursor-pointer bg-border accent-gain" />
+        className="w-full h-1 rounded-full appearance-none cursor-pointer bg-border accent-gain" />
     </div>
   );
 }
 
 export function AccumSliderPanel({ input, onInputChange }: SliderPanelProps) {
   return (
-    <div className="flex flex-col gap-6 p-6 bg-surface rounded-lg border border-border">
-      <h2 className="text-lg font-semibold tracking-tight">Configure Accumulation</h2>
+    <div className="flex flex-col gap-3 p-4 bg-surface rounded-lg border border-border h-full overflow-y-auto">
+      <h2 className="text-sm font-semibold tracking-tight">Configure Accumulation</h2>
       <SliderRow label="Initial Lumpsum" value={input.lumpsum} displayValue={formatINR(input.lumpsum)}
         min={0} max={50000000} step={100000} onChange={(v) => onInputChange("lumpsum", v)} />
       <SliderRow label="Monthly SIP" value={input.sipMonthly} displayValue={formatINR(input.sipMonthly)}
@@ -40,11 +40,11 @@ export function AccumSliderPanel({ input, onInputChange }: SliderPanelProps) {
       <SliderRow label="Inflation Rate" value={input.inflationRate} displayValue={`${input.inflationRate}%`}
         min={2} max={12} step={0.5} onChange={(v) => onInputChange("inflationRate", v)} />
       <div className="flex flex-col gap-2">
-        <span className="text-sm text-text-secondary">Step-Up Mode</span>
+        <span className="text-xs text-text-secondary">Step-Up Mode</span>
         <div className="flex gap-2">
           {(["percentage", "absolute"] as StepUpMode[]).map((mode) => (
             <button key={mode} className={twMerge(
-              "px-4 py-1.5 text-sm rounded-md font-mono transition-colors",
+              "px-3 py-1 text-xs rounded-md font-mono transition-colors",
               input.stepUpMode === mode
                 ? "bg-gain/20 text-gain border border-gain/40"
                 : "bg-border text-text-secondary border border-border"

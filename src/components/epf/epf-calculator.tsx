@@ -1,0 +1,196 @@
+"use client";
+
+import { useState, useMemo, useCallback } from "react";
+import type { EPFInput } from "@/lib/calculators/epf/types";
+import { computeEPF } from "@/lib/calculators/epf/engine";
+import { formatINR } from "@/lib/format";
+import { CalcExplainer } from "@/components/shared/calc-explainer";
+
+const DEFAULT_INPUT: EPFInput = {
+  monthlyBasicSalary: 50000,
+  employeeRate: 12,
+  employerEpfRate: 3.67,
+  employerEpsRate: 8.33,
+  ageOfEntry: 25,
+  retirementAge: 58,
+  annualSalaryIncrease: 6,
+  epfInterestRate: 8.25,
+};
+
+function SliderRow({ label, value, displayValue, min, max, step, onChange }: {
+  label: string; value: number; displayValue: string; min: number; max: number; step: number; onChange: (v: number) => void;
+}) {
+  return (
+    <div className="flex flex-col gap-0.5">
+      <div className="flex justify-between items-baseline">
+        <label className="text-xs text-text-secondary">{label}</label>
+        <span className="text-xs font-mono text-text-primary">{displayValue}</span>
+      </div>
+      <input type="range" min={min} max={max} step={step} value={value}
+        onChange={(e) => onChange(parseFloat(e.target.value))}
+        className="w-full h-1 rounded-full appearance-none cursor-pointer bg-border accent-gain" />
+    </div>
+  );
+}
+
+function ResultRow({ label, value, highlight, subtext }: {
+  label: string; value: string; highlight?: boolean; subtext?: string;
+}) {
+  return (
+    <div className={`flex justify-between items-baseline py-2 border-b border-border ${highlight ? "text-gain" : "text-text-secondary"}`}>
+      <div>
+        <span className="text-xs">{label}</span>
+        {subtext && <p className="text-[10px] text-text-muted font-mono mt-0.5">{subtext}</p>}
+      </div>
+      <span className={`text-sm font-mono font-semibold ${highlight ? "text-gain" : "text-text-primary"}`}>{value}</span>
+    </div>
+  );
+}
+
+export function EPFCalculator() {
+  const [input, setInput] = useState<EPFInput>(DEFAULT_INPUT);
+  const handleInputChange = useCallback(
+    <K extends keyof EPFInput>(key: K, value: EPFInput[K]) => { setInput((prev) => ({ ...prev, [key]: value })); }, []
+  );
+
+  const result = useMemo(() => computeEPF(input), [input]);
+
+  const years = Math.max(1, input.retirementAge - input.ageOfEntry);
+
+  const employeePercent = result.totalCorpusAtRetirement > 0
+    ? ((result.totalEmployeeContribution / result.totalCorpusAtRetirement) * 100).toFixed(0)
+    : "0";
+  const employerPercent = result.totalCorpusAtRetirement > 0
+    ? ((result.totalEmployerEpfContribution / result.totalCorpusAtRetirement) * 100).toFixed(0)
+    : "0";
+  const interestPercent = result.totalCorpusAtRetirement > 0
+    ? ((result.totalInterestEarned / result.totalCorpusAtRetirement) * 100).toFixed(0)
+    : "0";
+
+  return (
+    <div className="flex flex-col lg:flex-row gap-4 w-full h-full">
+      {/* Sliders */}
+      <div className="lg:w-[38%] shrink-0">
+        <div className="flex flex-col gap-3 p-4 bg-surface rounded-lg border border-border">
+          <h2 className="text-sm font-semibold tracking-tight">Calculate EPF Corpus</h2>
+          <SliderRow label="Monthly Basic Salary" value={input.monthlyBasicSalary}
+            displayValue={formatINR(input.monthlyBasicSalary)}
+            min={5000} max={500000} step={1000}
+            onChange={(v) => handleInputChange("monthlyBasicSalary", v)} />
+          <SliderRow label="Employee PF Rate" value={input.employeeRate}
+            displayValue={`${input.employeeRate}%`}
+            min={1} max={20} step={0.5}
+            onChange={(v) => handleInputChange("employeeRate", v)} />
+          <SliderRow label="Employer EPF Rate" value={input.employerEpfRate}
+            displayValue={`${input.employerEpfRate}%`}
+            min={1} max={15} step={0.01}
+            onChange={(v) => handleInputChange("employerEpfRate", v)} />
+          <SliderRow label="Employer EPS Rate" value={input.employerEpsRate}
+            displayValue={`${input.employerEpsRate}%`}
+            min={1} max={15} step={0.01}
+            onChange={(v) => handleInputChange("employerEpsRate", v)} />
+          <SliderRow label="Age of Entry" value={input.ageOfEntry}
+            displayValue={`${input.ageOfEntry} yrs`}
+            min={18} max={55} step={1}
+            onChange={(v) => handleInputChange("ageOfEntry", v)} />
+          <SliderRow label="Retirement Age" value={input.retirementAge}
+            displayValue={`${input.retirementAge} yrs`}
+            min={40} max={65} step={1}
+            onChange={(v) => handleInputChange("retirementAge", v)} />
+          <SliderRow label="Annual Salary Increase" value={input.annualSalaryIncrease}
+            displayValue={`${input.annualSalaryIncrease}%`}
+            min={0} max={20} step={0.5}
+            onChange={(v) => handleInputChange("annualSalaryIncrease", v)} />
+          <SliderRow label="EPF Interest Rate" value={input.epfInterestRate}
+            displayValue={`${input.epfInterestRate}%`}
+            min={5} max={12} step={0.25}
+            onChange={(v) => handleInputChange("epfInterestRate", v)} />
+        </div>
+      </div>
+
+      {/* Results */}
+      <div className="lg:w-[62%] min-h-0">
+        <div className="flex flex-col gap-3 min-h-0">
+          <CalcExplainer>
+            <p className="font-semibold text-text-primary">How to read</p>
+            <p>Your EPF corpus grows through three components:</p>
+            <ol className="list-decimal pl-5 space-y-0.5">
+              <li><strong>Employee contribution</strong> — {input.employeeRate}% of basic salary deducted monthly</li>
+              <li><strong>Employer EPF</strong> — {input.employerEpfRate}% of basic goes to your EPF savings</li>
+              <li><strong>Employer EPS</strong> — {input.employerEpsRate}% of basic (capped at ₹15,000) goes to pension, not your corpus</li>
+            </ol>
+            <p>Interest compounds annually on the EPF balance. EPS contributions fund a monthly pension, not included in the lump-sum corpus.</p>
+          </CalcExplainer>
+
+          {/* Monthly contribution summary */}
+          <div className="p-4 bg-surface rounded-lg border border-border">
+            <h3 className="text-xs font-semibold text-text-primary mb-3">Monthly Contributions</h3>
+            <ResultRow label="Employee Contribution"
+              value={formatINR(result.monthlyEmployeeContribution)} />
+            <ResultRow label="Employer EPF (to savings)"
+              value={formatINR(result.monthlyEmployerEpfContribution)}
+              subtext={`${input.employerEpfRate}% of basic`} />
+            <ResultRow label="Employer EPS (to pension)"
+              value={formatINR(result.monthlyEmployerEpsContribution)}
+              subtext={`${input.employerEpsRate}% of basic, capped at ₹15,000`} />
+          </div>
+
+          {/* Corpus breakdown */}
+          <div className="p-4 bg-surface rounded-lg border border-border">
+            <h3 className="text-xs font-semibold text-text-primary mb-3">Corpus at Retirement ({years} years)</h3>
+            <ResultRow label="Total Employee Contribution"
+              value={formatINR(result.totalEmployeeContribution)}
+              subtext={`${employeePercent}% of corpus`} />
+            <ResultRow label="Total Employer EPF"
+              value={formatINR(result.totalEmployerEpfContribution)}
+              subtext={`${employerPercent}% of corpus`} />
+            <ResultRow label="Total Interest Earned"
+              value={formatINR(result.totalInterestEarned)}
+              subtext={`${interestPercent}% of corpus`} />
+
+            <div className="mt-3 pt-3 border-t-2 border-gain">
+              <div className="flex justify-between items-center py-1">
+                <div>
+                  <span className="text-xs font-semibold text-text-primary">Total EPF Corpus at Retirement</span>
+                  <p className="text-[10px] text-text-muted font-mono">Employee + Employer EPF + Interest</p>
+                </div>
+                <span className="text-base font-mono font-bold text-gain">{formatINR(result.totalCorpusAtRetirement)}</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Year-by-year growth chart */}
+          <div className="p-4 bg-surface rounded-lg border border-border">
+            <h3 className="text-xs font-semibold text-text-primary mb-3">Year-by-Year Growth</h3>
+            <div className="overflow-x-auto">
+              <table className="w-full text-[10px] font-mono">
+                <thead>
+                  <tr className="text-text-muted border-b border-border">
+                    <th className="text-left py-1.5 pr-2">Yr</th>
+                    <th className="text-right py-1.5 pr-2">Age</th>
+                    <th className="text-right py-1.5 pr-2">Monthly Basic</th>
+                    <th className="text-right py-1.5 pr-2">Year Deposit</th>
+                    <th className="text-right py-1.5 pr-2">Interest</th>
+                    <th className="text-right py-1.5">Balance</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {result.yearlyBreakdown.map((row) => (
+                    <tr key={row.year} className="border-b border-border/50 hover:bg-border/20">
+                      <td className="py-1.5 pr-2 text-text-secondary">{row.year}</td>
+                      <td className="py-1.5 pr-2 text-right text-text-secondary">{row.age}</td>
+                      <td className="py-1.5 pr-2 text-right">{formatINR(row.monthlyBasic)}</td>
+                      <td className="py-1.5 pr-2 text-right">{formatINR(row.totalYearContribution)}</td>
+                      <td className="py-1.5 pr-2 text-right text-gain">{formatINR(row.interestEarned)}</td>
+                      <td className="py-1.5 text-right font-semibold">{formatINR(row.closingBalance)}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}

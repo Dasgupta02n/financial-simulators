@@ -1,0 +1,32 @@
+{
+  "id": "epf",
+  "slug": "epf-calculator",
+  "name": "EPF Calculator",
+  "metaTitle": "EPF Calculator — Estimate Your Provident Fund Corpus at Retirement | Financial Simulators",
+  "metaDescription": "Calculate your EPF corpus at retirement. See year-by-year growth of employee & employer contributions with compound interest. Free, client-side, no PII.",
+  "shortDescription": "Estimate your EPF corpus at retirement",
+  "faq": [
+    {
+      "question": "How is EPF interest calculated?",
+      "answer": "EPF interest is calculated on the monthly running balance. Each month, interest is earned on the opening balance plus that month's contribution. The interest rate is declared annually by the government (currently 8.25% for FY 2024-25). For simplification, this calculator applies annual compounding on the yearly opening balance plus that year's contributions."
+    },
+    {
+      "question": "What is the difference between EPF and EPS?",
+      "answer": "EPF (Employees' Provident Fund) is the savings portion where both employee (12% of basic) and employer (3.67% of basic) contributions accumulate with interest. EPS (Employees' Pension Scheme) is the pension portion where the employer contributes 8.33% of basic (capped at ₹15,000). EPS does not accumulate — it funds a monthly pension after retirement."
+    },
+    {
+      "question": "Is EPF interest taxable?",
+      "answer": "EPF interest earned on contributions up to ₹2.5 lakh per year (₹1.5 lakh for non-eligible employers) is tax-free. Interest on contributions exceeding this threshold is taxable. If you withdraw after 5 continuous years of service, the entire corpus including interest is tax-free."
+    },
+    {
+      "question": "What happens to EPS when I retire?",
+      "answer": "At retirement (age 58), you receive your EPF corpus (employee + employer EPF + interest) as a lump sum. The EPS portion provides a monthly pension based on your pensionable salary and years of service. This calculator focuses on the EPF lump-sum corpus only."
+    }
+  ],
+  "howToSteps": [
+    { "name": "Enter monthly basic salary", "text": "Set your monthly basic salary component" },
+    { "name": "Set EPF interest rate", "text": "Confirm or adjust the current EPF interest rate" },
+    { "name": "Set your age details", "text": "Enter your current age and expected retirement age" },
+    { "name": "Adjust salary growth", "text": "Set expected annual salary increase percentage" }
+  ]
+}

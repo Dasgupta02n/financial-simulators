@@ -35,22 +35,22 @@ export function CrossoverChart({ data, crossoverMonth, interestRate }: Crossover
   });
 
   return (
-    <div className="w-full h-[300px]">
+    <div className="w-full flex-1 min-h-[220px]">
       <ResponsiveContainer width="100%" height="100%">
         <ComposedChart data={chartData} margin={{ top: 10, right: 30, left: 10, bottom: 0 }}>
           <XAxis
             dataKey="month"
-            tick={{ fill: "#9ca3af", fontSize: 11, fontFamily: "var(--font-geist-mono)" }}
+            tick={{ fill: "#9ca3af", fontSize: 10, fontFamily: "var(--font-geist-mono)" }}
             tickFormatter={(v) => `M${v}`}
             axisLine={{ stroke: "#1f2937" }}
             tickLine={false}
           />
           <YAxis
-            tick={{ fill: "#9ca3af", fontSize: 11, fontFamily: "var(--font-geist-mono)" }}
+            tick={{ fill: "#9ca3af", fontSize: 10, fontFamily: "var(--font-geist-mono)" }}
             tickFormatter={formatINRShort}
             axisLine={{ stroke: "#1f2937" }}
             tickLine={false}
-            width={60}
+            width={55}
           />
           <Tooltip
             contentStyle={{

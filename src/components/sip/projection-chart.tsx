@@ -20,9 +20,9 @@ interface ProjectionChartProps {
 
 export function ProjectionChart({ data, showStress }: ProjectionChartProps) {
   return (
-    <div className="w-full h-[400px]">
+    <div className="w-full flex-1 min-h-[220px]">
       <ResponsiveContainer width="100%" height="100%">
-        <ComposedChart data={data} margin={{ top: 10, right: 30, left: 10, bottom: 0 }}>
+        <ComposedChart data={data} margin={{ top: 5, right: 20, left: 5, bottom: 0 }}>
           <defs>
             <linearGradient id="nominalGrad" x1="0" y1="0" x2="0" y2="1">
               <stop offset="0%" stopColor="#6ee7b7" stopOpacity={0.25} />
@@ -40,17 +40,17 @@ export function ProjectionChart({ data, showStress }: ProjectionChartProps) {
 
           <XAxis
             dataKey="year"
-            tick={{ fill: "#9ca3af", fontSize: 12, fontFamily: "var(--font-geist-mono)" }}
+            tick={{ fill: "#9ca3af", fontSize: 10, fontFamily: "var(--font-geist-mono)" }}
             tickFormatter={(v) => `Y${v}`}
             axisLine={{ stroke: "#1f2937" }}
             tickLine={false}
           />
           <YAxis
-            tick={{ fill: "#9ca3af", fontSize: 12, fontFamily: "var(--font-geist-mono)" }}
+            tick={{ fill: "#9ca3af", fontSize: 10, fontFamily: "var(--font-geist-mono)" }}
             tickFormatter={formatINRShort}
             axisLine={{ stroke: "#1f2937" }}
             tickLine={false}
-            width={70}
+            width={55}
           />
           <Tooltip
             contentStyle={{
@@ -58,7 +58,7 @@ export function ProjectionChart({ data, showStress }: ProjectionChartProps) {
               border: "1px solid #1f2937",
               borderRadius: "8px",
               fontFamily: "var(--font-geist-mono)",
-              fontSize: "12px",
+              fontSize: "11px",
             }}
             labelFormatter={(v) => `Year ${v}`}
             formatter={(value, name) => [

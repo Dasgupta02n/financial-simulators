@@ -6,7 +6,6 @@ import { AmortizationChart } from "./amortization-chart";
 import { CrossoverChart } from "./crossover-chart";
 import { formatINR } from "@/lib/format";
 import { CalcExplainer } from "@/components/shared/calc-explainer";
-import { CalcVisualization } from "@/components/shared/calc-visualization";
 
 interface ResultsPanelProps {
   emi: number;
@@ -21,7 +20,6 @@ interface ResultsPanelProps {
   amortization: AmortizationRow[];
   extraCash: number;
   interestRate: number;
-  vizData: Record<string, number>;
 }
 
 export function ResultsPanel({
@@ -37,29 +35,21 @@ export function ResultsPanel({
   amortization,
   extraCash,
   interestRate,
-  vizData,
 }: ResultsPanelProps) {
   return (
-    <div className="flex flex-col gap-6">
+    <div className="flex flex-col gap-3 min-h-0">
       <CalcExplainer>
-        <p className="font-semibold text-text-primary">What this calculator does</p>
-        <p>It breaks down your home loan into exactly where your money goes each month — how much pays off the loan versus how much goes to the bank as interest. Then it answers the big question: should you prepay or invest that extra cash?</p>
-        <p className="font-semibold text-text-primary">What each number means</p>
-        <ul className="list-disc pl-5 space-y-1">
-          <li><span className="text-text-primary">Monthly EMI</span> — your fixed monthly payment to the bank.</li>
-          <li><span className="text-text-primary">Total Interest</span> — the total money the bank charges you over the full loan period. This can shock you — it often exceeds the loan amount itself.</li>
-          <li><span className="text-text-primary">Interest Saved (Prepay)</span> — how much interest you avoid by putting your extra cash toward the loan each month.</li>
-          <li><span className="text-text-primary">Months Saved</span> — how many months earlier you become debt-free with prepayment.</li>
-          <li><span className="text-text-primary">SIP Corpus at Loan End</span> — if you invest that extra cash instead of prepaying, this is what it grows to by the time your loan ends.</li>
-        </ul>
-        <p className="font-semibold text-text-primary">How to read the charts</p>
-        <ul className="list-disc pl-5 space-y-1">
-          <li><span className="text-loss">Red bars</span> in the amortization chart = interest going to the bank. <span className="text-gain">Green bars</span> = actual loan reduction. Watch red shrink and green grow over time — that&apos;s your loan getting cheaper.</li>
-          <li>The <span className="text-warn">crossover chart</span> shows when investing beats prepaying. Before crossover: prepay. After crossover: invest.</li>
+        <p className="font-semibold text-text-primary">EMI Calculator</p>
+        <p>Breaks down your loan into interest vs principal each month, and answers: should you prepay or invest extra cash?</p>
+        <ul className="list-disc pl-5 space-y-0.5">
+          <li><span className="text-text-primary">Monthly EMI</span> — fixed monthly payment.</li>
+          <li><span className="text-text-primary">Total Interest</span> — total bank charges over the full loan.</li>
+          <li><span className="text-text-primary">Interest Saved (Prepay)</span> — interest avoided by prepaying.</li>
+          <li><span className="text-text-primary">Months Saved</span> — months earlier you become debt-free.</li>
+          <li><span className="text-text-primary">SIP Corpus</span> — value of extra cash if invested instead.</li>
         </ul>
       </CalcExplainer>
-      <CalcVisualization calcId="emi" data={vizData} />
-      <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="grid grid-cols-2 lg:grid-cols-3 gap-2">
         <MetricCard label="Monthly EMI" value={emi} variant="neutral" />
         <MetricCard label="Total Interest" value={totalInterest} variant="loss" />
         <MetricCard label="Total Payment" value={totalPayment} variant="neutral" />
@@ -95,17 +85,21 @@ export function ResultsPanel({
         </div>
       )}
 
-      <div className="bg-surface rounded-lg border border-border p-4">
-        <h3 className="text-sm font-semibold text-text-secondary mb-3">Amortization Schedule</h3>
-        <AmortizationChart data={amortization} />
+      <div className="bg-surface rounded-lg border border-border p-3">
+        <h3 className="text-xs font-semibold text-text-secondary mb-2">Amortization Schedule</h3>
+        <div className="flex-1 min-h-[220px]">
+          <AmortizationChart data={amortization} />
+        </div>
       </div>
 
       {extraCash > 0 && (
-        <div className="bg-surface rounded-lg border border-border p-4">
-          <h3 className="text-sm font-semibold text-text-secondary mb-3">
+        <div className="bg-surface rounded-lg border border-border p-3">
+          <h3 className="text-xs font-semibold text-text-secondary mb-2">
             SIP vs Prepayment Crossover
           </h3>
-          <CrossoverChart data={amortization} crossoverMonth={crossoverMonth} interestRate={interestRate} />
+          <div className="flex-1 min-h-[220px]">
+            <CrossoverChart data={amortization} crossoverMonth={crossoverMonth} interestRate={interestRate} />
+          </div>
         </div>
       )}
     </div>

@@ -34,14 +34,14 @@ export function CalcVisualization({ calcId, data }: CalcVisualizationProps) {
       initial={{ opacity: 0, scale: 0.95 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.5, delay: 0.2 }}
-      className="relative rounded-2xl border border-border bg-surface overflow-hidden"
+      className="relative rounded-lg border border-border bg-surface overflow-hidden"
     >
-      <div className="px-4 py-2 border-b border-border bg-surface-hover">
-        <span className="text-xs font-mono text-text-muted uppercase tracking-wider">
+      <div className="px-3 py-1 border-b border-border bg-surface-hover">
+        <span className="text-[10px] font-mono text-text-muted uppercase tracking-wider">
           Live Visualization
         </span>
       </div>
-      <div className="p-4 flex items-center justify-center min-h-[200px]">
+      <div className="p-3 flex items-center justify-center min-h-[120px]">
         <Visualization data={data} />
       </div>
     </motion.div>

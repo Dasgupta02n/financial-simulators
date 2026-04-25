@@ -1,0 +1,32 @@
+{
+  "id": "simple-interest",
+  "slug": "simple-interest-calculator",
+  "name": "Simple Interest Calculator",
+  "metaTitle": "Simple Interest Calculator — Compare Simple vs Compound Interest | Financial Simulators",
+  "metaDescription": "Calculate simple interest and compare it with compound interest side by side. See the year-by-year difference and understand why compounding matters. Client-side, no PII.",
+  "shortDescription": "Simple vs compound interest compared",
+  "faq": [
+    {
+      "question": "How is simple interest calculated?",
+      "answer": "Simple interest is calculated using the formula SI = (P × R × T) / 100, where P is the principal amount, R is the annual interest rate, and T is the time period in years. Unlike compound interest, simple interest is calculated only on the original principal."
+    },
+    {
+      "question": "What is the difference between simple and compound interest?",
+      "answer": "Simple interest is calculated only on the original principal, so the interest amount stays the same each year. Compound interest is calculated on the principal plus previously accumulated interest, so your earnings grow exponentially over time. The longer you stay invested, the bigger the difference becomes."
+    },
+    {
+      "question": "When is simple interest used in real life?",
+      "answer": "Simple interest is commonly used for short-term personal loans, car loans, and some types of bonds. It is also used for T-bills, fixed deposits with interest payout options, and informal lending. Most savings accounts and investment products use compound interest instead."
+    },
+    {
+      "question": "Does compounding frequency affect simple interest?",
+      "answer": "No, simple interest does not change with compounding frequency because interest is only ever calculated on the original principal. However, the compound interest comparison in this calculator does change with compounding frequency — more frequent compounding means higher compound interest."
+    }
+  ],
+  "howToSteps": [
+    { "name": "Set principal amount", "text": "Enter the amount you want to invest or borrow" },
+    { "name": "Set interest rate", "text": "Enter the annual interest rate in percentage" },
+    { "name": "Set time period", "text": "Enter the duration in years" },
+    { "name": "Compare results", "text": "See simple vs compound interest side by side with a year-by-year bar chart" }
+  ]
+}

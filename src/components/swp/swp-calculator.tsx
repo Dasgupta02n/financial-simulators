@@ -26,16 +26,11 @@ export function SWPCalculator() {
     }, []
   );
   const output = useMemo(() => computeSWP(input), [input]);
-  const vizData = useMemo(() => ({
-    corpusAtStart: input.corpus,
-    corpusAtEnd: output.finalCorpus,
-    monthlyWithdrawal: input.monthlyWithdrawal,
-  }), [input.corpus, input.monthlyWithdrawal, output.finalCorpus]);
 
   return (
-    <div className="flex flex-col lg:flex-row gap-6 w-full max-w-7xl mx-auto px-4 py-8">
-      <div className="lg:w-[40%]"><SWPSliderPanel input={input} onInputChange={handleInputChange} /></div>
-      <div className="lg:w-[60%]"><SWPResultsPanel output={output} crashEnabled={input.crashEnabled} vizData={vizData} /></div>
+    <div className="flex flex-col lg:flex-row gap-4 w-full h-full">
+      <div className="lg:w-[38%] shrink-0"><SWPSliderPanel input={input} onInputChange={handleInputChange} /></div>
+      <div className="lg:w-[62%] min-h-0"><SWPResultsPanel output={output} crashEnabled={input.crashEnabled} /></div>
     </div>
   );
 }

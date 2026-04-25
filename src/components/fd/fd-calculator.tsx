@@ -9,7 +9,6 @@ import { Area, Bar, ComposedChart, Line, ResponsiveContainer, Tooltip, XAxis, YA
 import { MetricCard } from "@/components/sip/metric-card";
 import { twMerge } from "tailwind-merge";
 import { CalcExplainer } from "@/components/shared/calc-explainer";
-import { CalcVisualization } from "@/components/shared/calc-visualization";
 
 const COMPOUND_OPTIONS = [
   { value: 1, label: "Annual" },
@@ -30,14 +29,14 @@ function SliderRow({ label, value, displayValue, min, max, step, onChange }: {
   label: string; value: number; displayValue: string; min: number; max: number; step: number; onChange: (v: number) => void;
 }) {
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-0.5">
       <div className="flex justify-between items-baseline">
-        <label className="text-sm text-text-secondary">{label}</label>
-        <span className="text-sm font-mono text-text-primary">{displayValue}</span>
+        <label className="text-xs text-text-secondary">{label}</label>
+        <span className="text-xs font-mono text-text-primary">{displayValue}</span>
       </div>
       <input type="range" min={min} max={max} step={step} value={value}
         onChange={(e) => onChange(parseFloat(e.target.value))}
-        className="w-full h-1.5 rounded-full appearance-none cursor-pointer bg-border accent-gain" />
+        className="w-full h-1 rounded-full appearance-none cursor-pointer bg-border accent-gain" />
     </div>
   );
 }
@@ -49,29 +48,24 @@ export function FDCalculator() {
   );
   const output = useMemo(() => computeFD(input), [input]);
   const isNegativeReal = output.realYield < 0;
-  const vizData = useMemo(() => ({
-    grossReturn: output.maturityGross,
-    postTaxReturn: output.maturityPostTax,
-    realReturn: output.maturityReal,
-  }), [output.maturityGross, output.maturityPostTax, output.maturityReal]);
 
   return (
-    <div className="flex flex-col lg:flex-row gap-6 w-full max-w-7xl mx-auto px-4 py-8">
-      <div className="lg:w-[40%]">
-        <div className="flex flex-col gap-6 p-6 bg-surface rounded-lg border border-border">
-          <h2 className="text-lg font-semibold tracking-tight">Configure FD</h2>
+    <div className="flex flex-col lg:flex-row gap-4 w-full h-full">
+      <div className="lg:w-[38%] shrink-0">
+        <div className="flex flex-col gap-3 p-4 bg-surface rounded-lg border border-border">
+          <h2 className="text-sm font-semibold tracking-tight">Configure FD</h2>
           <SliderRow label="Principal" value={input.principal} displayValue={formatINR(input.principal)}
             min={10000} max={50000000} step={10000} onChange={(v) => handleInputChange("principal", v)} />
           <SliderRow label="Interest Rate" value={input.interestRate} displayValue={`${input.interestRate}%`}
             min={2} max={12} step={0.25} onChange={(v) => handleInputChange("interestRate", v)} />
           <SliderRow label="Tenure" value={input.tenure} displayValue={`${input.tenure} yrs`}
             min={1} max={20} step={1} onChange={(v) => handleInputChange("tenure", v)} />
-          <div className="flex flex-col gap-2">
-            <span className="text-sm text-text-secondary">Compounding</span>
+          <div className="flex flex-col gap-1">
+            <span className="text-xs text-text-secondary">Compounding</span>
             <div className="flex gap-2">
               {COMPOUND_OPTIONS.map((opt) => (
                 <button key={opt.value} className={twMerge(
-                  "px-3 py-1.5 text-sm rounded-md font-mono transition-colors",
+                  "px-3 py-1.5 text-xs rounded-md font-mono transition-colors",
                   input.compoundingFreq === opt.value
                     ? "bg-gain/20 text-gain border border-gain/40"
                     : "bg-border text-text-secondary border border-border"
@@ -87,24 +81,19 @@ export function FDCalculator() {
             min={2} max={12} step={0.5} onChange={(v) => handleInputChange("inflationRate", v)} />
         </div>
       </div>
-      <div className="lg:w-[60%]">
-        <div className="flex flex-col gap-6">
+      <div className="lg:w-[62%] min-h-0">
+        <div className="flex flex-col gap-3 min-h-0">
           <CalcExplainer>
-            <p className="font-semibold text-text-primary">What this calculator does</p>
-            <p>It shows the truth behind FD returns — what the bank advertises versus what you actually keep after paying tax on interest and accounting for rising prices.</p>
-            <p className="font-semibold text-text-primary">What each number means</p>
+            <p className="font-semibold text-text-primary">How to read the numbers</p>
             <ul className="list-disc pl-5 space-y-1">
               <li><span className="text-text-primary">Maturity (Gross)</span> — what the bank tells you you&apos;ll get. No tax deducted.</li>
-              <li><span className="text-text-primary">Maturity (Post-Tax)</span> — what you actually receive after paying tax on the interest at your income tax slab rate.</li>
-              <li><span className="text-text-primary">Real Value</span> — what your post-tax money can buy in today&apos;s prices. This reveals whether FD actually grows your wealth or just preserves some of it.</li>
-              <li><span className="text-text-primary">Post-Tax Yield</span> — your effective annual return after tax. A 7% FD at 30% tax slab gives only ~5.3% post-tax.</li>
-              <li><span className="text-text-primary">Real Yield</span> — post-tax yield minus inflation. If this is negative, your money is losing purchasing power despite appearing to grow.</li>
+              <li><span className="text-text-primary">Maturity (Post-Tax)</span> — what you actually receive after paying tax on the interest at your slab rate.</li>
+              <li><span className="text-text-primary">Real Value</span> — what your post-tax money can buy in today&apos;s prices.</li>
+              <li><span className="text-text-primary">Post-Tax Yield</span> — your effective annual return after tax.</li>
+              <li><span className="text-text-primary">Real Yield</span> — post-tax yield minus inflation. Negative means losing purchasing power.</li>
             </ul>
-            <p className="font-semibold text-text-primary">Compounding frequency</p>
-            <p>Quarterly compounding (most common in India) pays slightly more than annual. Monthly pays a tiny bit more. The difference is small but adds up over long tenures.</p>
           </CalcExplainer>
-          <CalcVisualization calcId="fd" data={vizData} />
-          <div className="grid grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid grid-cols-2 lg:grid-cols-3 gap-2">
             <MetricCard label="Maturity (Gross)" value={output.maturityGross} variant="neutral" />
             <MetricCard label="Maturity (Post-Tax)" value={output.maturityPostTax} variant="gain" />
             <MetricCard label="Real Value (Today's ₹)" value={output.maturityReal} variant={isNegativeReal ? "loss" : "gain"} />
@@ -112,16 +101,16 @@ export function FDCalculator() {
             <MetricCard label="Real Yield" value={output.realYield} variant={isNegativeReal ? "loss" : "gain"} />
           </div>
           {isNegativeReal && (
-            <div className="p-3 bg-loss/10 border border-loss/30 rounded-lg text-sm font-mono text-loss">
-              Your real yield is negative — inflation erodes your purchasing power faster than post-tax FD returns grow it.
+            <div className="p-2 bg-loss/10 border border-loss/30 rounded-lg text-xs font-mono text-loss">
+              Real yield is negative — inflation erodes purchasing power faster than post-tax FD returns grow it.
             </div>
           )}
           <div className="text-xs text-text-secondary font-mono px-1">
             Gross interest: {formatINR(output.totalInterestGross)} → Post-tax: {formatINR(output.totalInterestPostTax)} (Tax: {formatINR(output.totalInterestGross - output.totalInterestPostTax)})
           </div>
-          <div className="bg-surface rounded-lg border border-border p-4">
-            <h3 className="text-sm font-semibold text-text-secondary mb-3">Growth vs Inflation</h3>
-            <div className="w-full h-[350px]">
+          <div className="flex-1 min-h-0 bg-surface rounded-lg border border-border p-4">
+            <h3 className="text-xs font-semibold text-text-secondary mb-2">Growth vs Inflation</h3>
+            <div className="w-full flex-1 min-h-[220px]">
               <ResponsiveContainer width="100%" height="100%">
                 <ComposedChart data={output.yearlyData} margin={{ top: 10, right: 30, left: 10, bottom: 0 }}>
                   <defs>
