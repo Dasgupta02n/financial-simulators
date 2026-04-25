@@ -5,14 +5,16 @@ import { PostList } from "./post-list";
 import { CalculatorConfig } from "./calculator-config";
 import { SeoToolkit } from "./seo-toolkit";
 import { SemDashboard } from "./sem-dashboard";
+import { LeadsPanel } from "./leads-panel";
 
-type Tab = "posts" | "calculators" | "seo" | "sem";
+type Tab = "posts" | "calculators" | "seo" | "sem" | "leads";
 
 const TABS: { id: Tab; label: string }[] = [
   { id: "posts", label: "Posts" },
   { id: "calculators", label: "Calculators" },
   { id: "seo", label: "SEO" },
   { id: "sem", label: "SEM" },
+  { id: "leads", label: "Leads" },
 ];
 
 export function AdminLayout() {
@@ -26,6 +28,7 @@ export function AdminLayout() {
           <button
             onClick={() => {
               localStorage.removeItem("admin_auth");
+              localStorage.removeItem("admin_password");
               window.location.reload();
             }}
             className="text-xs text-text-secondary hover:text-loss font-mono px-3 py-1 rounded border border-border"
@@ -55,6 +58,7 @@ export function AdminLayout() {
           {activeTab === "calculators" && <CalculatorConfig />}
           {activeTab === "seo" && <SeoToolkit />}
           {activeTab === "sem" && <SemDashboard />}
+          {activeTab === "leads" && <LeadsPanel />}
         </div>
       </div>
     </div>

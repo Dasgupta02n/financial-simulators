@@ -1,0 +1,82 @@
+{
+  "site": {
+    "title": "c7xai — The Truth About Your Money",
+    "description": "Old rules of money are broken. Here are the real ones. Inflation-adjusted, tax-aware financial clarity for India.",
+    "tagline": "The Truth About Money"
+  },
+  "nav": {
+    "calculators": "Calculators",
+    "planner": "Planner",
+    "compare": "Compare",
+    "truthIndex": "Truth Index",
+    "methodology": "Methodology",
+    "blog": "Blog"
+  },
+  "common": {
+    "verifyIt": "Verify it",
+    "theRealNumber": "the real number",
+    "lie": "Lie",
+    "truth": "Truth",
+    "totalInvested": "Total Invested",
+    "nominalCorpus": "Nominal Corpus",
+    "postTaxCorpus": "Post-Tax Corpus",
+    "realPurchasingPower": "Real Purchasing Power",
+    "inflationRate": "Inflation Rate",
+    "confidence": "Confidence",
+    "assumptions": "Assumptions",
+    "shareTitle": "Share",
+    "downloadReport": "Download Report",
+    "years": "years",
+    "year": "year",
+    "percent": "%"
+  },
+  "truthIndex": {
+    "title": "The Truth Index",
+    "subtitle": "Financial products are sold with big numbers. We show you what they actually mean after inflation, tax, and fees. Click any card to reveal the truth.",
+    "revealAll": "Reveal All",
+    "categoryAll": "All",
+    "categoryReturns": "Returns",
+    "categoryTax": "Tax",
+    "categoryLoans": "Loans",
+    "categoryPlanning": "Planning",
+    "bottomNote": "Every number on this page uses RBI 10-year average inflation (6%), current tax slabs, and real market data. Don't trust marketing — verify.",
+    "methodology": "Our Methodology",
+    "compareReturns": "Compare Returns"
+  },
+  "calculators": {
+    "sip": "SIP Simulator",
+    "emi": "EMI Analyzer",
+    "tax": "Tax Sandbox",
+    "fd": "FD Comparator",
+    "ppf": "PPF Calculator",
+    "swp": "SWP Stress Test",
+    "fire": "FIRE Matrix",
+    "goal": "Goal Planner",
+    "hra": "HRA Calculator",
+    "nps": "NPS Modeler",
+    "ctc": "CTC Optimizer",
+    "salary": "Salary Calculator",
+    "compound": "Compound Interest",
+    "accumulation": "Accumulation",
+    "epf": "EPF Calculator",
+    "gst": "GST Calculator",
+    "stepUpSip": "Step-Up SIP",
+    "termInsurance": "Term Insurance",
+    "crypto": "Crypto Tax",
+    "forex": "Forex Tax",
+    "depreciation": "Car / Depreciation",
+    "realEstate": "Real Estate",
+    "simpleInterest": "Simple Interest"
+  },
+  "lieVsTruth": {
+    "grossLabel": "They tell you",
+    "realLabel": "You actually keep",
+    "gapLabel": "The gap"
+  },
+  "calcExplainer": {
+    "howToRead": "How to read this",
+    "greenArea": "Green area",
+    "redDashedLine": "Red dashed line",
+    "inflationGap": "The gap between green and red is what inflation silently steals."
+  }
+}

@@ -1,0 +1,82 @@
+{
+  "site": {
+    "title": "c7xai — आपके पैसे की सच्चाई",
+    "description": "पुराने फाइनेंसियल नियम टूट चुके हैं। यहाँ हैं असली नियम। महंगाई-अनुकूल, टैक्स-जागरूक फाइनेंसियल स्पष्टता।",
+    "tagline": "पैसे की सच्चाई"
+  },
+  "nav": {
+    "calculators": "कैलकुलेटर",
+    "planner": "प्लानर",
+    "compare": "तुलना",
+    "truthIndex": "सच्चाई इंडेक्स",
+    "methodology": "पद्धति",
+    "blog": "ब्लॉग"
+  },
+  "common": {
+    "verifyIt": "जांचें",
+    "theRealNumber": "असली अंक",
+    "lie": "झूठ",
+    "truth": "सच",
+    "totalInvested": "कुल निवेश",
+    "nominalCorpus": "नाममात्र कोष",
+    "postTaxCorpus": "टैक्स के बाद",
+    "realPurchasingPower": "असली क्रय शक्ति",
+    "inflationRate": "महंगाई दर",
+    "confidence": "विश्वास",
+    "assumptions": "अनुमान",
+    "shareTitle": "शेयर करें",
+    "downloadReport": "रिपोर्ट डाउनलोड करें",
+    "years": "साल",
+    "year": "साल",
+    "percent": "%"
+  },
+  "truthIndex": {
+    "title": "सच्चाई इंडेक्स",
+    "subtitle": "फाइनेंसियल प्रोडक्ट बड़े अंकों के साथ बेचे जाते हैं। हम आपको दिखाते हैं कि महंगाई, टैक्स और फीस के बाद वे वास्तव में क्या मतलब रखते हैं। किसी भी कार्ड पर क्लिक करें।",
+    "revealAll": "सब प्रकट करें",
+    "categoryAll": "सभी",
+    "categoryReturns": "रिटर्न",
+    "categoryTax": "टैक्स",
+    "categoryLoans": "कर्जा",
+    "categoryPlanning": "योजना",
+    "bottomNote": "इस पेज का हर अंक RBI के 10 साल की औसत महंगाई (6%), वर्तमान टैक्स स्लैब और असली मार्केट डेटा का उपयोग करता है। मार्केटिंग पर भरोसा मत करें — जांचें।",
+    "methodology": "हमारी पद्धति",
+    "compareReturns": "रिटर्न तुलना करें"
+  },
+  "calculators": {
+    "sip": "SIP सिम्युलेटर",
+    "emi": "EMI विश्लेषक",
+    "tax": "टैक्स सैंडबॉक्स",
+    "fd": "FD तुलनाकर्ता",
+    "ppf": "PPF कैलकुलेटर",
+    "swp": "SWP स्ट्रेस टेस्ट",
+    "fire": "FIRE मैट्रिक्स",
+    "goal": "लक्ष्य योजनाकार",
+    "hra": "HRA कैलकुलेटर",
+    "nps": "NPS मॉडलर",
+    "ctc": "CTC ऑप्टिमाइज़र",
+    "salary": "वेतन कैलकुलेटर",
+    "compound": "चक्रवृद्धि ब्याज",
+    "accumulation": "संचय",
+    "epf": "EPF कैलकुलेटर",
+    "gst": "GST कैलकुलेटर",
+    "stepUpSip": "स्टेप-अप SIP",
+    "termInsurance": "टर्म इंश्योरेंस",
+    "crypto": "क्रिप्टो टैक्स",
+    "forex": "फॉरेक्स टैक्स",
+    "depreciation": "कार / मूल्यह्रास",
+    "realEstate": "रियल एस्टेट",
+    "simpleInterest": "साधारण ब्याज"
+  },
+  "lieVsTruth": {
+    "grossLabel": "वे बताते हैं",
+    "realLabel": "आप वास्तव में रखते हैं",
+    "gapLabel": "अंतर"
+  },
+  "calcExplainer": {
+    "howToRead": "कैसे पढ़ें",
+    "greenArea": "हरा क्षेत्र",
+    "redDashedLine": "लाल डैश लाइन",
+    "inflationGap": "हरे और लाल के बीच का अंतर वह है जो महंगाई चुपके से चुराती है।"
+  }
+}

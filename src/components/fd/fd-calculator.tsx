@@ -13,6 +13,7 @@ import { LieVsTruthPanel } from "@/components/shared/lie-vs-truth-panel";
 import { ConfidenceBadge } from "@/components/shared/confidence-badge";
 import { WhyThisNumber } from "@/components/shared/why-this-number";
 import { ShareBar } from "@/components/shared/share-bar";
+import { DownloadReportButton } from "@/components/shared/download-report-button";
 import { truthFromFD } from "@/lib/truth/truth-data-adapter";
 import { SliderRow } from "@/components/shared/slider-row";
 
@@ -131,6 +132,15 @@ export function FDCalculator() {
               <li>When real yield is negative, your money loses purchasing power every year it sits in an FD.</li>
             </ul>
           </CalcExplainer>
+          <DownloadReportButton
+            calculatorTitle="FD Comparator"
+            calculatorData={{
+              "Maturity Value": formatINR(output.maturityGross),
+              "Total Interest": formatINR(output.totalInterestGross),
+              "Post-Tax Return": formatINR(output.maturityPostTax),
+              "Real Purchasing Power": formatINR(output.maturityReal),
+            }}
+          />
         </div>
       </div>
     </div>

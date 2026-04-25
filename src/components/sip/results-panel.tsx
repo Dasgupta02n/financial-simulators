@@ -8,6 +8,7 @@ import { LieVsTruthPanel } from "@/components/shared/lie-vs-truth-panel";
 import { ConfidenceBadge } from "@/components/shared/confidence-badge";
 import { WhyThisNumber } from "@/components/shared/why-this-number";
 import { ShareBar } from "@/components/shared/share-bar";
+import { DownloadReportButton } from "@/components/shared/download-report-button";
 import { truthFromSIP } from "@/lib/truth/truth-data-adapter";
 
 interface ResultsPanelProps {
@@ -80,6 +81,17 @@ export function ResultsPanel({
           {stressEnabled && <li><span className="text-stress">Red line</span> — how a market crash would affect savings.</li>}
         </ul>
       </CalcExplainer>
+
+      <DownloadReportButton
+        calculatorTitle="SIP Simulator"
+        calculatorData={{
+          "Total Invested": `₹${totalInvested.toLocaleString("en-IN")}`,
+          "Nominal Corpus": `₹${nominalCorpus.toLocaleString("en-IN")}`,
+          "Post-Tax Corpus": `₹${postTaxCorpus.toLocaleString("en-IN")}`,
+          "Real Purchasing Power": `₹${realCorpus.toLocaleString("en-IN")}`,
+          ...(stressEnabled && stressCorpus !== undefined ? { "After Stress Test": `₹${stressCorpus.toLocaleString("en-IN")}` } : {}),
+        }}
+      />
     </div>
   );
 }

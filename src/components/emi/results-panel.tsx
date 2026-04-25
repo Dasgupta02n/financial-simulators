@@ -10,6 +10,7 @@ import { LieVsTruthPanel } from "@/components/shared/lie-vs-truth-panel";
 import { ConfidenceBadge } from "@/components/shared/confidence-badge";
 import { WhyThisNumber } from "@/components/shared/why-this-number";
 import { ShareBar } from "@/components/shared/share-bar";
+import { DownloadReportButton } from "@/components/shared/download-report-button";
 import { truthFromEMI } from "@/lib/truth/truth-data-adapter";
 
 interface ResultsPanelProps {
@@ -112,6 +113,17 @@ export function ResultsPanel({
           <li>If investing extra cash earns more than the loan interest rate, SIP beats prepayment. The crossover point tells you when.</li>
         </ul>
       </CalcExplainer>
+
+      <DownloadReportButton
+        calculatorTitle="EMI Analyzer"
+        calculatorData={{
+          "Monthly EMI": formatINR(emi),
+          "Total Interest": formatINR(totalInterest),
+          "Total Payment": formatINR(totalPayment),
+          "Interest Saved (Prepay)": formatINR(prepaidSavedInterest),
+          "SIP Corpus at Loan End": formatINR(sipCorpusAtLoanEnd),
+        }}
+      />
     </div>
   );
 }

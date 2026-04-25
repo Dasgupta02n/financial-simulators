@@ -30,6 +30,7 @@ export default function AdminPage() {
 
       if (res.ok) {
         localStorage.setItem("admin_auth", "true");
+        localStorage.setItem("admin_password", password);
         setAuthenticated(true);
       } else {
         setError("Incorrect password");
