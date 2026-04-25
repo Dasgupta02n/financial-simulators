@@ -132,6 +132,7 @@ export function SIPCalculator() {
           ltcgTax={result.ltcgTax}
           yearlyData={result.yearlyData}
           stressEnabled={stressConfig.enabled}
+          inflationRate={input.inflationRate}
         />
       </div>
     </div>

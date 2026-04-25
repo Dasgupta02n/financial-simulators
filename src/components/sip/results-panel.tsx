@@ -4,6 +4,11 @@ import type { YearlyDataPoint } from "@/lib/calculators/sip/types";
 import { MetricCard } from "./metric-card";
 import { ProjectionChart } from "./projection-chart";
 import { CalcExplainer } from "@/components/shared/calc-explainer";
+import { LieVsTruthPanel } from "@/components/shared/lie-vs-truth-panel";
+import { ConfidenceBadge } from "@/components/shared/confidence-badge";
+import { WhyThisNumber } from "@/components/shared/why-this-number";
+import { ShareButton } from "@/components/shared/share-button";
+import { truthFromSIP } from "@/lib/truth/truth-data-adapter";
 
 interface ResultsPanelProps {
   totalInvested: number;
@@ -15,6 +20,7 @@ interface ResultsPanelProps {
   yearlyData: YearlyDataPoint[];
   stressEnabled: boolean;
   vizData: Record<string, number>;
+  inflationRate?: number;
 }
 
 export function ResultsPanel({
@@ -27,9 +33,22 @@ export function ResultsPanel({
   yearlyData,
   stressEnabled,
   vizData,
+  inflationRate = 6,
 }: ResultsPanelProps) {
+  const truth = truthFromSIP(
+    { totalInvested, nominalCorpus, realCorpus },
+    inflationRate
+  );
+
   return (
     <div className="flex flex-col gap-3 h-full">
+      <div className="flex items-center justify-between shrink-0">
+        <ConfidenceBadge inflationRate={inflationRate} />
+        <ShareButton title="SIP Simulator — c7xai" />
+      </div>
+
+      <LieVsTruthPanel truth={truth} />
+
       <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 shrink-0">
         <MetricCard label="Total Invested" value={totalInvested} variant="neutral" />
         <MetricCard label="Nominal Corpus" value={nominalCorpus} variant="gain" />
@@ -49,6 +68,8 @@ export function ResultsPanel({
       <div className="bg-surface rounded-lg border border-border p-3 flex-1 min-h-0 flex flex-col">
         <ProjectionChart data={yearlyData} showStress={stressEnabled} />
       </div>
+
+      <WhyThisNumber assumptions={truth.assumptions} />
 
       <CalcExplainer>
         <p className="font-semibold text-text-primary">How to read this</p>

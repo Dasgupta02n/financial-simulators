@@ -7,6 +7,11 @@ import { formatINR, formatINRShort } from "@/lib/format";
 import { MetricCard } from "@/components/sip/metric-card";
 import { Area, ComposedChart, Line, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { CalcExplainer } from "@/components/shared/calc-explainer";
+import { LieVsTruthPanel } from "@/components/shared/lie-vs-truth-panel";
+import { ConfidenceBadge } from "@/components/shared/confidence-badge";
+import { WhyThisNumber } from "@/components/shared/why-this-number";
+import { ShareButton } from "@/components/shared/share-button";
+import { truthFromNPS } from "@/lib/truth/truth-data-adapter";
 
 const DEFAULT_INPUT: NPSInput = {
   currentAge: 30,
@@ -70,20 +75,11 @@ export function NPSCalculator() {
       </div>
       <div className="lg:w-[62%] min-h-0">
         <div className="flex flex-col gap-3 min-h-0">
-          <CalcExplainer>
-            <p className="font-semibold text-text-primary">How NPS withdrawal works</p>
-            <ul className="list-disc pl-5 space-y-1">
-              <li><span className="text-text-primary">60% Lumpsum</span> — withdrawn tax-free at retirement.</li>
-              <li><span className="text-text-primary">40% Annuity</span> — must buy an annuity (pension plan). Monthly pension is fully taxable as &quot;Income from Other Sources.&quot;</li>
-            </ul>
-            <p className="font-semibold text-text-primary">How to read the chart</p>
-            <ul className="list-disc pl-5 space-y-1">
-              <li><span className="text-warn">Yellow line</span> = equity allocation (Auto Choice lifecycle: 75% → 25% with age).</li>
-              <li><span className="text-gain">Green area</span> = corpus. <span className="text-loss">Red dashed</span> = real purchasing power.</li>
-              <li><span className="text-text-primary">Monthly Pension</span> — what you receive each month from the annuity.</li>
-              <li><span className="text-text-primary">Real Monthly Pension</span> — what that pension can buy in today&apos;s prices.</li>
-            </ul>
-          </CalcExplainer>
+          <div className="flex items-center justify-between shrink-0">
+            <ConfidenceBadge inflationRate={input.inflationRate} />
+            <ShareButton title="NPS Calculator — c7xai" />
+          </div>
+          <LieVsTruthPanel truth={truthFromNPS({ corpusAtRetirement: output.corpusAtRetirement, realCorpusAtRetirement: output.realCorpusAtRetirement, lumpsumWithdrawal: output.lumpsumWithdrawal, annuityCorpus: output.annuityCorpus, monthlyPension: output.monthlyPension, realMonthlyPension: output.realMonthlyPension, annuityTaxable: output.annuityTaxable, totalContributed: output.totalContributed ?? 0 }, input.inflationRate)} />
           <div className="grid grid-cols-2 lg:grid-cols-3 gap-2">
             <MetricCard label="Corpus at Retirement" value={output.corpusAtRetirement} variant="gain" />
             <MetricCard label="Real Value (Today's ₹)" value={output.realCorpusAtRetirement} variant="neutral" />
@@ -132,6 +128,15 @@ export function NPSCalculator() {
           <div className="text-xs text-text-secondary font-mono px-1">
             Auto Choice lifecycle: Equity 75% → 25% with age. 60% lumpsum tax-free; 40% annuity fully taxable.
           </div>
+          <WhyThisNumber assumptions={truthFromNPS({ corpusAtRetirement: output.corpusAtRetirement, realCorpusAtRetirement: output.realCorpusAtRetirement, lumpsumWithdrawal: output.lumpsumWithdrawal, annuityCorpus: output.annuityCorpus, monthlyPension: output.monthlyPension, realMonthlyPension: output.realMonthlyPension, annuityTaxable: output.annuityTaxable, totalContributed: output.totalContributed ?? 0 }, input.inflationRate).assumptions} />
+          <CalcExplainer>
+            <p className="font-semibold text-text-primary">The truth about NPS</p>
+            <ul className="list-disc pl-4 space-y-0.5">
+              <li>Your monthly pension looks decent, but inflation erodes its purchasing power every year. The real pension is what matters.</li>
+              <li>60% lumpsum is tax-free, but 40% annuity income is fully taxable — this drags down your real return.</li>
+              <li><span className="text-loss">Red dashed line</span> — what your corpus can actually buy. <span className="text-warn">Yellow line</span> — equity allocation glide path.</li>
+            </ul>
+          </CalcExplainer>
         </div>
       </div>
     </div>

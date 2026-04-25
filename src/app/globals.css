@@ -92,6 +92,24 @@ body {
   color: var(--color-text-muted);
 }
 
+/* Lie vs Truth panel */
+.lie-number {
+  font-family: var(--font-geist-mono), monospace;
+  color: var(--color-text-muted);
+  text-decoration: line-through;
+  opacity: 0.6;
+}
+.truth-highlight {
+  font-family: var(--font-playfair), serif;
+  font-weight: 700;
+  color: var(--color-sienna);
+  line-height: 1;
+}
+.gap-highlight {
+  color: var(--color-loss);
+  font-family: var(--font-geist-mono), monospace;
+}
+
 /* Glow effects */
 .glow-sienna { box-shadow: 0 0 30px rgba(216, 64, 14, 0.2), 0 0 60px rgba(216, 64, 14, 0.08); }
 .glow-gain { box-shadow: 0 0 24px rgba(74, 222, 128, 0.2); }

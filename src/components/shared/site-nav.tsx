@@ -2,6 +2,9 @@ import Link from "next/link";
 
 const NAV_LINKS = [
   { href: "/", label: "Calculators" },
+  { href: "/compare", label: "Compare" },
+  { href: "/truth-index", label: "Truth Index" },
+  { href: "/methodology", label: "Methodology" },
   { href: "/blog", label: "Blog" },
 ];
 

@@ -13,6 +13,7 @@ export interface AmortizationRow {
   principal: number;
   interest: number;
   outstanding: number;
+  realOutstanding: number;
   prepaidPrincipal?: number;
   prepaidOutstanding?: number;
   sipInvested?: number;

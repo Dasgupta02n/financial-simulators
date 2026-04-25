@@ -9,6 +9,11 @@ import { Area, Bar, ComposedChart, Line, ResponsiveContainer, Tooltip, XAxis, YA
 import { MetricCard } from "@/components/sip/metric-card";
 import { twMerge } from "tailwind-merge";
 import { CalcExplainer } from "@/components/shared/calc-explainer";
+import { LieVsTruthPanel } from "@/components/shared/lie-vs-truth-panel";
+import { ConfidenceBadge } from "@/components/shared/confidence-badge";
+import { WhyThisNumber } from "@/components/shared/why-this-number";
+import { ShareButton } from "@/components/shared/share-button";
+import { truthFromFD } from "@/lib/truth/truth-data-adapter";
 
 const COMPOUND_OPTIONS = [
   { value: 1, label: "Annual" },
@@ -83,16 +88,11 @@ export function FDCalculator() {
       </div>
       <div className="lg:w-[62%] min-h-0">
         <div className="flex flex-col gap-3 min-h-0">
-          <CalcExplainer>
-            <p className="font-semibold text-text-primary">How to read the numbers</p>
-            <ul className="list-disc pl-5 space-y-1">
-              <li><span className="text-text-primary">Maturity (Gross)</span> — what the bank tells you you&apos;ll get. No tax deducted.</li>
-              <li><span className="text-text-primary">Maturity (Post-Tax)</span> — what you actually receive after paying tax on the interest at your slab rate.</li>
-              <li><span className="text-text-primary">Real Value</span> — what your post-tax money can buy in today&apos;s prices.</li>
-              <li><span className="text-text-primary">Post-Tax Yield</span> — your effective annual return after tax.</li>
-              <li><span className="text-text-primary">Real Yield</span> — post-tax yield minus inflation. Negative means losing purchasing power.</li>
-            </ul>
-          </CalcExplainer>
+          <div className="flex items-center justify-between shrink-0">
+            <ConfidenceBadge inflationRate={input.inflationRate} />
+            <ShareButton title="FD Comparator — c7xai" />
+          </div>
+          <LieVsTruthPanel truth={truthFromFD(output, input.inflationRate)} />
           <div className="grid grid-cols-2 lg:grid-cols-3 gap-2">
             <MetricCard label="Maturity (Gross)" value={output.maturityGross} variant="neutral" />
             <MetricCard label="Maturity (Post-Tax)" value={output.maturityPostTax} variant="gain" />
@@ -137,6 +137,15 @@ export function FDCalculator() {
               </ResponsiveContainer>
             </div>
           </div>
+          <WhyThisNumber assumptions={truthFromFD(output, input.inflationRate).assumptions} />
+          <CalcExplainer>
+            <p className="font-semibold text-text-primary">The truth about FD returns</p>
+            <ul className="list-disc pl-4 space-y-0.5">
+              <li>Banks advertise gross interest — but you pay tax on every rupee of FD interest at your slab rate.</li>
+              <li><span className="text-loss">Red dashed line</span> — what your FD can actually buy after inflation. Often negative.</li>
+              <li>When real yield is negative, your money loses purchasing power every year it sits in an FD.</li>
+            </ul>
+          </CalcExplainer>
         </div>
       </div>
     </div>

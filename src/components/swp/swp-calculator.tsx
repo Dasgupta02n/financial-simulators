@@ -30,7 +30,7 @@ export function SWPCalculator() {
   return (
     <div className="flex flex-col lg:flex-row gap-4 w-full h-full">
       <div className="lg:w-[38%] shrink-0"><SWPSliderPanel input={input} onInputChange={handleInputChange} /></div>
-      <div className="lg:w-[62%] min-h-0"><SWPResultsPanel output={output} crashEnabled={input.crashEnabled} /></div>
+      <div className="lg:w-[62%] min-h-0"><SWPResultsPanel output={output} crashEnabled={input.crashEnabled} inflationRate={input.inflationRate} /></div>
     </div>
   );
 }

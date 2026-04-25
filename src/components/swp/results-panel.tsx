@@ -5,28 +5,30 @@ import { formatINR, formatINRShort } from "@/lib/format";
 import { MetricCard } from "@/components/sip/metric-card";
 import { Area, ComposedChart, Line, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { CalcExplainer } from "@/components/shared/calc-explainer";
+import { LieVsTruthPanel } from "@/components/shared/lie-vs-truth-panel";
+import { ConfidenceBadge } from "@/components/shared/confidence-badge";
+import { WhyThisNumber } from "@/components/shared/why-this-number";
+import { ShareButton } from "@/components/shared/share-button";
+import { truthFromSWP } from "@/lib/truth/truth-data-adapter";
 
 interface Props {
   output: SWPOutput;
   crashEnabled: boolean;
+  inflationRate?: number;
 }
 
-export function SWPResultsPanel({ output, crashEnabled }: Props) {
+export function SWPResultsPanel({ output, crashEnabled, inflationRate = 6 }: Props) {
   const isDepleted = output.depleted;
   const isStressWorse = crashEnabled && output.stressDepleted && (output.stressYearsLasted ?? 0) < output.yearsLasted;
+  const truth = truthFromSWP({ finalCorpus: output.finalCorpus, finalRealCorpus: output.finalRealCorpus, totalWithdrawn: output.totalWithdrawn }, inflationRate);
 
   return (
     <div className="flex flex-col gap-3 min-h-0">
-      <CalcExplainer>
-        <p className="font-semibold text-text-primary">SWP Calculator</p>
-        <p>Shows how long your retirement fund lasts with monthly withdrawals. Stress test simulates a market crash early in retirement.</p>
-        <ul className="list-disc pl-5 space-y-0.5">
-          <li><span className="text-text-primary">Final Corpus</span> — money left at end (or ₹0 if depleted).</li>
-          <li><span className="text-text-primary">Real Value</span> — remaining corpus in today&apos;s prices.</li>
-          <li><span className="text-text-primary">Years Lasted</span> — years before money runs out.</li>
-          <li><span className="text-text-primary">Total Withdrawn / Growth</span> — outflows vs market returns.</li>
-        </ul>
-      </CalcExplainer>
+      <div className="flex items-center justify-between shrink-0">
+        <ConfidenceBadge inflationRate={inflationRate} />
+        <ShareButton title="SWP Stress Test — c7xai" />
+      </div>
+      <LieVsTruthPanel truth={truth} />
       <div className="grid grid-cols-2 lg:grid-cols-3 gap-2">
         <MetricCard label="Final Corpus" value={output.finalCorpus} variant={isDepleted ? "loss" : "gain"} />
         <MetricCard label="Real Value (Today's ₹)" value={output.finalRealCorpus} variant={isDepleted ? "loss" : "neutral"} />
@@ -52,6 +54,16 @@ export function SWPResultsPanel({ output, crashEnabled }: Props) {
           Stress corpus survives with ₹{formatINR(output.stressFinalCorpus)} remaining — but still reduced from nominal by ₹{formatINR(output.finalCorpus - output.stressFinalCorpus)}.
         </div>
       )}
+
+      <WhyThisNumber assumptions={truth.assumptions} />
+      <CalcExplainer>
+        <p className="font-semibold text-text-primary">The truth about SWP</p>
+        <ul className="list-disc pl-4 space-y-0.5">
+          <li>Your corpus might last 25 years on paper — but inflation eats its purchasing power every year.</li>
+          <li><span className="text-loss">Red dashed line</span> — real value of your remaining corpus in today&apos;s money.</li>
+          {crashEnabled && <li><span className="text-stress">Red line</span> — how a market crash early in retirement derails your plan.</li>}
+        </ul>
+      </CalcExplainer>
 
       <div className="bg-surface rounded-lg border border-border p-3">
         <h3 className="text-xs font-semibold text-text-secondary mb-2">Corpus Over Time</h3>

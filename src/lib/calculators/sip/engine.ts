@@ -1,5 +1,6 @@
 import type { SIPInput, YearlyDataPoint } from "./types";
 import { getYearlySIP } from "./step-up";
+import { applyLTCG } from "./tax";
 
 export function computeSIP(input: SIPInput): YearlyDataPoint[] {
   const monthlyRate = input.returnRate / 100 / 12;
@@ -26,12 +27,14 @@ export function computeSIP(input: SIPInput): YearlyDataPoint[] {
     if (month % 12 === 0) {
       const nominalCorpus = lumpsumValue + sipAccumulated;
       const inflationFactor = Math.pow(1 + input.inflationRate / 100, currentYear);
+      const totalInvestedSoFar = totalInvested + input.lumpsum;
+      const { postTaxCorpus } = applyLTCG(nominalCorpus, totalInvestedSoFar);
       yearlyData.push({
         year: currentYear,
-        invested: totalInvested + input.lumpsum,
+        invested: totalInvestedSoFar,
         nominalCorpus,
         realCorpus: nominalCorpus / inflationFactor,
-        postTaxCorpus: 0,
+        postTaxCorpus,
       });
     }
   }

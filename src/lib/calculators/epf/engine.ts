@@ -12,6 +12,7 @@ export function computeEPF(input: EPFInput): EPFOutput {
     retirementAge,
     annualSalaryIncrease,
     epfInterestRate,
+    inflationRate,
   } = input;
 
   const years = Math.max(1, retirementAge - ageOfEntry);
@@ -52,6 +53,9 @@ export function computeEPF(input: EPFInput): EPFOutput {
 
     const closingBalance = openingBalance + totalYearContribution + interestEarned;
 
+    const inflationFactor = Math.pow(1 + inflationRate / 100, y);
+    const realClosingBalance = closingBalance / inflationFactor;
+
     yearlyBreakdown.push({
       year: y,
       age,
@@ -63,6 +67,7 @@ export function computeEPF(input: EPFInput): EPFOutput {
       openingBalance: Math.round(openingBalance),
       interestEarned: Math.round(interestEarned),
       closingBalance: Math.round(closingBalance),
+      realClosingBalance: Math.round(realClosingBalance),
     });
 
     totalEmployeeContribution += annualEmployeeContribution;
@@ -78,6 +83,8 @@ export function computeEPF(input: EPFInput): EPFOutput {
   const totalCorpusAtRetirement = Math.round(
     totalEmployeeContribution + totalEmployerEpfContribution + totalInterestEarned
   );
+  const finalInflationFactor = Math.pow(1 + inflationRate / 100, years);
+  const realCorpusAtRetirement = Math.round(totalCorpusAtRetirement / finalInflationFactor);
 
   return {
     monthlyEmployeeContribution: Math.round(monthlyBasicSalary * (employeeRate / 100)),
@@ -92,6 +99,7 @@ export function computeEPF(input: EPFInput): EPFOutput {
     totalEmployerEpfContribution: Math.round(totalEmployerEpfContribution),
     totalInterestEarned: Math.round(totalInterestEarned),
     totalCorpusAtRetirement,
+    realCorpusAtRetirement,
     yearlyBreakdown,
   };
 }

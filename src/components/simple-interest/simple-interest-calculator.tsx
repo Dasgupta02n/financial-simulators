@@ -5,6 +5,11 @@ import type { SimpleInterestInput } from "@/lib/calculators/simple-interest/type
 import { computeSimpleInterest } from "@/lib/calculators/simple-interest/engine";
 import { formatINR } from "@/lib/format";
 import { CalcExplainer } from "@/components/shared/calc-explainer";
+import { LieVsTruthPanel } from "@/components/shared/lie-vs-truth-panel";
+import { ConfidenceBadge } from "@/components/shared/confidence-badge";
+import { WhyThisNumber } from "@/components/shared/why-this-number";
+import { ShareButton } from "@/components/shared/share-button";
+import { truthFromSimpleInterest } from "@/lib/truth/truth-data-adapter";
 import {
   Bar,
   ComposedChart,
@@ -112,12 +117,11 @@ export function SimpleInterestCalculator() {
 
       <div className="lg:w-[62%] min-h-0">
         <div className="flex flex-col gap-3 min-h-0">
-          <CalcExplainer>
-            <p className="font-semibold text-text-primary">How to read</p>
-            <p><strong>Simple Interest</strong> = P &times; R &times; T / 100 is calculated only on the principal.</p>
-            <p><strong>Compound Interest</strong> = P(1 + r/n)<sup>nt</sup> &minus; P includes interest-on-interest.</p>
-            <p>The difference grows over time as compounding accelerates. More frequent compounding means a larger gap.</p>
-          </CalcExplainer>
+          <div className="flex items-center justify-between shrink-0">
+            <ConfidenceBadge inflationRate={6} />
+            <ShareButton title="Simple Interest Calculator — c7xai" />
+          </div>
+          <LieVsTruthPanel truth={truthFromSimpleInterest({ simpleInterest: result.simpleInterest, compoundInterest: result.compoundInterest, totalAmount: result.totalAmount, principal: input.principal }, 6)} />
 
           <div className="p-4 bg-surface rounded-lg border border-border">
             <h3 className="text-xs font-semibold text-text-primary mb-3">Interest Breakdown</h3>
@@ -203,6 +207,15 @@ export function SimpleInterestCalculator() {
               </div>
             </div>
           </div>
+          <WhyThisNumber assumptions={truthFromSimpleInterest({ simpleInterest: result.simpleInterest, compoundInterest: result.compoundInterest, totalAmount: result.totalAmount, principal: input.principal }, 6).assumptions} />
+          <CalcExplainer>
+            <p className="font-semibold text-text-primary">The truth about simple vs compound interest</p>
+            <ul className="list-disc pl-4 space-y-0.5">
+              <li>Simple interest earns only on your principal. Compound interest earns on principal + accumulated interest — the gap widens exponentially over time.</li>
+              <li>Both are fully taxable at your slab rate. And inflation erodes purchasing power regardless of interest type.</li>
+              <li>The compounding difference looks small in year 1 but becomes massive over decades. That&apos;s why starting early matters.</li>
+            </ul>
+          </CalcExplainer>
         </div>
       </div>
     </div>
