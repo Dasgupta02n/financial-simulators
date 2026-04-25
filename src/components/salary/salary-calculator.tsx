@@ -70,27 +70,27 @@ export function SalaryCalculator() {
           <SliderRow label="Basic Salary (% of CTC)" value={input.basicPct}
             displayValue={`${input.basicPct}%`}
             min={30} max={60} step={2}
-            onChange={(v) => handleInputChange("basicPct", v)} />
+            onChange={(v) => handleInputChange("basicPct", v)} tickUnit="%" />
           <SliderRow label="Expected Bonus (% of CTC)" value={input.bonusPct}
             displayValue={`${input.bonusPct}%`}
             min={0} max={40} step={1}
-            onChange={(v) => handleInputChange("bonusPct", v)} />
+            onChange={(v) => handleInputChange("bonusPct", v)} tickUnit="%" />
           <div className="flex flex-col gap-1">
             <span className="text-xs text-text-secondary">City Type</span>
             <div className="flex gap-2">
               <button className={twMerge(
                 "px-4 py-1.5 text-xs rounded-md font-mono transition-colors",
                 input.metroCity
-                  ? "bg-gain/20 text-gain border border-gain/40"
-                  : "bg-border text-text-secondary border border-border"
+                  ? "bg-sienna/10 text-sienna border border-sienna/30"
+                  : "bg-surface-hover text-text-secondary border border-border"
               )} onClick={() => handleInputChange("metroCity", true)}>
                 Metro
               </button>
               <button className={twMerge(
                 "px-4 py-1.5 text-xs rounded-md font-mono transition-colors",
                 !input.metroCity
-                  ? "bg-gain/20 text-gain border border-gain/40"
-                  : "bg-border text-text-secondary border border-border"
+                  ? "bg-sienna/10 text-sienna border border-sienna/30"
+                  : "bg-surface-hover text-text-secondary border border-border"
               )} onClick={() => handleInputChange("metroCity", false)}>
                 Non-Metro
               </button>
@@ -103,16 +103,16 @@ export function SalaryCalculator() {
               <button className={twMerge(
                 "px-4 py-1.5 text-xs rounded-md font-mono transition-colors",
                 input.regime === "new"
-                  ? "bg-gain/20 text-gain border border-gain/40"
-                  : "bg-border text-text-secondary border border-border"
+                  ? "bg-sienna/10 text-sienna border border-sienna/30"
+                  : "bg-surface-hover text-text-secondary border border-border"
               )} onClick={() => handleInputChange("regime", "new")}>
                 New Regime
               </button>
               <button className={twMerge(
                 "px-4 py-1.5 text-xs rounded-md font-mono transition-colors",
                 input.regime === "old"
-                  ? "bg-gain/20 text-gain border border-gain/40"
-                  : "bg-border text-text-secondary border border-border"
+                  ? "bg-sienna/10 text-sienna border border-sienna/30"
+                  : "bg-surface-hover text-text-secondary border border-border"
               )} onClick={() => handleInputChange("regime", "old")}>
                 Old Regime
               </button>

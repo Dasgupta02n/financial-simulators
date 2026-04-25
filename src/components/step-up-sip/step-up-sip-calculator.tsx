@@ -14,6 +14,7 @@ import {
   ResponsiveContainer,
   Legend,
 } from "recharts";
+import { SliderRow } from "@/components/shared/slider-row";
 
 const DEFAULT_INPUT: StepUpSIPInput = {
   monthlySIP: 10000,
@@ -22,23 +23,6 @@ const DEFAULT_INPUT: StepUpSIPInput = {
   tenureYears: 20,
   inflationRate: 6,
 };
-
-function SliderRow({ label, value, displayValue, min, max, step, onChange, suffix }: {
-  label: string; value: number; displayValue: string; min: number; max: number; step: number;
-  onChange: (v: number) => void; suffix?: string;
-}) {
-  return (
-    <div className="flex flex-col gap-0.5">
-      <div className="flex justify-between items-baseline">
-        <label className="text-xs text-text-secondary">{label}</label>
-        <span className="text-xs font-mono text-text-primary">{displayValue}{suffix}</span>
-      </div>
-      <input type="range" min={min} max={max} step={step} value={value}
-        onChange={(e) => onChange(parseFloat(e.target.value))}
-        className="w-full h-1 rounded-full appearance-none cursor-pointer bg-border accent-gain" />
-    </div>
-  );
-}
 
 export function StepUpSIPCalculator() {
   const [input, setInput] = useState<StepUpSIPInput>(DEFAULT_INPUT);
@@ -72,19 +56,19 @@ export function StepUpSIPCalculator() {
           <SliderRow label="Annual Step-Up" value={input.annualStepUp}
             displayValue={`${input.annualStepUp}%`}
             min={0} max={30} step={1}
-            onChange={(v) => handleInputChange("annualStepUp", v)} suffix="%" />
+            onChange={(v) => handleInputChange("annualStepUp", v)} tickUnit="%" />
           <SliderRow label="Expected Return" value={input.returnRate}
             displayValue={`${input.returnRate}%`}
             min={1} max={30} step={0.5}
-            onChange={(v) => handleInputChange("returnRate", v)} suffix="%" />
+            onChange={(v) => handleInputChange("returnRate", v)} tickUnit="%" />
           <SliderRow label="Tenure" value={input.tenureYears}
-            displayValue={`${input.tenureYears}`}
+            displayValue={`${input.tenureYears} yr`}
             min={1} max={40} step={1}
-            onChange={(v) => handleInputChange("tenureYears", v)} suffix=" yr" />
+            onChange={(v) => handleInputChange("tenureYears", v)} tickUnit=" yr" />
           <SliderRow label="Inflation" value={input.inflationRate}
             displayValue={`${input.inflationRate}%`}
             min={0} max={15} step={0.5}
-            onChange={(v) => handleInputChange("inflationRate", v)} suffix="%" />
+            onChange={(v) => handleInputChange("inflationRate", v)} tickUnit="%" />
         </div>
       </div>
 
