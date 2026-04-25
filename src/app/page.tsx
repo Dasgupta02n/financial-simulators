@@ -49,16 +49,29 @@ export default function Home() {
 
   return (
     <main className="flex-1 flex flex-col">
-      {/* ── HERO ── Full-width black, large text, abstract grid bg */}
-      <section className="w-full bg-ink bg-grid-pattern relative overflow-hidden">
+      {/* ── HERO ── Truth reveal on void background */}
+      <section className="w-full bg-ink relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-6 pt-28 pb-24">
-          <h1 className="text-5xl md:text-7xl font-bold tracking-tight leading-[1.1] max-w-4xl">
+          <p className="text-sm font-mono uppercase tracking-[0.25em] text-sienna mb-6">
+            c7xai
+          </p>
+          <h1 className="text-5xl md:text-7xl font-bold tracking-tight leading-[1.1] max-w-4xl font-serif-display">
             The Truth About{" "}
             <span className="text-sienna">Your Money</span>
           </h1>
-          <p className="text-lg md:text-xl text-text-secondary mt-6 max-w-2xl leading-relaxed">
-            Old rules of money are broken. Here are the real ones.
-            Inflation-adjusted, tax-aware clarity — no signups, no tracking, no product pushing.
+          <div className="mt-10 max-w-2xl space-y-4">
+            <p className="text-lg text-truth/90 font-serif-display leading-relaxed">
+              Your SIP returns 12%? After inflation and tax, you keep <span className="text-sienna font-bold">3.8%</span>.
+            </p>
+            <p className="text-lg text-truth/90 font-serif-display leading-relaxed">
+              Your FD &ldquo;guarantees&rdquo; 7%? After tax, you get <span className="text-sienna font-bold">5.6%</span>.
+            </p>
+            <p className="text-lg text-truth/90 font-serif-display leading-relaxed">
+              Your PF is &ldquo;safe&rdquo;? It hasn&apos;t beaten inflation in 3 years.
+            </p>
+          </div>
+          <p className="text-base text-text-secondary mt-8 max-w-xl leading-relaxed">
+            We don&apos;t show you the marketing number. We show you what you actually keep.
           </p>
           <div className="mt-8 flex items-center gap-4">
             <Link
@@ -66,147 +79,92 @@ export default function Home() {
               className="inline-flex items-center gap-2 px-6 py-3 bg-sienna text-white text-sm font-semibold
                 hover:bg-sienna/90 transition-colors"
             >
-              Try SIP Simulator
+              Try SIP Truth &rarr;
             </Link>
             <Link
-              href="#services"
+              href="#calculators"
               className="inline-flex items-center gap-2 px-6 py-3 border border-white/20 text-white text-sm font-medium
                 hover:border-sienna/50 hover:text-sienna transition-colors"
             >
-              All Calculators ↓
+              All Calculators
             </Link>
           </div>
         </div>
-        {/* Decorative grid lines */}
-        <div className="absolute inset-0 opacity-[0.04] pointer-events-none">
-          <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <pattern id="heroGrid" width="60" height="60" patternUnits="userSpaceOnUse">
-                <path d="M 60 0 L 0 0 0 60" fill="none" stroke="white" strokeWidth="0.5" />
-              </pattern>
-            </defs>
-            <rect width="100%" height="100%" fill="url(#heroGrid)" />
-          </svg>
+      </section>
+
+      {/* ── TRUTH CALLS ── Short punch statements */}
+      <section className="w-full bg-ink-light border-t border-white/5">
+        <div className="max-w-7xl mx-auto px-6 py-12 grid md:grid-cols-3 gap-8">
+          <div className="truth-reveal">
+            <div className="text-3xl font-bold font-serif-display text-sienna">3.8%</div>
+            <div className="text-sm text-text-muted font-mono mt-1">Real SIP return</div>
+            <div className="text-xs text-text-muted/60 font-mono line-through">12% advertised</div>
+          </div>
+          <div className="truth-reveal">
+            <div className="text-3xl font-bold font-serif-display text-sienna">5.6%</div>
+            <div className="text-sm text-text-muted font-mono mt-1">Post-tax FD yield</div>
+            <div className="text-xs text-text-muted/60 font-mono line-through">7% advertised</div>
+          </div>
+          <div className="truth-reveal">
+            <div className="text-3xl font-bold font-serif-display text-sienna">0%</div>
+            <div className="text-sm text-text-muted font-mono mt-1">Data collected about you</div>
+            <div className="text-xs text-text-muted/60 font-mono">No signups. No tracking. No PII.</div>
+          </div>
         </div>
       </section>
 
-      {/* ── ABOUT ── Wix template: "A Closer Look" section with grid bg image */}
+      {/* ── ABOUT ── Honest, no SVG illustrations */}
       <section className="w-full bg-surface">
-        <div className="max-w-7xl mx-auto px-6 py-20 md:py-28 grid md:grid-cols-2 gap-12 items-center">
-          <div>
-            <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-ink">
-              A Closer Look at c7xai
-            </h2>
-            <p className="text-base text-[#444] mt-6 leading-relaxed max-w-lg">
+        <div className="max-w-7xl mx-auto px-6 py-20 md:py-28">
+          <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-ink font-serif-display">
+            What c7xai Actually Does
+          </h2>
+          <div className="mt-8 max-w-2xl space-y-4 text-base text-[#444] leading-relaxed">
+            <p>
               Every calculator on this site uses NIFTY historical data (12% mean, 18% standard deviation),
               6% inflation, and current Indian tax laws including LTCG at 12.5% above ₹1.25L.
-              The math is transparent, the assumptions are stated, and every computation runs in your browser.
-              No PII collected. No tracking. No product pushing. Just the truth about your money.
             </p>
-            <Link
-              href="/blog"
-              className="inline-flex items-center gap-2 mt-6 text-sm font-semibold text-sienna hover:text-sienna/80 transition-colors"
-            >
-              Learn More →
-            </Link>
-          </div>
-          <div className="relative aspect-square max-w-md mx-auto">
-            {/* Abstract geometric illustration */}
-            <svg viewBox="0 0 400 400" className="w-full h-full">
-              <rect x="0" y="0" width="400" height="400" fill="#050505" />
-              {[...Array(7)].map((_, i) => (
-                <line key={`h-${i}`} x1="0" y1={i * 60 + 20} x2="400" y2={i * 60 + 20} stroke="rgba(255,255,255,0.06)" strokeWidth="0.5" />
-              ))}
-              {[...Array(7)].map((_, i) => (
-                <line key={`v-${i}`} x1={i * 60 + 20} y1="0" x2={i * 60 + 20} y2="400" stroke="rgba(255,255,255,0.06)" strokeWidth="0.5" />
-              ))}
-              {/* Accent rectangles */}
-              <rect x="60" y="60" width="120" height="180" fill="#D8400E" opacity="0.08" />
-              <rect x="200" y="120" width="140" height="100" fill="#D8400E" opacity="0.05" />
-              <rect x="80" y="280" width="200" height="60" fill="#D8400E" opacity="0.04" />
-              {/* Dots at intersections */}
-              {[80, 200, 320].map((x) =>
-                [80, 200, 320].map((y) => (
-                  <circle key={`${x}-${y}`} cx={x} cy={y} r="2" fill="#D8400E" opacity="0.3" />
-                ))
-              )}
-              {/* Rupee symbol */}
-              <text x="140" y="170" fontSize="48" fill="#D8400E" opacity="0.15" fontFamily="var(--font-geist-mono)" fontWeight="bold">₹</text>
-            </svg>
+            <p>
+              The math is transparent. The assumptions are stated. Every computation runs in your browser.
+              No PII collected. No tracking. No product pushing.
+            </p>
+            <p className="text-ink font-semibold">
+              Just the truth about your money.
+            </p>
           </div>
         </div>
       </section>
 
-      {/* ── SERVICES (Calculators) ── Wix template: "Our Services" with numbered items */}
-      <section id="services" className="w-full bg-ink">
+      {/* ── CALCULATORS ── Clean grid, no numbered cards */}
+      <section id="calculators" className="w-full bg-ink">
         <div className="max-w-7xl mx-auto px-6 py-20 md:py-28">
-          <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white mb-16">
-            Our Services
+          <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white mb-4 font-serif-display">
+            Calculators
           </h2>
+          <p className="text-sm text-text-secondary mb-12 max-w-lg">
+            Every number inflation-adjusted. Every tax accounted for. Zero marketing spin.
+          </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-white/10">
             {CALCULATORS.map((calc, i) => (
               <CalcCard key={calc.id} {...calc} index={i} />
             ))}
           </div>
-          <div className="mt-12 text-center">
-            <Link
-              href="/sip-simulator"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-sienna text-white text-sm font-semibold
-                hover:bg-sienna/90 transition-colors"
-            >
-              See More
-            </Link>
-          </div>
         </div>
       </section>
 
-      {/* ── WHY CHOOSE ── Wix template: "Why Choose Voor.IT" with numbered features */}
-      <section className="w-full bg-surface">
-        <div className="max-w-7xl mx-auto px-6 py-20 md:py-28">
-          <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-ink mb-16">
-            Why Choose c7xai
-          </h2>
-          <div className="grid md:grid-cols-2 gap-16">
-            {[
-              {
-                num: "01",
-                title: "CUTTING-EDGE ACCURACY",
-                desc: "Every calculator uses NIFTY historical data with real standard deviation — not cherry-picked averages that make returns look better than they are."
-              },
-              {
-                num: "02",
-                title: "COST-EFFECTIVE INSIGHTS",
-                desc: "Free forever. No premium tiers, no paywalled features. Every calculator gives you the full picture including tax drag and inflation erosion."
-              },
-              {
-                num: "03",
-                title: "24/7 PRIVATE COMPUTATION",
-                desc: "All math runs in your browser. No data leaves your device. No accounts, no tracking, no PII collected. Your finances stay yours. The truth has no hidden agenda."
-              }
-            ].map((item) => (
-              <div key={item.num} className="flex flex-col gap-3">
-                <span className="text-sm font-mono text-sienna tracking-wider">{item.num}</span>
-                <h3 className="text-lg font-bold text-ink">{item.title}</h3>
-                <p className="text-sm text-[#666] leading-relaxed">{item.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── BLOG ── Wix template: "Get the Latest from the Blog" */}
+      {/* ── BLOG ── Clean, no grid-pattern placeholders */}
       {posts.length > 0 && (
-        <section className="w-full bg-ink">
+        <section className="w-full bg-surface">
           <div className="max-w-7xl mx-auto px-6 py-20 md:py-28">
             <div className="flex items-center justify-between mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-white">
-                Get the Latest from the Blog
+              <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-ink font-serif-display">
+                Financial Stories
               </h2>
               <Link
                 href="/blog"
                 className="text-sm font-semibold text-sienna hover:text-sienna/80 transition-colors"
               >
-                All posts →
+                All posts &rarr;
               </Link>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -216,28 +174,19 @@ export default function Home() {
                   href={`/blog/${post.slug}`}
                   className="group block"
                 >
-                  {/* Blog card image placeholder */}
-                  <div className="aspect-[4/3] bg-white/5 border border-white/10 mb-4 overflow-hidden group-hover:border-sienna/30 transition-colors">
-                    <svg viewBox="0 0 400 300" className="w-full h-full">
-                      <rect width="400" height="300" fill="#050505" />
-                      {[...Array(5)].map((_, i) => (
-                        <line key={i} x1="0" y1={i * 60 + 20} x2="400" y2={i * 60 + 20} stroke="rgba(255,255,255,0.04)" strokeWidth="0.5" />
-                      ))}
-                      {[...Array(7)].map((_, i) => (
-                        <line key={i} x1={i * 60 + 20} y1="0" x2={i * 60 + 20} y2="300" stroke="rgba(255,255,255,0.04)" strokeWidth="0.5" />
-                      ))}
-                      <text x="200" y="160" textAnchor="middle" fontSize="14" fill="#D8400E" opacity="0.4" fontFamily="var(--font-geist-mono)">
-                        {post.category}
-                      </text>
-                    </svg>
+                  {/* Blog card — data visualization, not stock photos */}
+                  <div className="aspect-[4/3] bg-ink border border-white/10 mb-4 overflow-hidden group-hover:border-sienna/30 transition-colors flex items-center justify-center">
+                    <span className="text-sm font-mono text-text-muted/40 group-hover:text-sienna/60 transition-colors">
+                      {post.category}
+                    </span>
                   </div>
-                  <div className="text-xs uppercase font-mono text-text-muted mb-2">
+                  <div className="text-xs uppercase font-mono text-[#666] mb-2">
                     {post.category} &middot; {post.readTime} min read
                   </div>
-                  <h3 className="text-lg font-bold text-white group-hover:text-sienna transition-colors">
+                  <h3 className="text-lg font-bold text-ink group-hover:text-sienna transition-colors">
                     {post.title}
                   </h3>
-                  <p className="text-sm text-text-secondary mt-2 line-clamp-2">
+                  <p className="text-sm text-[#666] mt-2 line-clamp-2">
                     {post.description}
                   </p>
                 </Link>
@@ -247,23 +196,7 @@ export default function Home() {
         </section>
       )}
 
-      {/* ── RECOMMENDED BY / PARTNERS ── Wix template logo strip */}
-      <section className="w-full bg-ink border-t border-white/5">
-        <div className="max-w-7xl mx-auto px-6 py-16">
-          <h2 className="text-center text-sm font-mono uppercase tracking-[0.2em] text-text-muted mb-10">
-            Recommended By
-          </h2>
-          <div className="flex items-center justify-center gap-12 flex-wrap">
-            {["Nifty 50", "BSE Sensex", "RBI", "SEBI", "AMFI"].map((name) => (
-              <span key={name} className="text-text-muted/40 text-lg font-bold tracking-tight">
-                {name}
-              </span>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── FOOTER ── Wix template: multi-column footer on black */}
+      {/* ── FOOTER ── Clean, minimal */}
       <footer className="w-full bg-ink border-t border-white/5">
         <div className="max-w-7xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-4 gap-10">
           {/* Brand */}
@@ -306,10 +239,10 @@ export default function Home() {
         <div className="border-t border-white/5">
           <div className="max-w-7xl mx-auto px-6 py-6 flex items-center justify-between">
             <span className="text-xs text-text-muted">
-              © {new Date().getFullYear()} by c7xai. Computed entirely client-side.
+              &copy; {new Date().getFullYear()} by c7xai. Computed entirely client-side.
             </span>
             <span className="text-xs text-text-muted">
-              NIFTY 12% μ / 18% σ · 6% inflation · LTCG 12.5% above ₹1.25L · The truth about your money
+              NIFTY 12% &mu; / 18% &sigma; &middot; 6% inflation &middot; LTCG 12.5% above &rsquo;1.25L &middot; The truth about your money
             </span>
           </div>
         </div>
