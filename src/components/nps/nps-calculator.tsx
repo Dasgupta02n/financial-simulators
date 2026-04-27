@@ -11,6 +11,7 @@ import { LieVsTruthPanel } from "@/components/shared/lie-vs-truth-panel";
 import { ConfidenceBadge } from "@/components/shared/confidence-badge";
 import { WhyThisNumber } from "@/components/shared/why-this-number";
 import { ShareBar } from "@/components/shared/share-bar";
+import { DownloadReportButton } from "@/components/shared/download-report-button";
 import { truthFromNPS } from "@/lib/truth/truth-data-adapter";
 import { SliderRow } from "@/components/shared/slider-row";
 
@@ -122,6 +123,16 @@ export function NPSCalculator() {
               <li><span className="text-loss">Red dashed line</span> — what your corpus can actually buy. <span className="text-warn">Yellow line</span> — equity allocation glide path.</li>
             </ul>
           </CalcExplainer>
+          <DownloadReportButton
+            calculatorTitle="NPS Calculator"
+            calculatorData={{
+              "Corpus at Retirement": formatINR(output.corpusAtRetirement),
+              "Lumpsum (Tax-Free)": formatINR(output.lumpsumWithdrawal),
+              "Monthly Pension": formatINR(output.monthlyPension),
+              "Real Monthly Pension": formatINR(output.realMonthlyPension),
+              "Annuity Corpus": formatINR(output.annuityCorpus),
+            }}
+          />
         </div>
       </div>
     </div>

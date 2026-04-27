@@ -15,6 +15,8 @@ import {
   Legend,
 } from "recharts";
 import { SliderRow } from "@/components/shared/slider-row";
+import { ShareBar } from "@/components/shared/share-bar";
+import { DownloadReportButton } from "@/components/shared/download-report-button";
 
 const DEFAULT_INPUT: StepUpSIPInput = {
   monthlySIP: 10000,
@@ -117,6 +119,20 @@ export function StepUpSIPCalculator() {
               </ComposedChart>
             </ResponsiveContainer>
           </div>
+          <div className="flex items-center gap-2 pt-3 mt-auto">
+            <span className="text-xs text-text-muted font-mono">Share:</span>
+            <ShareBar title="Step-Up SIP Calculator — c7xai" />
+          </div>
+          <DownloadReportButton
+            calculatorTitle="Step-Up SIP Calculator"
+            calculatorData={{
+              "Step-Up Corpus": formatINR(result.nominalCorpus),
+              "After LTCG": formatINR(result.afterLTCG),
+              "Real Value": formatINR(result.realCorpus),
+              "Regular SIP Corpus": formatINR(result.regularCorpus),
+              "Total Invested": formatINR(result.totalInvested),
+            }}
+          />
         </div>
       </div>
     </div>

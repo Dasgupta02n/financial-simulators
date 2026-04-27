@@ -4,6 +4,7 @@ export type LifeStage = "single" | "married" | "married_with_kids" | "near_retir
 export type IncomeBracket = "below5L" | "5to10L" | "10to25L" | "25to50L" | "50Lto1Cr" | "above1Cr";
 export type GoalType = "emergency_fund" | "home" | "education" | "marriage" | "retirement" | "car" | "travel" | "health";
 export type InsuranceType = "life" | "health" | "vehicle" | "none";
+export type RiskProfile = "aggressive" | "moderate" | "conservative";
 
 export interface PlannerInput {
   /* Step 1: Personal */
@@ -38,7 +39,9 @@ export interface PlannerGoal {
 export interface PlannerOutput {
   /* Gap analysis */
   emergencyFundGap: number;
+  emergencyTarget: number;
   retirementGap: number;
+  retirementCorpusNeeded: number;
   goalGaps: GoalGap[];
 
   /* Recommendations */
@@ -51,6 +54,16 @@ export interface PlannerOutput {
   monthlyInvestmentNeeded: number;
   currentMonthlyInvestment: number;
   surplusDeficit: number;
+
+  /* New: Enhanced outputs */
+  riskProfile: RiskProfile;
+  assetAllocation: AssetAllocation;
+  monthlyBudgetAllocation: MonthlyAllocation[];
+  taxStrategy: TaxStrategy;
+  insuranceRecommendations: InsuranceRecommendation[];
+  netWorthProjection: YearlyProjection[];
+  stepByStepActionPlan: ActionStep[];
+  keyInsights: string[];
 }
 
 export interface GoalGap {
@@ -58,6 +71,7 @@ export interface GoalGap {
   projectedAmount: number;
   gap: number;
   monthlySIPNeeded: number;
+  inflatedTarget: number;
 }
 
 export interface PlannerRecommendation {
@@ -73,6 +87,61 @@ export interface CalculatorLink {
   label: string;
   slug: string;
   reason: string;
+}
+
+export interface AssetAllocation {
+  equity: number; // percentage
+  debt: number;
+  gold: number;
+  realEstate: number;
+  cash: number;
+  rationale: string;
+}
+
+export interface MonthlyAllocation {
+  category: string;
+  amount: number;
+  percentage: number;
+  reason: string;
+}
+
+export interface TaxStrategy {
+  regime: "old" | "new";
+  regimeReason: string;
+  estimatedTaxSavings: number;
+  deductions: TaxDeduction[];
+}
+
+export interface TaxDeduction {
+  section: string;
+  description: string;
+  maxAmount: number;
+  recommendedAmount: number;
+}
+
+export interface InsuranceRecommendation {
+  type: string;
+  recommendedCover: number;
+  estimatedPremium: number;
+  priority: "critical" | "high" | "medium";
+  reason: string;
+}
+
+export interface YearlyProjection {
+  year: number;
+  age: number;
+  totalCorpus: number;
+  invested: number;
+  returns: number;
+}
+
+export interface ActionStep {
+  step: number;
+  timeframe: string;
+  title: string;
+  description: string;
+  actionItems: string[];
+  calculatorLink?: string;
 }
 
 /* ── Step tracking ── */

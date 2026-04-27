@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { ShareBar } from "@/components/shared/share-bar";
 
 export const metadata: Metadata = {
   title: "Methodology — How c7xai Calculates Truth | c7xai",
@@ -160,6 +161,11 @@ export default function MethodologyPage() {
             </Link>
           </div>
         </section>
+      </div>
+
+      <div className="flex items-center gap-2 mt-8">
+        <span className="text-xs text-text-muted font-mono">Share:</span>
+        <ShareBar title="Methodology — c7xai" />
       </div>
     </main>
   );

@@ -7,6 +7,7 @@ import { generateSiteJsonLd } from "@/lib/seo";
 import { SiteNav } from "@/components/shared/site-nav";
 import { PageTransition } from "@/components/shared/page-transition";
 import { AuthProvider } from "@/components/shared/auth-provider";
+import { NoSaveGuard } from "@/components/shared/no-save-guard";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -72,6 +73,7 @@ export default async function RootLayout({
         ))}
       </head>
       <body className="min-h-full flex flex-col bg-ink text-text-primary">
+        <NoSaveGuard />
         <AuthProvider>
           <NextIntlClientProvider messages={messages}>
             <SiteNav />

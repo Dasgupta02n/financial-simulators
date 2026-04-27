@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import type { Metadata } from "next";
+import { ShareBar } from "@/components/shared/share-bar";
 
 interface TruthCard {
   lie: string;
@@ -337,6 +338,11 @@ export default function TruthIndexPage() {
             </Link>
           </div>
         </div>
+      </div>
+
+      <div className="flex items-center gap-2 mt-8">
+        <span className="text-xs text-text-muted font-mono">Share:</span>
+        <ShareBar title="Truth Index — c7xai" />
       </div>
     </main>
   );

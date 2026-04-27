@@ -4,6 +4,7 @@ import { MDXRemote } from "next-mdx-remote/rsc";
 import { getAllPosts, getPostBySlug } from "@/lib/blog";
 import { BLOG_CATEGORIES } from "@/lib/blog-categories";
 import { CalculatorCard as CalculatorCardEmbed } from "@/components/blog/calculator-card-embed";
+import { ShareBar } from "@/components/shared/share-bar";
 
 interface LocaleBlogPostPageProps {
   params: Promise<{ slug: string }>;
@@ -140,6 +141,11 @@ export default async function LocaleBlogPostPage({ params }: LocaleBlogPostPageP
             )}
           </footer>
         </article>
+
+        <div className="flex items-center gap-2 mt-6">
+          <span className="text-xs text-text-muted font-mono">Share:</span>
+          <ShareBar title={post.title + " — c7xai"} />
+        </div>
       </main>
     </>
   );

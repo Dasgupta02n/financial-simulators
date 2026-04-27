@@ -11,6 +11,7 @@ import { LieVsTruthPanel } from "@/components/shared/lie-vs-truth-panel";
 import { ConfidenceBadge } from "@/components/shared/confidence-badge";
 import { WhyThisNumber } from "@/components/shared/why-this-number";
 import { ShareBar } from "@/components/shared/share-bar";
+import { DownloadReportButton } from "@/components/shared/download-report-button";
 import { truthFromCTC } from "@/lib/truth/truth-data-adapter";
 import { SliderRow } from "@/components/shared/slider-row";
 
@@ -126,6 +127,16 @@ export function CTCCalculator() {
               <li>HRA exemption can save significant tax if you pay rent — the optimizer finds the best split.</li>
             </ul>
           </CalcExplainer>
+          <DownloadReportButton
+            calculatorTitle="CTC Calculator"
+            calculatorData={{
+              "In-Hand/Year": formatINR(output.inHandAnnual),
+              "In-Hand/Month": formatINR(output.inHandMonthly),
+              "Tax (Current)": formatINR(output.tax.totalTax),
+              "HRA Exemption": formatINR(output.hraExemption),
+              "Optimized In-Hand/Year": formatINR(output.optimizedInHandAnnual),
+            }}
+          />
         </div>
       </div>
     </div>

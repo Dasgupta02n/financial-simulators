@@ -10,6 +10,7 @@ import { LieVsTruthPanel } from "@/components/shared/lie-vs-truth-panel";
 import { ConfidenceBadge } from "@/components/shared/confidence-badge";
 import { WhyThisNumber } from "@/components/shared/why-this-number";
 import { ShareBar } from "@/components/shared/share-bar";
+import { DownloadReportButton } from "@/components/shared/download-report-button";
 import { truthFromPPF } from "@/lib/truth/truth-data-adapter";
 import { Area, Line, ComposedChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { SliderRow } from "@/components/shared/slider-row";
@@ -127,6 +128,16 @@ export function PPFViewModel() {
               <li>When real yield is negative, your PPF loses purchasing power despite tax-free returns.</li>
             </ul>
           </CalcExplainer>
+          <DownloadReportButton
+            calculatorTitle="PPF Calculator"
+            calculatorData={{
+              "Total Invested": formatINR(output.totalInvested),
+              "Maturity Value": formatINR(output.maturityValue),
+              "Real Value": formatINR(output.realMaturityValue),
+              "Interest Earned": formatINR(output.totalInterest),
+              "Effective Yield": `${output.effectiveYield.toFixed(1)}%`,
+            }}
+          />
         </div>
       </div>
     </div>

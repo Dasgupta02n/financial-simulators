@@ -9,6 +9,7 @@ import { LieVsTruthPanel } from "@/components/shared/lie-vs-truth-panel";
 import { ConfidenceBadge } from "@/components/shared/confidence-badge";
 import { WhyThisNumber } from "@/components/shared/why-this-number";
 import { ShareBar } from "@/components/shared/share-bar";
+import { DownloadReportButton } from "@/components/shared/download-report-button";
 import { truthFromSimpleInterest } from "@/lib/truth/truth-data-adapter";
 import {
   Bar,
@@ -201,6 +202,16 @@ export function SimpleInterestCalculator() {
               <li>The compounding difference looks small in year 1 but becomes massive over decades. That&apos;s why starting early matters.</li>
             </ul>
           </CalcExplainer>
+          <DownloadReportButton
+            calculatorTitle="Simple Interest Calculator"
+            calculatorData={{
+              "Simple Interest": formatINR(result.simpleInterest),
+              "Total Amount (Simple)": formatINR(result.totalAmount),
+              "Compound Interest": formatINR(result.compoundInterest),
+              "Total Amount (Compound)": formatINR(result.compoundAmount),
+              "Extra via Compounding": formatINR(result.difference),
+            }}
+          />
         </div>
       </div>
     </div>

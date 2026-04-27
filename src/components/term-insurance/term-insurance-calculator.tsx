@@ -7,6 +7,8 @@ import { formatINR } from "@/lib/format";
 import { CalcExplainer } from "@/components/shared/calc-explainer";
 import { twMerge } from "tailwind-merge";
 import { SliderRow } from "@/components/shared/slider-row";
+import { ShareBar } from "@/components/shared/share-bar";
+import { DownloadReportButton } from "@/components/shared/download-report-button";
 
 const DEFAULT_INPUT: TermInsuranceInput = {
   annualIncome: 1200000,
@@ -208,6 +210,20 @@ export function TermInsuranceCalculator() {
               Approx ₹800-1200 per ₹1Cr cover/year. Actual premiums vary by age, health, insurer.
             </p>
           </div>
+          <div className="flex items-center gap-2 pt-3 mt-auto">
+            <span className="text-xs text-text-muted font-mono">Share:</span>
+            <ShareBar title="Term Insurance Calculator — c7xai" />
+          </div>
+          <DownloadReportButton
+            calculatorTitle="Term Insurance Calculator"
+            calculatorData={{
+              "Total Cover Needed": formatINR(result.totalRequired),
+              "Additional Cover Needed": formatINR(result.coverNeeded),
+              "Future Expenses": formatINR(result.futureExpenses),
+              "Emergency Fund": formatINR(result.emergencyFund),
+              "Monthly Premium Range": `${formatINR(result.monthlyPremiumLow)} — ${formatINR(result.monthlyPremiumHigh)}`,
+            }}
+          />
         </div>
       </div>
     </div>

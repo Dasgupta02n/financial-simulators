@@ -10,6 +10,7 @@ import { LieVsTruthPanel } from "@/components/shared/lie-vs-truth-panel";
 import { ConfidenceBadge } from "@/components/shared/confidence-badge";
 import { WhyThisNumber } from "@/components/shared/why-this-number";
 import { ShareBar } from "@/components/shared/share-bar";
+import { DownloadReportButton } from "@/components/shared/download-report-button";
 import { CalcExplainer } from "@/components/shared/calc-explainer";
 import { Area, ComposedChart, Line, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { MetricCard } from "@/components/sip/metric-card";
@@ -238,6 +239,17 @@ export function RealEstateCalculator() {
               <li>Rental yield offsets some costs, but maintenance and property tax erode it further.</li>
             </ul>
           </CalcExplainer>
+          <DownloadReportButton
+            calculatorTitle="Real Estate Calculator"
+            calculatorData={{
+              "Property Value (Final)": formatINR(output.finalPropertyValue),
+              "Net Proceeds After Tax": formatINR(output.netProceedsAfterTax),
+              "Real Value": formatINR(output.realValueAfterInflation),
+              "Total Cost of Ownership": formatINR(output.totalCostOfOwnership),
+              "ROI": `${output.roi.toFixed(1)}%`,
+              "Real ROI": `${output.realROI.toFixed(1)}%`,
+            }}
+          />
         </div>
       </div>
     </div>

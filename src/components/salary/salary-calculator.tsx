@@ -7,6 +7,8 @@ import { formatINR } from "@/lib/format";
 import { CalcExplainer } from "@/components/shared/calc-explainer";
 import { twMerge } from "tailwind-merge";
 import { SliderRow } from "@/components/shared/slider-row";
+import { ShareBar } from "@/components/shared/share-bar";
+import { DownloadReportButton } from "@/components/shared/download-report-button";
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer } from "recharts";
 
 const COLORS = ["#6ee7b7", "#38bdf8", "#f59e0b", "#a78bfa", "#f87171"];
@@ -274,6 +276,19 @@ export function SalaryCalculator() {
               <span className="text-lg font-mono font-bold text-gain">{formatINR(result.monthlyInHand)}</span>
             </div>
           </div>
+          <div className="flex items-center gap-2 pt-3 mt-auto">
+            <span className="text-xs text-text-muted font-mono">Share:</span>
+            <ShareBar title="Salary Calculator — c7xai" />
+          </div>
+          <DownloadReportButton
+            calculatorTitle="Salary Calculator"
+            calculatorData={{
+              "Monthly In-Hand": formatINR(result.monthlyInHand),
+              "Annual In-Hand": formatINR(result.annualInHand),
+              "Income Tax": formatINR(result.deductions.incomeTax),
+              "Total Deductions": formatINR(result.deductions.totalDeductions),
+            }}
+          />
         </div>
       </div>
     </div>

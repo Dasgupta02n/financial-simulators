@@ -3,6 +3,7 @@ import { Suspense } from "react";
 import { getAllPosts } from "@/lib/blog";
 import type { BlogCategory } from "@/lib/blog-categories";
 import { BlogCard } from "@/components/blog/blog-card";
+import { ShareBar } from "@/components/shared/share-bar";
 import { CategoryFilter } from "@/components/blog/category-filter";
 
 export const metadata: Metadata = {
@@ -66,6 +67,11 @@ export default async function LocaleBlogPage({
           ))}
         </div>
       </section>
+
+      <div className="flex items-center gap-2 mt-6">
+        <span className="text-xs text-text-muted font-mono">Share:</span>
+        <ShareBar title="Blog — c7xai" />
+      </div>
     </main>
   );
 }

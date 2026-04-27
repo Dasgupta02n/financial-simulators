@@ -6,6 +6,8 @@ import { INCOME_BRACKETS, LIFE_STAGES, GOAL_TYPES, STEPS } from "@/lib/planner/t
 import { computePlanner } from "@/lib/planner/engine";
 import { formatINR } from "@/lib/format";
 import { LifeJourneyMap } from "@/components/planner/life-journey-map";
+import { ShareBar } from "@/components/shared/share-bar";
+import { DownloadReportButton } from "@/components/shared/download-report-button";
 import Link from "next/link";
 import { twMerge } from "tailwind-merge";
 
@@ -421,12 +423,31 @@ function StepInsurance({ input, onChange }: { input: PlannerInput; onChange: (i:
 function StepAnalysis({ input, output }: { input: PlannerInput; output: ReturnType<typeof computePlanner> }) {
   const surplusColor = output.surplusDeficit >= 0 ? "text-gain" : "text-loss";
   const surplusLabel = output.surplusDeficit >= 0 ? "Surplus" : "Deficit";
+  const riskColors: Record<string, string> = {
+    aggressive: "bg-gain/10 text-gain border-gain/30",
+    moderate: "bg-amber-50 text-amber-700 border-amber-200",
+    conservative: "bg-blue-50 text-blue-700 border-blue-200",
+  };
+  const riskLabels: Record<string, string> = {
+    aggressive: "Aggressive — High risk, high growth potential",
+    moderate: "Moderate — Balanced risk and growth",
+    conservative: "Conservative — Capital preservation focused",
+  };
 
   return (
     <div className="flex flex-col gap-6">
       <div>
-        <h2 className="text-lg font-semibold text-text-primary font-serif-display">Gap Analysis</h2>
-        <p className="text-sm text-text-secondary mt-1">Here&apos;s where you stand vs. where you need to be.</p>
+        <h2 className="text-lg font-semibold text-text-primary font-serif-display">Your Financial Analysis</h2>
+        <p className="text-sm text-text-secondary mt-1">Comprehensive gap analysis, risk profile, and allocation breakdown.</p>
+      </div>
+
+      {/* Risk profile badge */}
+      <div className={twMerge("p-3 rounded-lg border flex items-center justify-between", riskColors[output.riskProfile])}>
+        <div>
+          <div className="text-sm font-semibold capitalize">{output.riskProfile} Risk Profile</div>
+          <div className="text-xs mt-0.5 opacity-80">{riskLabels[output.riskProfile]}</div>
+        </div>
+        <div className="text-2xl">{output.riskProfile === "aggressive" ? "📈" : output.riskProfile === "moderate" ? "⚖️" : "🛡️"}</div>
       </div>
 
       {/* Summary cards */}
@@ -451,6 +472,120 @@ function StepAnalysis({ input, output }: { input: PlannerInput; output: ReturnTy
         </div>
       </div>
 
+      {/* Asset allocation */}
+      <div className="p-4 bg-white border border-border rounded-lg">
+        <h3 className="text-sm font-semibold text-text-primary mb-3">Recommended Asset Allocation</h3>
+        <div className="flex h-8 rounded-lg overflow-hidden mb-3">
+          {[
+            { label: "Equity", value: output.assetAllocation.equity, color: "bg-blue-500" },
+            { label: "Debt", value: output.assetAllocation.debt, color: "bg-green-500" },
+            { label: "Gold", value: output.assetAllocation.gold, color: "bg-amber-400" },
+            { label: "Real Estate", value: output.assetAllocation.realEstate, color: "bg-purple-500" },
+            { label: "Cash", value: output.assetAllocation.cash, color: "bg-gray-400" },
+          ].filter((s) => s.value > 0).map((slice) => (
+            <div key={slice.label} className={twMerge(slice.color, "flex items-center justify-center text-white text-[10px] font-mono font-semibold")} style={{ width: `${slice.value}%` }}>
+              {slice.value > 8 ? `${slice.value}%` : ""}
+            </div>
+          ))}
+        </div>
+        <div className="flex flex-wrap gap-3 text-xs font-mono">
+          {[
+            { label: "Equity", value: output.assetAllocation.equity, color: "bg-blue-500" },
+            { label: "Debt", value: output.assetAllocation.debt, color: "bg-green-500" },
+            { label: "Gold", value: output.assetAllocation.gold, color: "bg-amber-400" },
+            { label: "Real Estate", value: output.assetAllocation.realEstate, color: "bg-purple-500" },
+            { label: "Cash", value: output.assetAllocation.cash, color: "bg-gray-400" },
+          ].filter((s) => s.value > 0).map((slice) => (
+            <div key={slice.label} className="flex items-center gap-1">
+              <div className={twMerge("w-2.5 h-2.5 rounded-sm", slice.color)} />
+              <span className="text-text-secondary">{slice.label}: {slice.value}%</span>
+            </div>
+          ))}
+        </div>
+        <p className="text-xs text-text-muted mt-2">{output.assetAllocation.rationale}</p>
+      </div>
+
+      {/* Tax strategy */}
+      <div className="p-4 bg-white border border-border rounded-lg">
+        <h3 className="text-sm font-semibold text-text-primary mb-1">
+          {output.taxStrategy.regime === "new" ? "🟢" : "🔵"} {output.taxStrategy.regime === "new" ? "New" : "Old"} Tax Regime Recommended
+        </h3>
+        <p className="text-xs text-text-secondary mb-3">{output.taxStrategy.regimeReason}</p>
+        {output.taxStrategy.estimatedTaxSavings > 0 && (
+          <div className="p-2 bg-gain/10 border border-gain/20 rounded text-xs font-mono text-gain mb-3">
+            Estimated tax savings: {formatINR(output.taxStrategy.estimatedTaxSavings)}/year
+          </div>
+        )}
+        <div className="flex flex-col gap-2">
+          {output.taxStrategy.deductions.map((d) => (
+            <div key={d.section} className="flex items-center justify-between text-xs font-mono">
+              <div>
+                <span className="text-text-primary font-semibold">{d.section}</span>
+                <span className="text-text-muted ml-1">— {d.description}</span>
+              </div>
+              <div className="text-text-secondary">
+                {formatINR(d.recommendedAmount)} <span className="text-text-muted">/ {formatINR(d.maxAmount)}</span>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Insurance recommendations */}
+      {output.insuranceRecommendations.length > 0 && (
+        <div className="p-4 bg-white border border-border rounded-lg">
+          <h3 className="text-sm font-semibold text-text-primary mb-3">Insurance Recommendations</h3>
+          <div className="flex flex-col gap-2">
+            {output.insuranceRecommendations.map((rec, i) => (
+              <div key={i} className={twMerge(
+                "p-3 rounded-md border",
+                rec.priority === "critical" ? "bg-loss/5 border-loss/20" :
+                rec.priority === "high" ? "bg-amber-50 border-amber-200" :
+                "bg-surface-hover border-border"
+              )}>
+                <div className="flex items-center justify-between mb-1">
+                  <span className="text-sm font-semibold text-text-primary">{rec.type}</span>
+                  <span className={twMerge(
+                    "text-[10px] font-mono px-1.5 py-0.5 rounded",
+                    rec.priority === "critical" ? "bg-loss/10 text-loss" :
+                    rec.priority === "high" ? "bg-amber-50 text-amber-700" : "bg-surface-hover text-text-secondary"
+                  )}>
+                    {rec.priority}
+                  </span>
+                </div>
+                {rec.recommendedCover > 0 && (
+                  <div className="text-xs font-mono text-text-secondary">Cover: {formatINR(rec.recommendedCover)} · Premium: ~{formatINR(rec.estimatedPremium)}/yr</div>
+                )}
+                <p className="text-xs text-text-secondary mt-1">{rec.reason}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Monthly budget allocation */}
+      {output.monthlyBudgetAllocation.length > 0 && (
+        <div className="p-4 bg-white border border-border rounded-lg">
+          <h3 className="text-sm font-semibold text-text-primary mb-3">Monthly Budget Allocation</h3>
+          <div className="flex flex-col gap-2">
+            {output.monthlyBudgetAllocation.map((alloc, i) => (
+              <div key={i} className="flex items-center gap-3">
+                <div className="flex-1">
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs font-semibold text-text-primary">{alloc.category}</span>
+                    <span className="text-xs font-mono text-text-secondary">{formatINR(alloc.amount)}/mo ({alloc.percentage}%)</span>
+                  </div>
+                  <div className="w-full h-1.5 bg-border rounded-full mt-1">
+                    <div className="h-full bg-sienna rounded-full" style={{ width: `${Math.min(alloc.percentage, 100)}%` }} />
+                  </div>
+                  <p className="text-[10px] text-text-muted mt-0.5">{alloc.reason}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
       {/* Goal gaps */}
       {output.goalGaps.length > 0 && (
         <div className="flex flex-col gap-3">
@@ -467,23 +602,27 @@ function StepAnalysis({ input, output }: { input: PlannerInput; output: ReturnTy
                   {gg.goal.priority === "essential" ? "Essential" : gg.goal.priority === "important" ? "Important" : "Nice to have"}
                 </span>
               </div>
-              <div className="grid grid-cols-3 gap-2 text-xs font-mono">
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-2 text-xs font-mono">
                 <div>
-                  <div className="text-text-muted">Target</div>
+                  <div className="text-text-muted">Today&apos;s Target</div>
                   <div className="text-text-primary font-semibold">{formatINR(gg.goal.targetAmount)}</div>
                 </div>
                 <div>
-                  <div className="text-text-muted">Projected</div>
+                  <div className="text-text-muted">Inflated Target</div>
+                  <div className="text-loss font-semibold">{formatINR(gg.inflatedTarget)}</div>
+                </div>
+                <div>
+                  <div className="text-text-muted">You&apos;ll Have</div>
                   <div className="text-text-primary font-semibold">{formatINR(gg.projectedAmount)}</div>
                 </div>
                 <div>
-                  <div className="text-text-muted">Monthly SIP Needed</div>
+                  <div className="text-text-muted">SIP Needed</div>
                   <div className="text-sienna font-semibold">{formatINR(gg.monthlySIPNeeded)}/mo</div>
                 </div>
               </div>
               {gg.gap > 0 && (
                 <div className="mt-2 p-2 bg-loss/10 border border-loss/20 rounded text-xs font-mono text-loss">
-                  Gap of {formatINR(gg.gap)} — need {formatINR(gg.monthlySIPNeeded)}/mo more to reach this goal
+                  Gap of {formatINR(gg.gap)} — need {formatINR(gg.monthlySIPNeeded)}/mo SIP to reach this goal in {gg.goal.yearsFromNow} years
                 </div>
               )}
             </div>
@@ -503,14 +642,76 @@ function StepAction({ input, output }: { input: PlannerInput; output: ReturnType
     low: "bg-white border-border text-text-muted",
   };
 
+  // Build calculator data for the download report button
+  const calculatorData: Record<string, string> = {
+    "Risk Profile": output.riskProfile,
+    "Monthly Invested": formatINR(output.currentMonthlyInvestment),
+    "Monthly Needed": formatINR(output.monthlyInvestmentNeeded),
+    "Surplus/Deficit": formatINR(Math.abs(output.surplusDeficit)),
+    "Emergency Fund Gap": output.emergencyFundGap > 0 ? formatINR(output.emergencyFundGap) : "Covered",
+    "Retirement Corpus Needed": formatINR(output.retirementCorpusNeeded),
+    "Asset Allocation": `Equity ${output.assetAllocation.equity}% / Debt ${output.assetAllocation.debt}% / Gold ${output.assetAllocation.gold}% / RE ${output.assetAllocation.realEstate}%`,
+    "Tax Regime": output.taxStrategy.regime === "new" ? "New" : "Old",
+    "Est. Tax Savings": formatINR(output.taxStrategy.estimatedTaxSavings) + "/yr",
+  };
+
   return (
     <div className="flex flex-col gap-6">
       <div>
         <h2 className="text-lg font-semibold text-text-primary font-serif-display">Your Action Plan</h2>
-        <p className="text-sm text-text-secondary mt-1">Priority-ranked recommendations based on your profile.</p>
+        <p className="text-sm text-text-secondary mt-1">Step-by-step guidance with specific amounts and timelines.</p>
       </div>
 
+      {/* Key insights */}
+      {output.keyInsights.length > 0 && (
+        <div className="p-4 bg-amber-50 border border-amber-200 rounded-lg">
+          <h3 className="text-sm font-semibold text-amber-700 mb-2">Key Insights</h3>
+          <ul className="flex flex-col gap-1.5">
+            {output.keyInsights.map((insight, i) => (
+              <li key={i} className="text-xs text-amber-800 flex items-start gap-2">
+                <span className="text-amber-500 mt-0.5">●</span>
+                {insight}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      {/* Step-by-step action plan */}
+      {output.stepByStepActionPlan.length > 0 && (
+        <div className="flex flex-col gap-3">
+          <h3 className="text-sm font-semibold text-text-primary">Step-by-Step Plan</h3>
+          {output.stepByStepActionPlan.map((step) => (
+            <div key={step.step} className="p-4 bg-white border border-border rounded-lg">
+              <div className="flex items-center gap-2 mb-1">
+                <span className="w-6 h-6 rounded-full bg-sienna text-white text-xs font-bold flex items-center justify-center">{step.step}</span>
+                <div>
+                  <div className="text-sm font-semibold text-text-primary">{step.title}</div>
+                  <div className="text-[10px] font-mono text-sienna">{step.timeframe}</div>
+                </div>
+              </div>
+              <p className="text-xs text-text-secondary mb-2">{step.description}</p>
+              <ul className="flex flex-col gap-1">
+                {step.actionItems.map((item, i) => (
+                  <li key={i} className="text-xs text-text-secondary flex items-start gap-2">
+                    <span className="text-sienna mt-0.5">→</span>
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              {step.calculatorLink && (
+                <Link href={step.calculatorLink} className="inline-block mt-2 text-xs font-mono text-sienna hover:text-sienna/80 underline">
+                  Open calculator →
+                </Link>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* Recommendations summary */}
       <div className="flex flex-col gap-3">
+        <h3 className="text-sm font-semibold text-text-primary">Priority Recommendations</h3>
         {output.recommendations.map((rec, i) => (
           <div key={rec.id} className={twMerge("p-4 rounded-lg border", priorityColors[rec.priority] || "bg-white border-border")}>
             <div className="flex items-start gap-3">
@@ -520,10 +721,7 @@ function StepAction({ input, output }: { input: PlannerInput; output: ReturnType
                 <div className="text-xs mt-1 opacity-80">{rec.description}</div>
                 <div className="text-xs mt-2 font-mono font-semibold">{rec.action}</div>
                 {rec.calculatorLink && (
-                  <Link
-                    href={rec.calculatorLink}
-                    className="inline-block mt-2 text-xs font-mono text-sienna hover:text-sienna/80 underline"
-                  >
+                  <Link href={rec.calculatorLink} className="inline-block mt-2 text-xs font-mono text-sienna hover:text-sienna/80 underline">
                     Open calculator →
                   </Link>
                 )}
@@ -532,6 +730,37 @@ function StepAction({ input, output }: { input: PlannerInput; output: ReturnType
           </div>
         ))}
       </div>
+
+      {/* Net worth projection */}
+      {output.netWorthProjection.length > 0 && (
+        <div className="p-4 bg-white border border-border rounded-lg">
+          <h3 className="text-sm font-semibold text-text-primary mb-3">Net Worth Projection</h3>
+          <div className="overflow-x-auto">
+            <table className="w-full text-xs font-mono">
+              <thead>
+                <tr className="border-b border-border">
+                  <th className="text-left py-1.5 text-text-muted">Year</th>
+                  <th className="text-right py-1.5 text-text-muted">Age</th>
+                  <th className="text-right py-1.5 text-text-muted">Invested</th>
+                  <th className="text-right py-1.5 text-text-muted">Returns</th>
+                  <th className="text-right py-1.5 text-text-muted">Total Corpus</th>
+                </tr>
+              </thead>
+              <tbody>
+                {output.netWorthProjection.filter((_, i) => i % 5 === 0 || i === output.netWorthProjection.length - 1).map((row) => (
+                  <tr key={row.year} className="border-b border-border/50">
+                    <td className="py-1.5 text-text-primary">Y{row.year}</td>
+                    <td className="py-1.5 text-right text-text-secondary">{row.age}</td>
+                    <td className="py-1.5 text-right text-text-secondary">{formatINR(row.invested)}</td>
+                    <td className="py-1.5 text-right text-gain">{formatINR(row.returns)}</td>
+                    <td className="py-1.5 text-right text-text-primary font-semibold">{formatINR(row.totalCorpus)}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      )}
 
       {/* Linked calculators */}
       {output.calculatorLinks.length > 0 && (
@@ -551,6 +780,15 @@ function StepAction({ input, output }: { input: PlannerInput; output: ReturnType
           </div>
         </div>
       )}
+
+      {/* Download report + Share */}
+      <div className="flex flex-col gap-3">
+        <DownloadReportButton calculatorTitle="Financial Planner" calculatorData={calculatorData} />
+        <div className="flex items-center gap-2">
+          <span className="text-xs text-text-muted font-mono">Share:</span>
+          <ShareBar title="Financial Planner — c7xai" />
+        </div>
+      </div>
 
       <div className="p-3 bg-amber-50 border border-amber-200 rounded-lg text-xs font-mono text-amber-700">
         This is a planning tool, not financial advice. Consult a SEBI-registered advisor before making investment decisions.

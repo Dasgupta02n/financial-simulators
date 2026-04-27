@@ -12,6 +12,7 @@ import { LieVsTruthPanel } from "@/components/shared/lie-vs-truth-panel";
 import { ConfidenceBadge } from "@/components/shared/confidence-badge";
 import { WhyThisNumber } from "@/components/shared/why-this-number";
 import { ShareBar } from "@/components/shared/share-bar";
+import { DownloadReportButton } from "@/components/shared/download-report-button";
 import { truthFromGoal } from "@/lib/truth/truth-data-adapter";
 import { SliderRow } from "@/components/shared/slider-row";
 
@@ -177,6 +178,15 @@ export function GoalCalculator() {
               <li><span className="text-text-secondary">Gray bars</span> = conservative, <span className="text-gain">green</span> = moderate, <span className="text-warn">yellow</span> = aggressive SIP estimates.</li>
             </ul>
           </CalcExplainer>
+          <DownloadReportButton
+            calculatorTitle="Goal Planner"
+            calculatorData={{
+              "Total SIP (Conservative)": formatINR(output.totalMonthlyConservative),
+              "Total SIP (Moderate)": formatINR(output.totalMonthlyModerate),
+              "Total SIP (Aggressive)": formatINR(output.totalMonthlyAggressive),
+              "Total Inflated Target": formatINR(output.totalInflatedTarget ?? 0),
+            }}
+          />
         </div>
       </div>
     </div>

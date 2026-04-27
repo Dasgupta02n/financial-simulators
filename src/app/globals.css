@@ -351,3 +351,10 @@ svg line {
 .section-navy .card-navy p {
   color: rgba(255, 255, 255, 0.65);
 }
+
+/* Disable printing and saving pages */
+@media print {
+  body {
+    display: none !important;
+  }
+}
