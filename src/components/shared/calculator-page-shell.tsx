@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import type { CalculatorConfig } from "@/lib/seo";
 import { generateCalculatorJsonLd } from "@/lib/seo";
 

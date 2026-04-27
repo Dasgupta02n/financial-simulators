@@ -1,7 +1,7 @@
 "use client";
 
 import { useLocale } from "next-intl";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname, useRouter } from "@/i18n/navigation";
 import { routing, type Locale } from "@/i18n/routing";
 
 const LOCALE_LABELS: Record<Locale, string> = {
@@ -21,20 +21,7 @@ export function LanguageSwitcher() {
   const router = useRouter();
 
   const switchLocale = (newLocale: Locale) => {
-    const segments = pathname.split("/");
-    const currentLocale = segments[1];
-
-    if (routing.locales.includes(currentLocale as Locale)) {
-      segments[1] = newLocale;
-    } else if (newLocale === "en") {
-      // English is at root, no prefix needed
-      router.push(pathname);
-      return;
-    } else {
-      segments.splice(1, 0, newLocale);
-    }
-
-    router.push(segments.join("/"));
+    router.replace(pathname, { locale: newLocale });
   };
 
   return (

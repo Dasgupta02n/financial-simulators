@@ -18,17 +18,9 @@ export default function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  // Locale-prefixed paths (e.g., /hi/, /ta/) go through next-intl
-  const hasLocalePrefix = routing.locales.some(
-    (locale) => pathname === `/${locale}` || pathname.startsWith(`/${locale}/`)
-  );
-
-  if (hasLocalePrefix) {
-    return intlMiddleware(request);
-  }
-
-  // Root and all other paths: serve normally without locale rewriting
-  return NextResponse.next();
+  // Let next-intl handle all locale routing
+  // With localePrefix: "as-needed", English stays at root, others get prefixes
+  return intlMiddleware(request);
 }
 
 export const config = {

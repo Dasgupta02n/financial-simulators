@@ -8,12 +8,13 @@ export default function AdminPage() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [checking, setChecking] = useState(true);
 
   useEffect(() => {
-    const stored = localStorage.getItem("admin_auth");
-    if (stored === "true") {
-      setAuthenticated(true);
-    }
+    fetch("/api/admin/session")
+      .then((res) => setAuthenticated(res.ok))
+      .catch(() => setAuthenticated(false))
+      .finally(() => setChecking(false));
   }, []);
 
   async function handleLogin(e: React.FormEvent) {
@@ -29,9 +30,9 @@ export default function AdminPage() {
       });
 
       if (res.ok) {
-        localStorage.setItem("admin_auth", "true");
-        localStorage.setItem("admin_password", password);
         setAuthenticated(true);
+      } else if (res.status === 429) {
+        setError("Too many attempts. Try again later.");
       } else {
         setError("Incorrect password");
       }
@@ -40,6 +41,14 @@ export default function AdminPage() {
     } finally {
       setLoading(false);
     }
+  }
+
+  if (checking) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-ink">
+        <p className="text-text-secondary text-sm font-mono">Checking session...</p>
+      </div>
+    );
   }
 
   if (!authenticated) {

@@ -20,9 +20,8 @@ export function LeadsPanel() {
     setLoading(true);
     setError("");
     try {
-      const password = localStorage.getItem("admin_password") ?? "";
       const res = await fetch("/api/leads", {
-        headers: { Authorization: `Bearer ${password}` },
+        credentials: "include",
       });
       if (!res.ok) {
         setError("Failed to fetch leads");

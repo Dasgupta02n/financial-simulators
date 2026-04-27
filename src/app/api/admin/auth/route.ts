@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { timingSafeEqual } from "crypto";
+import { generateSessionToken } from "@/lib/admin-auth";
 
 const attempts = new Map<string, { count: number; lastAttempt: number }>();
 const MAX_ATTEMPTS = 5;
@@ -35,8 +36,9 @@ export async function POST(req: NextRequest) {
 
   if (safeEqual(password, adminPassword)) {
     attempts.delete(clientKey);
+    const sessionToken = generateSessionToken();
     const response = NextResponse.json({ authenticated: true });
-    response.cookies.set("admin_session", "1", {
+    response.cookies.set("admin_session", sessionToken, {
       httpOnly: true,
       secure: process.env.NODE_ENV === "production",
       sameSite: "strict",
