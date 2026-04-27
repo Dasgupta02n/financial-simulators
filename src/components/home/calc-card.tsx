@@ -3,6 +3,7 @@
 import { Link } from "@/i18n/navigation";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
+import { useTranslations } from "next-intl";
 
 interface CalcCardProps {
   id: string;
@@ -15,6 +16,7 @@ interface CalcCardProps {
 
 export function CalcCard({ id, name, slug, description, tag, index }: CalcCardProps) {
   const [mounted, setMounted] = useState(false);
+  const t = useTranslations("home");
   useEffect(() => { setMounted(true); }, []);
 
   return (
@@ -41,7 +43,7 @@ export function CalcCard({ id, name, slug, description, tag, index }: CalcCardPr
         </p>
 
         <span className="text-xs font-mono text-sienna opacity-0 group-hover:opacity-100 transition-all duration-200 flex items-center gap-2 group-hover:gap-3">
-          Open Calculator <span className="text-sienna">&rarr;</span>
+          {t("openCalculator")} <span className="text-sienna">&rarr;</span>
         </span>
 
         <div className="absolute bottom-0 left-0 w-0 h-[2px] bg-sienna group-hover:w-full transition-all duration-500" />

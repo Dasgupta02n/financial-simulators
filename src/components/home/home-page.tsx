@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { Link } from "@/i18n/navigation";
 import { CalcCard } from "@/components/home/calc-card";
 import { BlogCategoryThumb } from "@/components/home/blog-category-thumb";
 import { HeroIllustration } from "@/components/home/hero-illustration";
@@ -20,76 +20,69 @@ interface HomePageProps {
   posts: BlogPost[];
 }
 
-const CALCULATOR_QUESTIONS: readonly {
-  question: string;
-  calculators: readonly { id: string; name: string; slug: string; description: string; tag?: string }[];
+const CALCULATOR_GROUPS: readonly {
+  questionKey: string;
+  calculators: readonly { id: string; slug: string; tagKey?: string }[];
 }[] = [
   {
-    question: "home.questionWillMoneyLast",
+    questionKey: "home.questionWillMoneyLast",
     calculators: [
-      { id: "swp", name: "SWP Stress Test", slug: "swp-stress-test", description: "Will your corpus survive a market crash? Simulate worst-case withdrawals." },
-      { id: "fire", name: "FIRE Matrix", slug: "fire-matrix", description: "When can you actually retire? Month-by-month freedom timeline." },
+      { id: "swp", slug: "swp-stress-test" },
+      { id: "fire", slug: "fire-matrix" },
     ],
   },
   {
-    question: "home.questionHowMuchKeep",
+    questionKey: "home.questionHowMuchKeep",
     calculators: [
-      { id: "tax", name: "Tax Sandbox", slug: "tax-sandbox", description: "Old vs New regime side by side. Find which one actually saves you more." },
-      { id: "hra", name: "HRA Calculator", slug: "hra-calculator", description: "How much HRA is tax-free? Section 10(13A) exemption.", tag: "New" },
-      { id: "ctc", name: "CTC Optimizer", slug: "ctc-optimizer", description: "Maximize in-hand salary. See where every rupee of your CTC goes." },
-      { id: "salary", name: "Salary Calculator", slug: "salary-calculator", description: "CTC to in-hand. Full breakup — basic, HRA, PF, tax — old vs new." },
+      { id: "tax", slug: "tax-sandbox" },
+      { id: "hra", slug: "hra-calculator", tagKey: "tagNew" },
+      { id: "ctc", slug: "ctc-optimizer" },
+      { id: "salary", slug: "salary-calculator" },
     ],
   },
   {
-    question: "home.questionWhenRetire",
+    questionKey: "home.questionWhenRetire",
     calculators: [
-      { id: "fire", name: "FIRE Matrix", slug: "fire-matrix", description: "When can you actually retire? Month-by-month freedom timeline." },
-      { id: "nps", name: "NPS Modeler", slug: "nps-modeler", description: "Project your pension and corpus. See what 80C savings really build." },
-      { id: "ppf", name: "PPF Calculator", slug: "ppf-calculator", description: "Real PPF maturity after inflation. EEE tax benefit included.", tag: "New" },
-      { id: "epf", name: "EPF Calculator", slug: "epf-calculator", description: "Project your EPF corpus with employer split and interest compounding.", tag: "New" },
+      { id: "fire", slug: "fire-matrix" },
+      { id: "nps", slug: "nps-modeler" },
+      { id: "ppf", slug: "ppf-calculator", tagKey: "tagNew" },
+      { id: "epf", slug: "epf-calculator", tagKey: "tagNew" },
     ],
   },
   {
-    question: "home.questionRealReturn",
+    questionKey: "home.questionRealReturn",
     calculators: [
-      { id: "sip", name: "SIP Simulator", slug: "sip-simulator", description: "See actual returns after inflation and tax. Real numbers, not marketing.", tag: "Popular" },
-      { id: "fd", name: "FD Comparator", slug: "fd-comparator", description: "Your FD's real return after tax and inflation. Usually lower than you think." },
-      { id: "compound", name: "Compound Interest", slug: "compound-interest-calculator", description: "See how compound interest really grows your money after tax and inflation.", tag: "New" },
-      { id: "step-up-sip", name: "Step-Up SIP", slug: "step-up-sip-calculator", description: "Annual SIP increase vs Regular compared. Step-Up wins every time.", tag: "New" },
-      { id: "simple-interest", name: "Simple Interest", slug: "simple-interest-calculator", description: "Simple vs Compound side by side. See what compounding really costs you.", tag: "New" },
+      { id: "sip", slug: "sip-simulator", tagKey: "tagPopular" },
+      { id: "fd", slug: "fd-comparator" },
+      { id: "compound", slug: "compound-interest-calculator", tagKey: "tagNew" },
+      { id: "stepUpSip", slug: "step-up-sip-calculator", tagKey: "tagNew" },
+      { id: "simpleInterest", slug: "simple-interest-calculator", tagKey: "tagNew" },
     ],
   },
   {
-    question: "home.questionHowMuchPay",
+    questionKey: "home.questionHowMuchPay",
     calculators: [
-      { id: "emi", name: "EMI Analyzer", slug: "emi-analyzer", description: "Compare loan EMIs with the real total cost over the full tenure." },
-      { id: "gst", name: "GST Calculator", slug: "gst-calculator", description: "Compute GST on any amount. CGST/SGST split for intra-state.", tag: "New" },
-      { id: "real-estate", name: "Real Estate", slug: "real-estate-calculator", description: "Stamp duty, capital gains, rental yield — the true cost of property.", tag: "New" },
-      { id: "depreciation", name: "Car & Depreciation", slug: "depreciation-calculator", description: "Total cost of owning a vehicle — fuel, insurance, loan interest, resale.", tag: "New" },
+      { id: "emi", slug: "emi-analyzer" },
+      { id: "gst", slug: "gst-calculator", tagKey: "tagNew" },
+      { id: "realEstate", slug: "real-estate-calculator", tagKey: "tagNew" },
+      { id: "depreciation", slug: "depreciation-calculator", tagKey: "tagNew" },
     ],
   },
   {
-    question: "home.questionOnTrack",
+    questionKey: "home.questionOnTrack",
     calculators: [
-      { id: "goal", name: "Goal Planner", slug: "goal-planner", description: "Monthly SIP needed per goal. Know exactly what to invest and when." },
-      { id: "accum", name: "Accumulator", slug: "accumulation-calculator", description: "Lump sum vs SIP — see which strategy wins after costs." },
-      { id: "crypto", name: "Crypto Tax", slug: "crypto-calculator", description: "30% flat tax + 1% TDS + inflation. Your real crypto return.", tag: "New" },
-      { id: "forex", name: "Forex & LRS", slug: "forex-calculator", description: "TCS, capital gains, and LRS limits — the real cost of investing abroad.", tag: "New" },
+      { id: "goal", slug: "goal-planner" },
+      { id: "accumulation", slug: "accumulation-calculator" },
+      { id: "crypto", slug: "crypto-calculator", tagKey: "tagNew" },
+      { id: "forex", slug: "forex-calculator", tagKey: "tagNew" },
     ],
   },
 ];
 
 export default function HomePage({ posts }: HomePageProps) {
   const t = useTranslations("home");
-
-  const questionLabels: Record<string, string> = {
-    "home.questionWillMoneyLast": t("questionWillMoneyLast"),
-    "home.questionHowMuchKeep": t("questionHowMuchKeep"),
-    "home.questionWhenRetire": t("questionWhenRetire"),
-    "home.questionRealReturn": t("questionRealReturn"),
-    "home.questionHowMuchPay": t("questionHowMuchPay"),
-    "home.questionOnTrack": t("questionOnTrack"),
-  };
+  const tc = useTranslations("calculators");
+  const tn = useTranslations("nav");
 
   return (
     <main className="flex-1 flex flex-col">
@@ -155,14 +148,22 @@ export default function HomePage({ posts }: HomePageProps) {
             {t("sectionSubtitle")}
           </p>
           <div className="space-y-16">
-            {CALCULATOR_QUESTIONS.map((group) => (
-              <div key={group.question}>
+            {CALCULATOR_GROUPS.map((group) => (
+              <div key={group.questionKey}>
                 <h3 className="text-lg font-semibold text-sienna font-serif-display mb-6">
-                  {questionLabels[group.question] ?? group.question}
+                  {t(group.questionKey.replace("home.", ""))}
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-border">
                   {group.calculators.map((calc, i) => (
-                    <CalcCard key={calc.id} {...calc} index={i} />
+                    <CalcCard
+                      key={calc.id + i}
+                      id={calc.id}
+                      name={tc(calc.id)}
+                      slug={calc.slug}
+                      description={tc(`${calc.id}Desc`)}
+                      tag={calc.tagKey ? tc(calc.tagKey) : undefined}
+                      index={i}
+                    />
                   ))}
                 </div>
               </div>
@@ -276,23 +277,23 @@ export default function HomePage({ posts }: HomePageProps) {
           <div>
             <h4 className="text-xs uppercase font-mono tracking-[0.15em] text-white/40 mb-4">{t("footerCalculators")}</h4>
             <div className="flex flex-col gap-2">
-              <Link href="/sip-simulator" className="text-sm text-white/60 hover:text-sienna transition-colors">SIP Simulator</Link>
-              <Link href="/emi-analyzer" className="text-sm text-white/60 hover:text-sienna transition-colors">EMI Analyzer</Link>
-              <Link href="/tax-sandbox" className="text-sm text-white/60 hover:text-sienna transition-colors">Tax Sandbox</Link>
-              <Link href="/fire-matrix" className="text-sm text-white/60 hover:text-sienna transition-colors">FIRE Matrix</Link>
-              <Link href="/real-estate-calculator" className="text-sm text-white/60 hover:text-sienna transition-colors">Real Estate</Link>
-              <Link href="/crypto-calculator" className="text-sm text-white/60 hover:text-sienna transition-colors">Crypto Tax</Link>
+              <Link href="/sip-simulator" className="text-sm text-white/60 hover:text-sienna transition-colors">{tc("sip")}</Link>
+              <Link href="/emi-analyzer" className="text-sm text-white/60 hover:text-sienna transition-colors">{tc("emi")}</Link>
+              <Link href="/tax-sandbox" className="text-sm text-white/60 hover:text-sienna transition-colors">{tc("tax")}</Link>
+              <Link href="/fire-matrix" className="text-sm text-white/60 hover:text-sienna transition-colors">{tc("fire")}</Link>
+              <Link href="/real-estate-calculator" className="text-sm text-white/60 hover:text-sienna transition-colors">{tc("realEstate")}</Link>
+              <Link href="/crypto-calculator" className="text-sm text-white/60 hover:text-sienna transition-colors">{tc("crypto")}</Link>
             </div>
           </div>
           <div>
             <h4 className="text-xs uppercase font-mono tracking-[0.15em] text-white/40 mb-4">{t("footerMore")}</h4>
             <div className="flex flex-col gap-2">
-              <Link href="/methodology" className="text-sm text-white/60 hover:text-sienna transition-colors">Methodology</Link>
-              <Link href="/truth-index" className="text-sm text-white/60 hover:text-sienna transition-colors">Truth Index</Link>
-              <Link href="/compare" className="text-sm text-white/60 hover:text-sienna transition-colors">Compare</Link>
-              <Link href="/forex-calculator" className="text-sm text-white/60 hover:text-sienna transition-colors">Forex & LRS</Link>
-              <Link href="/depreciation-calculator" className="text-sm text-white/60 hover:text-sienna transition-colors">Car & Depreciation</Link>
-              <Link href="/blog" className="text-sm text-white/60 hover:text-sienna transition-colors">Blog</Link>
+              <Link href="/methodology" className="text-sm text-white/60 hover:text-sienna transition-colors">{tn("methodology")}</Link>
+              <Link href="/truth-index" className="text-sm text-white/60 hover:text-sienna transition-colors">{tn("truthIndex")}</Link>
+              <Link href="/compare" className="text-sm text-white/60 hover:text-sienna transition-colors">{tn("compare")}</Link>
+              <Link href="/forex-calculator" className="text-sm text-white/60 hover:text-sienna transition-colors">{tn("forex-calculator")}</Link>
+              <Link href="/depreciation-calculator" className="text-sm text-white/60 hover:text-sienna transition-colors">{tn("depreciation-calculator")}</Link>
+              <Link href="/blog" className="text-sm text-white/60 hover:text-sienna transition-colors">{tn("blog")}</Link>
             </div>
           </div>
           <div>
