@@ -75,7 +75,7 @@ export default async function RootLayout({
       <body className="min-h-full flex flex-col bg-ink text-text-primary">
         <NoSaveGuard />
         <AuthProvider>
-          <NextIntlClientProvider messages={messages}>
+          <NextIntlClientProvider messages={messages} locale={locale}>
             <SiteNav />
             <PageTransition>{children}</PageTransition>
           </NextIntlClientProvider>
