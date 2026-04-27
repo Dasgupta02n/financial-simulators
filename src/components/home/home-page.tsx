@@ -1,20 +1,38 @@
+"use client";
+
 import Link from "next/link";
-import { getAllPosts } from "@/lib/blog";
 import { CalcCard } from "@/components/home/calc-card";
+import { BlogCategoryThumb } from "@/components/home/blog-category-thumb";
+import { HeroIllustration } from "@/components/home/hero-illustration";
+import { InflationIllustration, TaxIllustration, NoProductIllustration } from "@/components/home/method-illustrations";
+import { useTranslations } from "next-intl";
+
+interface BlogPost {
+  slug: string;
+  title: string;
+  description: string;
+  category: string;
+  featured: boolean;
+  readTime: number;
+}
+
+interface HomePageProps {
+  posts: BlogPost[];
+}
 
 const CALCULATOR_QUESTIONS: readonly {
   question: string;
   calculators: readonly { id: string; name: string; slug: string; description: string; tag?: string }[];
 }[] = [
   {
-    question: "Will my money last?",
+    question: "home.questionWillMoneyLast",
     calculators: [
       { id: "swp", name: "SWP Stress Test", slug: "swp-stress-test", description: "Will your corpus survive a market crash? Simulate worst-case withdrawals." },
       { id: "fire", name: "FIRE Matrix", slug: "fire-matrix", description: "When can you actually retire? Month-by-month freedom timeline." },
     ],
   },
   {
-    question: "How much do I actually keep?",
+    question: "home.questionHowMuchKeep",
     calculators: [
       { id: "tax", name: "Tax Sandbox", slug: "tax-sandbox", description: "Old vs New regime side by side. Find which one actually saves you more." },
       { id: "hra", name: "HRA Calculator", slug: "hra-calculator", description: "How much HRA is tax-free? Section 10(13A) exemption.", tag: "New" },
@@ -23,7 +41,7 @@ const CALCULATOR_QUESTIONS: readonly {
     ],
   },
   {
-    question: "When can I retire?",
+    question: "home.questionWhenRetire",
     calculators: [
       { id: "fire", name: "FIRE Matrix", slug: "fire-matrix", description: "When can you actually retire? Month-by-month freedom timeline." },
       { id: "nps", name: "NPS Modeler", slug: "nps-modeler", description: "Project your pension and corpus. See what 80C savings really build." },
@@ -32,7 +50,7 @@ const CALCULATOR_QUESTIONS: readonly {
     ],
   },
   {
-    question: "What's my real return?",
+    question: "home.questionRealReturn",
     calculators: [
       { id: "sip", name: "SIP Simulator", slug: "sip-simulator", description: "See actual returns after inflation and tax. Real numbers, not marketing.", tag: "Popular" },
       { id: "fd", name: "FD Comparator", slug: "fd-comparator", description: "Your FD's real return after tax and inflation. Usually lower than you think." },
@@ -42,7 +60,7 @@ const CALCULATOR_QUESTIONS: readonly {
     ],
   },
   {
-    question: "How much will I pay?",
+    question: "home.questionHowMuchPay",
     calculators: [
       { id: "emi", name: "EMI Analyzer", slug: "emi-analyzer", description: "Compare loan EMIs with the real total cost over the full tenure." },
       { id: "gst", name: "GST Calculator", slug: "gst-calculator", description: "Compute GST on any amount. CGST/SGST split for intra-state.", tag: "New" },
@@ -51,7 +69,7 @@ const CALCULATOR_QUESTIONS: readonly {
     ],
   },
   {
-    question: "Am I on track?",
+    question: "home.questionOnTrack",
     calculators: [
       { id: "goal", name: "Goal Planner", slug: "goal-planner", description: "Monthly SIP needed per goal. Know exactly what to invest and when." },
       { id: "accum", name: "Accumulator", slug: "accumulation-calculator", description: "Lump sum vs SIP — see which strategy wins after costs." },
@@ -61,59 +79,69 @@ const CALCULATOR_QUESTIONS: readonly {
   },
 ];
 
-export default function HomePage() {
-  const posts = getAllPosts().filter((p) => p.featured).slice(0, 3);
+export default function HomePage({ posts }: HomePageProps) {
+  const t = useTranslations("home");
+
+  const questionLabels: Record<string, string> = {
+    "home.questionWillMoneyLast": t("questionWillMoneyLast"),
+    "home.questionHowMuchKeep": t("questionHowMuchKeep"),
+    "home.questionWhenRetire": t("questionWhenRetire"),
+    "home.questionRealReturn": t("questionRealReturn"),
+    "home.questionHowMuchPay": t("questionHowMuchPay"),
+    "home.questionOnTrack": t("questionOnTrack"),
+  };
 
   return (
     <main className="flex-1 flex flex-col">
       <section className="w-full gradient-hero relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-6 pt-28 pb-24">
           <p className="text-sm font-mono uppercase tracking-[0.25em] text-sienna mb-6">
-            c7xai
+            {t("heroTag")}
           </p>
           <h1 className="text-5xl md:text-7xl font-bold tracking-tight leading-[1.1] max-w-4xl font-serif-display text-white">
-            Your 12% SIP returns become{" "}
-            <span className="text-sienna">3.8%</span>.
+            {t("heroTitle")}{" "}
+            <span className="text-sienna">{t("heroHighlight")}</span>.
           </h1>
           <p className="text-xl md:text-2xl text-white/70 font-serif-display mt-6 max-w-2xl">
-            Here&apos;s why.
+            {t("heroSubtitle")}
           </p>
           <p className="text-base text-white/50 mt-4 max-w-xl leading-relaxed">
-            Mutual funds show you 12%. After inflation (6%) and LTCG tax (12.5% above ₹1.25L), you keep 3.8%. Every calculator here shows the real number.
+            {t("heroBody")}
           </p>
           <div className="mt-8 flex items-center gap-4">
             <Link
               href="/sip-simulator"
               className="inline-flex items-center gap-2 px-6 py-3 bg-sienna text-white text-sm font-semibold hover:bg-sienna/90 transition-colors rounded"
             >
-              Try SIP Truth &rarr;
+              {t("heroCta")} &rarr;
             </Link>
             <Link
               href="#calculators"
               className="inline-flex items-center gap-2 px-6 py-3 border border-white/20 text-white text-sm font-medium hover:border-sienna/50 hover:text-sienna transition-colors rounded"
             >
-              All Calculators
+              {t("heroCtaAll")}
             </Link>
           </div>
         </div>
+        <HeroIllustration />
       </section>
 
       <section className="w-full section-navy">
         <div className="max-w-7xl mx-auto px-6 py-12 grid md:grid-cols-3 gap-8">
           <div className="truth-reveal text-center">
             <div className="text-4xl font-bold font-serif-display text-sienna">3.8%</div>
-            <div className="text-sm text-white/50 font-mono mt-1">Real SIP return</div>
-            <div className="text-xs text-white/30 font-mono line-through">12% advertised</div>
+            <div className="text-sm text-white/50 font-mono mt-1">{t("statRealSip")}</div>
+            <div className="text-xs text-white/30 font-mono line-through">12% {t("statAdvertised")}</div>
           </div>
           <div className="truth-reveal text-center">
             <div className="text-4xl font-bold font-serif-display text-sienna">5.6%</div>
-            <div className="text-sm text-white/50 font-mono mt-1">Post-tax FD yield</div>
-            <div className="text-xs text-white/30 font-mono line-through">7% advertised</div>
+            <div className="text-sm text-white/50 font-mono mt-1">{t("statPostTaxFd")}</div>
+            <div className="text-xs text-white/30 font-mono line-through">7% {t("statAdvertised")}</div>
           </div>
           <div className="truth-reveal text-center">
             <div className="text-4xl font-bold font-serif-display text-sienna">0%</div>
-            <div className="text-sm text-white/50 font-mono mt-1">Data collected about you</div>
-            <div className="text-xs text-white/30 font-mono">No signups. No tracking. No PII.</div>
+            <div className="text-sm text-white/50 font-mono mt-1">{t("statDataCollected")}</div>
+            <div className="text-xs text-white/30 font-mono">{t("statNoSignup")}</div>
           </div>
         </div>
       </section>
@@ -121,16 +149,16 @@ export default function HomePage() {
       <section id="calculators" className="w-full section-gray">
         <div className="max-w-7xl mx-auto px-6 py-20 md:py-28">
           <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-text-primary mb-4 font-serif-display">
-            What do you want to know?
+            {t("sectionTitle")}
           </h2>
           <p className="text-sm text-text-secondary mb-12 max-w-lg">
-            Every number inflation-adjusted. Every tax accounted for. Zero marketing spin.
+            {t("sectionSubtitle")}
           </p>
           <div className="space-y-16">
             {CALCULATOR_QUESTIONS.map((group) => (
               <div key={group.question}>
                 <h3 className="text-lg font-semibold text-sienna font-serif-display mb-6">
-                  {group.question}
+                  {questionLabels[group.question] ?? group.question}
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-px bg-border">
                   {group.calculators.map((calc, i) => (
@@ -146,28 +174,31 @@ export default function HomePage() {
       <section className="w-full section-white">
         <div className="max-w-7xl mx-auto px-6 py-20 md:py-28">
           <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-text-primary font-serif-display">
-            The Method
+            {t("methodTitle")}
           </h2>
           <p className="text-sm text-text-secondary mt-2 mb-12 max-w-lg">
-            Why our numbers are different — and more honest.
+            {t("methodSubtitle")}
           </p>
           <div className="grid md:grid-cols-3 gap-8">
-            <div className="card-shadow">
-              <div className="text-2xl font-bold font-serif-display text-sienna mb-3">Real Inflation Data</div>
+            <div className="card-shadow relative overflow-hidden">
+              <InflationIllustration />
+              <div className="text-2xl font-bold font-serif-display text-sienna mb-3">{t("methodInflationTitle")}</div>
               <p className="text-sm text-text-secondary leading-relaxed">
-                We use RBI&apos;s 10-year average inflation (6%), not the feel-good 4% headline number. Your money buys less every year — we account for that.
+                {t("methodInflationBody")}
               </p>
             </div>
-            <div className="card-shadow">
-              <div className="text-2xl font-bold font-serif-display text-sienna mb-3">Current Tax Laws</div>
+            <div className="card-shadow relative overflow-hidden">
+              <TaxIllustration />
+              <div className="text-2xl font-bold font-serif-display text-sienna mb-3">{t("methodTaxTitle")}</div>
               <p className="text-sm text-text-secondary leading-relaxed">
-                LTCG at 12.5% above ₹1.25L. New vs Old regime. Section 80C limits. Every deduction that applies to you — we apply it.
+                {t("methodTaxBody")}
               </p>
             </div>
-            <div className="card-shadow">
-              <div className="text-2xl font-bold font-serif-display text-sienna mb-3">No Product to Sell</div>
+            <div className="card-shadow relative overflow-hidden">
+              <NoProductIllustration />
+              <div className="text-2xl font-bold font-serif-display text-sienna mb-3">{t("methodNoProductTitle")}</div>
               <p className="text-sm text-text-secondary leading-relaxed">
-                We don&apos;t sell mutual funds, insurance, or FDs. No affiliate links. No commissions. The math just is what it is.
+                {t("methodNoProductBody")}
               </p>
             </div>
           </div>
@@ -179,13 +210,13 @@ export default function HomePage() {
           <div className="max-w-7xl mx-auto px-6 py-20 md:py-28">
             <div className="flex items-center justify-between mb-12">
               <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-text-primary font-serif-display">
-                Truth Reports
+                {t("blogTitle")}
               </h2>
               <Link
                 href="/blog"
                 className="text-sm font-semibold text-sienna hover:text-sienna/80 transition-colors"
               >
-                All reports &rarr;
+                {t("blogAllLink")} &rarr;
               </Link>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -195,13 +226,11 @@ export default function HomePage() {
                   href={`/blog/${post.slug}`}
                   className="group block"
                 >
-                  <div className="aspect-[4/3] bg-ink-light border border-border mb-4 overflow-hidden group-hover:border-sienna/30 transition-colors flex items-center justify-center rounded-lg">
-                    <span className="text-sm font-mono text-text-muted/40 group-hover:text-sienna/60 transition-colors">
-                      {post.category}
-                    </span>
+                  <div className="aspect-[4/3] bg-ink-light border border-border mb-4 overflow-hidden group-hover:border-sienna/30 transition-colors rounded-lg relative">
+                    <BlogCategoryThumb category={post.category} />
                   </div>
                   <div className="text-xs uppercase font-mono text-text-muted mb-2">
-                    {post.category} &middot; {post.readTime} min read
+                    {post.category} &middot; {post.readTime} {t("blogMinRead")}
                   </div>
                   <h3 className="text-lg font-bold text-text-primary group-hover:text-sienna transition-colors">
                     {post.title}
@@ -219,20 +248,19 @@ export default function HomePage() {
       <section className="w-full section-white border-t border-border">
         <div className="max-w-7xl mx-auto px-6 py-20 md:py-28 text-center">
           <div className="text-4xl font-bold font-serif-display text-text-primary mb-6">
-            All our math runs in your browser.
+            {t("privacyTitle")}
           </div>
           <p className="text-lg text-text-secondary max-w-xl mx-auto leading-relaxed">
-            Zero data sent anywhere. No server. No database. No tracking.
-            Every computation happens client-side — you can verify it yourself.
+            {t("privacyBody")}
           </p>
           <div className="mt-8 flex items-center justify-center gap-6 text-sm font-mono text-text-muted">
-            <span>No signups</span>
+            <span>{t("privacyNoSignups")}</span>
             <span className="text-border">&middot;</span>
-            <span>No PII</span>
+            <span>{t("privacyNoPii")}</span>
             <span className="text-border">&middot;</span>
-            <span>No cookies</span>
+            <span>{t("privacyNoCookies")}</span>
             <span className="text-border">&middot;</span>
-            <span>No server</span>
+            <span>{t("privacyNoServer")}</span>
           </div>
         </div>
       </section>
@@ -242,11 +270,11 @@ export default function HomePage() {
           <div>
             <span className="text-xl font-bold text-white">c7<span className="text-sienna">xai</span></span>
             <p className="text-xs text-white/40 mt-3 leading-relaxed">
-              The truth about your money. Inflation-adjusted, tax-aware financial clarity for India.
+              {t("footerDescription")}
             </p>
           </div>
           <div>
-            <h4 className="text-xs uppercase font-mono tracking-[0.15em] text-white/40 mb-4">Calculators</h4>
+            <h4 className="text-xs uppercase font-mono tracking-[0.15em] text-white/40 mb-4">{t("footerCalculators")}</h4>
             <div className="flex flex-col gap-2">
               <Link href="/sip-simulator" className="text-sm text-white/60 hover:text-sienna transition-colors">SIP Simulator</Link>
               <Link href="/emi-analyzer" className="text-sm text-white/60 hover:text-sienna transition-colors">EMI Analyzer</Link>
@@ -257,7 +285,7 @@ export default function HomePage() {
             </div>
           </div>
           <div>
-            <h4 className="text-xs uppercase font-mono tracking-[0.15em] text-white/40 mb-4">More</h4>
+            <h4 className="text-xs uppercase font-mono tracking-[0.15em] text-white/40 mb-4">{t("footerMore")}</h4>
             <div className="flex flex-col gap-2">
               <Link href="/methodology" className="text-sm text-white/60 hover:text-sienna transition-colors">Methodology</Link>
               <Link href="/truth-index" className="text-sm text-white/60 hover:text-sienna transition-colors">Truth Index</Link>
@@ -268,12 +296,12 @@ export default function HomePage() {
             </div>
           </div>
           <div>
-            <h4 className="text-xs uppercase font-mono tracking-[0.15em] text-white/40 mb-4">Legal</h4>
+            <h4 className="text-xs uppercase font-mono tracking-[0.15em] text-white/40 mb-4">{t("footerLegal")}</h4>
             <div className="flex flex-col gap-2">
-              <Link href="/privacy" className="text-sm text-white/60 hover:text-sienna transition-colors">Privacy Policy</Link>
-              <Link href="/terms" className="text-sm text-white/60 hover:text-sienna transition-colors">Terms & Conditions</Link>
-              <Link href="/eula" className="text-sm text-white/60 hover:text-sienna transition-colors">EULA</Link>
-              <Link href="/refund" className="text-sm text-white/60 hover:text-sienna transition-colors">Refund Policy</Link>
+              <Link href="/privacy" className="text-sm text-white/60 hover:text-sienna transition-colors">{t("footerPrivacy")}</Link>
+              <Link href="/terms" className="text-sm text-white/60 hover:text-sienna transition-colors">{t("footerTerms")}</Link>
+              <Link href="/eula" className="text-sm text-white/60 hover:text-sienna transition-colors">{t("footerEula")}</Link>
+              <Link href="/refund" className="text-sm text-white/60 hover:text-sienna transition-colors">{t("footerRefund")}</Link>
             </div>
           </div>
         </div>

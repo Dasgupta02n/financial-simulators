@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { getAllPosts } from "@/lib/blog";
 import HomePage from "@/components/home/home-page";
 
 export const metadata: Metadata = {
@@ -14,6 +15,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/" },
 };
 
-export default function Home() {
-  return <HomePage />;
+export default async function Home() {
+  const posts = getAllPosts().filter((p) => p.featured).slice(0, 3);
+  return <HomePage posts={posts} />;
 }

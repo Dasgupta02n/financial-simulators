@@ -1,0 +1,54 @@
+  API Backend (base): https://web-production-e5b81.up.railway.app/api/admin/
+
+  Available API endpoints:
+  - POST /api/admin/auth — login
+  - GET /api/admin/posts — list blog posts
+  - POST /api/admin/save — save content
+  - GET /api/admin/calculator-config/[id] — get calculator config
+
+https://web-production-e5b81.up.railway.app
+
+PS C:\Users\dasgu>  npx @railway/cli variables --service web
+New version available: v4.40.2 visit https://docs.railway.com/guides/cli for more info
+No linked project found. Run railway link to connect to a project
+PS C:\Users\dasgu> railway link
+New version available: v4.40.2 visit https://docs.railway.com/guides/cli for more info
+> Select a workspace dasgupta02n's Projects
+> Select a project financial-simulators
+> Select an environment production
+> Select a service <esc to skip> web
+
+Project financial-simulators linked successfully! 🎉
+PS C:\Users\dasgu>  npx @railway/cli variables --service web
+New version available: v4.40.2 visit https://docs.railway.com/guides/cli for more info
+╔═══════════════════════ Variables for web ═══════════════════════╗
+║ ADMIN_PASSWORD           │ mKMFLA230d2KzVQqGG5OcMkHhjnm         ║
+║─────────────────────────────────────────────────────────────────║
+║ GITHUB_BRANCH            │ main                                 ║
+║─────────────────────────────────────────────────────────────────║
+║ GITHUB_REPO_NAME         │ financial-simulators                 ║
+║─────────────────────────────────────────────────────────────────║
+║ GITHUB_REPO_OWNER        │ Dasgupta02n                          ║
+║─────────────────────────────────────────────────────────────────║
+║ RAILWAY_ENVIRONMENT      │ production                           ║
+║─────────────────────────────────────────────────────────────────║
+║ RAILWAY_ENVIRONMENT_ID   │ 1cb05b44-bcec-4dd6-a961-f69defa807c2 ║
+║─────────────────────────────────────────────────────────────────║
+║ RAILWAY_ENVIRONMENT_NAME │ production                           ║
+║─────────────────────────────────────────────────────────────────║
+║ RAILWAY_PRIVATE_DOMAIN   │ web.railway.internal                 ║
+║─────────────────────────────────────────────────────────────────║
+║ RAILWAY_PROJECT_ID       │ d0b7677c-49d9-4f27-9d99-ff4782791458 ║
+║─────────────────────────────────────────────────────────────────║
+║ RAILWAY_PROJECT_NAME     │ financial-simulators                 ║
+║─────────────────────────────────────────────────────────────────║
+║ RAILWAY_PUBLIC_DOMAIN    │ web-production-e5b81.up.railway.app  ║
+║─────────────────────────────────────────────────────────────────║
+║ RAILWAY_SERVICE_ID       │ c9f950dd-b509-4df6-8824-c2bbd3f01759 ║
+║─────────────────────────────────────────────────────────────────║
+║ RAILWAY_SERVICE_NAME     │ web                                  ║
+║─────────────────────────────────────────────────────────────────║
+║ RAILWAY_SERVICE_WEB_URL  │ web-production-e5b81.up.railway.app  ║
+║─────────────────────────────────────────────────────────────────║
+║ RAILWAY_STATIC_URL       │ web-production-e5b81.up.railway.app  ║
+╚═════════════════════════════════════════════════════════════════╝

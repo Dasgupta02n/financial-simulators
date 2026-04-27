@@ -1,15 +1,30 @@
 import { NextRequest, NextResponse } from "next/server";
+import path from "path";
 import { saveFile } from "@/lib/github-api";
+import { verifyAdminSession } from "@/lib/admin-auth";
 
 const ALLOWED_PREFIXES = ["src/content/calculators/", "src/content/blog/"];
 
-function isAuthenticated(req: NextRequest): boolean {
-  const session = req.cookies.get("admin_session");
-  return session?.value === "1";
+function validatePath(filePath: string): boolean {
+  // Double-decode to catch encoded traversal sequences
+  let decoded = filePath;
+  for (let i = 0; i < 2; i++) {
+    try { decoded = decodeURIComponent(decoded); } catch { return false; }
+  }
+
+  // Reject null bytes
+  if (decoded.includes("\0")) return false;
+
+  // Normalize and verify no traversal above base
+  const normalized = path.posix.normalize(decoded);
+  if (normalized.startsWith("/") || normalized.includes("..")) return false;
+
+  // Must match an allowed prefix
+  return ALLOWED_PREFIXES.some((prefix) => normalized.startsWith(prefix));
 }
 
 export async function POST(req: NextRequest) {
-  if (!isAuthenticated(req)) {
+  if (!verifyAdminSession(req)) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
@@ -24,15 +39,8 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
   }
 
-  // Prevent path traversal
-  if (path.includes("..") || path.startsWith("/")) {
-    return NextResponse.json({ error: "Invalid path" }, { status: 400 });
-  }
-
-  // Only allow writes to content directories
-  const isAllowed = ALLOWED_PREFIXES.some((prefix) => path.startsWith(prefix));
-  if (!isAllowed) {
-    return NextResponse.json({ error: "Path not allowed" }, { status: 403 });
+  if (!validatePath(path)) {
+    return NextResponse.json({ error: "Invalid path" }, { status: 403 });
   }
 
   try {
