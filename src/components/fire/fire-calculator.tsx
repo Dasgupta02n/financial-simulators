@@ -12,6 +12,7 @@ import { LieVsTruthPanel } from "@/components/shared/lie-vs-truth-panel";
 import { ConfidenceBadge } from "@/components/shared/confidence-badge";
 import { WhyThisNumber } from "@/components/shared/why-this-number";
 import { ShareBar } from "@/components/shared/share-bar";
+import { DownloadReportButton } from "@/components/shared/download-report-button";
 import { truthFromFIRE } from "@/lib/truth/truth-data-adapter";
 import { SliderRow } from "@/components/shared/slider-row";
 
@@ -138,6 +139,16 @@ export function FIRECalculator() {
               <li>After retirement, if the green line drops, your money is running out. The 4% rule is a starting point, not a guarantee.</li>
             </ul>
           </CalcExplainer>
+          <DownloadReportButton
+            calculatorTitle="FIRE Calculator"
+            calculatorData={{
+              "FIRE Number": formatINR(output.fireNumber),
+              "Corpus at Retirement": formatINR(output.corpusAtRetirement),
+              "Real Corpus at Ret.": formatINR(output.realCorpusAtRetirement),
+              "Total Contributed": formatINR(output.totalContributed),
+              "Corpus at End": formatINR(output.corpusAtEnd),
+            }}
+          />
         </div>
       </div>
     </div>

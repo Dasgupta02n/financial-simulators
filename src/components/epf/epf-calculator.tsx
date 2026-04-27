@@ -9,6 +9,7 @@ import { LieVsTruthPanel } from "@/components/shared/lie-vs-truth-panel";
 import { ConfidenceBadge } from "@/components/shared/confidence-badge";
 import { WhyThisNumber } from "@/components/shared/why-this-number";
 import { ShareBar } from "@/components/shared/share-bar";
+import { DownloadReportButton } from "@/components/shared/download-report-button";
 import { truthFromEPF } from "@/lib/truth/truth-data-adapter";
 import { SliderRow } from "@/components/shared/slider-row";
 
@@ -197,6 +198,16 @@ export function EPFCalculator() {
               <li>EPS contributions fund a monthly pension, not your lump-sum corpus. The pension itself is taxable.</li>
             </ul>
           </CalcExplainer>
+          <DownloadReportButton
+            calculatorTitle="EPF Calculator"
+            calculatorData={{
+              "Total EPF Corpus": formatINR(result.totalCorpusAtRetirement),
+              "Employee Contribution": formatINR(result.totalEmployeeContribution),
+              "Employer EPF": formatINR(result.totalEmployerEpfContribution),
+              "Interest Earned": formatINR(result.totalInterestEarned),
+              "Real Purchasing Power": formatINR(result.realCorpusAtRetirement),
+            }}
+          />
         </div>
       </div>
     </div>

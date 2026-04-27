@@ -12,6 +12,7 @@ import { LieVsTruthPanel } from "@/components/shared/lie-vs-truth-panel";
 import { ConfidenceBadge } from "@/components/shared/confidence-badge";
 import { WhyThisNumber } from "@/components/shared/why-this-number";
 import { ShareBar } from "@/components/shared/share-bar";
+import { DownloadReportButton } from "@/components/shared/download-report-button";
 import { SliderRow } from "@/components/shared/slider-row";
 import type { TruthResult } from "@/lib/truth/types";
 import { FY_YEAR, INFLATION_RATE, LAST_UPDATED } from "@/lib/truth/assumptions";
@@ -354,6 +355,16 @@ export function DepreciationCalculator() {
               <li>EV owners with income below ₹50L can claim Section 80EEB deduction on loan interest.</li>
             </ul>
           </CalcExplainer>
+          <DownloadReportButton
+            calculatorTitle="Depreciation Calculator"
+            calculatorData={{
+              "Purchase Price": formatINR(output.purchasePrice),
+              "Total Cost of Ownership": formatINR(output.totalCostOfOwnership),
+              "Estimated Resale": formatINR(output.estimatedResaleValue),
+              "Net Cost After Tax": formatINR(output.netCostAfterTax),
+              "Total Fuel Cost": formatINR(output.totalFuelCost),
+            }}
+          />
         </div>
       </div>
     </div>

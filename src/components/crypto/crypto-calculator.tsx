@@ -11,6 +11,7 @@ import { LieVsTruthPanel } from "@/components/shared/lie-vs-truth-panel";
 import { ConfidenceBadge } from "@/components/shared/confidence-badge";
 import { WhyThisNumber } from "@/components/shared/why-this-number";
 import { ShareBar } from "@/components/shared/share-bar";
+import { DownloadReportButton } from "@/components/shared/download-report-button";
 import { SliderRow } from "@/components/shared/slider-row";
 import { truthFromCrypto } from "@/lib/truth/truth-data-adapter";
 
@@ -122,6 +123,16 @@ export function CryptoCalculator() {
               <li>Staking income is taxed separately at your slab rate, not at the 30% crypto rate.</li>
             </ul>
           </CalcExplainer>
+          <DownloadReportButton
+            calculatorTitle="Crypto Tax Calculator"
+            calculatorData={{
+              "Total Gains": formatINR(output.totalGains),
+              "Tax @30%": formatINR(output.taxOnGains),
+              "TDS Deducted": formatINR(output.tdsAmount),
+              "Net After Tax": formatINR(output.netAfterTax),
+              "Real Value": formatINR(output.realValueAfterInflation),
+            }}
+          />
         </div>
       </div>
     </div>

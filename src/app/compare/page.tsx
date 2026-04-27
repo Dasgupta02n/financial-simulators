@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { ShareBar } from "@/components/shared/share-bar";
 
 export const metadata: Metadata = {
   title: "Compare Returns — SIP vs FD vs PPF vs Gold vs Real Estate | c7xai",
@@ -164,6 +165,11 @@ export default function ComparePage() {
             Truth Index
           </Link>
         </div>
+      </div>
+
+      <div className="flex items-center gap-2 mt-8">
+        <span className="text-xs text-text-muted font-mono">Share:</span>
+        <ShareBar title="Compare Returns — c7xai" />
       </div>
     </main>
   );

@@ -12,6 +12,7 @@ import { LieVsTruthPanel } from "@/components/shared/lie-vs-truth-panel";
 import { ConfidenceBadge } from "@/components/shared/confidence-badge";
 import { WhyThisNumber } from "@/components/shared/why-this-number";
 import { ShareBar } from "@/components/shared/share-bar";
+import { DownloadReportButton } from "@/components/shared/download-report-button";
 import { SliderRow } from "@/components/shared/slider-row";
 import type { TruthResult } from "@/lib/truth/types";
 import { FY_YEAR, INFLATION_RATE, LAST_UPDATED } from "@/lib/truth/assumptions";
@@ -292,6 +293,16 @@ export function ForexCalculator() {
               </li>
             </ul>
           </CalcExplainer>
+          <DownloadReportButton
+            calculatorTitle="Forex Calculator"
+            calculatorData={{
+              "Foreign Amount": `${output.finalForeignAmount.toLocaleString("en-IN")} ${input.targetCurrency}`,
+              "INR Value": formatINR(output.finalINRValue),
+              "Capital Gains Tax": formatINR(output.capitalGainsTax),
+              "Net Proceeds": formatINR(output.netProceeds),
+              "Real Value": formatINR(output.realValue),
+            }}
+          />
         </div>
       </div>
     </div>

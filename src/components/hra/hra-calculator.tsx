@@ -9,6 +9,7 @@ import { LieVsTruthPanel } from "@/components/shared/lie-vs-truth-panel";
 import { ConfidenceBadge } from "@/components/shared/confidence-badge";
 import { WhyThisNumber } from "@/components/shared/why-this-number";
 import { ShareBar } from "@/components/shared/share-bar";
+import { DownloadReportButton } from "@/components/shared/download-report-button";
 import { truthFromHRA } from "@/lib/truth/truth-data-adapter";
 import { twMerge } from "tailwind-merge";
 import { SliderRow } from "@/components/shared/slider-row";
@@ -135,6 +136,16 @@ export function HRACalculator() {
               <li>HRA exemption only works in the Old Tax Regime. New Regime doesn&apos;t allow HRA claims.</li>
             </ul>
           </CalcExplainer>
+          <DownloadReportButton
+            calculatorTitle="HRA Calculator"
+            calculatorData={{
+              "HRA Exemption": formatINR(result.hraExemption),
+              "Taxable HRA": formatINR(result.taxableHRA),
+              "Actual HRA": formatINR(result.breakdown.actualHRA),
+              "Rent - 10% Basic": formatINR(result.breakdown.rentOver10Percent),
+              "Metro Limit": formatINR(result.breakdown.metroLimit),
+            }}
+          />
         </div>
       </div>
     </div>

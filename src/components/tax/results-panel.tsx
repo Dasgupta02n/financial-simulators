@@ -10,6 +10,7 @@ import { LieVsTruthPanel } from "@/components/shared/lie-vs-truth-panel";
 import { ConfidenceBadge } from "@/components/shared/confidence-badge";
 import { WhyThisNumber } from "@/components/shared/why-this-number";
 import { ShareBar } from "@/components/shared/share-bar";
+import { DownloadReportButton } from "@/components/shared/download-report-button";
 import { truthFromTax } from "@/lib/truth/truth-data-adapter";
 
 interface ResultsPanelProps {
@@ -125,6 +126,17 @@ export function ResultsPanel({ output }: ResultsPanelProps) {
           <li>Surcharge kicks in above ₹50L income. Cess (4%) applies on top of everything — no exemptions.</li>
         </ul>
       </CalcExplainer>
+      <DownloadReportButton
+        calculatorTitle="Tax Calculator"
+        calculatorData={{
+          "Old Regime Tax": formatINR(oldRegime.totalTax),
+          "New Regime Tax": formatINR(newRegime.totalTax),
+          "Recommended": oldWins ? "Old Regime" : "New Regime",
+          "Savings": formatINR(savings),
+          "Old Regime Effective Rate": `${(oldRegime.effectiveRate * 100).toFixed(1)}%`,
+          "New Regime Effective Rate": `${(newRegime.effectiveRate * 100).toFixed(1)}%`,
+        }}
+      />
     </div>
   );
 }

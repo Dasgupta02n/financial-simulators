@@ -9,6 +9,7 @@ import { LieVsTruthPanel } from "@/components/shared/lie-vs-truth-panel";
 import { ConfidenceBadge } from "@/components/shared/confidence-badge";
 import { WhyThisNumber } from "@/components/shared/why-this-number";
 import { ShareBar } from "@/components/shared/share-bar";
+import { DownloadReportButton } from "@/components/shared/download-report-button";
 import { truthFromAccumulator } from "@/lib/truth/truth-data-adapter";
 
 interface ResultsPanelProps { output: AccumulatorOutput; }
@@ -47,6 +48,16 @@ export function AccumResultsPanel({ output }: ResultsPanelProps) {
           <li>Step-up SIP accelerates growth, but returns are assumed constant — actual market returns vary.</li>
         </ul>
       </CalcExplainer>
+      <DownloadReportButton
+        calculatorTitle="Accumulation Calculator"
+        calculatorData={{
+          "Total Invested": formatINR(output.totalInvested),
+          "Nominal Total": formatINR(output.finalNominalTotal),
+          "Real Purchasing Power": formatINR(output.finalRealTotal),
+          "Lumpsum Value": formatINR(output.finalLumpsum),
+          "SIP Corpus": formatINR(output.finalSipCorpus),
+        }}
+      />
     </div>
   );
 }

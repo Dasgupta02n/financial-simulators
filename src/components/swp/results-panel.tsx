@@ -9,6 +9,7 @@ import { LieVsTruthPanel } from "@/components/shared/lie-vs-truth-panel";
 import { ConfidenceBadge } from "@/components/shared/confidence-badge";
 import { WhyThisNumber } from "@/components/shared/why-this-number";
 import { ShareBar } from "@/components/shared/share-bar";
+import { DownloadReportButton } from "@/components/shared/download-report-button";
 import { truthFromSWP } from "@/lib/truth/truth-data-adapter";
 
 interface Props {
@@ -99,6 +100,17 @@ export function SWPResultsPanel({ output, crashEnabled, inflationRate = 6 }: Pro
         Withdrawals increase at {output.yearlyData.length > 1 ? "inflation rate" : "configured rate"} each year (real purchasing power preserved).
         {crashEnabled && " Stress path injects a crash in early years — this is the Bucket Strategy risk scenario."}
       </div>
+
+      <DownloadReportButton
+        calculatorTitle="SWP Calculator"
+        calculatorData={{
+          "Final Corpus": formatINR(output.finalCorpus),
+          "Real Value": formatINR(output.finalRealCorpus),
+          "Years Lasted": `${output.yearsLasted}`,
+          "Total Withdrawn": formatINR(output.totalWithdrawn),
+          "Total Growth": formatINR(output.totalGrowth),
+        }}
+      />
     </div>
   );
 }

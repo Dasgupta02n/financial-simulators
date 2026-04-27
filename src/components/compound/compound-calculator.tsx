@@ -10,6 +10,7 @@ import { LieVsTruthPanel } from "@/components/shared/lie-vs-truth-panel";
 import { ConfidenceBadge } from "@/components/shared/confidence-badge";
 import { WhyThisNumber } from "@/components/shared/why-this-number";
 import { ShareBar } from "@/components/shared/share-bar";
+import { DownloadReportButton } from "@/components/shared/download-report-button";
 import { truthFromCompound } from "@/lib/truth/truth-data-adapter";
 import { SliderRow } from "@/components/shared/slider-row";
 import { Area, Line, ComposedChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
@@ -141,6 +142,16 @@ export function CompoundCalculator() {
               <li>When real yield is negative, your money loses purchasing power despite appearing to grow.</li>
             </ul>
           </CalcExplainer>
+          <DownloadReportButton
+            calculatorTitle="Compound Interest Calculator"
+            calculatorData={{
+              "Total Invested": formatINR(output.totalInvested),
+              "Maturity (Nominal)": formatINR(output.maturityNominal),
+              "Maturity (Post-Tax)": formatINR(output.maturityPostTax),
+              "Real Value": formatINR(output.maturityReal),
+              "Nominal Yield": `${output.nominalYield.toFixed(1)}%`,
+            }}
+          />
         </div>
       </div>
     </div>
