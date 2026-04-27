@@ -1,6 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
 import {
   SIPVisualization, EMIVisualization, TaxVisualization, AccumVisualization,
   FDVisualization, SWPVisualization, FIREVisualization, CTCVisualization,
@@ -27,11 +28,13 @@ interface CalcVisualizationProps {
 
 export function CalcVisualization({ calcId, data }: CalcVisualizationProps) {
   const Visualization = VIS_MAP[calcId];
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => { setMounted(true); }, []);
   if (!Visualization) return null;
 
   return (
     <motion.div
-      initial={{ opacity: 0, scale: 0.95 }}
+      initial={mounted ? { opacity: 0, scale: 0.95 } : false}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.5, delay: 0.2 }}
       className="relative rounded-lg border border-border bg-white overflow-hidden shadow-sm"
