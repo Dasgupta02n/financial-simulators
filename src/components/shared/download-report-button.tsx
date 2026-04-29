@@ -9,7 +9,7 @@ interface DownloadReportButtonProps {
 }
 
 export function DownloadReportButton({ calculatorTitle, calculatorData }: DownloadReportButtonProps) {
-  const { data: session, status } = useSession();
+  const { data: session, status } = useSession() ?? { data: null, status: "unauthenticated" as const };
   const [eulaAccepted, setEulaAccepted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
