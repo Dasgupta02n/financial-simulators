@@ -75,9 +75,25 @@ body {
   background-size: 40px 40px;
 }
 
-/* Hero gradient (dark overlay sections) */
+/* Subtle dot pattern for light sections */
+.bg-dots-pattern {
+  background-image: radial-gradient(circle, var(--color-text-muted) 0.5px, transparent 0.5px);
+  background-size: 24px 24px;
+  background-position: 12px 12px;
+}
+
+/* Hero gradient with sienna accent glow */
 .gradient-hero {
-  background: linear-gradient(135deg, #0a0f1e 0%, #141b2d 100%);
+  background:
+    radial-gradient(ellipse 60% 50% at 90% 20%, rgba(216, 64, 14, 0.08) 0%, transparent 70%),
+    linear-gradient(135deg, #0a0f1e 0%, #141b2d 100%);
+}
+
+/* Ambient sienna glow for hero accent */
+.gradient-hero-accent {
+  background:
+    radial-gradient(ellipse 50% 60% at 85% 30%, rgba(216, 64, 14, 0.12) 0%, transparent 70%),
+    linear-gradient(135deg, #0a0f1e 0%, #141b2d 100%);
 }
 
 /* Serif headlines — FT authority */

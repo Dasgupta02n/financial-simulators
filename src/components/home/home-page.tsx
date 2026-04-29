@@ -119,7 +119,7 @@ export default function HomePage({ posts }: HomePageProps) {
         <HeroIllustration />
       </section>
 
-      <section className="w-full section-navy">
+      <section className="w-full section-navy bg-grid-pattern">
         <div className="max-w-7xl mx-auto px-6 py-12 grid md:grid-cols-3 gap-8">
           <div className="truth-reveal text-center">
             <div className="text-4xl font-bold font-serif-display text-sienna">3.8%</div>
@@ -139,7 +139,7 @@ export default function HomePage({ posts }: HomePageProps) {
         </div>
       </section>
 
-      <section id="calculators" className="w-full section-gray">
+      <section id="calculators" className="w-full section-gray bg-dots-pattern">
         <div className="max-w-7xl mx-auto px-6 py-20 md:py-28">
           <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-text-primary mb-4 font-serif-display">
             {t("sectionTitle")}
@@ -246,7 +246,7 @@ export default function HomePage({ posts }: HomePageProps) {
         </section>
       )}
 
-      <section className="w-full section-white border-t border-border">
+      <section className="w-full section-white bg-dots-pattern border-t border-border">
         <div className="max-w-7xl mx-auto px-6 py-20 md:py-28 text-center">
           <div className="text-4xl font-bold font-serif-display text-text-primary mb-6">
             {t("privacyTitle")}
@@ -266,7 +266,7 @@ export default function HomePage({ posts }: HomePageProps) {
         </div>
       </section>
 
-      <footer className="w-full section-navy">
+      <footer className="w-full section-navy bg-grid-pattern">
         <div className="max-w-7xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-4 gap-10">
           <div>
             <span className="text-xl font-bold text-white">c7<span className="text-sienna">xai</span></span>
