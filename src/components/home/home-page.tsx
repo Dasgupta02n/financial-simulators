@@ -302,7 +302,6 @@ export default function HomePage({ posts }: HomePageProps) {
               <Link href="/privacy" className="text-sm text-white/60 hover:text-sienna transition-colors">{t("footerPrivacy")}</Link>
               <Link href="/terms" className="text-sm text-white/60 hover:text-sienna transition-colors">{t("footerTerms")}</Link>
               <Link href="/eula" className="text-sm text-white/60 hover:text-sienna transition-colors">{t("footerEula")}</Link>
-              <Link href="/refund" className="text-sm text-white/60 hover:text-sienna transition-colors">{t("footerRefund")}</Link>
             </div>
           </div>
         </div>
