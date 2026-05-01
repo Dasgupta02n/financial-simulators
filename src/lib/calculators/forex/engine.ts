@@ -1,10 +1,8 @@
 import type { ForexInput, ForexOutput, ForexYearlyPoint } from "./types";
-import { RBI_LRS_LIMIT_USD } from "./types";
 
 export function computeForex(input: ForexInput): ForexOutput {
   const {
     amountINR,
-    targetCurrency,
     exchangeRate,
     holdingYears,
     appreciationRate,
@@ -22,12 +20,6 @@ export function computeForex(input: ForexInput): ForexOutput {
 
   const netInvestedINR = amountINR - tcsOnRemittance - bankSpread;
   const initialForeignAmount = Math.round((netInvestedINR / exchangeRate) * 100) / 100;
-
-  // LRS limit check
-  const usdEquivalent = targetCurrency === "USD"
-    ? initialForeignAmount
-    : initialForeignAmount / (exchangeRate / 83); // rough USD equivalent
-  const lrsLimitHit = usdEquivalent > RBI_LRS_LIMIT_USD;
 
   const yearlyData: ForexYearlyPoint[] = [];
   let currentForeignValue = initialForeignAmount;

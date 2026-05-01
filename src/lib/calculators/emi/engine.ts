@@ -34,7 +34,7 @@ export function computeAmortization(
   let outstanding = input.loanAmount;
   let prepaidOutstanding = input.loanAmount;
   let sipAccumulated = 0;
-  let sipMonthlyRate = input.sipReturnRate / 100 / 12;
+  const sipMonthlyRate = input.sipReturnRate / 100 / 12;
 
   for (let month = 1; month <= totalMonths && outstanding > 0; month++) {
     const currentRate = getEffectiveRate(input.interestRate, rateShift, month);
@@ -42,7 +42,6 @@ export function computeAmortization(
 
     // Standard EMI path
     const interestPortion = outstanding * monthlyRate;
-    const remainingMonths = totalMonths - month + 1;
     const emi = getEMI(input.loanAmount, monthlyRate, totalMonths);
     const principalPortion = Math.min(emi - interestPortion, outstanding);
     outstanding = Math.max(0, outstanding - principalPortion);

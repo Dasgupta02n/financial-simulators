@@ -1,7 +1,6 @@
 import {
   SURCHARGE_THRESHOLDS,
   CESS_RATE,
-  type RegimeResult,
 } from "./types";
 
 export function computeSurcharge(

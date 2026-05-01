@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import type { Metadata } from "next";
 import { ShareBar } from "@/components/shared/share-bar";
 
 interface TruthCard {

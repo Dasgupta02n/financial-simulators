@@ -11,7 +11,7 @@ function autoChoiceEquityPct(age: number): number {
 export function computeNPS(input: NPSInput): NPSOutput {
   const {
     currentAge, retirementAge, monthlyContribution, employerContribution,
-    equityReturn, debtReturn, annuityRate, annuityReturn, inflationRate,
+    equityReturn, debtReturn, annuityReturn, inflationRate,
   } = input;
 
   const years = retirementAge - currentAge;

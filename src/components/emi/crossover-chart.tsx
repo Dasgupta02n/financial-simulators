@@ -23,16 +23,20 @@ export function CrossoverChart({ data, crossoverMonth, interestRate }: Crossover
   const sampled = data.filter((_, i) => i % 6 === 0 || i === data.length - 1);
   const monthlyRate = interestRate / 100 / 12;
 
-  let prepaidSaved = 0;
-  const chartData = sampled.map((row) => {
-    const outstandingDiff = (row.outstanding || 0) - (row.prepaidOutstanding || 0);
-    prepaidSaved += Math.round(outstandingDiff * monthlyRate);
-    return {
-      month: row.month,
-      sipCorpus: row.sipCorpus || 0,
-      prepaidSaved: Math.max(0, prepaidSaved),
-    };
-  });
+  const chartData = sampled.reduce<{ month: number; sipCorpus: number; prepaidSaved: number }[]>(
+    (acc, row) => {
+      const outstandingDiff = (row.outstanding || 0) - (row.prepaidOutstanding || 0);
+      const prevSaved = acc.length > 0 ? acc[acc.length - 1].prepaidSaved : 0;
+      const saved = prevSaved + Math.round(outstandingDiff * monthlyRate);
+      acc.push({
+        month: row.month,
+        sipCorpus: row.sipCorpus || 0,
+        prepaidSaved: Math.max(0, saved),
+      });
+      return acc;
+    },
+    []
+  );
 
   return (
     <div className="w-full flex-1 min-h-[220px]">

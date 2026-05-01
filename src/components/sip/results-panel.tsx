@@ -20,7 +20,6 @@ interface ResultsPanelProps {
   ltcgTax: number;
   yearlyData: YearlyDataPoint[];
   stressEnabled: boolean;
-  vizData: Record<string, number>;
   inflationRate?: number;
 }
 
@@ -33,7 +32,6 @@ export function ResultsPanel({
   ltcgTax,
   yearlyData,
   stressEnabled,
-  vizData,
   inflationRate = 6,
 }: ResultsPanelProps) {
   const truth = truthFromSIP(

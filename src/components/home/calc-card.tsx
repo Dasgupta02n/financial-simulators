@@ -2,11 +2,10 @@
 
 import { Link } from "@/i18n/navigation";
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
+import { useIsMounted } from "@/lib/hooks/use-is-mounted";
 
 interface CalcCardProps {
-  id: string;
   name: string;
   slug: string;
   description: string;
@@ -14,10 +13,9 @@ interface CalcCardProps {
   index: number;
 }
 
-export function CalcCard({ id, name, slug, description, tag, index }: CalcCardProps) {
-  const [mounted, setMounted] = useState(false);
+export function CalcCard({ name, slug, description, tag, index }: CalcCardProps) {
+  const mounted = useIsMounted();
   const t = useTranslations("home");
-  useEffect(() => { setMounted(true); }, []);
 
   return (
     <Link href={`/${slug}`} className="group block">

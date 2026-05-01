@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 
 interface Lead {
   timestamp: string;
@@ -15,31 +15,31 @@ export function LeadsPanel() {
   const [leads, setLeads] = useState<Lead[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-
-  const fetchLeads = useCallback(async () => {
-    setLoading(true);
-    setError("");
-    try {
-      const res = await fetch("/api/leads", {
-        credentials: "include",
-      });
-      if (!res.ok) {
-        setError("Failed to fetch leads");
-        setLeads([]);
-        return;
-      }
-      const data = await res.json();
-      setLeads(data.leads ?? []);
-    } catch {
-      setError("Network error");
-    } finally {
-      setLoading(false);
-    }
-  }, []);
+  const [retryKey, setRetryKey] = useState(0);
 
   useEffect(() => {
-    fetchLeads();
-  }, [fetchLeads]);
+    let cancelled = false;
+    (async () => {
+      try {
+        const res = await fetch("/api/leads", { credentials: "include" });
+        if (cancelled) return;
+        if (!res.ok) {
+          setError("Failed to fetch leads");
+          setLeads([]);
+          return;
+        }
+        const data = await res.json();
+        if (cancelled) return;
+        setLeads(data.leads ?? []);
+      } catch {
+        if (cancelled) return;
+        setError("Network error");
+      } finally {
+        if (!cancelled) setLoading(false);
+      }
+    })();
+    return () => { cancelled = true; };
+  }, [retryKey]);
 
   function exportCSV() {
     if (leads.length === 0) return;
@@ -72,7 +72,7 @@ export function LeadsPanel() {
     return (
       <div className="flex flex-col gap-2">
         <p className="text-loss text-sm font-mono">{error}</p>
-        <button onClick={fetchLeads} className="text-xs text-gain underline">Retry</button>
+        <button onClick={() => { setLoading(true); setError(""); setRetryKey((k) => k + 1); }} className="text-xs text-gain underline">Retry</button>
       </div>
     );
   }

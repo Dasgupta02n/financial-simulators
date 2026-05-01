@@ -50,16 +50,16 @@ export function SliderRow({
   const fillPct = range > 0 ? ((value - min) / range) * 100 : 50;
   const fillPctClamped = Math.max(0, Math.min(100, fillPct));
 
-  const defaultTicks = tickPositions ?? [0, 0.25, 0.5, 0.75, 1];
   const tickLabels = useMemo(() => {
+    const ticks = tickPositions ?? [0, 0.25, 0.5, 0.75, 1];
     const fmt = tickFormat ?? formatTickDefault;
-    return defaultTicks.map((frac) => {
+    return ticks.map((frac) => {
       const raw = min + frac * range;
       const rounded = Math.round(raw / step) * step;
       const text = tickUnit ? `${fmt(rounded)}${tickUnit}` : fmt(rounded);
       return text;
     });
-  }, [min, range, step, tickFormat, tickUnit, defaultTicks]);
+  }, [min, range, step, tickFormat, tickUnit, tickPositions]);
 
   return (
     <div className="flex flex-col gap-0.5">

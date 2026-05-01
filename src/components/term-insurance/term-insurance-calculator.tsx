@@ -43,7 +43,6 @@ export function TermInsuranceCalculator() {
 
   const result = useMemo(() => computeTermInsurance(input), [input]);
 
-  const coverShortfall = Math.max(0, result.totalRequired - input.existingInsuranceCover - input.savingsInvestments);
   const existingBarPercent = result.totalRequired > 0
     ? Math.min(100, Math.round((input.existingInsuranceCover / result.totalRequired) * 100))
     : 0;

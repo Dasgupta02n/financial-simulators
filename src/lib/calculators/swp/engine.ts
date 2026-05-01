@@ -16,7 +16,6 @@ export function computeSWP(input: SWPInput): SWPOutput {
 
   for (let year = 1; year <= tenure; year++) {
     const corpusStart = Math.round(corpusNominal);
-    const stressCorpusStart = Math.round(corpusStress);
 
     // Inflation-adjusted withdrawal for this year
     const annualWithdrawal = monthlyWithdrawal * 12 * Math.pow(1 + inflationRate / 100, year - 1);

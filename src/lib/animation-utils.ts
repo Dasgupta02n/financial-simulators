@@ -7,7 +7,10 @@ export function useAnimatedCounter(target: number, duration = 1200, enabled = tr
   const prevTarget = useRef(0);
 
   useEffect(() => {
-    if (!enabled) { setValue(target); return; }
+    if (!enabled) {
+      prevTarget.current = target;
+      return;
+    }
     const start = prevTarget.current;
     const diff = target - start;
     if (diff === 0) return;
@@ -25,7 +28,7 @@ export function useAnimatedCounter(target: number, duration = 1200, enabled = tr
     return () => { prevTarget.current = target; };
   }, [target, duration, enabled]);
 
-  return value;
+  return enabled ? value : target;
 }
 
 export const fadeInUp = {

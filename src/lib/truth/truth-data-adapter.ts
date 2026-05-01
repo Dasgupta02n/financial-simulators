@@ -210,7 +210,6 @@ interface FIREPartial {
 export function truthFromFIRE(r: FIREPartial, inflationRate = INFLATION_RATE): TruthResult {
   const gains = r.corpusAtRetirement - r.totalContributed;
   const ltcg = computeLTCG(gains);
-  const postTax = r.corpusAtRetirement - ltcg.tax;
 
   return {
     grossLabel: "Corpus at retirement",

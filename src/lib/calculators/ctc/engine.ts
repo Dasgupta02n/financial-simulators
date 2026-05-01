@@ -60,17 +60,6 @@ function computeNewRegimeTax(taxableIncome: number): TaxCalculation {
   };
 }
 
-function computeInHand(ctc: number, breakdown: SalaryBreakup, hraExemption: number, regime: "old" | "new"): number {
-  const gross = breakdown.basic + breakdown.hra + breakdown.lta + breakdown.specialAllowance;
-  const taxable = regime === "new"
-    ? gross - hraExemption // simplified: new regime only allows HRA exemption if relevant
-    : gross - hraExemption;
-  const taxCalc = computeNewRegimeTax(taxable); // Using new regime for optimization
-  return ctc - taxCalc.totalTax;
-}
-
-type SalaryBreakup = SalaryBreakdown;
-
 // Optimization: find best HRA% and Basic% combination
 function optimizeStructure(input: CTCInput): { breakdown: SalaryBreakdown; hraExemption: number; taxable: number; inHand: number } {
   let bestInHand = 0;

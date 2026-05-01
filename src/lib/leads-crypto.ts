@@ -26,9 +26,10 @@ export function decrypt(ciphertext: string): string {
   if (parts.length !== 3) throw new Error("Invalid encrypted format");
   const iv = Buffer.from(parts[0], "hex");
   const tag = Buffer.from(parts[1], "hex");
+  if (tag.length !== AUTH_TAG_BYTES) throw new Error("Invalid auth tag length");
   const data = Buffer.from(parts[2], "hex");
 
-  const decipher = createDecipheriv(ALGORITHM, getKey(), iv);
+  const decipher = createDecipheriv(ALGORITHM, getKey(), iv, { authTagLength: AUTH_TAG_BYTES });
   decipher.setAuthTag(tag);
   return decipher.update(data) + decipher.final("utf8");
 }

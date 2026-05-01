@@ -16,7 +16,6 @@ export function computeEPF(input: EPFInput): EPFOutput {
   } = input;
 
   const years = Math.max(1, retirementAge - ageOfEntry);
-  const monthlyIncreaseFactor = 1 + annualSalaryIncrease / 100 / 12;
   const yearlyInterestRate = epfInterestRate / 100;
 
   let currentBasic = monthlyBasicSalary;

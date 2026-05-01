@@ -15,7 +15,7 @@ import { ShareBar } from "@/components/shared/share-bar";
 import { DownloadReportButton } from "@/components/shared/download-report-button";
 import { SliderRow } from "@/components/shared/slider-row";
 import type { TruthResult } from "@/lib/truth/types";
-import { FY_YEAR, INFLATION_RATE, LAST_UPDATED } from "@/lib/truth/assumptions";
+import { FY_YEAR, LAST_UPDATED } from "@/lib/truth/assumptions";
 
 const VEHICLE_OPTIONS: { value: VehicleType; label: string }[] = [
   { value: "car", label: "Car" },
@@ -78,8 +78,6 @@ export function DepreciationCalculator() {
   );
   const output = useMemo(() => computeDepreciation(input), [input]);
   const truth = truthFromDepreciation(output, input);
-
-  const finalPoint = output.yearlyData[output.yearlyData.length - 1];
 
   return (
     <div className="flex flex-col lg:flex-row gap-4 w-full h-full">

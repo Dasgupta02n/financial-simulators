@@ -5,7 +5,7 @@ import type { FDInput } from "@/lib/calculators/fd/types";
 import { computeFD } from "@/lib/calculators/fd/engine";
 import { formatINR } from "@/lib/format";
 import { formatINRShort } from "@/lib/format";
-import { Area, Bar, ComposedChart, Line, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+import { Area, ComposedChart, Line, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import { MetricCard } from "@/components/sip/metric-card";
 import { twMerge } from "tailwind-merge";
 import { CalcExplainer } from "@/components/shared/calc-explainer";

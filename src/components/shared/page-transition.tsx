@@ -1,11 +1,10 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useIsMounted } from "@/lib/hooks/use-is-mounted";
 
 export function PageTransition({ children }: { children: React.ReactNode }) {
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => { setMounted(true); }, []);
+  const mounted = useIsMounted();
 
   return (
     <motion.div

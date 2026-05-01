@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useMemo } from "react";
-import type { PlannerInput, PlannerGoal, LifeStage, IncomeBracket, GoalType, InsuranceType } from "@/lib/planner/types";
+import { useState, useMemo, useRef } from "react";
+import type { PlannerInput, PlannerGoal, GoalType, InsuranceType } from "@/lib/planner/types";
 import { INCOME_BRACKETS, LIFE_STAGES, GOAL_TYPES, STEPS } from "@/lib/planner/types";
 import { computePlanner } from "@/lib/planner/engine";
 import { formatINR } from "@/lib/format";
@@ -69,11 +69,11 @@ export function PlannerWizard() {
       {step === 2 && <StepIncome input={input} onChange={setInput} />}
       {step === 3 && <StepGoals input={input} onChange={setInput} />}
       {step === 4 && <StepInsurance input={input} onChange={setInput} />}
-      {step === 5 && <StepAnalysis input={input} output={output} />}
+      {step === 5 && <StepAnalysis output={output} />}
       {(step === 3 || step === 5) && input.goals.length > 0 && (
         <LifeJourneyMap goals={input.goals} currentAge={input.lifeStage === "near_retirement" ? 50 : input.lifeStage === "retired" ? 60 : input.lifeStage === "married_with_kids" ? 35 : 28} />
       )}
-      {step === 6 && <StepAction input={input} output={output} />}
+      {step === 6 && <StepAction output={output} />}
 
       {/* Navigation */}
       <div className="flex items-center justify-between pt-2">
@@ -228,11 +228,12 @@ function StepIncome({ input, onChange }: { input: PlannerInput; onChange: (i: Pl
 
 /* ── Step 3: Goals ─────────────────────────────────── */
 function StepGoals({ input, onChange }: { input: PlannerInput; onChange: (i: PlannerInput) => void }) {
+  const nextId = useRef(0);
   const addGoal = (type: GoalType) => {
     const template = GOAL_TYPES.find((g) => g.value === type);
     if (!template) return;
     const newGoal: PlannerGoal = {
-      id: `${type}_${Date.now()}`,
+      id: `${type}_${nextId.current++}`,
       type,
       name: template.label,
       targetAmount: template.defaultAmount,
@@ -420,7 +421,7 @@ function StepInsurance({ input, onChange }: { input: PlannerInput; onChange: (i:
 }
 
 /* ── Step 5: Analysis ──────────────────────────────── */
-function StepAnalysis({ input, output }: { input: PlannerInput; output: ReturnType<typeof computePlanner> }) {
+function StepAnalysis({ output }: { output: ReturnType<typeof computePlanner> }) {
   const surplusColor = output.surplusDeficit >= 0 ? "text-gain" : "text-loss";
   const surplusLabel = output.surplusDeficit >= 0 ? "Surplus" : "Deficit";
   const riskColors: Record<string, string> = {
@@ -634,7 +635,7 @@ function StepAnalysis({ input, output }: { input: PlannerInput; output: ReturnTy
 }
 
 /* ── Step 6: Action Plan ────────────────────────────── */
-function StepAction({ input, output }: { input: PlannerInput; output: ReturnType<typeof computePlanner> }) {
+function StepAction({ output }: { output: ReturnType<typeof computePlanner> }) {
   const priorityColors: Record<string, string> = {
     critical: "bg-loss/10 border-loss/30 text-loss",
     high: "bg-amber-50 border-amber-200 text-amber-700",

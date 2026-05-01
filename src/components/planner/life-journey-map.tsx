@@ -66,7 +66,7 @@ export function LifeJourneyMap({ goals, currentAge = 30 }: Props) {
 
           {/* Goal markers */}
           <div className="flex flex-col gap-6 mt-4 pb-6">
-            {sortedGoals.map((goal, i) => {
+            {sortedGoals.map((goal) => {
               const leftPct = (goal.yearsFromNow / timelineYears) * 100;
               const color = GOAL_COLORS[goal.type] || "bg-sienna";
               const icon = GOAL_ICONS[goal.type] || "🎯";

@@ -1,4 +1,4 @@
-import type { SalaryInput, SalaryOutput, CTCBreakdown, Deductions, TaxBreakdown } from "./types";
+import type { SalaryInput, SalaryOutput, CTCBreakdown, TaxBreakdown } from "./types";
 
 // New regime slabs (FY 2025-26)
 const NEW_SLABS = [

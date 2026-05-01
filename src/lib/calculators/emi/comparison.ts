@@ -5,8 +5,6 @@ export function findCrossover(
   amortization: AmortizationRow[]
 ): CrossoverResult {
   let prepaidSavedInterest = 0;
-  const loanMonths = amortization.length;
-  const baseTotalInterest = amortization.reduce((sum, r) => sum + r.interest, 0);
 
   for (let i = 0; i < amortization.length; i++) {
     const row = amortization[i];

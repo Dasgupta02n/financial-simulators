@@ -39,7 +39,6 @@ export function computeCrypto(input: CryptoInput): CryptoOutput {
     const projectedTDS = projectedValue > 10_00_000 ? Math.round(projectedValue * 0.01) : 0;
 
     cumulativeStaking += stakingIncome;
-    const yearStakingTax = Math.round(stakingIncome * (taxSlab / 100));
 
     const realValue = Math.round(projectedValue / Math.pow(1 + inflationRate / 100, year));
 

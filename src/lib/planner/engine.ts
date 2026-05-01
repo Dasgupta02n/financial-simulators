@@ -25,9 +25,6 @@ const INCOME_MEDIAN: Record<string, number> = {
 
 const RETURN_RATES = { equity: 0.12, debt: 0.07, gold: 0.08, realEstate: 0.09 };
 
-const TAX_OLD_DEDUCTIONS_MAX = 450000; // 80C + 80D + 80CCD + HRA + home loan
-const TAX_NEW_DEDUCTIONS_MAX = 75000;  // New regime standard deduction + NPS
-
 function determineRiskProfile(input: PlannerInput): RiskProfile {
   if (input.lifeStage === "retired" || input.lifeStage === "near_retirement") return "conservative";
   if (input.lifeStage === "married_with_kids" && input.savingsRate < 20) return "conservative";
@@ -389,7 +386,6 @@ function getActionSteps(input: PlannerInput, output: { emergencyFundGap: number;
 
 function getKeyInsights(input: PlannerInput, output: { surplusDeficit: number; emergencyFundGap: number; taxStrategy: TaxStrategy }): string[] {
   const insights: string[] = [];
-  const annualIncome = INCOME_MEDIAN[input.incomeBracket] || 1000000;
 
   if (output.surplusDeficit < 0) {
     insights.push("You're short by " + formatApprox(Math.abs(output.surplusDeficit)) + "/month. Consider increasing SIPs or reducing discretionary spending by 5-10%.");

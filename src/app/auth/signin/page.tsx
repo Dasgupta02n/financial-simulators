@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { signIn } from "next-auth/react";
 
 export default function SignInPage() {
@@ -38,8 +39,8 @@ export default function SignInPage() {
 
         <p className="text-[11px] text-text-muted text-center mt-6">
           By signing in, you agree to our{" "}
-          <a href="/eula" className="text-sienna underline">EULA</a> and{" "}
-          <a href="/privacy" className="text-sienna underline">Privacy Policy</a>.
+          <Link href="/eula" className="text-sienna underline">EULA</Link> and{" "}
+          <Link href="/privacy" className="text-sienna underline">Privacy Policy</Link>.
         </p>
       </div>
     </main>

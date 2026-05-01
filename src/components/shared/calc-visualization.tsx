@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useIsMounted } from "@/lib/hooks/use-is-mounted";
 import {
   SIPVisualization, EMIVisualization, TaxVisualization, AccumVisualization,
   FDVisualization, SWPVisualization, FIREVisualization, CTCVisualization,
@@ -28,8 +28,7 @@ interface CalcVisualizationProps {
 
 export function CalcVisualization({ calcId, data }: CalcVisualizationProps) {
   const Visualization = VIS_MAP[calcId];
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => { setMounted(true); }, []);
+  const mounted = useIsMounted();
   if (!Visualization) return null;
 
   return (

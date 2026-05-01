@@ -25,7 +25,7 @@ export function PostEditor({ slug: initialSlug, onSaved }: PostEditorProps) {
   const [body, setBody] = useState("");
   const [tagInput, setTagInput] = useState("");
   const [saving, setSaving] = useState(false);
-  const [mode, setMode] = useState<"create" | "edit">(initialSlug ? "edit" : "create");
+  const [mode] = useState<"create" | "edit">(initialSlug ? "edit" : "create");
 
   function escapeYaml(str: string): string {
     return str

@@ -1,15 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
-
-interface SeoPage {
-  slug: string;
-  title: string;
-  hasTitle: boolean;
-  hasDescription: boolean;
-  hasJsonLd: boolean;
-  hasOg: boolean;
-}
+import { useMemo, useState } from "react";
 
 const CALCULATOR_PAGES = [
   { slug: "sip-simulator", name: "SIP Simulator" },
@@ -26,19 +17,16 @@ const CALCULATOR_PAGES = [
 
 export function SeoToolkit() {
   const [selectedPage, setSelectedPage] = useState<string | null>(null);
-  const [pages, setPages] = useState<SeoPage[]>([]);
-
-  useEffect(() => {
-    const seoPages: SeoPage[] = CALCULATOR_PAGES.map((calc) => ({
+  const pages = useMemo(() =>
+    CALCULATOR_PAGES.map((calc) => ({
       slug: calc.slug,
       title: calc.name,
       hasTitle: true,
       hasDescription: true,
       hasJsonLd: true,
       hasOg: true,
-    }));
-    setPages(seoPages);
-  }, []);
+    })),
+  []);
 
   const selected = selectedPage ? pages.find((p) => p.slug === selectedPage) : null;
 

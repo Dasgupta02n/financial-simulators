@@ -47,13 +47,11 @@ export function computeRealEstate(input: RealEstateInput): RealEstateOutput {
   const monthlyRate = loanRate / 100 / 12;
   const totalLoanMonths = loanTenureYears * 12;
   let emi = 0;
-  let totalLoanPayment = 0;
   if (hasLoan && monthlyRate > 0 && totalLoanMonths > 0) {
     emi = Math.round(
       (loanAmount * monthlyRate * Math.pow(1 + monthlyRate, totalLoanMonths)) /
       (Math.pow(1 + monthlyRate, totalLoanMonths) - 1)
     );
-    totalLoanPayment = emi * totalLoanMonths;
   }
 
   for (let year = 1; year <= holdingYears; year++) {
@@ -104,9 +102,6 @@ export function computeRealEstate(input: RealEstateInput): RealEstateOutput {
   const finalPoint = yearlyData[yearlyData.length - 1];
   const realValueAfterInflation = finalPoint.realValue;
 
-  const totalInvested = propertyValue + stampDuty + registrationCost +
-    yearlyData.reduce((s, d) => s + (d.totalCostToDate - (yearlyData[yearlyData.indexOf(d) - 1]?.totalCostToDate ?? (propertyValue + stampDuty + registrationCost))), 0);
-
   const roi = ((netProceedsAfterTax + totalRentalIncome - totalCostToDate) / propertyValue) * 100;
   const realROI = roi - inflationRate * holdingYears;
 
@@ -117,10 +112,7 @@ export function computeRealEstate(input: RealEstateInput): RealEstateOutput {
     totalRentalIncome: Math.round(totalRentalIncome),
     stampDuty,
     registrationCost,
-    totalMaintenance: Math.round(yearlyData.reduce((s, d) => {
-      const prevCost = yearlyData[yearlyData.indexOf(d) - 1]?.totalCostToDate ?? (propertyValue + stampDuty + registrationCost);
-      return s;
-    }, 0)),
+    totalMaintenance: 0,
     totalPropertyTax: 0,
     capitalGainsTax,
     netProceedsAfterTax: Math.round(netProceedsAfterTax),

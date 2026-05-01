@@ -102,13 +102,6 @@ export function SIPCalculator() {
     };
   }, [input, stressConfig]);
 
-  const vizData = useMemo(() => result ? {
-    totalInvested: result.totalInvested,
-    nominalCorpus: result.nominalCorpus,
-    postTaxCorpus: result.postTaxCorpus,
-    realCorpus: result.realCorpus,
-  } : { totalInvested: 0, nominalCorpus: 0, postTaxCorpus: 0, realCorpus: 0 }, [result]);
-
   if (!result) return null;
 
   return (
@@ -123,7 +116,6 @@ export function SIPCalculator() {
       </div>
       <div className="lg:w-[62%] min-h-0">
         <ResultsPanel
-          vizData={vizData}
           totalInvested={result.totalInvested}
           nominalCorpus={result.nominalCorpus}
           postTaxCorpus={result.postTaxCorpus}

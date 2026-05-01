@@ -1,6 +1,6 @@
 "use client";
 
-import { Area, AreaChart, ComposedChart, Line, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
+import { Area, ComposedChart, Line, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import type { YearlyAccumulationPoint } from "@/lib/calculators/accumulator/types";
 import { formatINRShort } from "@/lib/format";
 

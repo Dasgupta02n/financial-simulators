@@ -13,10 +13,7 @@ export function computeFD(input: FDInput): FDOutput {
     grossValue = grossValue * Math.pow(1 + ratePerPeriod, compoundingFreq);
     const grossInterest = grossValue - principal;
 
-    // Post-tax: tax on interest earned this year
-    const interestThisYear = grossValue - (yearlyData.length > 0 ? yearlyData[yearlyData.length - 1].grossValue : principal);
-    const postTaxInterestThisYear = interestThisYear * (1 - taxRate);
-
+    // Post-tax: compute value after taxing interest each year
     let postTaxValue = principal;
     for (let y = 1; y <= year; y++) {
       const prevPTValue = y === 1 ? principal : yearlyData[y - 2].postTaxValue;
@@ -25,7 +22,6 @@ export function computeFD(input: FDInput): FDOutput {
     }
 
     const realValue = postTaxValue / Math.pow(1 + inflationRate / 100, year);
-    const postTaxYield = year === 0 ? 0 : ((postTaxValue / principal) ** (1 / year) - 1) * 100;
     const realYield = year === 0 ? 0 : (((postTaxValue / principal) ** (1 / year) - 1) * 100) - inflationRate;
 
     yearlyData.push({

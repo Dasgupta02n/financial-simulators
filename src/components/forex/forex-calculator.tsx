@@ -15,7 +15,7 @@ import { ShareBar } from "@/components/shared/share-bar";
 import { DownloadReportButton } from "@/components/shared/download-report-button";
 import { SliderRow } from "@/components/shared/slider-row";
 import type { TruthResult } from "@/lib/truth/types";
-import { FY_YEAR, INFLATION_RATE, LAST_UPDATED } from "@/lib/truth/assumptions";
+import { FY_YEAR, LAST_UPDATED } from "@/lib/truth/assumptions";
 
 const CURRENCY_OPTIONS = Object.keys(CURRENCY_NAMES);
 

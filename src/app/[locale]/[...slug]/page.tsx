@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
-import { routing } from "@/i18n/routing";
+import { routing, type Locale } from "@/i18n/routing";
 import { calculatorRegistry } from "@/lib/calculator-registry";
 import { generateCalculatorMetadata } from "@/lib/seo";
 import { CalculatorPageShell } from "@/components/shared/calculator-page-shell";
@@ -99,7 +99,7 @@ export default async function LocaleSlugPage({
 }) {
   const { locale, slug } = await params;
 
-  if (!routing.locales.includes(locale as any)) {
+  if (!routing.locales.includes(locale as Locale)) {
     notFound();
   }
 

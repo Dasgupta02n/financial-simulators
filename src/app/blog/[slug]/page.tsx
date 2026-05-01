@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { MDXRemote } from "next-mdx-remote/rsc";
+import Link from "next/link";
 import { getAllPosts, getPostBySlug } from "@/lib/blog";
 import { BLOG_CATEGORIES } from "@/lib/blog-categories";
 import { CalculatorCard as CalculatorCardEmbed } from "@/components/blog/calculator-card-embed";
@@ -85,12 +86,12 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     <>
       <ArticleJsonLd post={post} />
       <main className="flex-1 w-full max-w-3xl mx-auto px-4 pt-8 pb-12">
-        <a
+        <Link
           href="/blog"
           className="text-sm text-text-secondary hover:text-gain transition-colors font-mono"
         >
           &larr; Back to blog
-        </a>
+        </Link>
 
         <article className="mt-6">
           <header className="mb-8">

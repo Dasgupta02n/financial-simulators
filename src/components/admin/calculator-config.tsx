@@ -34,7 +34,6 @@ export function CalculatorConfig() {
         setLoading(false);
       }
     }
-    setLoading(true);
     loadConfig();
   }, [activeCalc]);
 
