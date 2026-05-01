@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Playfair_Display } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
-import { getLocale, getMessages, setRequestLocale } from "next-intl/server";
+import { getMessages, setRequestLocale } from "next-intl/server";
 import { generateSiteJsonLd } from "@/lib/seo";
 import { SiteNav } from "@/components/shared/site-nav";
 import { PageTransition } from "@/components/shared/page-transition";
@@ -54,14 +54,13 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const locale = await getLocale();
-  setRequestLocale(locale);
+  setRequestLocale("en");
   const messages = await getMessages();
   const siteSchemas = generateSiteJsonLd();
 
   return (
     <html
-      lang={locale}
+      lang="en"
       className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} h-full antialiased`}
     >
       <head>
@@ -76,7 +75,7 @@ export default async function RootLayout({
       <body className="min-h-full flex flex-col bg-ink text-text-primary">
         <NoSaveGuard />
         <AuthProvider>
-          <NextIntlClientProvider messages={messages} locale={locale}>
+          <NextIntlClientProvider messages={messages} locale="en">
             <SiteNav />
             <PageTransition>{children}</PageTransition>
           </NextIntlClientProvider>
