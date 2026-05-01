@@ -6,6 +6,7 @@ import { useTranslations } from "next-intl";
 import { useIsMounted } from "@/lib/hooks/use-is-mounted";
 
 interface CalcCardProps {
+  id: string;
   name: string;
   slug: string;
   description: string;
