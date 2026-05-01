@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import type { Metadata } from "next";
+import { setRequestLocale } from "next-intl/server";
 import { routing, type Locale } from "@/i18n/routing";
 import { calculatorRegistry } from "@/lib/calculator-registry";
 import { generateCalculatorMetadata } from "@/lib/seo";
@@ -98,6 +99,7 @@ export default async function LocaleSlugPage({
   params: Promise<{ locale: string; slug: string[] }>;
 }) {
   const { locale, slug } = await params;
+  setRequestLocale(locale);
 
   if (!routing.locales.includes(locale as Locale)) {
     notFound();

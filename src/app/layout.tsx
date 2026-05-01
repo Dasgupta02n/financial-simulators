@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Playfair_Display } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
-import { getLocale, getMessages } from "next-intl/server";
+import { getLocale, getMessages, setRequestLocale } from "next-intl/server";
 import { generateSiteJsonLd } from "@/lib/seo";
 import { SiteNav } from "@/components/shared/site-nav";
 import { PageTransition } from "@/components/shared/page-transition";
@@ -55,6 +55,7 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const locale = await getLocale();
+  setRequestLocale(locale);
   const messages = await getMessages();
   const siteSchemas = generateSiteJsonLd();
 

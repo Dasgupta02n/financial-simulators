@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { setRequestLocale } from "next-intl/server";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import Link from "next/link";
 import { getAllPosts, getPostBySlug } from "@/lib/blog";
@@ -8,13 +9,14 @@ import { CalculatorCard as CalculatorCardEmbed } from "@/components/blog/calcula
 import { ShareBar } from "@/components/shared/share-bar";
 
 interface LocaleBlogPostPageProps {
-  params: Promise<{ slug: string }>;
+  params: Promise<{ locale: string; slug: string }>;
 }
 
 export async function generateMetadata({
   params,
 }: LocaleBlogPostPageProps): Promise<Metadata> {
-  const { slug } = await params;
+  const { locale, slug } = await params;
+  setRequestLocale(locale);
   const post = getPostBySlug(slug);
 
   if (!post) return { title: "Post Not Found" };
@@ -72,7 +74,8 @@ function ArticleJsonLd({ post }: { post: NonNullable<ReturnType<typeof getPostBy
 }
 
 export default async function LocaleBlogPostPage({ params }: LocaleBlogPostPageProps) {
-  const { slug } = await params;
+  const { locale, slug } = await params;
+  setRequestLocale(locale);
   const post = getPostBySlug(slug);
 
   if (!post || post.status !== "published") {

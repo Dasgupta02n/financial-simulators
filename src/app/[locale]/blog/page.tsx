@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
+import { setRequestLocale } from "next-intl/server";
+import { routing } from "@/i18n/routing";
 import { getAllPosts } from "@/lib/blog";
 import type { BlogCategory } from "@/lib/blog-categories";
 import { BlogCard } from "@/components/blog/blog-card";
@@ -18,11 +20,19 @@ export const metadata: Metadata = {
   },
 };
 
+export function generateStaticParams() {
+  return routing.locales.map((locale) => ({ locale }));
+}
+
 export default async function LocaleBlogPage({
+  params,
   searchParams,
 }: {
+  params: Promise<{ locale: string }>;
   searchParams: Promise<{ category?: string }>;
 }) {
+  const { locale } = await params;
+  setRequestLocale(locale);
   const { category } = await searchParams;
   const allPosts = getAllPosts();
   const filtered = category && category !== "all"

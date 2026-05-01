@@ -1,11 +1,16 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { setRequestLocale } from "next-intl/server";
 import { routing, type Locale } from "@/i18n/routing";
 
 export const metadata: Metadata = {
   title: "c7xai — The Truth About Your Money",
   description: "Old rules of money are broken. Here are the real ones. Inflation-adjusted, tax-aware financial clarity for India.",
 };
+
+export function generateStaticParams() {
+  return routing.locales.map((locale) => ({ locale }));
+}
 
 export default async function LocaleLayout({
   children,
@@ -19,6 +24,8 @@ export default async function LocaleLayout({
   if (!routing.locales.includes(locale as Locale)) {
     notFound();
   }
+
+  setRequestLocale(locale);
 
   return <>{children}</>;
 }
