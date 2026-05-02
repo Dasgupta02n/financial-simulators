@@ -6,7 +6,6 @@ import { addBrandHeader, addLink, autoWidth } from "../utils";
 function sipTemplate(ws: Worksheet, name: string): void {
   // Brand header
   addBrandHeader(ws, name);
-  ws.mergeCells("A1:D1");
 
   // Link to online version
   addLink(ws, 2, 1, `Open online →`, "https://c7xai.in/sip-simulator");

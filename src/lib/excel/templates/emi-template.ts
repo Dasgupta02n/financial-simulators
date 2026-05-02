@@ -5,7 +5,6 @@ import { addBrandHeader, addLink } from "../utils";
 
 function emiTemplate(ws: Worksheet, name: string): void {
   addBrandHeader(ws, name);
-  ws.mergeCells("A1:D1");
   addLink(ws, 2, 1, "Open online →", "https://c7xai.in/emi-analyzer");
 
   const inputStart = 4;
