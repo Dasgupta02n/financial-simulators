@@ -1,0 +1,25 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Lead {
+  id           String   @id @default(cuid())
+  firstName    String
+  surname      String
+  email        String
+  city         String?
+  country      String?
+  calculatorId String
+  locale       String   @default("en")
+  eulaAccepted Boolean  @default(false)
+  createdAt    DateTime @default(now())
+
+  @@index([email])
+  @@index([email, calculatorId])
+  @@index([calculatorId, createdAt])
+}

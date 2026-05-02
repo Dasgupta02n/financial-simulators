@@ -59,8 +59,11 @@
     "heroHighlight": "3.8%",
     "heroSubtitle": "તેનું કારણ અહીં છે.",
     "heroBody": "મ્યુચ્યુઅલ ફંડ તમને 12% બતાવે છે. ફુગાવો (6%) અને LTCG ટૅક્સ (₹1.25L ઉપર 12.5%) પછી, તમારી પાસે 3.8% વધે છે. અહીંનો દરેક કૅલ્ક્યુલેટર સાચો આંકડો બતાવે છે.",
-    "heroCta": "SIP સત્ય વાપરો",
-    "heroCtaAll": "બધા કૅલ્ક્યુલેટર",
+    "heroCta": "તમારા સાચા SIP રિટર્નની ગણતરી કરો",
+    "heroCtaMicro": "ફુગાવો અને ટૅક્સ પછી રિટર્ન 30 સેકન્ડમાં જુઓ",
+    "heroCtaAll": "કૅલ્ક્યુલેટર જુઓ",
+    "heroCtaAllMicro": "ટૅક્સ પછી રિટર્ન અંદાજ",
+    "heroClarifier": "ફુગાવો અને ટૅક્સ પછી સાચો રિટર્ન — સેકન્ડોમાં તમારો ટૅક્સ-પછી SIP જુઓ",
     "statRealSip": "સાચો SIP રિટર્ન",
     "statAdvertised": "જાહેરાતમાં",
     "statPostTaxFd": "ટૅક્સ પછીનું FD વળતર",
@@ -173,5 +176,23 @@
     "greenArea": "લીલો વિસ્તાર",
     "redDashedLine": "લાલ વિખંડિત રેખા",
     "inflationGap": "લીલા અને લાલ રેખા વચ્ચેનો તફાવત એ છે જે ફુગાવો મૂંગે ચોરી જાય છે."
+  },
+  "excel": {
+    "ribbonTitle": "ઑફલાઇન વાપરવા માટે સંપૂર્ણ કાર્યકર ટેમ્પલેટ",
+    "ribbonCta": "Excel ડાઉનલોડ કરો",
+    "modalTitle": "તમારું Excel ટેમ્પલેટ મેળવો",
+    "modalSubtitle": "લાઇવ ફોર્મ્યુલા સાથે ઑફલાઇન કામ કરે છે — ડાઉનલોડ પછી ઇન્ટરનેટ જોઈએ નહીં",
+    "fieldFirstName": "પ્રથમ નામ",
+    "fieldSurname": "અટક",
+    "fieldEmail": "Email",
+    "fieldCity": "શહેર",
+    "fieldCountry": "દેશ",
+    "eulaLabel": "હું સ્વીકારું છું",
+    "eulaLink": "End User License Agreement",
+    "submitCta": "Excel ટેમ્પલેટ મોકલો",
+    "sending": "મોકલી રહ્યા છીએ...",
+    "successMessage": "Excel ટેમ્પલેટ તમારા email પર મોકલી દીધું!",
+    "errorMessage": "કંઈક ખોટું થયું. ફરી પ્રયાસ કરો.",
+    "close": "બંધ કરો"
   }
 }

@@ -1,6 +1,7 @@
 import { Link } from "@/i18n/navigation";
 import type { CalculatorConfig } from "@/lib/seo";
 import { generateCalculatorJsonLd } from "@/lib/seo";
+import { ExcelDownloadRibbon } from "./excel-download-ribbon";
 
 const SITE_URL = "https://c7xai.in";
 
@@ -31,21 +32,21 @@ export function CalculatorPageShell({ config, children }: Props) {
     ],
   };
 
+  // JSON-LD content is server-generated from static config files — not user input
+  const jsonLdHtml = (obj: object) => ({ __html: JSON.stringify(obj) });
+
   return (
     <>
       {schemas.map((schema, i) => (
         <script
           key={i}
           type="application/ld+json"
-          // Content is server-generated from our own config files — not user input.
-          // This is the standard Next.js pattern for injecting structured data.
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }}
+          dangerouslySetInnerHTML={jsonLdHtml(schema)}
         />
       ))}
       <script
         type="application/ld+json"
-        // Server-generated breadcrumb from config — not user input.
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+        dangerouslySetInnerHTML={jsonLdHtml(breadcrumbSchema)}
       />
       <main className="flex-1 flex flex-col h-[calc(100vh-3.5rem)] overflow-hidden">
         <div className="w-full max-w-7xl mx-auto px-4 pt-1 shrink-0">
@@ -57,10 +58,11 @@ export function CalculatorPageShell({ config, children }: Props) {
             <span className="text-text-primary">{config.name}</span>
           </nav>
         </div>
-        <div className="w-full max-w-7xl mx-auto px-4 py-2 flex-1 min-h-0 overflow-auto">
+        <div className="w-full max-w-7xl mx-auto px-4 py-2 flex-1 min-h-0 overflow-auto pb-12">
           {children}
         </div>
       </main>
+      <ExcelDownloadRibbon calculatorId={config.id} />
     </>
   );
 }

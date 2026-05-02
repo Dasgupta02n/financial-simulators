@@ -59,8 +59,11 @@
     "heroHighlight": "3.8%",
     "heroSubtitle": "এর কারণ এখানে।",
     "heroBody": "মিউচুয়াল ফান্ড আপনাকে 12% দেখায়। মুদ্রাস্ফীতি (6%) এবং LTCG কর (₹1.25L এর উপরে 12.5%) কাটার পর আপনার থাকে 3.8%। এখানকার প্রতিটি ক্যালকুলেটর আসল সংখ্যাটি দেখায়।",
-    "heroCta": "SIP সত্য দেখুন",
-    "heroCtaAll": "সব ক্যালকুলেটর",
+    "heroCta": "আপনার প্রকৃত SIP রিটার্ন গণনা করুন",
+    "heroCtaMicro": "মুদ্রাস্ফীতি ও কর পরবর্তী রিটার্ন ৩০ সেকেন্ডে দেখুন",
+    "heroCtaAll": "ক্যালকুলেটর দেখুন",
+    "heroCtaAllMicro": "কর-পরবর্তী রিটার্ন অনুমান",
+    "heroClarifier": "মুদ্রাস্ফীতি ও কর পরবর্তী প্রকৃত রিটার্ন — সেকেন্ডে আপনার কর-পরবর্তী SIP দেখুন",
     "statRealSip": "প্রকৃত SIP রিটার্ন",
     "statAdvertised": "বিজ্ঞাপিত",
     "statPostTaxFd": "কর-পরবর্তী FD লাভ",
@@ -173,5 +176,23 @@
     "greenArea": "সবুজ অঞ্চল",
     "redDashedLine": "লাল ড্যাশ রেখা",
     "inflationGap": "সবুজ এবং লালের মধ্যে ফারকটি মুদ্রাস্ফীতি নীরবে যা কেড়ে নেয়।"
+  },
+  "excel": {
+    "ribbonTitle": "অফলাইন ব্যবহারের জন্য সম্পূর্ণ কার্যকরী টেমপ্লেট",
+    "ribbonCta": "Excel ডাউনলোড করুন",
+    "modalTitle": "আপনার Excel টেমপ্লেট পান",
+    "modalSubtitle": "লাইভ ফর্মুলা সহ অফলাইনে কাজ করে — ডাউনলোডের পর ইন্টারনেট লাগবে না",
+    "fieldFirstName": "প্রথম নাম",
+    "fieldSurname": "পদবি",
+    "fieldEmail": "Email",
+    "fieldCity": "শহর",
+    "fieldCountry": "দেশ",
+    "eulaLabel": "আমি গ্রহণ করি",
+    "eulaLink": "End User License Agreement",
+    "submitCta": "Excel টেমপ্লেট পাঠান",
+    "sending": "পাঠানো হচ্ছে...",
+    "successMessage": "Excel টেমপ্লেট আপনার email-এ পাঠানো হয়েছে!",
+    "errorMessage": "কিছু সমস্যা হয়েছে। আবার চেষ্টা করুন।",
+    "close": "বন্ধ করুন"
   }
 }

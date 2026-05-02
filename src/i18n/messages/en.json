@@ -59,8 +59,11 @@
     "heroHighlight": "3.8%",
     "heroSubtitle": "Here's why.",
     "heroBody": "Mutual funds show you 12%. After inflation (6%) and LTCG tax (12.5% above ₹1.25L), you keep 3.8%. Every calculator here shows the real number.",
-    "heroCta": "Try SIP Truth",
-    "heroCtaAll": "All Calculators",
+    "heroCta": "Calculate Your Real SIP Returns",
+    "heroCtaMicro": "See after-inflation & tax returns in 30s",
+    "heroCtaAll": "Explore Calculators",
+    "heroCtaAllMicro": "Estimate post-tax returns",
+    "heroClarifier": "Real returns after inflation and tax — see your post-tax SIP in seconds",
     "statRealSip": "Real SIP return",
     "statAdvertised": "advertised",
     "statPostTaxFd": "Post-tax FD yield",
@@ -173,5 +176,23 @@
     "greenArea": "Green area",
     "redDashedLine": "Red dashed line",
     "inflationGap": "The gap between green and red is what inflation silently steals."
+  },
+  "excel": {
+    "ribbonTitle": "Fully Functional Template for Offline Use",
+    "ribbonCta": "Download Excel",
+    "modalTitle": "Get Your Excel Template",
+    "modalSubtitle": "Works offline with live formulas — no internet needed after download",
+    "fieldFirstName": "First Name",
+    "fieldSurname": "Surname",
+    "fieldEmail": "Email",
+    "fieldCity": "City",
+    "fieldCountry": "Country",
+    "eulaLabel": "I accept the",
+    "eulaLink": "End User License Agreement",
+    "submitCta": "Send Excel Template",
+    "sending": "Sending...",
+    "successMessage": "Excel template sent to your email!",
+    "errorMessage": "Something went wrong. Please try again.",
+    "close": "Close"
   }
 }

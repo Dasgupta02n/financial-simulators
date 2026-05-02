@@ -59,8 +59,11 @@
     "heroHighlight": "3.8%",
     "heroSubtitle": "ਇਸ ਦਾ ਕਾਰਨ ਇੱਥੇ ਹੈ।",
     "heroBody": "ਮਿਊਚੂਅਲ ਫੰਡ ਤੁਹਾਨੂੰ 12% ਦਿਖਾਉਂਦੇ ਹਨ। ਮਹਿੰਗਾਈ (6%) ਅਤੇ LTCG ਟੈਕਸ (₹1.25L ਤੋਂ ਉੱਪਰ 12.5%) ਬਾਅਦ, ਤੁਹਾਡੇ ਕੋਲ 3.8% ਬਚਦੇ ਹਨ। ਇੱਥੇ ਹਰ ਕੈਲਕੁਲੇਟਰ ਅਸਲੀ ਅੰਕ ਦਿਖਾਉਂਦਾ ਹੈ।",
-    "heroCta": "SIP ਸੱਚ ਵਰਤੋ",
-    "heroCtaAll": "ਸਾਰੇ ਕੈਲਕੁਲੇਟਰ",
+    "heroCta": "ਆਪਣੇ ਅਸਲੀ SIP ਰਿਟਰਨ ਦੀ ਗਣਨਾ ਕਰੋ",
+    "heroCtaMicro": "ਮਹਿੰਗਾਈ ਅਤੇ ਟੈਕਸ ਬਾਅਦ ਰਿਟਰਨ 30 ਸਕਿੰਟਾਂ ਵਿੱਚ ਦੇਖੋ",
+    "heroCtaAll": "ਕੈਲਕੁਲੇਟਰ ਦੇਖੋ",
+    "heroCtaAllMicro": "ਟੈਕਸ ਬਾਅਦ ਰਿਟਰਨ ਦਾ ਅੰਦਾਜ਼ਾ",
+    "heroClarifier": "ਮਹਿੰਗਾਈ ਅਤੇ ਟੈਕਸ ਬਾਅਦ ਅਸਲੀ ਰਿਟਰਨ — ਸਕਿੰਟਾਂ ਵਿੱਚ ਆਪਣਾ ਟੈਕਸ-ਬਾਅਦ SIP ਦੇਖੋ",
     "statRealSip": "ਅਸਲੀ SIP ਰਿਟਰਨ",
     "statAdvertised": "ਇਸ਼ਤਿਹਾਰ ਵਿੱਚ",
     "statPostTaxFd": "ਟੈਕਸ ਬਾਅਦ FD ਪ੍ਰਾਪਤੀ",
@@ -173,5 +176,23 @@
     "greenArea": "ਹਰਾ ਖੇਤਰ",
     "redDashedLine": "ਲਾਲ ਟੁੱਟੀ ਰੇਖਾ",
     "inflationGap": "ਹਰੇ ਅਤੇ ਲਾਲ ਰੇਖਾ ਵਿਚਕਾਰ ਦਾ ਅੰਤਰ ਉਹ ਹੈ ਜੋ ਮਹਿੰਗਾਈ ਚੁੱਪ-ਚਾਪ ਚੋਰੀ ਕਰਦੀ ਹੈ।"
+  },
+  "excel": {
+    "ribbonTitle": "ਆਫਲਾਈਨ ਵਰਤੋਂ ਲਈ ਪੂਰੀ ਤਰ੍ਹਾਂ ਕੰਮ ਕਰਨ ਵਾਲਾ ਟੈਮਪਲੇਟ",
+    "ribbonCta": "Excel ਡਾਊਨਲੋਡ ਕਰੋ",
+    "modalTitle": "ਆਪਣਾ Excel ਟੈਮਪਲੇਟ ਲਓ",
+    "modalSubtitle": "ਲਾਈਵ ਫਾਰਮੂਲੇ ਨਾਲ ਆਫਲਾਈਨ ਕੰਮ ਕਰਦਾ ਹੈ — ਡਾਊਨਲੋਡ ਤੋਂ ਬਾਅਦ ਇੰਟਰਨੈੱਟ ਦੀ ਲੋੜ ਨਹੀਂ",
+    "fieldFirstName": "ਪਹਿਲਾ ਨਾਮ",
+    "fieldSurname": "ਗੋਤ",
+    "fieldEmail": "Email",
+    "fieldCity": "ਸ਼ਹਿਰ",
+    "fieldCountry": "ਦੇਸ਼",
+    "eulaLabel": "ਮੈਂ ਸਵੀਕਾਰ ਕਰਦਾ/ਕਰਦੀ ਹਾਂ",
+    "eulaLink": "End User License Agreement",
+    "submitCta": "Excel ਟੈਮਪਲੇਟ ਭੇਜੋ",
+    "sending": "ਭੇਜ ਰਹੇ ਹਾਂ...",
+    "successMessage": "Excel ਟੈਮਪਲੇਟ ਤੁਹਾਡੇ email 'ਤੇ ਭੇਜ ਦਿੱਤਾ!",
+    "errorMessage": "ਕੁਝ ਗਲਤ ਹੋ ਗਿਆ। ਦੁਬਾਰਾ ਕੋਸ਼ਿਸ਼ ਕਰੋ।",
+    "close": "ਬੰਦ ਕਰੋ"
   }
 }

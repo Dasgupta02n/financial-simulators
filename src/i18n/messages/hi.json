@@ -59,8 +59,11 @@
     "heroHighlight": "3.8%",
     "heroSubtitle": "यहाँ बताते हैं क्यों।",
     "heroBody": "म्यूचुअल फंड आपको 12% दिखाते हैं। महंगाई (6%) और LTCG टैक्स (₹1.25L से ऊपर 12.5%) के बाद, आप रख पाते हैं 3.8%। यहाँ हर कैलकुलेटर असली अंक दिखाता है।",
-    "heroCta": "SIP सच्चाई देखें",
-    "heroCtaAll": "सभी कैलकुलेटर",
+    "heroCta": "अपने वास्तविक SIP रिटर्न की गणना करें",
+    "heroCtaMicro": "मुद्रास्फीति और कर के बाद रिटर्न 30 सेकंड में देखें",
+    "heroCtaAll": "कैलकुलेटर देखें",
+    "heroCtaAllMicro": "कर-पश्चात रिटर्न का अनुमान लगाएं",
+    "heroClarifier": "मुद्रास्फीति और कर के बाद वास्तविक रिटर्न — सेकंडों में अपना पोस्ट-टैक्स SIP देखें",
     "statRealSip": "वास्तविक SIP रिटर्न",
     "statAdvertised": "दिखाया गया",
     "statPostTaxFd": "कर-पश्चात FD प्रतिफल",
@@ -173,5 +176,23 @@
     "greenArea": "हरा क्षेत्र",
     "redDashedLine": "लाल डैश लाइन",
     "inflationGap": "हरे और लाल के बीच का अंतर वह है जो महंगाई चुपके से चुराती है।"
+  },
+  "excel": {
+    "ribbonTitle": "ऑफलाइन उपयोग के लिए पूरी तरह काम करने वाला टेम्पलेट",
+    "ribbonCta": "Excel डाउनलोड करें",
+    "modalTitle": "अपना Excel टेम्पलेट प्राप्त करें",
+    "modalSubtitle": "लाइव फॉर्मूले के साथ ऑफलाइन काम करता है — डाउनलोड के बाद इंटरनेट की ज़रूरत नहीं",
+    "fieldFirstName": "पहला नाम",
+    "fieldSurname": "उपनाम",
+    "fieldEmail": "Email",
+    "fieldCity": "शहर",
+    "fieldCountry": "देश",
+    "eulaLabel": "मैं स्वीकार करता/करती हूँ",
+    "eulaLink": "End User License Agreement",
+    "submitCta": "Excel टेम्पलेट भेजें",
+    "sending": "भेज रहे हैं...",
+    "successMessage": "Excel टेम्पलेट आपके email पर भेज दिया गया!",
+    "errorMessage": "कुछ गड़बड़ हो गई। कृपया दोबारा प्रयास करें।",
+    "close": "बंद करें"
   }
 }
