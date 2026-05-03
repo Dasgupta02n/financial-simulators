@@ -91,7 +91,7 @@ export async function POST(req: NextRequest) {
       locale,
     });
 
-    const fileName = `c7xai-${calculatorId}-template.xlsm`;
+    const fileName = `c7xai-${calculatorId}-template.xlsx`;
 
     // Send email with attachment
     const sendgridKey = process.env.SENDGRID_API_KEY;

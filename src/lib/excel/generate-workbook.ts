@@ -2,7 +2,6 @@ import ExcelJS from "exceljs";
 import { createAboutSheet } from "./sheets/about-sheet";
 import { createRegistrationSheet } from "./sheets/registration-sheet";
 import { getTemplate } from "./templates/registry";
-import { injectVba } from "./vba-inject";
 
 export interface GenerateWorkbookOptions {
   calculatorId: string;
@@ -13,14 +12,12 @@ export interface GenerateWorkbookOptions {
 }
 
 /**
- * Generate a complete .xlsm workbook for a calculator.
+ * Generate a complete .xlsx workbook for a calculator.
  *
  * Creates 3 sheets:
  * 1. Calculator — formula-driven template matching the web calculator
- * 2. Registration — user info + registration status + VBA macro button
+ * 2. Registration — user info + registration status
  * 3. About c7xai — links, branding, disclaimer
- *
- * Then injects VBA macro structure to convert .xlsx → .xlsm
  */
 export async function generateWorkbook(
   opts: GenerateWorkbookOptions
@@ -70,8 +67,5 @@ export async function generateWorkbook(
   // Generate .xlsx buffer
   const xlsxBuffer = await workbook.xlsx.writeBuffer();
 
-  // Inject VBA to convert .xlsx → .xlsm
-  const xlsmBuffer = await injectVba(Buffer.from(xlsxBuffer));
-
-  return xlsmBuffer;
+  return Buffer.from(xlsxBuffer);
 }

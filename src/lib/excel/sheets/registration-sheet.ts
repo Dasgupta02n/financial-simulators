@@ -70,7 +70,7 @@ export function createRegistrationSheet(
   eulaCell.value = "By using this template, you accept the EULA at https://c7xai.in/eula";
   eulaCell.font = { name: "Calibri", size: 9, color: { argb: BRAND.textSecondary } };
 
-  // Verification URL reference for VBA
+  // Verification URL reference
   row += 2;
   ws.mergeCells(`A${row}:C${row}`);
   const verifyCell = ws.getCell(`A${row}`);

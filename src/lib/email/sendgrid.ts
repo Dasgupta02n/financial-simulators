@@ -27,7 +27,7 @@ export async function sendExcelEmail(opts: SendExcelEmailOptions): Promise<void>
     <table style="width: 100%; font-size: 13px; border-collapse: collapse; margin-bottom: 16px;">
       <tr><td style="padding: 8px 0; border-bottom: 1px solid #eee; color: #888;">File</td><td style="padding: 8px 0; border-bottom: 1px solid #eee; text-align: right; font-weight: 600;">${fileName}</td></tr>
       <tr><td style="padding: 8px 0; border-bottom: 1px solid #eee; color: #888;">Sheets</td><td style="padding: 8px 0; border-bottom: 1px solid #eee; text-align: right;">Calculator · Registration · About</td></tr>
-      <tr><td style="padding: 8px 0; color: #888;">Format</td><td style="padding: 8px 0; text-align: right;">Excel Macro-Enabled (.xlsm)</td></tr>
+      <tr><td style="padding: 8px 0; color: #888;">Format</td><td style="padding: 8px 0; text-align: right;">Excel (.xlsx)</td></tr>
     </table>
     <p style="font-size: 12px; color: #999; margin: 0;">
       For informational purposes only. Verify all numbers at
@@ -45,7 +45,7 @@ export async function sendExcelEmail(opts: SendExcelEmailOptions): Promise<void>
       {
         content: buffer.toString("base64"),
         filename: fileName,
-        type: "application/vnd.ms-excel.sheet.macroEnabled.12",
+        type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
         disposition: "attachment" as const,
       },
     ],
