@@ -3,12 +3,16 @@
 import { useState, useEffect } from "react";
 
 interface Lead {
-  timestamp: string;
-  name: string;
+  id: string;
+  firstName: string;
+  surname: string;
   email: string;
-  provider: string;
-  calculator: string;
+  city: string | null;
+  state: string | null;
+  calculatorId: string;
+  locale: string;
   eulaAccepted: boolean;
+  createdAt: string;
 }
 
 export function LeadsPanel() {
@@ -44,13 +48,16 @@ export function LeadsPanel() {
   function exportCSV() {
     if (leads.length === 0) return;
 
-    const headers = ["Timestamp", "Name", "Email", "Provider", "Calculator", "EULA Accepted"];
+    const headers = ["Date", "First Name", "Surname", "Email", "City", "State", "Calculator", "Locale", "EULA"];
     const rows = leads.map((l) => [
-      l.timestamp,
-      `"${l.name}"`,
+      new Date(l.createdAt).toISOString().slice(0, 10),
+      `"${l.firstName}"`,
+      `"${l.surname}"`,
       l.email,
-      l.provider,
-      `"${l.calculator}"`,
+      l.city ?? "",
+      l.state ?? "",
+      l.calculatorId,
+      l.locale,
       l.eulaAccepted ? "Yes" : "No",
     ]);
 
@@ -100,29 +107,31 @@ export function LeadsPanel() {
                 <th className="px-3 py-2">Date</th>
                 <th className="px-3 py-2">Name</th>
                 <th className="px-3 py-2">Email</th>
-                <th className="px-3 py-2">Source</th>
+                <th className="px-3 py-2">City</th>
+                <th className="px-3 py-2">State</th>
                 <th className="px-3 py-2">Calculator</th>
                 <th className="px-3 py-2">EULA</th>
               </tr>
             </thead>
             <tbody>
-              {[...leads].reverse().map((lead, i) => (
-                <tr key={i} className="border-t border-border hover:bg-surface-hover">
+              {leads.map((lead) => (
+                <tr key={lead.id} className="border-t border-border hover:bg-surface-hover">
                   <td className="px-3 py-2 text-text-secondary whitespace-nowrap">
-                    {new Date(lead.timestamp).toLocaleDateString("en-IN", {
+                    {new Date(lead.createdAt).toLocaleDateString("en-IN", {
                       day: "2-digit",
                       month: "short",
                       year: "numeric",
                     })}
                   </td>
-                  <td className="px-3 py-2 text-text-primary">{lead.name}</td>
+                  <td className="px-3 py-2 text-text-primary">{lead.firstName} {lead.surname}</td>
                   <td className="px-3 py-2 text-text-primary">{lead.email}</td>
+                  <td className="px-3 py-2 text-text-secondary">{lead.city ?? "—"}</td>
+                  <td className="px-3 py-2 text-text-secondary">{lead.state ?? "—"}</td>
                   <td className="px-3 py-2">
                     <span className="px-1.5 py-0.5 rounded text-[10px] uppercase tracking-wider bg-surface text-text-secondary">
-                      {lead.provider}
+                      {lead.calculatorId}
                     </span>
                   </td>
-                  <td className="px-3 py-2 text-text-primary">{lead.calculator}</td>
                   <td className="px-3 py-2">{lead.eulaAccepted ? "✓" : "✗"}</td>
                 </tr>
               ))}
