@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { headers } from "next/headers";
 import { setRequestLocale } from "next-intl/server";
 import { MDXRemote } from "next-mdx-remote/rsc";
 import Link from "next/link";
@@ -77,6 +78,10 @@ export default async function LocaleBlogPostPage({ params }: LocaleBlogPostPageP
   const { locale, slug } = await params;
   setRequestLocale(locale);
   const post = getPostBySlug(slug);
+  const reqHeaders = await headers();
+  const host = reqHeaders.get("host") || "c7xai.in";
+  const protocol = reqHeaders.get("x-forwarded-proto") || "https";
+  const shareUrl = `${protocol}://${host}${locale === "en" ? "" : `/${locale}`}/blog/${slug}`;
 
   if (!post || post.status !== "published") {
     notFound();
@@ -148,7 +153,7 @@ export default async function LocaleBlogPostPage({ params }: LocaleBlogPostPageP
 
         <div className="flex items-center gap-2 mt-6">
           <span className="text-xs text-text-muted font-mono">Share:</span>
-          <ShareBar title={post.title + " — c7xai"} />
+          <ShareBar title={post.title + " — c7xai"} url={shareUrl} />
         </div>
       </main>
     </>

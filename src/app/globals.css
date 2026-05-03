@@ -310,8 +310,14 @@ input[type="range"]:focus-visible::-moz-range-thumb {
   100% { transform: scale(1.4); opacity: 0; }
 }
 
-.animate-float { animation: float 3s ease-in-out infinite; }
-.animate-pulse-ring { animation: pulse-ring 1.5s ease-out infinite; }
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+  will-change: transform;
+}
+.animate-pulse-ring {
+  animation: pulse-ring 1.5s ease-out infinite;
+  will-change: transform, opacity;
+}
 
 /* SVG visualization transitions */
 svg rect,
@@ -322,6 +328,7 @@ svg line {
   transition-property: x, y, width, height, stroke-dasharray, transform, opacity;
   transition-duration: 0.5s;
   transition-timing-function: ease-out;
+  will-change: transform, opacity;
 }
 
 /* Metric card hover */

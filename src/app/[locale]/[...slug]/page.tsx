@@ -6,13 +6,13 @@ import { calculatorRegistry } from "@/lib/calculator-registry";
 import { generateCalculatorMetadata } from "@/lib/seo";
 import { CalculatorPageShell } from "@/components/shared/calculator-page-shell";
 
-// Non-calculator page components (lazy-ish imports to keep bundle reasonable)
-import MethodologyPage from "../../methodology/page";
-import ComparePage from "../../compare/page";
-import TruthIndexPage from "../../truth-index/page";
-import EulaPage from "../../eula/page";
-import PrivacyPage from "../../privacy/page";
-import TermsPage from "../../terms/page";
+// Non-calculator page components
+import MethodologyPage from "@/components/pages/methodology";
+import ComparePage from "@/components/pages/compare";
+import TruthIndexPage from "@/components/pages/truth-index";
+import EulaPage from "@/components/pages/eula";
+import PrivacyPage from "@/components/pages/privacy";
+import TermsPage from "@/components/pages/terms";
 
 // Non-calculator page metadata
 const NON_CALC_META: Record<string, Metadata> = {
@@ -58,12 +58,11 @@ const NON_CALC_PAGES: Record<string, React.ComponentType<any>> = {
 };
 
 export function generateStaticParams() {
-  const locales = routing.locales.filter((l) => l !== routing.defaultLocale);
   const calcSlugs = Object.keys(calculatorRegistry);
   const nonCalcSlugs = Object.keys(NON_CALC_PAGES);
   const allSlugs = [...calcSlugs, ...nonCalcSlugs];
   const params: { locale: string; slug: string[] }[] = [];
-  for (const locale of locales) {
+  for (const locale of routing.locales) {
     for (const slug of allSlugs) {
       params.push({ locale, slug: [slug] });
     }

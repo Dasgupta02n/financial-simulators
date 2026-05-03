@@ -2,6 +2,7 @@
 
 interface Props {
   title: string;
+  url?: string;
   className?: string;
 }
 
@@ -58,8 +59,8 @@ const SHARE_PLATFORMS = [
   },
 ] as const;
 
-export function ShareBar({ title, className = "" }: Props) {
-  const url = typeof window !== "undefined" ? window.location.href : "";
+export function ShareBar({ title, url: urlProp, className = "" }: Props) {
+  const url = urlProp || (typeof window !== "undefined" ? window.location.href : "");
   const text = `${title} — Calculate your real returns at c7xai.in`;
 
   return (

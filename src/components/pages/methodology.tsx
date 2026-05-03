@@ -1,17 +1,5 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { ShareBar } from "@/components/shared/share-bar";
-
-export const metadata: Metadata = {
-  title: "Methodology — How c7xai Calculates Truth | c7xai",
-  description: "Our formulas, data sources, and assumptions. Every number on c7xai is transparent, verifiable, and runs entirely in your browser.",
-  openGraph: {
-    title: "Methodology — How c7xai Calculates Truth",
-    description: "Our formulas, data sources, and assumptions. Every number on c7xai is transparent, verifiable, and runs entirely in your browser.",
-    url: "https://c7xai.in/methodology",
-  },
-  alternates: { canonical: "/methodology" },
-};
 
 const ASSUMPTIONS = [
   { label: "Inflation Rate", value: "6%", source: "RBI 10-year average (2014–2024)" },

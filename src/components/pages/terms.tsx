@@ -1,11 +1,3 @@
-import { Metadata } from "next";
-
-export const metadata: Metadata = {
-  title: "Terms of Service — c7xai",
-  description: "Terms of Service for c7xai financial calculators.",
-  alternates: { canonical: "/terms" },
-};
-
 export default function TermsPage() {
   return (
     <main className="flex-1 max-w-3xl mx-auto px-6 py-16">

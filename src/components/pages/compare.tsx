@@ -1,17 +1,5 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { ShareBar } from "@/components/shared/share-bar";
-
-export const metadata: Metadata = {
-  title: "Compare Returns — SIP vs FD vs PPF vs Gold vs Real Estate | c7xai",
-  description: "Side-by-side comparison of ₹10,000/month across SIP, FD, PPF, Gold, and Real Estate. Real returns after inflation and tax.",
-  openGraph: {
-    title: "Compare Returns — SIP vs FD vs PPF vs Gold vs Real Estate",
-    description: "Side-by-side comparison showing real returns after inflation and tax.",
-    url: "https://c7xai.in/compare",
-  },
-  alternates: { canonical: "/compare" },
-};
 
 const ASSUMPTIONS = {
   monthly: 10000,

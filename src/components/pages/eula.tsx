@@ -1,12 +1,4 @@
-import { Metadata } from "next";
-
-export const metadata: Metadata = {
-  title: "End User License Agreement — c7xai",
-  description: "End User License Agreement for c7xai financial calculators.",
-  alternates: { canonical: "/eula" },
-};
-
-export default function EULAPage() {
+export default function EulaPage() {
   return (
     <main className="flex-1 max-w-3xl mx-auto px-6 py-16">
       <h1 className="text-3xl font-bold font-serif-display text-text-primary mb-2">End User License Agreement</h1>

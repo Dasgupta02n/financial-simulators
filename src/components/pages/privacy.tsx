@@ -1,11 +1,3 @@
-import { Metadata } from "next";
-
-export const metadata: Metadata = {
-  title: "Privacy Policy — c7xai",
-  description: "Privacy policy for c7xai financial calculators. No PII collected, all computation client-side.",
-  alternates: { canonical: "/privacy" },
-};
-
 export default function PrivacyPage() {
   return (
     <main className="flex-1 max-w-3xl mx-auto px-6 py-16">

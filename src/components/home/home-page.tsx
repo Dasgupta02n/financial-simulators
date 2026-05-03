@@ -5,6 +5,7 @@ import { CalcCard } from "@/components/home/calc-card";
 import { BlogCategoryThumb } from "@/components/home/blog-category-thumb";
 import { HeroIllustration } from "@/components/home/hero-illustration";
 import { InflationIllustration, TaxIllustration, NoProductIllustration } from "@/components/home/method-illustrations";
+import { StickyMobileCta } from "@/components/home/sticky-mobile-cta";
 import { useTranslations } from "next-intl";
 
 interface BlogPost {
@@ -85,7 +86,7 @@ export default function HomePage({ posts }: HomePageProps) {
   const tn = useTranslations("nav");
 
   return (
-    <main className="flex-1 flex flex-col">
+    <main className="flex-1 flex flex-col pb-14 lg:pb-0">
       <section className="w-full gradient-hero relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-6 pt-28 pb-24">
           <p className="text-sm font-mono uppercase tracking-[0.25em] text-sienna mb-6">
@@ -95,25 +96,36 @@ export default function HomePage({ posts }: HomePageProps) {
             {t("heroTitle")}{" "}
             <span className="text-sienna">{t("heroHighlight")}</span>.
           </h1>
-          <p className="text-xl md:text-2xl text-white/70 font-serif-display mt-6 max-w-2xl">
+          <p className="text-xl md:text-2xl text-white/85 font-serif-display mt-6 max-w-2xl">
             {t("heroSubtitle")}
           </p>
-          <p className="text-base text-white/50 mt-4 max-w-xl leading-relaxed">
+          <p className="text-sm text-[#bfc8d6] mt-2 font-mono">
+            {t("heroClarifier")}
+          </p>
+          <p className="text-base text-white/85 mt-4 max-w-xl leading-relaxed">
             {t("heroBody")}
           </p>
-          <div className="mt-8 flex items-center gap-4">
-            <Link
-              href="/sip-simulator"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-sienna text-white text-sm font-semibold hover:bg-sienna/90 transition-colors rounded"
-            >
-              {t("heroCta")} &rarr;
-            </Link>
-            <Link
-              href="#calculators"
-              className="inline-flex items-center gap-2 px-6 py-3 border border-white/20 text-white text-sm font-medium hover:border-sienna/50 hover:text-sienna transition-colors rounded"
-            >
-              {t("heroCtaAll")}
-            </Link>
+          <div className="mt-4 flex flex-col sm:flex-row items-start sm:items-center gap-3">
+            <div className="flex flex-col">
+              <Link
+                href="/sip-simulator"
+                aria-label={t("heroCta")}
+                className="inline-flex items-center justify-center gap-2 h-12 px-5 bg-sienna text-white text-[22px] font-semibold hover:bg-sienna/90 transition-colors rounded min-w-[200px]"
+              >
+                {t("heroCta")}
+              </Link>
+              <p className="text-xs text-[#bfc8d6] mt-1.5 text-center">{t("heroCtaMicro")}</p>
+            </div>
+            <div className="flex flex-col">
+              <Link
+                href="#calculators"
+                aria-label={t("heroCtaAll")}
+                className="inline-flex items-center justify-center gap-2 h-12 px-5 bg-navy-light text-white text-base font-semibold hover:bg-navy-light/80 border border-white/10 transition-colors rounded min-w-[160px]"
+              >
+                {t("heroCtaAll")}
+              </Link>
+              <p className="text-xs text-[#bfc8d6] mt-1.5 text-center">{t("heroCtaAllMicro")}</p>
+            </div>
           </div>
         </div>
         <HeroIllustration />
@@ -123,18 +135,18 @@ export default function HomePage({ posts }: HomePageProps) {
         <div className="max-w-7xl mx-auto px-6 py-12 grid md:grid-cols-3 gap-8">
           <div className="truth-reveal text-center">
             <div className="text-4xl font-bold font-serif-display text-sienna">3.8%</div>
-            <div className="text-sm text-white/50 font-mono mt-1">{t("statRealSip")}</div>
-            <div className="text-xs text-white/30 font-mono line-through">12% {t("statAdvertised")}</div>
+            <div className="text-sm text-white/70 font-mono mt-1">{t("statRealSip")}</div>
+            <div className="text-xs text-white/50 font-mono line-through">12% {t("statAdvertised")}</div>
           </div>
           <div className="truth-reveal text-center">
             <div className="text-4xl font-bold font-serif-display text-sienna">5.6%</div>
-            <div className="text-sm text-white/50 font-mono mt-1">{t("statPostTaxFd")}</div>
-            <div className="text-xs text-white/30 font-mono line-through">7% {t("statAdvertised")}</div>
+            <div className="text-sm text-white/70 font-mono mt-1">{t("statPostTaxFd")}</div>
+            <div className="text-xs text-white/50 font-mono line-through">7% {t("statAdvertised")}</div>
           </div>
           <div className="truth-reveal text-center">
             <div className="text-4xl font-bold font-serif-display text-sienna">0%</div>
-            <div className="text-sm text-white/50 font-mono mt-1">{t("statDataCollected")}</div>
-            <div className="text-xs text-white/30 font-mono">{t("statNoSignup")}</div>
+            <div className="text-sm text-white/70 font-mono mt-1">{t("statDataCollected")}</div>
+            <div className="text-xs text-white/50 font-mono">{t("statNoSignup")}</div>
           </div>
         </div>
       </section>
@@ -273,6 +285,7 @@ export default function HomePage({ posts }: HomePageProps) {
             <p className="text-xs text-white/40 mt-3 leading-relaxed">
               {t("footerDescription")}
             </p>
+            <a href="mailto:Hello@C7XAI.IN" className="text-sm text-white/60 hover:text-sienna transition-colors mt-3 inline-block">Hello@C7XAI.IN</a>
           </div>
           <div>
             <h4 className="text-xs uppercase font-mono tracking-[0.15em] text-white/40 mb-4">{t("footerCalculators")}</h4>
@@ -316,6 +329,7 @@ export default function HomePage({ posts }: HomePageProps) {
           </div>
         </div>
       </footer>
+      <StickyMobileCta />
     </main>
   );
 }
