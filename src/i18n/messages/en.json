@@ -186,7 +186,7 @@
     "fieldSurname": "Surname",
     "fieldEmail": "Email",
     "fieldCity": "City",
-    "fieldCountry": "Country",
+    "fieldState": "State",
     "eulaLabel": "I accept the",
     "eulaLink": "End User License Agreement",
     "submitCta": "Send Excel Template",

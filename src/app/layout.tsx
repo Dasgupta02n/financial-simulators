@@ -4,7 +4,6 @@ import { Playfair_Display } from "next/font/google";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, setRequestLocale } from "next-intl/server";
 import { generateSiteJsonLd } from "@/lib/seo";
-import { SiteNav } from "@/components/shared/site-nav";
 import { PageTransition } from "@/components/shared/page-transition";
 import { AuthProvider } from "@/components/shared/auth-provider";
 import { NoSaveGuard } from "@/components/shared/no-save-guard";
@@ -35,16 +34,10 @@ export const metadata: Metadata = {
     "language": "en-IN",
   },
   alternates: {
-    canonical: "/",
+    canonical: "https://c7xai.in/",
     languages: {
-      "en-IN": "/",
-      "hi": "/hi/",
-      "mr": "/mr/",
-      "ta": "/ta/",
-      "te": "/te/",
-      "pa": "/pa/",
-      "gu": "/gu/",
-      "bn": "/bn/",
+      "en-IN": "https://c7xai.in/",
+      "hi": "https://c7xai.in/hi/",
     },
   },
 };
@@ -76,7 +69,6 @@ export default async function RootLayout({
         <NoSaveGuard />
         <AuthProvider>
           <NextIntlClientProvider messages={messages} locale="en">
-            <SiteNav />
             <PageTransition>{children}</PageTransition>
           </NextIntlClientProvider>
         </AuthProvider>

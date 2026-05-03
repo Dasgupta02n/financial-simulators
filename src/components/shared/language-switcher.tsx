@@ -7,12 +7,6 @@ import { routing, type Locale } from "@/i18n/routing";
 const LOCALE_LABELS: Record<Locale, string> = {
   en: "EN",
   hi: "हि",
-  mr: "मर",
-  ta: "தம",
-  te: "తె",
-  pa: "ਪੰ",
-  gu: "ગુ",
-  bn: "বাং",
 };
 
 export function LanguageSwitcher() {
@@ -21,7 +15,9 @@ export function LanguageSwitcher() {
   const router = useRouter();
 
   const switchLocale = (newLocale: Locale) => {
-    router.replace(pathname, { locale: newLocale });
+    const prefixPattern = new RegExp(`^/(${routing.locales.join("|")})(/|$)`);
+    const strippedPath = pathname.replace(prefixPattern, "/") || "/";
+    router.replace(strippedPath, { locale: newLocale });
   };
 
   return (

@@ -29,7 +29,7 @@ export function createRegistrationSheet(
     { label: "Surname", value: "" },
     { label: "Email", value: registeredEmail },
     { label: "City", value: "" },
-    { label: "Country", value: "" },
+    { label: "State", value: "" },
   ];
 
   let row = 5;

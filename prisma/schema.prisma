@@ -13,7 +13,7 @@ model Lead {
   surname       String
   email         String
   city          String?
-  country       String?
+  state         String?
   calculatorId  String
   locale        String   @default("en")
   eulaAccepted  Boolean  @default(false)

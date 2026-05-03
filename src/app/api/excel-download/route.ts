@@ -23,7 +23,7 @@ export async function POST(req: NextRequest) {
       surname,
       email,
       city,
-      country,
+      state,
       calculatorId,
       locale = "en",
       eulaAccepted,
@@ -32,7 +32,7 @@ export async function POST(req: NextRequest) {
       surname: string;
       email: string;
       city?: string;
-      country?: string;
+      state?: string;
       calculatorId: string;
       locale?: string;
       eulaAccepted: boolean;
@@ -67,7 +67,7 @@ export async function POST(req: NextRequest) {
           surname: surname.trim(),
           email: email.trim().toLowerCase(),
           city: city?.trim() || null,
-          country: country?.trim() || null,
+          state: state?.trim() || null,
           calculatorId,
           locale,
           eulaAccepted: true,

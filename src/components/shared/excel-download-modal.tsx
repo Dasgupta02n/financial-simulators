@@ -4,6 +4,25 @@ import { useState, useEffect, useRef } from "react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 
+const INDIAN_STATES = [
+  "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh",
+  "Delhi", "Goa", "Gujarat", "Haryana", "Himachal Pradesh",
+  "Jharkhand", "Karnataka", "Kerala", "Madhya Pradesh", "Maharashtra",
+  "Manipur", "Meghalaya", "Mizoram", "Nagaland", "Odisha",
+  "Punjab", "Rajasthan", "Sikkim", "Tamil Nadu", "Telangana",
+  "Tripura", "Uttar Pradesh", "Uttarakhand", "West Bengal",
+  "Andaman and Nicobar Islands", "Chandigarh", "Dadra and Nagar Haveli",
+  "Daman and Diu", "Jammu and Kashmir", "Ladakh", "Lakshadweep", "Puducherry",
+];
+
+const MAJOR_CITIES = [
+  "Mumbai", "Delhi", "Bangalore", "Hyderabad", "Chennai",
+  "Kolkata", "Pune", "Ahmedabad", "Jaipur", "Lucknow",
+  "Chandigarh", "Bhopal", "Patna", "Indore", "Nagpur",
+  "Kochi", "Coimbatore", "Vizag", "Bhubaneswar", "Guwahati",
+  "Thiruvananthapuram", "Surat", "Vadodara", "Mysore", "Mangalore",
+];
+
 interface ExcelDownloadModalProps {
   calculatorId: string;
   open: boolean;
@@ -17,7 +36,7 @@ export function ExcelDownloadModal({ calculatorId, open, onClose }: ExcelDownloa
     surname: "",
     email: "",
     city: "",
-    country: "",
+    state: "",
   });
   const [eulaAccepted, setEulaAccepted] = useState(false);
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
@@ -68,7 +87,18 @@ export function ExcelDownloadModal({ calculatorId, open, onClose }: ExcelDownloa
       className="backdrop:bg-black/50 bg-transparent p-0 m-auto max-w-md w-full"
       aria-label={t("modalTitle")}
     >
-      <div className="bg-white rounded-xl shadow-2xl overflow-hidden">
+      <div className="bg-white rounded-xl shadow-2xl overflow-hidden relative">
+        {/* Close button */}
+        <button
+          onClick={handleClose}
+          className="absolute top-3 right-3 z-10 w-7 h-7 flex items-center justify-center rounded-full bg-white/20 hover:bg-white/40 text-white hover:text-white transition-colors"
+          aria-label="Close"
+        >
+          <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+
         {/* Header */}
         <div className="bg-gradient-to-r from-sienna to-orange-600 px-6 py-4">
           <h2 className="text-white text-lg font-semibold">{t("modalTitle")}</h2>
@@ -131,21 +161,29 @@ export function ExcelDownloadModal({ calculatorId, open, onClose }: ExcelDownloa
               <div className="grid grid-cols-2 gap-3">
                 <div>
                   <label className={labelClass}>{t("fieldCity")}</label>
-                  <input
-                    type="text"
+                  <select
                     className={fieldClass}
                     value={form.city}
                     onChange={(e) => setForm({ ...form, city: e.target.value })}
-                  />
+                  >
+                    <option value="">Select city</option>
+                    {MAJOR_CITIES.map((c) => (
+                      <option key={c} value={c}>{c}</option>
+                    ))}
+                  </select>
                 </div>
                 <div>
-                  <label className={labelClass}>{t("fieldCountry")}</label>
-                  <input
-                    type="text"
+                  <label className={labelClass}>{t("fieldState")}</label>
+                  <select
                     className={fieldClass}
-                    value={form.country}
-                    onChange={(e) => setForm({ ...form, country: e.target.value })}
-                  />
+                    value={form.state}
+                    onChange={(e) => setForm({ ...form, state: e.target.value })}
+                  >
+                    <option value="">Select state</option>
+                    {INDIAN_STATES.map((s) => (
+                      <option key={s} value={s}>{s}</option>
+                    ))}
+                  </select>
                 </div>
               </div>
 

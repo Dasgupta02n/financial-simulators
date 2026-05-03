@@ -882,7 +882,7 @@ export namespace Prisma {
     surname: string | null
     email: string | null
     city: string | null
-    country: string | null
+    state: string | null
     calculatorId: string | null
     locale: string | null
     eulaAccepted: boolean | null
@@ -895,7 +895,7 @@ export namespace Prisma {
     surname: string | null
     email: string | null
     city: string | null
-    country: string | null
+    state: string | null
     calculatorId: string | null
     locale: string | null
     eulaAccepted: boolean | null
@@ -908,7 +908,7 @@ export namespace Prisma {
     surname: number
     email: number
     city: number
-    country: number
+    state: number
     calculatorId: number
     locale: number
     eulaAccepted: number
@@ -923,7 +923,7 @@ export namespace Prisma {
     surname?: true
     email?: true
     city?: true
-    country?: true
+    state?: true
     calculatorId?: true
     locale?: true
     eulaAccepted?: true
@@ -936,7 +936,7 @@ export namespace Prisma {
     surname?: true
     email?: true
     city?: true
-    country?: true
+    state?: true
     calculatorId?: true
     locale?: true
     eulaAccepted?: true
@@ -949,7 +949,7 @@ export namespace Prisma {
     surname?: true
     email?: true
     city?: true
-    country?: true
+    state?: true
     calculatorId?: true
     locale?: true
     eulaAccepted?: true
@@ -1035,7 +1035,7 @@ export namespace Prisma {
     surname: string
     email: string
     city: string | null
-    country: string | null
+    state: string | null
     calculatorId: string
     locale: string
     eulaAccepted: boolean
@@ -1065,7 +1065,7 @@ export namespace Prisma {
     surname?: boolean
     email?: boolean
     city?: boolean
-    country?: boolean
+    state?: boolean
     calculatorId?: boolean
     locale?: boolean
     eulaAccepted?: boolean
@@ -1078,7 +1078,7 @@ export namespace Prisma {
     surname?: boolean
     email?: boolean
     city?: boolean
-    country?: boolean
+    state?: boolean
     calculatorId?: boolean
     locale?: boolean
     eulaAccepted?: boolean
@@ -1091,7 +1091,7 @@ export namespace Prisma {
     surname?: boolean
     email?: boolean
     city?: boolean
-    country?: boolean
+    state?: boolean
     calculatorId?: boolean
     locale?: boolean
     eulaAccepted?: boolean
@@ -1104,14 +1104,14 @@ export namespace Prisma {
     surname?: boolean
     email?: boolean
     city?: boolean
-    country?: boolean
+    state?: boolean
     calculatorId?: boolean
     locale?: boolean
     eulaAccepted?: boolean
     createdAt?: boolean
   }
 
-  export type LeadOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "firstName" | "surname" | "email" | "city" | "country" | "calculatorId" | "locale" | "eulaAccepted" | "createdAt", ExtArgs["result"]["lead"]>
+  export type LeadOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "firstName" | "surname" | "email" | "city" | "state" | "calculatorId" | "locale" | "eulaAccepted" | "createdAt", ExtArgs["result"]["lead"]>
 
   export type $LeadPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Lead"
@@ -1122,7 +1122,7 @@ export namespace Prisma {
       surname: string
       email: string
       city: string | null
-      country: string | null
+      state: string | null
       calculatorId: string
       locale: string
       eulaAccepted: boolean
@@ -1555,7 +1555,7 @@ export namespace Prisma {
     readonly surname: FieldRef<"Lead", 'String'>
     readonly email: FieldRef<"Lead", 'String'>
     readonly city: FieldRef<"Lead", 'String'>
-    readonly country: FieldRef<"Lead", 'String'>
+    readonly state: FieldRef<"Lead", 'String'>
     readonly calculatorId: FieldRef<"Lead", 'String'>
     readonly locale: FieldRef<"Lead", 'String'>
     readonly eulaAccepted: FieldRef<"Lead", 'Boolean'>
@@ -1951,7 +1951,7 @@ export namespace Prisma {
     surname: 'surname',
     email: 'email',
     city: 'city',
-    country: 'country',
+    state: 'state',
     calculatorId: 'calculatorId',
     locale: 'locale',
     eulaAccepted: 'eulaAccepted',
@@ -2051,7 +2051,7 @@ export namespace Prisma {
     surname?: StringFilter<"Lead"> | string
     email?: StringFilter<"Lead"> | string
     city?: StringNullableFilter<"Lead"> | string | null
-    country?: StringNullableFilter<"Lead"> | string | null
+    state?: StringNullableFilter<"Lead"> | string | null
     calculatorId?: StringFilter<"Lead"> | string
     locale?: StringFilter<"Lead"> | string
     eulaAccepted?: BoolFilter<"Lead"> | boolean
@@ -2064,7 +2064,7 @@ export namespace Prisma {
     surname?: SortOrder
     email?: SortOrder
     city?: SortOrderInput | SortOrder
-    country?: SortOrderInput | SortOrder
+    state?: SortOrderInput | SortOrder
     calculatorId?: SortOrder
     locale?: SortOrder
     eulaAccepted?: SortOrder
@@ -2080,7 +2080,7 @@ export namespace Prisma {
     surname?: StringFilter<"Lead"> | string
     email?: StringFilter<"Lead"> | string
     city?: StringNullableFilter<"Lead"> | string | null
-    country?: StringNullableFilter<"Lead"> | string | null
+    state?: StringNullableFilter<"Lead"> | string | null
     calculatorId?: StringFilter<"Lead"> | string
     locale?: StringFilter<"Lead"> | string
     eulaAccepted?: BoolFilter<"Lead"> | boolean
@@ -2093,7 +2093,7 @@ export namespace Prisma {
     surname?: SortOrder
     email?: SortOrder
     city?: SortOrderInput | SortOrder
-    country?: SortOrderInput | SortOrder
+    state?: SortOrderInput | SortOrder
     calculatorId?: SortOrder
     locale?: SortOrder
     eulaAccepted?: SortOrder
@@ -2112,7 +2112,7 @@ export namespace Prisma {
     surname?: StringWithAggregatesFilter<"Lead"> | string
     email?: StringWithAggregatesFilter<"Lead"> | string
     city?: StringNullableWithAggregatesFilter<"Lead"> | string | null
-    country?: StringNullableWithAggregatesFilter<"Lead"> | string | null
+    state?: StringNullableWithAggregatesFilter<"Lead"> | string | null
     calculatorId?: StringWithAggregatesFilter<"Lead"> | string
     locale?: StringWithAggregatesFilter<"Lead"> | string
     eulaAccepted?: BoolWithAggregatesFilter<"Lead"> | boolean
@@ -2125,7 +2125,7 @@ export namespace Prisma {
     surname: string
     email: string
     city?: string | null
-    country?: string | null
+    state?: string | null
     calculatorId: string
     locale?: string
     eulaAccepted?: boolean
@@ -2138,7 +2138,7 @@ export namespace Prisma {
     surname: string
     email: string
     city?: string | null
-    country?: string | null
+    state?: string | null
     calculatorId: string
     locale?: string
     eulaAccepted?: boolean
@@ -2151,7 +2151,7 @@ export namespace Prisma {
     surname?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     city?: NullableStringFieldUpdateOperationsInput | string | null
-    country?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
     calculatorId?: StringFieldUpdateOperationsInput | string
     locale?: StringFieldUpdateOperationsInput | string
     eulaAccepted?: BoolFieldUpdateOperationsInput | boolean
@@ -2164,7 +2164,7 @@ export namespace Prisma {
     surname?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     city?: NullableStringFieldUpdateOperationsInput | string | null
-    country?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
     calculatorId?: StringFieldUpdateOperationsInput | string
     locale?: StringFieldUpdateOperationsInput | string
     eulaAccepted?: BoolFieldUpdateOperationsInput | boolean
@@ -2177,7 +2177,7 @@ export namespace Prisma {
     surname: string
     email: string
     city?: string | null
-    country?: string | null
+    state?: string | null
     calculatorId: string
     locale?: string
     eulaAccepted?: boolean
@@ -2190,7 +2190,7 @@ export namespace Prisma {
     surname?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     city?: NullableStringFieldUpdateOperationsInput | string | null
-    country?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
     calculatorId?: StringFieldUpdateOperationsInput | string
     locale?: StringFieldUpdateOperationsInput | string
     eulaAccepted?: BoolFieldUpdateOperationsInput | boolean
@@ -2203,7 +2203,7 @@ export namespace Prisma {
     surname?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     city?: NullableStringFieldUpdateOperationsInput | string | null
-    country?: NullableStringFieldUpdateOperationsInput | string | null
+    state?: NullableStringFieldUpdateOperationsInput | string | null
     calculatorId?: StringFieldUpdateOperationsInput | string
     locale?: StringFieldUpdateOperationsInput | string
     eulaAccepted?: BoolFieldUpdateOperationsInput | boolean
@@ -2267,7 +2267,7 @@ export namespace Prisma {
     surname?: SortOrder
     email?: SortOrder
     city?: SortOrder
-    country?: SortOrder
+    state?: SortOrder
     calculatorId?: SortOrder
     locale?: SortOrder
     eulaAccepted?: SortOrder
@@ -2280,7 +2280,7 @@ export namespace Prisma {
     surname?: SortOrder
     email?: SortOrder
     city?: SortOrder
-    country?: SortOrder
+    state?: SortOrder
     calculatorId?: SortOrder
     locale?: SortOrder
     eulaAccepted?: SortOrder
@@ -2293,7 +2293,7 @@ export namespace Prisma {
     surname?: SortOrder
     email?: SortOrder
     city?: SortOrder
-    country?: SortOrder
+    state?: SortOrder
     calculatorId?: SortOrder
     locale?: SortOrder
     eulaAccepted?: SortOrder
