@@ -8,7 +8,7 @@ export default function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   // Paths that should skip i18n middleware entirely
-  const skipPrefixes = ["/api", "/auth", "/_next", "/_vercel"];
+  const skipPrefixes = ["/api", "/auth", "/admin", "/_next", "/_vercel"];
   if (skipPrefixes.some((prefix) => pathname.startsWith(prefix))) {
     return NextResponse.next();
   }
