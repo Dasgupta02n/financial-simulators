@@ -14,6 +14,9 @@ interface CalcConfig {
 
 const CALCULATOR_IDS = [
   "sip", "emi", "tax", "accum", "fd", "swp", "fire", "ctc", "nps", "goal",
+  "ppf", "epf", "hra", "salary", "gst", "compound", "simple-interest",
+  "step-up-sip", "term-insurance", "crypto", "depreciation", "forex",
+  "planner", "real-estate",
 ];
 
 export function CalculatorConfig() {

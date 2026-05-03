@@ -1,19 +1,20 @@
 import { NextRequest, NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
+import { verifyAdminSession } from "@/lib/admin-auth";
 
-function isAuthenticated(req: NextRequest): boolean {
-  const session = req.cookies.get("admin_session");
-  return session?.value === "1";
-}
-
-const CALCULATOR_IDS = ["sip", "emi", "tax", "accum", "fd", "swp", "fire", "ctc", "nps", "goal"];
+const CALCULATOR_IDS = [
+  "sip", "emi", "tax", "accum", "fd", "swp", "fire", "ctc", "nps", "goal",
+  "ppf", "epf", "hra", "salary", "gst", "compound", "simple-interest",
+  "step-up-sip", "term-insurance", "crypto", "depreciation", "forex",
+  "planner", "real-estate",
+];
 
 export async function GET(
   req: NextRequest,
   { params }: { params: Promise<{ id: string }> }
 ) {
-  if (!isAuthenticated(req)) {
+  if (!verifyAdminSession(req)) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 

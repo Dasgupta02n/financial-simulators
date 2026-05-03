@@ -1,13 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getAllPosts } from "@/lib/blog";
-
-function isAuthenticated(req: NextRequest): boolean {
-  const session = req.cookies.get("admin_session");
-  return session?.value === "1";
-}
+import { verifyAdminSession } from "@/lib/admin-auth";
 
 export async function GET(req: NextRequest) {
-  if (!isAuthenticated(req)) {
+  if (!verifyAdminSession(req)) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
 
