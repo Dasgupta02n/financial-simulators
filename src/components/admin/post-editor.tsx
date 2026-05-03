@@ -17,6 +17,7 @@ const EMPTY_FRONTMATTER = {
   calculators: [] as string[],
   featured: false,
   status: "draft" as "draft" | "published",
+  locale: "en" as "en" | "hi",
 };
 
 export function PostEditor({ slug: initialSlug, onSaved }: PostEditorProps) {
@@ -50,6 +51,7 @@ export function PostEditor({ slug: initialSlug, onSaved }: PostEditorProps) {
     }
     lines.push(`featured: ${frontmatter.featured}`);
     lines.push(`status: ${frontmatter.status}`);
+    lines.push(`locale: ${frontmatter.locale}`);
     lines.push("---");
     lines.push("");
     lines.push(body);
@@ -83,7 +85,7 @@ export function PostEditor({ slug: initialSlug, onSaved }: PostEditorProps) {
       const data = await res.json();
       if (data.success) {
         onSaved?.();
-        alert("Post saved!");
+        alert("Post saved! It may take a minute to appear on the site.");
       } else {
         alert(`Failed to save: ${data.error ?? "Unknown error"}`);
       }
@@ -139,7 +141,7 @@ export function PostEditor({ slug: initialSlug, onSaved }: PostEditorProps) {
         <span className="text-xs text-text-secondary">{frontmatter.description.length}/160</span>
       </div>
 
-      <div className="grid grid-cols-2 gap-4">
+      <div className="grid grid-cols-3 gap-4">
         <div>
           <label className="block text-xs font-mono text-text-secondary mb-1">Date</label>
           <input
@@ -159,6 +161,17 @@ export function PostEditor({ slug: initialSlug, onSaved }: PostEditorProps) {
             {BLOG_CATEGORIES.map((cat) => (
               <option key={cat.slug} value={cat.slug}>{cat.label}</option>
             ))}
+          </select>
+        </div>
+        <div>
+          <label className="block text-xs font-mono text-text-secondary mb-1">Locale</label>
+          <select
+            value={frontmatter.locale}
+            onChange={(e) => setFrontmatter({ ...frontmatter, locale: e.target.value as "en" | "hi" })}
+            className="w-full px-3 py-2 rounded-md bg-ink border border-border text-text-primary text-sm font-mono focus:outline-none focus:border-gain"
+          >
+            <option value="en">English</option>
+            <option value="hi">हिन्दी (Hindi)</option>
           </select>
         </div>
       </div>

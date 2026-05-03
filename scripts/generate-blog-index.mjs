@@ -33,6 +33,7 @@ const posts = files
       readTime: data.readTime ?? readTime,
       featured: data.featured ?? false,
       status: data.status ?? "draft",
+      locale: data.locale ?? "en",
     };
   })
   .filter((post) => post.status === "published" && post.title)

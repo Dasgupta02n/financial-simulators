@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Suspense } from "react";
 import { setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
-import { getAllPosts } from "@/lib/blog";
+import { getAllPostsByLocale } from "@/lib/blog";
 import type { BlogCategory } from "@/lib/blog-categories";
 import { BlogCard } from "@/components/blog/blog-card";
 import { ShareBar } from "@/components/shared/share-bar";
@@ -34,7 +34,7 @@ export default async function LocaleBlogPage({
   const { locale } = await params;
   setRequestLocale(locale);
   const { category } = await searchParams;
-  const allPosts = getAllPosts();
+  const allPosts = getAllPostsByLocale(locale);
   const filtered = category && category !== "all"
     ? allPosts.filter((p) => p.category === (category as BlogCategory))
     : allPosts;

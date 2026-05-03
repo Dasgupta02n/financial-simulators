@@ -16,7 +16,8 @@
     ],
     "readTime": 4,
     "featured": false,
-    "status": "published"
+    "status": "published",
+    "locale": "en"
   },
   {
     "slug": "5-crore-not-enough",
@@ -35,7 +36,8 @@
     ],
     "readTime": 4,
     "featured": false,
-    "status": "published"
+    "status": "published",
+    "locale": "en"
   },
   {
     "slug": "50-30-20-rule-broken-indian",
@@ -54,7 +56,8 @@
     ],
     "readTime": 3,
     "featured": false,
-    "status": "published"
+    "status": "published",
+    "locale": "en"
   },
   {
     "slug": "dont-borrow-for-wedding",
@@ -73,7 +76,8 @@
     ],
     "readTime": 3,
     "featured": false,
-    "status": "published"
+    "status": "published",
+    "locale": "en"
   },
   {
     "slug": "emergency-fund-real-math",
@@ -92,7 +96,8 @@
     ],
     "readTime": 3,
     "featured": false,
-    "status": "published"
+    "status": "published",
+    "locale": "en"
   },
   {
     "slug": "epf-825-not-enough",
@@ -111,7 +116,8 @@
     ],
     "readTime": 4,
     "featured": false,
-    "status": "published"
+    "status": "published",
+    "locale": "en"
   },
   {
     "slug": "financial-literacy-starts-inflation",
@@ -130,7 +136,8 @@
     ],
     "readTime": 4,
     "featured": false,
-    "status": "published"
+    "status": "published",
+    "locale": "en"
   },
   {
     "slug": "fire-india-feasible-dream",
@@ -149,7 +156,8 @@
     ],
     "readTime": 3,
     "featured": false,
-    "status": "published"
+    "status": "published",
+    "locale": "en"
   },
   {
     "slug": "first-sip-boring-good",
@@ -168,7 +176,8 @@
     ],
     "readTime": 3,
     "featured": false,
-    "status": "published"
+    "status": "published",
+    "locale": "en"
   },
   {
     "slug": "gold-etf-vs-physical-gold-liquidity",
@@ -187,7 +196,8 @@
     ],
     "readTime": 4,
     "featured": false,
-    "status": "published"
+    "status": "published",
+    "locale": "en"
   },
   {
     "slug": "great-indian-small-cap-illusion",
@@ -206,7 +216,8 @@
     ],
     "readTime": 3,
     "featured": false,
-    "status": "published"
+    "status": "published",
+    "locale": "en"
   },
   {
     "slug": "hidden-cost-savings-account",
@@ -225,7 +236,8 @@
     ],
     "readTime": 3,
     "featured": false,
-    "status": "published"
+    "status": "published",
+    "locale": "en"
   },
   {
     "slug": "how-much-spend-on-house",
@@ -244,7 +256,8 @@
     ],
     "readTime": 3,
     "featured": false,
-    "status": "published"
+    "status": "published",
+    "locale": "en"
   },
   {
     "slug": "how-much-tax-do-fd-interest-earnings-cost",
@@ -263,7 +276,8 @@
     ],
     "readTime": 3,
     "featured": false,
-    "status": "published"
+    "status": "published",
+    "locale": "en"
   },
   {
     "slug": "india-inflation-numbers-honest-terrifying",
@@ -282,7 +296,8 @@
     ],
     "readTime": 3,
     "featured": false,
-    "status": "published"
+    "status": "published",
+    "locale": "en"
   },
   {
     "slug": "lic-vs-mutual-funds-emotional-decision",
@@ -301,7 +316,8 @@
     ],
     "readTime": 4,
     "featured": false,
-    "status": "published"
+    "status": "published",
+    "locale": "en"
   },
   {
     "slug": "ltcg-tax-changed-again-mutual-funds",
@@ -320,7 +336,8 @@
     ],
     "readTime": 3,
     "featured": false,
-    "status": "published"
+    "status": "published",
+    "locale": "en"
   },
   {
     "slug": "lump-sum-vs-sip-timing",
@@ -339,7 +356,8 @@
     ],
     "readTime": 3,
     "featured": false,
-    "status": "published"
+    "status": "published",
+    "locale": "en"
   },
   {
     "slug": "market-crashes-worst-time-stop-sip",
@@ -358,7 +376,8 @@
     ],
     "readTime": 3,
     "featured": false,
-    "status": "published"
+    "status": "published",
+    "locale": "en"
   },
   {
     "slug": "most-indians-retire-7-years-savings",
@@ -377,7 +396,8 @@
     ],
     "readTime": 4,
     "featured": false,
-    "status": "published"
+    "status": "published",
+    "locale": "en"
   },
   {
     "slug": "new-tax-regime-is-honest-why-people-dont-like-it",
@@ -396,7 +416,8 @@
     ],
     "readTime": 3,
     "featured": false,
-    "status": "published"
+    "status": "published",
+    "locale": "en"
   },
   {
     "slug": "nifty-12-percent-average-hides-more",
@@ -415,7 +436,8 @@
     ],
     "readTime": 3,
     "featured": false,
-    "status": "published"
+    "status": "published",
+    "locale": "en"
   },
   {
     "slug": "nps-tax-benefit-50000-deduction-nobody-uses",
@@ -434,7 +456,8 @@
     ],
     "readTime": 3,
     "featured": false,
-    "status": "published"
+    "status": "published",
+    "locale": "en"
   },
   {
     "slug": "nps-vs-ppf-showdown",
@@ -453,7 +476,8 @@
     ],
     "readTime": 4,
     "featured": false,
-    "status": "published"
+    "status": "published",
+    "locale": "en"
   },
   {
     "slug": "old-vs-new-tax-regime-honest-comparison",
@@ -472,7 +496,8 @@
     ],
     "readTime": 3,
     "featured": false,
-    "status": "published"
+    "status": "published",
+    "locale": "en"
   },
   {
     "slug": "parents-fd-losing-money",
@@ -492,7 +517,8 @@
     ],
     "readTime": 3,
     "featured": false,
-    "status": "published"
+    "status": "published",
+    "locale": "en"
   },
   {
     "slug": "ppf-71-safest-loses-inflation",
@@ -511,7 +537,8 @@
     ],
     "readTime": 4,
     "featured": false,
-    "status": "published"
+    "status": "published",
+    "locale": "en"
   },
   {
     "slug": "rbi-rate-cuts-fd-wealth-transfer",
@@ -530,7 +557,8 @@
     ],
     "readTime": 3,
     "featured": false,
-    "status": "published"
+    "status": "published",
+    "locale": "en"
   },
   {
     "slug": "reach-one-crore-without-posters",
@@ -549,7 +577,8 @@
     ],
     "readTime": 3,
     "featured": false,
-    "status": "published"
+    "status": "published",
+    "locale": "en"
   },
   {
     "slug": "retirement-planning-25-vs-35",
@@ -568,7 +597,8 @@
     ],
     "readTime": 4,
     "featured": false,
-    "status": "published"
+    "status": "published",
+    "locale": "en"
   },
   {
     "slug": "sebi-expense-ratio-caps-savings",
@@ -587,7 +617,8 @@
     ],
     "readTime": 3,
     "featured": false,
-    "status": "published"
+    "status": "published",
+    "locale": "en"
   },
   {
     "slug": "sebi-mutual-fund-reforms-pocket",
@@ -606,7 +637,8 @@
     ],
     "readTime": 3,
     "featured": false,
-    "status": "published"
+    "status": "published",
+    "locale": "en"
   },
   {
     "slug": "section-80c-is-not-a-savings-strategy",
@@ -625,7 +657,8 @@
     ],
     "readTime": 3,
     "featured": false,
-    "status": "published"
+    "status": "published",
+    "locale": "en"
   },
   {
     "slug": "sensex-80000-richer-or-inflated",
@@ -644,7 +677,8 @@
     ],
     "readTime": 3,
     "featured": false,
-    "status": "published"
+    "status": "published",
+    "locale": "en"
   },
   {
     "slug": "standard-deduction-doubled-does-it-actually-help",
@@ -663,7 +697,8 @@
     ],
     "readTime": 3,
     "featured": false,
-    "status": "published"
+    "status": "published",
+    "locale": "en"
   },
   {
     "slug": "swp-2008-crash",
@@ -682,7 +717,8 @@
     ],
     "readTime": 4,
     "featured": false,
-    "status": "published"
+    "status": "published",
+    "locale": "en"
   },
   {
     "slug": "why-hra-claims-are-most-misunderstood",
@@ -701,7 +737,8 @@
     ],
     "readTime": 3,
     "featured": false,
-    "status": "published"
+    "status": "published",
+    "locale": "en"
   },
   {
     "slug": "withdraw-corpus-without-going-broke",
@@ -720,7 +757,8 @@
     ],
     "readTime": 4,
     "featured": false,
-    "status": "published"
+    "status": "published",
+    "locale": "en"
   },
   {
     "slug": "your-ctc-is-a-lie",
@@ -739,7 +777,8 @@
     ],
     "readTime": 2,
     "featured": false,
-    "status": "published"
+    "status": "published",
+    "locale": "en"
   },
   {
     "slug": "your-salary-structure-is-costing-you-lakhs",
@@ -758,7 +797,8 @@
     ],
     "readTime": 3,
     "featured": false,
-    "status": "published"
+    "status": "published",
+    "locale": "en"
   },
   {
     "slug": "retirement-crash-test",
@@ -778,7 +818,8 @@
     ],
     "readTime": 2,
     "featured": false,
-    "status": "published"
+    "status": "published",
+    "locale": "en"
   },
   {
     "slug": "sip-real-returns",
@@ -797,7 +838,8 @@
     ],
     "readTime": 2,
     "featured": true,
-    "status": "published"
+    "status": "published",
+    "locale": "en"
   },
   {
     "slug": "budget-2026-tax-slabs",
@@ -816,6 +858,7 @@
     ],
     "readTime": 2,
     "featured": true,
-    "status": "published"
+    "status": "published",
+    "locale": "en"
   }
 ]

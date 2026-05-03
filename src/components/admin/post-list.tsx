@@ -9,6 +9,7 @@ export function PostList() {
   const [loading, setLoading] = useState(true);
   const [editing, setEditing] = useState<string | null>(null);
   const [creating, setCreating] = useState(false);
+  const [deleting, setDeleting] = useState<string | null>(null);
 
   useEffect(() => {
     async function loadPosts() {
@@ -34,6 +35,26 @@ export function PostList() {
       .then((data) => setPosts(data.posts ?? []))
       .catch(() => {})
       .finally(() => setLoading(false));
+  }
+
+  async function handleDelete(slug: string) {
+    if (!confirm(`Delete "${slug}"? This cannot be undone.`)) return;
+    setDeleting(slug);
+    try {
+      const res = await fetch(`/api/admin/delete?path=src/content/blog/${slug}.mdx`, {
+        method: "DELETE",
+      });
+      const data = await res.json();
+      if (data.success) {
+        refreshPosts();
+      } else {
+        alert(`Failed to delete: ${data.error ?? "Unknown error"}`);
+      }
+    } catch {
+      alert("Failed to delete. Make sure GITHUB_TOKEN is configured.");
+    } finally {
+      setDeleting(null);
+    }
   }
 
   if (creating) {
@@ -65,6 +86,7 @@ export function PostList() {
           <thead>
             <tr className="border-b border-border text-left">
               <th className="pb-2 text-text-secondary font-mono">Title</th>
+              <th className="pb-2 text-text-secondary font-mono">Locale</th>
               <th className="pb-2 text-text-secondary font-mono">Category</th>
               <th className="pb-2 text-text-secondary font-mono">Date</th>
               <th className="pb-2 text-text-secondary font-mono">Status</th>
@@ -75,6 +97,15 @@ export function PostList() {
             {posts.map((post) => (
               <tr key={post.slug} className="border-b border-border/50">
                 <td className="py-2 text-text-primary">{post.title}</td>
+                <td className="py-2">
+                  <span className={`text-xs px-2 py-0.5 rounded font-mono ${
+                    post.locale === "hi"
+                      ? "bg-orange-500/10 text-orange-400 border border-orange-500/20"
+                      : "bg-blue-500/10 text-blue-400 border border-blue-500/20"
+                  }`}>
+                    {post.locale === "hi" ? "हि" : "EN"}
+                  </span>
+                </td>
                 <td className="py-2 text-text-secondary">{post.category}</td>
                 <td className="py-2 text-text-secondary font-mono">{post.date}</td>
                 <td className="py-2">
@@ -89,9 +120,16 @@ export function PostList() {
                 <td className="py-2">
                   <button
                     onClick={() => setEditing(post.slug)}
-                    className="text-xs text-gain hover:text-gain/80 font-mono"
+                    className="text-xs text-gain hover:text-gain/80 font-mono mr-3"
                   >
                     Edit
+                  </button>
+                  <button
+                    onClick={() => handleDelete(post.slug)}
+                    disabled={deleting === post.slug}
+                    className="text-xs text-loss hover:text-loss/80 font-mono disabled:opacity-50"
+                  >
+                    {deleting === post.slug ? "Deleting..." : "Delete"}
                   </button>
                 </td>
               </tr>

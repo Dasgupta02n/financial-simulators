@@ -1,30 +1,26 @@
 import { NextRequest, NextResponse } from "next/server";
 import path from "path";
-import { saveFile } from "@/lib/github-api";
+import { deleteFile } from "@/lib/github-api";
 import { verifyAdminSession } from "@/lib/admin-auth";
 import { revalidatePath } from "next/cache";
 
 const ALLOWED_PREFIXES = ["src/content/calculators/", "src/content/blog/"];
 
 function validatePath(filePath: string): boolean {
-  // Double-decode to catch encoded traversal sequences
   let decoded = filePath;
   for (let i = 0; i < 2; i++) {
     try { decoded = decodeURIComponent(decoded); } catch { return false; }
   }
 
-  // Reject null bytes
   if (decoded.includes("\0")) return false;
 
-  // Normalize and verify no traversal above base
   const normalized = path.posix.normalize(decoded);
   if (normalized.startsWith("/") || normalized.includes("..")) return false;
 
-  // Must match an allowed prefix
   return ALLOWED_PREFIXES.some((prefix) => normalized.startsWith(prefix));
 }
 
-export async function POST(req: NextRequest) {
+export async function DELETE(req: NextRequest) {
   if (!verifyAdminSession(req)) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
@@ -34,26 +30,22 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "GitHub token not configured" }, { status: 500 });
   }
 
-  const { path, content, message } = await req.json();
+  const { searchParams } = new URL(req.url);
+  const filePath = searchParams.get("path");
 
-  if (!path || !content || !message) {
-    return NextResponse.json({ error: "Missing required fields" }, { status: 400 });
-  }
-
-  if (!validatePath(path)) {
-    return NextResponse.json({ error: "Invalid path" }, { status: 403 });
+  if (!filePath || !validatePath(filePath)) {
+    return NextResponse.json({ error: "Invalid or missing path" }, { status: 400 });
   }
 
   try {
-    const success = await saveFile(path, content, message);
+    const success = await deleteFile(filePath, `chore(blog): delete ${path.basename(filePath)}`);
     if (success) {
-      // Revalidate blog pages so the new/updated post appears
       revalidatePath("/blog", "layout");
       revalidatePath("/", "layout");
       return NextResponse.json({ success: true });
     }
-    return NextResponse.json({ error: "Failed to save" }, { status: 500 });
+    return NextResponse.json({ error: "File not found or delete failed" }, { status: 404 });
   } catch {
-    return NextResponse.json({ error: "Failed to save" }, { status: 500 });
+    return NextResponse.json({ error: "Failed to delete" }, { status: 500 });
   }
 }

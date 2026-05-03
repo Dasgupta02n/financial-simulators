@@ -18,6 +18,7 @@ export interface BlogPost {
   readTime: number;
   featured: boolean;
   status: "published" | "draft";
+  locale: "en" | "hi";
   content: string;
 }
 
@@ -28,6 +29,10 @@ const postsDirectory = path.join(process.cwd(), "src/content/blog");
 // Blog listing uses the pre-generated JSON index (works at runtime without filesystem)
 export function getAllPosts(): BlogPostSummary[] {
   return blogIndex as BlogPostSummary[];
+}
+
+export function getAllPostsByLocale(locale: string): BlogPostSummary[] {
+  return getAllPosts().filter((post) => post.locale === locale || (!post.locale && locale === "en"));
 }
 
 export function getPostBySlug(slug: string): BlogPost | null {
@@ -54,6 +59,7 @@ export function getPostBySlug(slug: string): BlogPost | null {
     readTime: data.readTime ?? readTime,
     featured: data.featured ?? false,
     status: data.status ?? "draft",
+    locale: data.locale ?? "en",
     content,
   };
 }

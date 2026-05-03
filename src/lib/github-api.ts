@@ -105,3 +105,29 @@ export async function saveFile(
   }
   return createFile(path, content, message);
 }
+
+export async function deleteFile(
+  path: string,
+  message: string
+): Promise<boolean> {
+  const existing = await getFileContent(path);
+  if (!existing) return false;
+
+  const octokit = getOctokit();
+  const { owner, repo, branch } = getRepoInfo();
+
+  try {
+    await octokit.rest.repos.deleteFile({
+      owner,
+      repo,
+      path,
+      message,
+      sha: existing.sha,
+      branch,
+    });
+    return true;
+  } catch (error) {
+    console.error("Failed to delete file:", error);
+    return false;
+  }
+}
